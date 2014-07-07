@@ -7,12 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4C279D1B196AFCAD00337D13 /* BlueBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C279D1A196AFCAD00337D13 /* BlueBackground.png */; };
 		4C67F90C196A49EB0054A187 /* TestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C67F90B196A49EB0054A187 /* TestViewController.m */; };
-		4C67F90E196A4EB40054A187 /* bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C67F90D196A4EB40054A187 /* bg.png */; };
-		4C67F910196A4FD70054A187 /* button-red.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C67F90F196A4FD70054A187 /* button-red.png */; };
-		4C67F912196A501D0054A187 /* button-green.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C67F911196A501D0054A187 /* button-green.png */; };
-		4C67F914196A502F0054A187 /* button-black.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C67F913196A502F0054A187 /* button-black.png */; };
 		4CACF951195F9F1500056B92 /* MSContactManipulater.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CACF950195F9F1500056B92 /* MSContactManipulater.m */; };
 		4CACF953195FA19400056B92 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CACF952195FA19400056B92 /* AddressBook.framework */; };
 		4CACF955195FA19B00056B92 /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CACF954195FA19B00056B92 /* AddressBookUI.framework */; };
@@ -45,13 +40,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		4C279D1A196AFCAD00337D13 /* BlueBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BlueBackground.png; path = "../../../Library/Mobile Documents/com~apple~Preview/Documents/BlueBackground.png"; sourceTree = "<group>"; };
 		4C67F90A196A49EB0054A187 /* TestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestViewController.h; sourceTree = "<group>"; };
 		4C67F90B196A49EB0054A187 /* TestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestViewController.m; sourceTree = "<group>"; };
-		4C67F90D196A4EB40054A187 /* bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bg.png; path = "../../../Downloads/gunmetal-s/sample-project/gunmetal/Resources/bg.png"; sourceTree = "<group>"; };
-		4C67F90F196A4FD70054A187 /* button-red.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "button-red.png"; path = "../../../Downloads/gunmetal-s-2/sample-project/gunmetal/Resources/button-red.png"; sourceTree = "<group>"; };
-		4C67F911196A501D0054A187 /* button-green.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "button-green.png"; path = "../../../Downloads/gunmetal-s-2/sample-project/gunmetal/Resources/button-green.png"; sourceTree = "<group>"; };
-		4C67F913196A502F0054A187 /* button-black.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "button-black.png"; path = "../../../Downloads/gunmetal-s/slice/button-black.png"; sourceTree = "<group>"; };
 		4CACF94F195F9F1500056B92 /* MSContactManipulater.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSContactManipulater.h; sourceTree = "<group>"; };
 		4CACF950195F9F1500056B92 /* MSContactManipulater.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSContactManipulater.m; sourceTree = "<group>"; };
 		4CACF952195FA19400056B92 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
@@ -154,11 +144,6 @@
 				4CACF94F195F9F1500056B92 /* MSContactManipulater.h */,
 				4CACF950195F9F1500056B92 /* MSContactManipulater.m */,
 				4EC04F54195297350017AA78 /* Images.xcassets */,
-				4C67F90D196A4EB40054A187 /* bg.png */,
-				4C279D1A196AFCAD00337D13 /* BlueBackground.png */,
-				4C67F90F196A4FD70054A187 /* button-red.png */,
-				4C67F911196A501D0054A187 /* button-green.png */,
-				4C67F913196A502F0054A187 /* button-black.png */,
 				4EC04F43195297350017AA78 /* Supporting Files */,
 			);
 			path = FR;
@@ -269,14 +254,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4C67F90E196A4EB40054A187 /* bg.png in Resources */,
-				4C67F914196A502F0054A187 /* button-black.png in Resources */,
-				4C67F910196A4FD70054A187 /* button-red.png in Resources */,
 				4EC04F7519529C3A0017AA78 /* Unknown.jpeg in Resources */,
 				4EC04F55195297350017AA78 /* Images.xcassets in Resources */,
-				4C67F912196A501D0054A187 /* button-green.png in Resources */,
 				4EC04F47195297350017AA78 /* InfoPlist.strings in Resources */,
-				4C279D1B196AFCAD00337D13 /* BlueBackground.png in Resources */,
 				4EC04F50195297350017AA78 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
