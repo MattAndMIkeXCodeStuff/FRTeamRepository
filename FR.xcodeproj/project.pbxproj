@@ -7,6 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4C279D1B196AFCAD00337D13 /* BlueBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C279D1A196AFCAD00337D13 /* BlueBackground.png */; };
+		4C67F90C196A49EB0054A187 /* TestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C67F90B196A49EB0054A187 /* TestViewController.m */; };
+		4C67F90E196A4EB40054A187 /* bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C67F90D196A4EB40054A187 /* bg.png */; };
+		4C67F910196A4FD70054A187 /* button-red.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C67F90F196A4FD70054A187 /* button-red.png */; };
+		4C67F912196A501D0054A187 /* button-green.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C67F911196A501D0054A187 /* button-green.png */; };
+		4C67F914196A502F0054A187 /* button-black.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C67F913196A502F0054A187 /* button-black.png */; };
+		4CACF951195F9F1500056B92 /* MSContactManipulater.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CACF950195F9F1500056B92 /* MSContactManipulater.m */; };
+		4CACF953195FA19400056B92 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CACF952195FA19400056B92 /* AddressBook.framework */; };
+		4CACF955195FA19B00056B92 /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CACF954195FA19B00056B92 /* AddressBookUI.framework */; };
 		4EC04F3D195297350017AA78 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EC04F3C195297350017AA78 /* Foundation.framework */; };
 		4EC04F3F195297350017AA78 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EC04F3E195297350017AA78 /* CoreGraphics.framework */; };
 		4EC04F41195297350017AA78 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EC04F40195297350017AA78 /* UIKit.framework */; };
@@ -21,6 +30,8 @@
 		4EC04F5E195297350017AA78 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EC04F40195297350017AA78 /* UIKit.framework */; };
 		4EC04F66195297350017AA78 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4EC04F64195297350017AA78 /* InfoPlist.strings */; };
 		4EC04F68195297350017AA78 /* FRTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EC04F67195297350017AA78 /* FRTests.m */; };
+		4EC04F73195297E90017AA78 /* Person.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EC04F72195297E90017AA78 /* Person.m */; };
+		4EC04F7519529C3A0017AA78 /* Unknown.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 4EC04F7419529C3A0017AA78 /* Unknown.jpeg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,6 +45,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4C279D1A196AFCAD00337D13 /* BlueBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BlueBackground.png; path = "../../../Library/Mobile Documents/com~apple~Preview/Documents/BlueBackground.png"; sourceTree = "<group>"; };
+		4C67F90A196A49EB0054A187 /* TestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestViewController.h; sourceTree = "<group>"; };
+		4C67F90B196A49EB0054A187 /* TestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestViewController.m; sourceTree = "<group>"; };
+		4C67F90D196A4EB40054A187 /* bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bg.png; path = "../../../Downloads/gunmetal-s/sample-project/gunmetal/Resources/bg.png"; sourceTree = "<group>"; };
+		4C67F90F196A4FD70054A187 /* button-red.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "button-red.png"; path = "../../../Downloads/gunmetal-s-2/sample-project/gunmetal/Resources/button-red.png"; sourceTree = "<group>"; };
+		4C67F911196A501D0054A187 /* button-green.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "button-green.png"; path = "../../../Downloads/gunmetal-s-2/sample-project/gunmetal/Resources/button-green.png"; sourceTree = "<group>"; };
+		4C67F913196A502F0054A187 /* button-black.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "button-black.png"; path = "../../../Downloads/gunmetal-s/slice/button-black.png"; sourceTree = "<group>"; };
+		4CACF94F195F9F1500056B92 /* MSContactManipulater.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSContactManipulater.h; sourceTree = "<group>"; };
+		4CACF950195F9F1500056B92 /* MSContactManipulater.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSContactManipulater.m; sourceTree = "<group>"; };
+		4CACF952195FA19400056B92 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
+		4CACF954195FA19B00056B92 /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
 		4EC04F39195297350017AA78 /* FR.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FR.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4EC04F3C195297350017AA78 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		4EC04F3E195297350017AA78 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -53,6 +75,9 @@
 		4EC04F63195297350017AA78 /* FRTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "FRTests-Info.plist"; sourceTree = "<group>"; };
 		4EC04F65195297350017AA78 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		4EC04F67195297350017AA78 /* FRTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FRTests.m; sourceTree = "<group>"; };
+		4EC04F71195297E90017AA78 /* Person.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Person.h; sourceTree = "<group>"; };
+		4EC04F72195297E90017AA78 /* Person.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Person.m; sourceTree = "<group>"; };
+		4EC04F7419529C3A0017AA78 /* Unknown.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = Unknown.jpeg; path = ../../Desktop/Unknown.jpeg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +85,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4CACF955195FA19B00056B92 /* AddressBookUI.framework in Frameworks */,
+				4CACF953195FA19400056B92 /* AddressBook.framework in Frameworks */,
 				4EC04F3F195297350017AA78 /* CoreGraphics.framework in Frameworks */,
 				4EC04F41195297350017AA78 /* UIKit.framework in Frameworks */,
 				4EC04F3D195297350017AA78 /* Foundation.framework in Frameworks */,
@@ -82,6 +109,9 @@
 		4EC04F30195297350017AA78 = {
 			isa = PBXGroup;
 			children = (
+				4EC04F7419529C3A0017AA78 /* Unknown.jpeg */,
+				4EC04F71195297E90017AA78 /* Person.h */,
+				4EC04F72195297E90017AA78 /* Person.m */,
 				4EC04F42195297350017AA78 /* FR */,
 				4EC04F61195297350017AA78 /* FRTests */,
 				4EC04F3B195297350017AA78 /* Frameworks */,
@@ -101,6 +131,8 @@
 		4EC04F3B195297350017AA78 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4CACF954195FA19B00056B92 /* AddressBookUI.framework */,
+				4CACF952195FA19400056B92 /* AddressBook.framework */,
 				4EC04F3C195297350017AA78 /* Foundation.framework */,
 				4EC04F3E195297350017AA78 /* CoreGraphics.framework */,
 				4EC04F40195297350017AA78 /* UIKit.framework */,
@@ -115,9 +147,18 @@
 				4EC04F4B195297350017AA78 /* AppDelegate.h */,
 				4EC04F4C195297350017AA78 /* AppDelegate.m */,
 				4EC04F4E195297350017AA78 /* Main.storyboard */,
+				4C67F90A196A49EB0054A187 /* TestViewController.h */,
+				4C67F90B196A49EB0054A187 /* TestViewController.m */,
 				4EC04F51195297350017AA78 /* ViewController.h */,
 				4EC04F52195297350017AA78 /* ViewController.m */,
+				4CACF94F195F9F1500056B92 /* MSContactManipulater.h */,
+				4CACF950195F9F1500056B92 /* MSContactManipulater.m */,
 				4EC04F54195297350017AA78 /* Images.xcassets */,
+				4C67F90D196A4EB40054A187 /* bg.png */,
+				4C279D1A196AFCAD00337D13 /* BlueBackground.png */,
+				4C67F90F196A4FD70054A187 /* button-red.png */,
+				4C67F911196A501D0054A187 /* button-green.png */,
+				4C67F913196A502F0054A187 /* button-black.png */,
 				4EC04F43195297350017AA78 /* Supporting Files */,
 			);
 			path = FR;
@@ -228,8 +269,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4C67F90E196A4EB40054A187 /* bg.png in Resources */,
+				4C67F914196A502F0054A187 /* button-black.png in Resources */,
+				4C67F910196A4FD70054A187 /* button-red.png in Resources */,
+				4EC04F7519529C3A0017AA78 /* Unknown.jpeg in Resources */,
 				4EC04F55195297350017AA78 /* Images.xcassets in Resources */,
+				4C67F912196A501D0054A187 /* button-green.png in Resources */,
 				4EC04F47195297350017AA78 /* InfoPlist.strings in Resources */,
+				4C279D1B196AFCAD00337D13 /* BlueBackground.png in Resources */,
 				4EC04F50195297350017AA78 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -249,8 +296,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4C67F90C196A49EB0054A187 /* TestViewController.m in Sources */,
 				4EC04F53195297350017AA78 /* ViewController.m in Sources */,
+				4CACF951195F9F1500056B92 /* MSContactManipulater.m in Sources */,
 				4EC04F4D195297350017AA78 /* AppDelegate.m in Sources */,
+				4EC04F73195297E90017AA78 /* Person.m in Sources */,
 				4EC04F49195297350017AA78 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -456,6 +506,7 @@
 				4EC04F6D195297350017AA78 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		4EC04F6E195297350017AA78 /* Build configuration list for PBXNativeTarget "FRTests" */ = {
 			isa = XCConfigurationList;
@@ -464,6 +515,7 @@
 				4EC04F70195297350017AA78 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
