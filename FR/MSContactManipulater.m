@@ -11,10 +11,10 @@
 @implementation MSContactManipulater
 
 
--(NSArray *)getContactsWithAnImage {
+-(NSMutableArray *)getContactsWithAnImage {
     ABAddressBookRef addressBook2  = ABAddressBookCreateWithOptions(NULL, NULL);
     NSLog(@"HEllO");
-    NSArray *people = (__bridge NSArray *)ABAddressBookCopyArrayOfAllPeople(addressBook2);
+    NSMutableArray *people = (__bridge NSMutableArray *)ABAddressBookCopyArrayOfAllPeople(addressBook2);
     NSMutableArray *finalPeople = [[NSMutableArray alloc]init];
     for (int i = 0; i<[people count]; i++) {
         ABRecordRef r = (__bridge ABRecordRef)([people objectAtIndex:i]);
@@ -26,7 +26,7 @@
             Person *myPerson = [[Person alloc] init];
             [myPerson setWithFirstName:firstName andLastName:lastName andImage:Cimage andGender:true];
             [finalPeople addObject:myPerson];
-            NSLog(@" %@ Have A picture",firstName);
+            NSLog(@" %@ has a picture",firstName);
         }
         
         
