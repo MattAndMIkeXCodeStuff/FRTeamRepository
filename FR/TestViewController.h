@@ -11,7 +11,7 @@
 #import <AddressBookUI/AddressBookUI.h>
 #import "MSContactManipulater.h"
 @interface TestViewController : UIViewController
-@property(nonatomic)NSArray *currentPeopleArray;
+@property(nonatomic)NSMutableArray *currentPeopleArray;
 @property(nonatomic)MSContactManipulater *contactGetter;
 @property(nonatomic)IBOutlet UIView *nameAndButtonsView;
 @property(nonatomic)IBOutlet UIImageView *personPic;

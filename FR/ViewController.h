@@ -13,16 +13,30 @@
 #import "MSContactManipulater.h"
 @interface ViewController : UIViewController
 {
+    IBOutlet UILabel* timerLable;
+    NSTimer *timer;
+    int seconds;
+    int minutes;
+    int wait;
+    IBOutlet UIView *timerView;
+    
     Person* myPerson;
     NSMutableArray* arrayOfPeople;
+    NSMutableArray* arrayOf50PercentAndOver;
+    NSMutableArray* arrayOf49PercentAndUnder;
+
     
-    IBOutlet UIView* contactView;
+    
     //MC stands for multiple choice
     IBOutlet UIView* MCGameView;
     //MCT stands for multiple choice timed
     IBOutlet UIView* MCTGameView;
-    //T stands for timed game
-    IBOutlet UIView* TGameView;
+    //F stands for flashcard game
+    IBOutlet UIView* FGameView;
+    //FT stands for flashcard timed game
+    IBOutlet UIView* FTGameView;
+    //FT stands for flashcard timed game
+    IBOutlet UIView* FCGameView;
     //The first view
     IBOutlet UIView* firstView;
     //mcc stands for multiple choice chooser
@@ -51,9 +65,14 @@
 -(IBAction)goToFV;
 //go to multiple choice timed view
 -(IBAction)goToMCTV;
-//go to timed view
--(IBAction)goToTV;
+//go to flashcard view
+-(IBAction)goToFlashV;
+//go to flashcard chooser view
+-(IBAction)goToFCV;
+//go to flashcard timed view
+-(IBAction)goToFTV;
 //go to multiple choice chooser view
 -(IBAction)goToMCCV;
 -(IBAction)mcAnswerPressed:(id)sender;
 @end
+
