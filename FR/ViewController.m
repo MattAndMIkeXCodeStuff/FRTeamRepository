@@ -32,76 +32,71 @@
 -(IBAction)gotRight:(id)sender {
     NSLog(@"Got Right");
     [currentPerson gotRight];
-    NSLog(@"%f", [currentPerson returnPercentage]);
-    if (currentPerson.returnPercentage < 0.5)
-    {
-        [arrayOf50PercentAndOver removeObjectIdenticalTo:currentPerson];
-        [arrayOf49PercentAndUnder addObject:currentPerson];
-    }
-    else
-    {
-        [arrayOf49PercentAndUnder removeObjectIdenticalTo:currentPerson];
-        NSLog(@"%i number of people in 49 array", arrayOf49PercentAndUnder.count);
-        [arrayOf50PercentAndOver addObject:currentPerson];
-    }
-    NSMutableArray*currentArray;
-    currentArray = [self chooseArray];
-    
-    j = rand()%currentArray.count - 1;
-    
-    
-    currentPerson =[currentArray objectAtIndex:j];
-    
-    
-    
-    personPic.image = [currentPerson selfImage];
-    
-    if (currentPerson.lastName == NULL) {
-        nameLabel.text = currentPerson.firstName;
-        
-    } else {
-        nameLabel.text = [NSString stringWithFormat:@"%@ %@", currentPerson.firstName,currentPerson.lastName];
-    }
-    nameAndButtonsView.hidden = true;
+    [self loadNewPerson];
 }
 -(IBAction)gotWrong:(id)sender {
     NSLog(@"Got Wrong");
-
     [currentPerson gotWrong];
-    NSLog(@"%f", [currentPerson returnPercentage]);
+    [self loadNewPerson];
+}
 
+-(void)loadNewPerson
+{
+    NSLog(@"%f", [currentPerson returnPercentage]);
     if (currentPerson.returnPercentage < 0.5)
     {
+        if(arrayOf50PercentAndOver.count > 2) // the 1 is intentional, in order to add objects to the array the array must have at least one object
+        {
+            //idk how to right now but eventually we'll need to test to make sure the person is not already in this array and if it is not then we can remove it from the other and add it to this one
+            [arrayOf49PercentAndUnder addObject:currentPerson];
+            [arrayOf50PercentAndOver removeObjectIdenticalTo:currentPerson];
+        }
         
-        [arrayOf50PercentAndOver removeObjectIdenticalTo:currentPerson];
-        [arrayOf49PercentAndUnder addObject:currentPerson];
+        
+        NSLog(@"%i people in 49 array", arrayOf49PercentAndUnder.count);
+        NSLog(@"%i people in 50 array", arrayOf50PercentAndOver.count);
     }
     else
     {
-        [arrayOf49PercentAndUnder removeObjectIdenticalTo:currentPerson];
-        NSLog(@"%i number of people in 49 array", arrayOf49PercentAndUnder.count);
-        [arrayOf50PercentAndOver addObject:currentPerson];
+        if(arrayOf49PercentAndUnder.count > 2)// the 1 is intentional, in order to add objects to the array the array must have at least one
+        {
+            //idk how to right now but eventually we'll need to test to make sure the person is not already in this array and if it is not then we can remove it from the other and add it to this one
+            [arrayOf50PercentAndOver addObject:currentPerson];
+            [arrayOf49PercentAndUnder removeObjectIdenticalTo:currentPerson];
+            NSLog(@"%i people in 49 array", arrayOf49PercentAndUnder.count);
+            NSLog(@"%i people in 50 array", arrayOf50PercentAndOver.count);
+        }
     }
     NSMutableArray*currentArray;
     currentArray = [self chooseArray];
-    
-    j = rand()%currentArray.count -1;
-    
-    currentPerson =[currentArray objectAtIndex:j];
-    
+    int x;
+    x =(currentArray.count-1);
+    NSLog(@"%i val of x",x);
+    j = rand()%x;
+    NSLog(@"%i val of j",j);
+    if(j != 0)
+    {
+        currentPerson =[currentArray objectAtIndex:j];
+    }
+    else
+    {
+        currentPerson =[currentArray objectAtIndex:currentArray.count - 1];
+    }
     
     personPic.image = [currentPerson selfImage];
     
-    if (currentPerson.lastName == NULL) {
+    if (currentPerson.lastName == NULL)
+    {
         nameLabel.text = currentPerson.firstName;
         
-    } else {
+    }
+    else
+    {
         nameLabel.text = [NSString stringWithFormat:@"%@ %@", currentPerson.firstName,currentPerson.lastName];
     }
     nameAndButtonsView.hidden = true;
-
 }
-
+/*depricated
 -(int)checkFName:(NSString*)fN LName:(NSString*)lN inArray:(NSMutableArray*)array
 {
     for(int a=0; a < (array.count)-1; a++)
@@ -115,7 +110,7 @@
     }
     return -1;
 }
-
+*/
 
 - (void)viewDidLoad
 {
@@ -265,7 +260,7 @@
     
     contactGetter = [[MSContactManipulater alloc]init];
     arrayOf49PercentAndUnder = [contactGetter getContactsWithAnImage];
-    
+    arrayOf50PercentAndOver = [contactGetter getContactsWithAnImage];
     for (int i = 0 ; i< arrayOf49PercentAndUnder.count; i++) {
         Person *p = [arrayOf49PercentAndUnder objectAtIndex:i];
         NSLog(@"%@",p.firstName);
@@ -296,7 +291,7 @@
 
     if(arrayOf50PercentAndOver.count > 0 || arrayOf49PercentAndUnder.count>0)
     {
-        if(arrayOf50PercentAndOver.count > 0 && arrayOf49PercentAndUnder.count>0)
+        if(arrayOf50PercentAndOver.count > 0 && arrayOf49PercentAndUnder.count > 0)
         {
             int rn;
             rn = (rand()%10);
@@ -331,10 +326,13 @@
     else
     {
         //error
+        return currentPeopleArray;
+
     }
     return currentPeopleArray;
 
 }
+
 //go to flashcard chooser view
 -(IBAction)goToFCV
 {
@@ -365,5 +363,34 @@
     
     personPic.hidden = false;
     showInfoButton.hidden = false;
+    
+    
+    contactGetter = [[MSContactManipulater alloc]init];
+    arrayOf49PercentAndUnder = [contactGetter getContactsWithAnImage];
+    arrayOf50PercentAndOver = [contactGetter getContactsWithAnImage];
+    for (int i = 0 ; i< arrayOf49PercentAndUnder.count; i++) {
+        Person *p = [arrayOf49PercentAndUnder objectAtIndex:i];
+        NSLog(@"%@",p.firstName);
+    }
+    
+    NSMutableArray*currentArray;
+    currentArray = arrayOf49PercentAndUnder;
+    int x;
+    x =arrayOf49PercentAndUnder.count;
+    j = rand()%x;
+    
+    
+    currentPerson =[currentArray objectAtIndex:j];
+    
+    personPic.image = [currentPerson selfImage];
+    
+    if (currentPerson.lastName == NULL) {
+        nameLabel.text = currentPerson.firstName;
+        
+    } else {
+        nameLabel.text = [NSString stringWithFormat:@"%@ %@", currentPerson.firstName,currentPerson.lastName];
+    }
+    
+
 }
 @end

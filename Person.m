@@ -21,7 +21,12 @@
     isMale = iM;
 }
 -(double)returnPercentage {
-    return (double)numTimesCorrect/numTimesGuessed;
+    NSLog(@"ntc=%f",numTimesCorrect);
+    NSLog(@"ntg=%f",numTimesGuessed);
+    NSLog(@"p=%f",(numTimesCorrect/numTimesGuessed));
+
+    
+    return (double)(numTimesCorrect/numTimesGuessed);
 }
 -(void)gotRight {
     numTimesCorrect++;

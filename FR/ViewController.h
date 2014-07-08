@@ -57,6 +57,7 @@
 -(IBAction)gotRight:(id)sender;
 -(IBAction)gotWrong:(id)sender;
 
+-(void)loadNewPerson;
 
 -(int)checkFName:(NSString*)fN LName:(NSString*)lN inArray:(NSMutableArray*)array;
 
