@@ -10,8 +10,7 @@
 
 @interface Person : NSObject
 {
-    double numTimesCorrect;
-    double numTimesGuessed;
+    
 }
 @property (nonatomic) UIImage* selfImage;
 @property (nonatomic) NSString* firstName;
@@ -19,6 +18,8 @@
 @property (nonatomic) bool isMale;
 @property(nonatomic) NSString *company;
 @property(nonatomic) NSString *department;
+@property(nonatomic)double numTimesCorrect;
+@property(nonatomic)double numTimesGuessed;
 -(void)gotRight;
 -(void)gotWrong;
 -(double)returnPercentage;

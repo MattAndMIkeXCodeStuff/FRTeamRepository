@@ -49,16 +49,36 @@
     IBOutlet UIButton *mcButton3;
     IBOutlet UIButton *mcButton4;
     MSContactManipulater *contactGetter;
+    
+    IBOutlet UIButton*showInfoButton;
+    
     Person *currentPerson;
+    
+    
 }
 @property(nonatomic)int numberOfSmiths;
 @property(nonatomic)IBOutlet UIImageView *mcPersonPicture;
 @property(nonatomic)NSArray *currentContacts;
+@property(nonatomic)NSMutableArray *currentPeopleArray;
 @property(nonatomic)MSContactManipulater *contactGetter;
 -(IBAction)addContactsFromAppleContactsApp;
 -(IBAction)addContactFromScratch;
 //go to contact view
 -(IBAction)goToCV;
+@property(nonatomic)IBOutlet UIView *nameAndButtonsView;
+@property(nonatomic)IBOutlet UIImageView *personPic;
+@property(nonatomic)IBOutlet UILabel *nameLabel;
+-(IBAction)showInfo:(id)sender;
+-(IBAction)gotRight:(id)sender;
+-(IBAction)gotWrong:(id)sender;
+
+-(void)loadNewPerson;
+
+-(int)checkFName:(NSString*)fN LName:(NSString*)lN inArray:(NSMutableArray*)array;
+
+
+-(void)countUpDuration;
+
 //go to multiple choice view
 -(IBAction)goToMCV;
 //go to first view
@@ -74,5 +94,7 @@
 //go to multiple choice chooser view
 -(IBAction)goToMCCV;
 -(IBAction)mcAnswerPressed:(id)sender;
+
+-(NSMutableArray*)chooseArray;
 @end
 

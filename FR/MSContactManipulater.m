@@ -12,27 +12,9 @@
 
 
 -(NSArray *)getContactsWithAnImage {
-    CFErrorRef error = nil;
-    ABAddressBookRef addressBookYeah  = ABAddressBookCreateWithOptions(NULL, &error);
-    ABAddressBookRequestAccessWithCompletion(addressBookYeah, ^(bool granted, CFErrorRef error) {
-        if (error) {
-            NSLog(@"error %@", error);
-        }else if (granted){
-            // Do what you want with the Address Book
-            
-        }else{
-            NSLog(@"permission denied");
-        }
-        
-        CFRelease(addressBookYeah);
-    });
-    if (!addressBookYeah) {
-        NSLog(@"What the Freek why is there an error!");
-    }
-    
+    ABAddressBookRef addressBook2  = ABAddressBookCreateWithOptions(NULL, NULL);
     NSLog(@"HEllO");
-    CFArrayRef arrayOfPeople = ABAddressBookCopyArrayOfAllPeople(addressBookYeah);
-    NSArray *people = (__bridge NSArray *)ABAddressBookCopyArrayOfAllPeople(addressBookYeah);
+    NSMutableArray *people = (__bridge NSMutableArray *)ABAddressBookCopyArrayOfAllPeople(addressBook2);
     NSMutableArray *finalPeople = [[NSMutableArray alloc]init];
     for (int i = 0; i<[people count]; i++) {
         ABRecordRef r = (__bridge ABRecordRef)([people objectAtIndex:i]);
@@ -46,7 +28,7 @@
             myPerson.company = (__bridge NSString *)(ABRecordCopyValue(r, kABPersonOrganizationProperty));
             myPerson.department = (__bridge NSString *)(ABRecordCopyValue(r, kABPersonDepartmentProperty));
             [finalPeople addObject:myPerson];
-            //NSLog(@" %@ Have A picture",firstName);
+            NSLog(@" %@ has a picture",firstName);
         }
         
         

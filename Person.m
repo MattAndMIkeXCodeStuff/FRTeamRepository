@@ -13,6 +13,8 @@
 @synthesize lastName;
 @synthesize selfImage;
 @synthesize isMale;
+@synthesize numTimesCorrect;
+@synthesize numTimesGuessed;
 - (void)setWithFirstName:(NSString*) fName andLastName:(NSString*) lName andImage:(UIImage*)img andGender:(bool)iM
 {
     firstName = fName;

@@ -14,6 +14,5 @@
 ABAddressBookRef addressBook;
 }
 
--(NSArray *)getContactsWithAnImage;
-
+-(NSMutableArray *)getContactsWithAnImage;
 @end
