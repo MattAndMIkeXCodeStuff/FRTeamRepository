@@ -17,9 +17,11 @@
 @property (nonatomic) NSString* firstName;
 @property (nonatomic) NSString* lastName;
 @property (nonatomic) bool isMale;
-
+@property(nonatomic) NSString *company;
+@property(nonatomic) NSString *department;
 -(void)gotRight;
 -(void)gotWrong;
 -(double)returnPercentage;
 - (void)setWithFirstName:(NSString*) fName andLastName:(NSString*) lName andImage:(UIImage*)img andGender:(bool)iM;
+-(NSString *)getFullName;
 @end

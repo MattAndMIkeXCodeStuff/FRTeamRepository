@@ -10,6 +10,7 @@
 #import "Person.h"
 #import <AddressBook/AddressBook.h>
 #import <AddressBookUI/AddressBookUI.h>
+#import "MSContactManipulater.h"
 @interface ViewController : UIViewController
 {
     Person* myPerson;
@@ -27,8 +28,19 @@
     //mcc stands for multiple choice chooser
     IBOutlet UIView* MCCView;
     ABAddressBookRef addressBook;
+    IBOutlet UIImageView *mcPersonPicture;
+    NSArray *currentContacts;
+    IBOutlet UIButton *mcButton1;
+    IBOutlet UIButton *mcButton2;
+    IBOutlet UIButton *mcButton3;
+    IBOutlet UIButton *mcButton4;
+    MSContactManipulater *contactGetter;
+    Person *currentPerson;
 }
 @property(nonatomic)int numberOfSmiths;
+@property(nonatomic)IBOutlet UIImageView *mcPersonPicture;
+@property(nonatomic)NSArray *currentContacts;
+@property(nonatomic)MSContactManipulater *contactGetter;
 -(IBAction)addContactsFromAppleContactsApp;
 -(IBAction)addContactFromScratch;
 //go to contact view
@@ -43,4 +55,5 @@
 -(IBAction)goToTV;
 //go to multiple choice chooser view
 -(IBAction)goToMCCV;
+-(IBAction)mcAnswerPressed:(id)sender;
 @end

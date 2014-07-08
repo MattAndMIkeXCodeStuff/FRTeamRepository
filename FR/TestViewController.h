@@ -16,6 +16,7 @@
 @property(nonatomic)IBOutlet UIView *nameAndButtonsView;
 @property(nonatomic)IBOutlet UIImageView *personPic;
 @property(nonatomic)IBOutlet UILabel *nameLabel;
+
 -(IBAction)showInfo:(id)sender;
 -(IBAction)gotRight:(id)sender;
 -(IBAction)gotWrong:(id)sender;

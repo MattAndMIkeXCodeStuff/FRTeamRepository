@@ -30,4 +30,18 @@
 -(void)gotWrong {
     numTimesGuessed++;
 }
+-(NSString *)getFullName {
+    NSString *fullName;
+    if (self.firstName == NULL) {
+        fullName = lastName;
+    }
+    else if (self.lastName == NULL) {
+        fullName = firstName;
+    }
+    else {
+        fullName = [NSString stringWithFormat:@"%@ %@",firstName,lastName];
+    }
+    return fullName;
+    
+}
 @end
