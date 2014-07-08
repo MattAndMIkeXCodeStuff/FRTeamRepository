@@ -61,10 +61,7 @@
 @property(nonatomic)NSArray *currentContacts;
 @property(nonatomic)NSMutableArray *currentPeopleArray;
 @property(nonatomic)MSContactManipulater *contactGetter;
--(IBAction)addContactsFromAppleContactsApp;
--(IBAction)addContactFromScratch;
 //go to contact view
--(IBAction)goToCV;
 @property(nonatomic)IBOutlet UIView *nameAndButtonsView;
 @property(nonatomic)IBOutlet UIImageView *personPic;
 @property(nonatomic)IBOutlet UILabel *nameLabel;
@@ -73,8 +70,6 @@
 -(IBAction)gotWrong:(id)sender;
 
 -(void)loadNewPerson;
-
--(int)checkFName:(NSString*)fN LName:(NSString*)lN inArray:(NSMutableArray*)array;
 
 
 -(void)countUpDuration;
@@ -94,6 +89,9 @@
 //go to multiple choice chooser view
 -(IBAction)goToMCCV;
 -(IBAction)mcAnswerPressed:(id)sender;
+
+- (bool)isObjectIdenticalTo:(id)anObject inArray:(NSMutableArray*)aIQ;
+
 
 -(NSMutableArray*)chooseArray;
 @end

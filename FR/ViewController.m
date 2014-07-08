@@ -51,27 +51,27 @@
             rn = (rand()%10);
             if(rn <= 3 && arrayOf50PercentAndOver.count > 0)
             {
-                NSLog(@"50 and over");
+               // NSLog(@"50 and over");
                 
                 return arrayOf50PercentAndOver;
             }
             else
             {
-                NSLog(@"49 and under");
+                //NSLog(@"49 and under");
                 
                 return arrayOf49PercentAndUnder;
             }
         }
         else if(arrayOf49PercentAndUnder.count > 0 && arrayOf50PercentAndOver.count == 0)
         {
-            NSLog(@"49 and under");
+            //NSLog(@"49 and under");
             
             return arrayOf49PercentAndUnder;
             
         }
         else if(arrayOf50PercentAndOver.count > 0 && arrayOf49PercentAndUnder.count == 0)
         {
-            NSLog(@"50 and over");
+            //NSLog(@"50 and over");
             
             return arrayOf50PercentAndOver;
         }
@@ -89,45 +89,54 @@
 
 -(void)loadNewPerson
 {
-    NSLog(@"Percent Right = s%f", [currentPerson returnPercentage]);
+    NSLog(@"Percent Right = %f", [currentPerson returnPercentage]*100);
     if (currentPerson.returnPercentage < 0.5)
     {
-        if(arrayOf50PercentAndOver.count > 2) // the 1 is intentional, in order to add objects to the array the array must have at least one object
-        {
+        //if(arrayOf50PercentAndOver.count > 0) // the 1 is intentional, in order to add objects to the array the array must have at least one object
+        //{
             //idk how to right now but eventually we'll need to test to make sure the person is not already in this array and if it is not then we can remove it from the other and add it to this one
+        if ([self isObjectIdenticalTo:currentPerson inArray:arrayOf50PercentAndOver]==true)
+        {
             [arrayOf49PercentAndUnder addObject:currentPerson];
             [arrayOf50PercentAndOver removeObjectIdenticalTo:currentPerson];
         }
-        
-        
         NSLog(@"%i people in 49 array", arrayOf49PercentAndUnder.count);
         NSLog(@"%i people in 50 array", arrayOf50PercentAndOver.count);
+        NSLog(@"%i total people", arrayOf50PercentAndOver.count + arrayOf49PercentAndUnder.count);
+
+        //}
     }
-    else
+    else if (currentPerson.returnPercentage >= 0.5)
     {
-        if(arrayOf49PercentAndUnder.count > 2)// the 1 is intentional, in order to add objects to the array the array must have at least one
-        {
+        //if(arrayOf49PercentAndUnder.count > 0)// the 1 is intentional, in order to add objects to the array the array must have at least one
+        //{
             //idk how to right now but eventually we'll need to test to make sure the person is not already in this array and if it is not then we can remove it from the other and add it to this one
+        if ([self isObjectIdenticalTo:currentPerson inArray:arrayOf49PercentAndUnder]==true)
+        {
             [arrayOf50PercentAndOver addObject:currentPerson];
             [arrayOf49PercentAndUnder removeObjectIdenticalTo:currentPerson];
-            NSLog(@"%i people in 49 array", arrayOf49PercentAndUnder.count);
-            NSLog(@"%i people in 50 array", arrayOf50PercentAndOver.count);
         }
+        NSLog(@"%i people in 49 array", arrayOf49PercentAndUnder.count);
+        NSLog(@"%i people in 50 array", arrayOf50PercentAndOver.count);
+        NSLog(@"%i total people", arrayOf50PercentAndOver.count + arrayOf49PercentAndUnder.count);
+        
+        //}
     }
     NSMutableArray*currentArray;
     currentArray = [self chooseArray];
     int x;
     x =(currentArray.count-1);
-    NSLog(@"%i val of x",x);
+   // NSLog(@"%i val of x",x);
     j = rand()%x;
-    NSLog(@"%i val of j",j);
-    if(j != 0)
+   // NSLog(@"%i val of j",j);
+    if(j == 0)
     {
-        currentPerson =[currentArray objectAtIndex:j];
+        (NSLog(@"%i",currentArray.count - 1));
+        currentPerson =[currentArray objectAtIndex:(currentArray.count - 1)];
     }
     else
     {
-        currentPerson =[currentArray objectAtIndex:currentArray.count - 1];
+        currentPerson =[currentArray objectAtIndex:j];
     }
     
     personPic.image = [currentPerson selfImage];
@@ -143,22 +152,6 @@
     }
     nameAndButtonsView.hidden = true;
 }
-/*depricated
--(int)checkFName:(NSString*)fN LName:(NSString*)lN inArray:(NSMutableArray*)array
-{
-    for(int a=0; a < (array.count)-1; a++)
-    {
-        Person *pIQ;
-        pIQ = [array objectAtIndexedSubscript:a];
-        if (pIQ.firstName == fN && pIQ.lastName == lN)
-        {
-            return a;
-        }
-    }
-    return -1;
-}
-*/
-
 - (void)viewDidLoad
 {
     timer = [NSTimer scheduledTimerWithTimeInterval:0.01 target:self selector:@selector(countUpDuration) userInfo:Nil repeats:YES];
@@ -492,4 +485,48 @@
     
 
 }
+
+
+- (bool)isObjectIdenticalTo:(id)anObject inArray:(NSMutableArray*)aIQ
+{
+    int p;
+    p = aIQ.count;
+    NSLog(@"%i people in array before",p);
+    
+    Person *sentP;
+    sentP = anObject;
+    if(p-1 != 0 && p-1 > 0)
+    {
+        for (int h =0; h < (p-1); ++h)
+        {
+            NSLog(@"valH=%i",h);
+            Person *pIQ;
+            pIQ = [aIQ objectAtIndex:h];
+            
+            if (pIQ.firstName == sentP.firstName && pIQ.lastName == sentP.lastName && [pIQ returnPercentage] == [sentP returnPercentage] )
+            {
+                NSLog(@"object was in the array");
+                return true;
+            }
+        }
+    }
+    else if(p-1 == 0)
+    {
+        Person *pIQ;
+        pIQ = [aIQ objectAtIndex:0];
+        if (pIQ.firstName == sentP.firstName && pIQ.lastName == sentP.lastName && [pIQ returnPercentage] == [sentP returnPercentage] )
+        {
+            NSLog(@"object was in the array");
+            return true;
+        }
+    }
+    else if(p-1 < 0)
+    {
+        //error the array is empty
+    }
+    NSLog(@"object was not in the array");
+    return false;
+}
+
+
 @end
