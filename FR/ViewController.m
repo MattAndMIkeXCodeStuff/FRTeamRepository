@@ -254,9 +254,6 @@
     FGameView.hidden = true;
     FCGameView.hidden = true;
     FTGameView.hidden = true;
-    
-    personPic.hidden = false;
-    showInfoButton.hidden = false;
 }
 //go to first view
 -(IBAction)goToFV
@@ -333,8 +330,6 @@
     FCGameView.hidden = true;
     FTGameView.hidden = true;
     
-    personPic.hidden = false;
-    showInfoButton.hidden = false;
 }
 -(IBAction)mcAnswerPressed:(id)sender {
     UIButton *b = (UIButton *)sender;
