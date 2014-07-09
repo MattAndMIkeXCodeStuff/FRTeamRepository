@@ -27,6 +27,7 @@
                                         <rect key="frame" x="137" y="361" width="46" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" title="Next" backgroundImage="RoundedRectBlackButton.png">
+                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
@@ -453,7 +454,7 @@
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="lCd-Et-gYF" userLabel="XButton">
-                                        <rect key="frame" x="39" y="50" width="50" height="50"/>
+                                        <rect key="frame" x="38" y="64" width="50" height="50"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                         <state key="normal" image="XButton.png" backgroundImage="button-red.png">
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
@@ -464,7 +465,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="T9p-Le-4Hl" userLabel="CheckButton">
-                                        <rect key="frame" x="168" y="50" width="50" height="50"/>
+                                        <rect key="frame" x="169" y="64" width="50" height="50"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                         <state key="normal" image="CheckButton.png" backgroundImage="CheckButton.png">
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
@@ -477,6 +478,9 @@
                                     <button appearanceType="aqua" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="infoDark" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="Szw-bl-XKh">
                                         <rect key="frame" x="117" y="108" width="22" height="22"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <connections>
+                                            <action selector="moreInfo" destination="vXZ-lx-hvc" eventType="touchUpInside" id="y3N-NA-xD0"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.80000001190000003" green="0.80000001190000003" blue="0.80000001190000003" alpha="1" colorSpace="calibratedRGB"/>
@@ -542,6 +546,58 @@
                                 </subviews>
                                 <color key="backgroundColor" red="0.180392161" green="0.57647061349999995" blue="0.67450982329999998" alpha="1" colorSpace="deviceRGB"/>
                             </view>
+                            <view contentMode="scaleToFill" id="WiV-gJ-wew" userLabel="MoreInfoView">
+                                <rect key="frame" x="10" y="370" width="300" height="190"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="f8y-cr-rIi">
+                                        <rect key="frame" x="0.0" y="0.0" width="300" height="190"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <subviews>
+                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SUPERDUPERLONGNAME" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="sIY-n0-dSi">
+                                                <rect key="frame" x="20" y="20" width="260" height="21"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="COMPANY:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="jkv-Fz-u4Y">
+                                                <rect key="frame" x="20" y="49" width="260" height="21"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="JOB TITLE:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Ssn-q6-tpk">
+                                                <rect key="frame" x="20" y="78" width="260" height="21"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DEPARTMENT:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="arH-Sp-Kbn">
+                                                <rect key="frame" x="20" y="107" width="260" height="21"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="YhL-mT-J0E">
+                                                <rect key="frame" x="127" y="136" width="46" height="30"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <state key="normal" title="Done" backgroundImage="RoundedRectBlackButton.png">
+                                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="lessInfo" destination="vXZ-lx-hvc" eventType="touchUpInside" id="ioe-BV-dDj"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </scrollView>
+                                </subviews>
+                                <color key="backgroundColor" red="0.180392161" green="0.57647061349999995" blue="0.67450982329999998" alpha="1" colorSpace="deviceRGB"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -566,6 +622,11 @@
                         <outlet property="mcButton3" destination="G1S-3G-aq4" id="3HR-2v-rTZ"/>
                         <outlet property="mcButton4" destination="cxq-Xf-kWs" id="Sax-VU-xKs"/>
                         <outlet property="mcPersonPicture" destination="XOz-CU-Ha9" id="zwu-ma-Suw"/>
+                        <outlet property="moreInfoCompany" destination="jkv-Fz-u4Y" id="MOU-70-Hwk"/>
+                        <outlet property="moreInfoJobTitle" destination="Ssn-q6-tpk" id="JSh-NE-hWJ"/>
+                        <outlet property="moreInfoName" destination="sIY-n0-dSi" id="72q-bc-qTH"/>
+                        <outlet property="moreInfoView" destination="WiV-gJ-wew" id="4y3-8e-esE"/>
+                        <outlet property="moreInforDepartment" destination="arH-Sp-Kbn" id="Ak8-f1-VF2"/>
                         <outlet property="nameAndButtonsView" destination="NO8-CE-HIs" id="AoN-wM-fws"/>
                         <outlet property="nameLabel" destination="qqd-ur-Djm" id="SLv-Ps-IsL"/>
                         <outlet property="percentLabel" destination="lcj-Fw-rKi" id="vkh-z6-Z5c"/>

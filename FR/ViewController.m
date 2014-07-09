@@ -221,7 +221,7 @@
     jobTitleField.hidden = true;
     gameOverView.hidden = true;
     filteringIndicator.hidesWhenStopped = true;
-    
+    moreInfoView.hidden =true;
     [super viewDidLoad];
     filteringIndicator = [[UIActivityIndicatorView alloc]init];
     arrayOf50PercentAndOver = [[NSMutableArray alloc]init];
@@ -1027,5 +1027,19 @@
         }
     }
     return true;
+}
+-(IBAction)moreInfo
+{
+    moreInfoView.hidden=false;
+    moreInfoName.text = [NSString stringWithFormat:@"%@ %@", currentPerson.firstName, currentPerson.lastName];
+    moreInfoJobTitle.text = [NSString stringWithFormat:@"Job Title: %@", currentPerson.jobTitle];
+    moreInfoCompany.text = [NSString stringWithFormat:@"Company: %@", currentPerson.company];
+    moreInforDepartment.text = [NSString stringWithFormat:@"Department: %@", currentPerson.department];
+    //moreInfoBio.text = [NSString stringWithFormat:@"Bio: %@", currentPerson.notes];
+
+}
+-(IBAction)lessInfo
+{
+    moreInfoView.hidden=true;
 }
 @end

@@ -27,6 +27,8 @@
             [myPerson setWithFirstName:firstName andLastName:lastName andImage:Cimage andGender:true];
             myPerson.company = (__bridge NSString *)(ABRecordCopyValue(r, kABPersonOrganizationProperty));
             myPerson.department = (__bridge NSString *)(ABRecordCopyValue(r, kABPersonDepartmentProperty));
+            myPerson.jobTitle = (__bridge NSString *)(ABRecordCopyValue(r, kABPersonJobTitleProperty));
+
             [finalPeople addObject:myPerson];
         }
         

@@ -70,6 +70,13 @@
     double totalPercentage;
     
     IBOutlet UIActivityIndicatorView*filteringIndicator;
+    
+    IBOutlet UILabel*moreInfoName;
+    IBOutlet UILabel*moreInfoJobTitle;
+    IBOutlet UILabel*moreInforDepartment;
+    IBOutlet UILabel*moreInfoCompany;
+    IBOutlet UITextView*moreInfoBio;
+    IBOutlet UIView*moreInfoView;
 }
 @property(nonatomic)int numberOfSmiths;
 @property(nonatomic)IBOutlet UIImageView *mcPersonPicture;
@@ -83,6 +90,11 @@
 -(IBAction)showInfo:(id)sender;
 -(IBAction)gotRight:(id)sender;
 -(IBAction)gotWrong:(id)sender;
+
+
+-(IBAction)moreInfo;
+-(IBAction)lessInfo;
+
 
 -(void)loadNewPerson;
 
