@@ -215,6 +215,35 @@
 }
 -(void)countUpDuration
 {
+    if(MCGameView.hidden == false || FGameView.hidden == false)
+    {
+        if([self checkIfAllPeopleHaveBeenGuessed]==true)
+        {
+            //game ends
+            //go to view that shows stats
+            MCGameView.hidden=true;
+            firstView.hidden=false;
+            //right now it just goes back to the first view but eventually it will go to the stats view
+            MCTGameView.hidden=true;
+            FCGameView.hidden=true;
+            MCCView.hidden = true;
+            FGameView.hidden = true;
+            FCGameView.hidden = true;
+            FTGameView.hidden = true;
+            FilterView.hidden = true;
+            
+            personPic.hidden = true;
+            showInfoButton.hidden = true;
+            deptTitleField.hidden = true;
+            jobTitleField.hidden = true;
+            filterField.text = @"";
+            filterLabel.text = @"Filter By:";
+            companyTitleField.hidden = true;
+            
+            [arrayOf49PercentAndUnder removeAllObjects];
+            [arrayOf50PercentAndOver removeAllObjects];
+        }
+    }
     if(MCTGameView.hidden == false || FTGameView.hidden == false ) //playing a timed game
     {
         if([self checkIfAllPeopleHaveBeenGuessedCorrectly]==true)
@@ -244,7 +273,6 @@
             [arrayOf50PercentAndOver removeAllObjects];
             
         }
-        
         timerView.hidden = false;
         ++wait;
         if(wait == 100)
@@ -271,37 +299,6 @@
 
             }
         }
-        else if(MCGameView.hidden == false || FGameView.hidden == false)
-        {
-            if([self checkIfAllPeopleHaveBeenGuessed]==true)
-            {
-                //game ends
-                //go to view that shows stats
-                MCGameView.hidden=true;
-                firstView.hidden=false;
-                //right now it just goes back to the first view but eventually it will go to the stats view
-                MCTGameView.hidden=true;
-                FCGameView.hidden=true;
-                MCCView.hidden = true;
-                FGameView.hidden = true;
-                FCGameView.hidden = true;
-                FTGameView.hidden = true;
-                FilterView.hidden = true;
-                
-                personPic.hidden = true;
-                showInfoButton.hidden = true;
-                deptTitleField.hidden = true;
-                jobTitleField.hidden = true;
-                filterField.text = @"";
-                filterLabel.text = @"Filter By:";
-                companyTitleField.hidden = true;
-                
-                [arrayOf49PercentAndUnder removeAllObjects];
-                [arrayOf50PercentAndOver removeAllObjects];
-            }
-        }
-        
-
     }
     else
     {
