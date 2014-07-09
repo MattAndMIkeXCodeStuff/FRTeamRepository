@@ -21,6 +21,8 @@
 @property(nonatomic) NSString *jobTitle;
 @property(nonatomic)double numTimesCorrect;
 @property(nonatomic)double numTimesGuessed;
+@property(nonatomic)bool hasBeenGuessed;
+
 -(void)gotRight;
 -(void)gotWrong;
 -(double)returnPercentage;

@@ -32,13 +32,19 @@
 }
 -(IBAction)gotRight:(id)sender {
     NSLog(@"Got Right");
+    currentPerson.hasBeenGuessed = true;
     [currentPerson gotRight];
     [self loadNewPerson];
+    totalGuessed++;
+    totalCorrect++;
 }
 -(IBAction)gotWrong:(id)sender {
     NSLog(@"Got Wrong");
+    currentPerson.hasBeenGuessed = true;
     [currentPerson gotWrong];
     [self loadNewPerson];
+    totalGuessed++;
+
 }
 -(NSMutableArray*)chooseArray
 {
@@ -127,18 +133,17 @@
     int x;
     x =(currentArray.count-1);
    // NSLog(@"%i val of x",x);
-    j = rand()%x;
-   // NSLog(@"%i val of j",j);
-    if(j == 0)
+    if(x == 0)
     {
-        (NSLog(@"%i",currentArray.count - 1));
-        currentPerson =[currentArray objectAtIndex:(currentArray.count - 1)];
+        j = 0;
     }
     else
     {
-        currentPerson =[currentArray objectAtIndex:j];
+        j = rand()%x;
     }
-    
+   // NSLog(@"%i val of j",j);
+    currentPerson = [currentArray objectAtIndex:j];
+
     personPic.image = [currentPerson selfImage];
     
     if (currentPerson.lastName == NULL)
@@ -208,9 +213,34 @@
 }
 -(void)countUpDuration
 {
-    
     if(MCTGameView.hidden == false || FTGameView.hidden == false ) //playing a timed game
     {
+        if([self checkIfAllPeopleHaveBeenGuessed]==true)
+        {
+            //game ends
+            //go to view that shows stats
+            MCGameView.hidden=true;
+            firstView.hidden=false;
+            //right now it just goes back to the first view but eventually it will go to the stats view
+            MCTGameView.hidden=true;
+            FCGameView.hidden=true;
+            MCCView.hidden = true;
+            FGameView.hidden = true;
+            FCGameView.hidden = true;
+            FTGameView.hidden = true;
+            FilterView.hidden = true;
+            
+            personPic.hidden = true;
+            showInfoButton.hidden = true;
+            deptTitleField.hidden = true;
+            jobTitleField.hidden = true;
+            filterField.text = @"";
+            filterLabel.text = @"Filter By:";
+            companyTitleField.hidden = true;
+            
+            
+        }
+        
         timerView.hidden = false;
         ++wait;
         if(wait == 100)
@@ -237,6 +267,34 @@
 
             }
         }
+        else if(MCGameView.hidden == false || FGameView.hidden == false)
+        {
+            if([self checkIfAllPeopleHaveBeenGuessed]==true)
+            {
+                //game ends
+                //go to view that shows stats
+                MCGameView.hidden=true;
+                firstView.hidden=false;
+                //right now it just goes back to the first view but eventually it will go to the stats view
+                MCTGameView.hidden=true;
+                FCGameView.hidden=true;
+                MCCView.hidden = true;
+                FGameView.hidden = true;
+                FCGameView.hidden = true;
+                FTGameView.hidden = true;
+                FilterView.hidden = true;
+                
+                personPic.hidden = true;
+                showInfoButton.hidden = true;
+                deptTitleField.hidden = true;
+                jobTitleField.hidden = true;
+                filterField.text = @"";
+                filterLabel.text = @"Filter By:";
+                companyTitleField.hidden = true;
+                
+            }
+        }
+        
 
     }
     else
@@ -730,5 +788,33 @@
         nameLabel.text = [NSString stringWithFormat:@"%@ %@", currentPerson.firstName,currentPerson.lastName];
     }
     FilterView.hidden = true;
+}
+-(bool)checkIfAllPeopleHaveBeenGuessed
+{
+    if(arrayOf49PercentAndUnder.count > 0)
+    {
+        for (int f = 0; f<arrayOf49PercentAndUnder.count; f++)
+        {
+            Person *pIQ;
+            pIQ = [arrayOf49PercentAndUnder objectAtIndex:f];
+            if(pIQ.hasBeenGuessed == false)
+            {
+                return false;
+            }
+        }
+    }
+    if(arrayOf50PercentAndOver.count > 0)
+    {
+        for (int f = 0; f<arrayOf50PercentAndOver.count; f++)
+        {
+            Person *pIQ;
+            pIQ = [arrayOf50PercentAndOver objectAtIndex:f];
+            if(pIQ.hasBeenGuessed == false)
+            {
+                return false;
+            }
+        }
+    }
+    return true;
 }
 @end

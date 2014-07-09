@@ -61,7 +61,9 @@
     IBOutlet UITextField*deptTitleField;
     IBOutlet UITextField*companyTitleField;
 
-
+    int totalGuessed;
+    int totalCorrect;
+    double totalPercentage;
 }
 @property(nonatomic)int numberOfSmiths;
 @property(nonatomic)IBOutlet UIImageView *mcPersonPicture;
@@ -105,6 +107,7 @@
 
 - (bool)isObjectIdenticalTo:(id)anObject inArray:(NSMutableArray*)aIQ;
 
+-(bool)checkIfAllPeopleHaveBeenGuessed;
 
 -(NSMutableArray*)chooseArray;
 @end
