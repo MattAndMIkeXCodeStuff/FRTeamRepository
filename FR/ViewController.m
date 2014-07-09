@@ -154,6 +154,8 @@
 }
 - (void)viewDidLoad
 {
+    
+    
     timer = [NSTimer scheduledTimerWithTimeInterval:0.01 target:self selector:@selector(countUpDuration) userInfo:Nil repeats:YES];
     
     MCGameView.hidden=true;
@@ -172,6 +174,29 @@
     jobTitleField.hidden = true;
     
     [super viewDidLoad];
+    
+    
+    if (ABAddressBookGetAuthorizationStatus() == kABAuthorizationStatusDenied ||
+        ABAddressBookGetAuthorizationStatus() == kABAuthorizationStatusRestricted){
+        //1
+        NSLog(@"Denied");
+    } else if (ABAddressBookGetAuthorizationStatus() == kABAuthorizationStatusAuthorized){
+        //2
+        NSLog(@"Authorized");
+    } else{ //ABAddressBookGetAuthorizationStatus() == kABAuthorizationStatusNotDetermined
+        //3
+        NSLog(@"Not determined");
+        ABAddressBookRequestAccessWithCompletion(ABAddressBookCreateWithOptions(NULL, nil), ^(bool granted, CFErrorRef error) {
+            if (!granted){
+                //4
+                NSLog(@"Just denied");
+                return;
+            }
+            //5
+            NSLog(@"Just authorized");
+        });
+    }
+    
 	// Do any additional setup after loading the view, typically from a nib.
     myPerson = [[Person alloc] init];
     [myPerson setWithFirstName:@"mike" andLastName:@"Selander" andImage:[UIImage imageNamed:@"Unkown.jpeg"] andGender:true];

@@ -56,7 +56,7 @@
             if([[myPerson.jobTitle uppercaseString] isEqual: [jobTitle uppercaseString]])
             {
                 [finalPeople addObject:myPerson];
-                NSLog(@" %@ has a picture has a job title of %@ ",firstName, jobTitle);
+                NSLog(@" %@ has a picture his/her job is called %@ ",firstName, jobTitle);
              
             }
         }
@@ -87,7 +87,7 @@
              if([[myPerson.company uppercaseString] isEqual: [company uppercaseString]])
              {
              [finalPeople addObject:myPerson];
-             NSLog(@" %@ has a picture has a company of %@ ",firstName, company);
+             NSLog(@" %@ has a picture and works at %@ ",firstName, company);
              
              }
         }
