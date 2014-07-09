@@ -167,6 +167,10 @@
     personPic.hidden = true;
     showInfoButton.hidden = true;
     nameAndButtonsView.hidden = true;
+    FilterView.hidden = true;
+    deptTitleField.hidden = true;
+    jobTitleField.hidden = true;
+    
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     myPerson = [[Person alloc] init];
@@ -179,6 +183,7 @@
 }
 -(void)countUpDuration
 {
+    
     if(MCTGameView.hidden == false || FTGameView.hidden == false ) //playing a timed game
     {
         timerView.hidden = false;
@@ -225,7 +230,6 @@
 }
 -(IBAction)goToMCCV:(id)sender {
     MCCView.hidden = false;
-
     MCGameView.hidden=true;
     firstView.hidden=true;
     MCTGameView.hidden=true;
@@ -233,12 +237,18 @@
     FGameView.hidden = true;
     FCGameView.hidden = true;
     FTGameView.hidden = true;
+    FilterView.hidden = true;
+    deptTitleField.hidden = true;
+    jobTitleField.hidden = true;
+    filterField.text = @"";
+
 }
 //go to multiple choice view
 -(IBAction)goToMCV
 {
     
     //contactView.hidden=true;
+    FilterView.hidden = true;
     MCGameView.hidden=false;
     firstView.hidden=true;
     MCTGameView.hidden=true;
@@ -247,24 +257,35 @@
     FGameView.hidden = true;
     FCGameView.hidden = true;
     FTGameView.hidden = true;
+    deptTitleField.hidden = true;
+    jobTitleField.hidden = true;
+    filterField.text = @"";
+
 }
 //go to first view
 -(IBAction)goToFV
 {
+    FilterView.hidden = true;
     MCGameView.hidden=true;
     firstView.hidden=false;
+    FilterView.hidden = true;
     MCTGameView.hidden=true;
     FCGameView.hidden=true;
     MCCView.hidden = true;
     FGameView.hidden = true;
     FCGameView.hidden = true;
     FTGameView.hidden = true;
-    
+    deptTitleField.hidden = true;
+    jobTitleField.hidden = true;
+    filterField.text = @"";
 
 }
 //go to multiple choice timed view
 -(IBAction)goToMCTV
 {
+    FilterView.hidden = true;
+    deptTitleField.hidden = true;
+    jobTitleField.hidden = true;
     mcButton1.titleLabel.text = @"";
     mcButton2.titleLabel.text = @"";
     mcButton3.titleLabel.text = @"";
@@ -322,9 +343,14 @@
     FGameView.hidden = true;
     FCGameView.hidden = true;
     FTGameView.hidden = true;
-    
+    deptTitleField.hidden = true;
+    jobTitleField.hidden = true;
+    filterField.text = @"";
+
 }
 -(IBAction)mcAnswerPressed:(id)sender {
+    filterField.text = @"";
+
     UIButton *b = (UIButton *)sender;
     NSLog(@"%@", b.titleLabel.text);
     NSLog(@"%@",[NSString stringWithFormat:@"%@ %@",currentPerson.firstName,currentPerson.lastName]);
@@ -387,10 +413,14 @@
     FGameView.hidden = true;
     FCGameView.hidden = true;
     FTGameView.hidden = true;
-    
+    FilterView.hidden = true;
     personPic.hidden = true;
     showInfoButton.hidden = true;
     nameAndButtonsView.hidden = true;
+    deptTitleField.hidden = true;
+    jobTitleField.hidden = true;
+    filterField.text = @"";
+
 }
 //go to flashcard view
 -(IBAction)goToFlashV
@@ -403,31 +433,20 @@
     FGameView.hidden = false;
     FCGameView.hidden = true;
     FTGameView.hidden = true;
-    
+    FilterView.hidden = true;
+
     personPic.hidden = false;
     showInfoButton.hidden = false;
-    
-    
-    contactGetter = [[MSContactManipulater alloc]init];
-    arrayOf49PercentAndUnder = [contactGetter getContactsWithAnImage];
-    arrayOf50PercentAndOver = [contactGetter getContactsWithAnImage];
-    for (int i = 0 ; i< arrayOf49PercentAndUnder.count; i++) {
-        Person *p = [arrayOf49PercentAndUnder objectAtIndex:i];
-        NSLog(@"%@",p.firstName);
-    }
-    
-    NSMutableArray*currentArray;
-    currentArray = arrayOf49PercentAndUnder;
-    
-    j = rand()%arrayOf49PercentAndUnder.count;
+    deptTitleField.hidden = true;
+    jobTitleField.hidden = true;
+    filterField.text = @"";
 
-    
-    currentPerson =[currentArray objectAtIndex:j];
 }
 //go to timed view
 //go to flashcard chooser view
 -(IBAction)goToFCV
 {
+    FilterView.hidden = false;
     MCGameView.hidden=true;
     firstView.hidden=true;
     MCTGameView.hidden=true;
@@ -440,10 +459,15 @@
     personPic.hidden = true;
     showInfoButton.hidden = true;
     nameAndButtonsView.hidden = true;
+    deptTitleField.hidden = true;
+    jobTitleField.hidden = true;
+    filterField.text = @"";
+
 }
 //go to flashcard timed view
 -(IBAction)goToFTV
 {
+    FilterView.hidden = true;
     MCGameView.hidden=true;
     firstView.hidden=true;
     MCTGameView.hidden=true;
@@ -455,35 +479,9 @@
     
     personPic.hidden = false;
     showInfoButton.hidden = false;
-    
-    
-    contactGetter = [[MSContactManipulater alloc]init];
-    arrayOf49PercentAndUnder = [contactGetter getContactsWithAnImage];
-    arrayOf50PercentAndOver = [contactGetter getContactsWithAnImage];
-    for (int i = 0 ; i< arrayOf49PercentAndUnder.count; i++) {
-        Person *p = [arrayOf49PercentAndUnder objectAtIndex:i];
-        NSLog(@"%@",p.firstName);
-    }
-    
-    NSMutableArray*currentArray;
-    currentArray = arrayOf49PercentAndUnder;
-    int x;
-    x =arrayOf49PercentAndUnder.count;
-    j = rand()%x;
-    
-    
-    currentPerson =[currentArray objectAtIndex:j];
-    
-    personPic.image = [currentPerson selfImage];
-    
-    if (currentPerson.lastName == NULL) {
-        nameLabel.text = currentPerson.firstName;
-        
-    } else {
-        nameLabel.text = [NSString stringWithFormat:@"%@ %@", currentPerson.firstName,currentPerson.lastName];
-    }
-    
-
+    deptTitleField.hidden = true;
+    jobTitleField.hidden = true;
+    filterField.text = @"";
 }
 
 
@@ -527,6 +525,114 @@
     NSLog(@"object was not in the array");
     return false;
 }
+-(IBAction)enteredFilter
+{
+    NSLog(@"button succesfully pressed");
+    if ([[filterField.text uppercaseString]  isEqual: @"DEPARTMENT"])
+    {
+        //show different departments
+        NSLog(@"department");
+        filterLabel.text = @"Department Title:";
+        deptTitleField.hidden = false;
+    }
+    else if ([[filterField.text uppercaseString]  isEqual: @"JOB TITLE"])
+    {
+        //show different JOB TITLES
+        NSLog(@"job titles");
+        filterLabel.text = @"Job Title:";
+        jobTitleField.hidden = false;
+    }
+    else if ([[filterField.text uppercaseString]  isEqual: @"ALL"])
+    {
+        FilterView.hidden = true;
+        NSLog(@"all contacts");
+        
+        contactGetter = [[MSContactManipulater alloc]init];
+        arrayOf49PercentAndUnder = [contactGetter getContactsWithAnImage];
+        arrayOf50PercentAndOver = [contactGetter getContactsWithAnImage];
+        for (int i = 0 ; i< arrayOf49PercentAndUnder.count; i++) {
+            Person *p = [arrayOf49PercentAndUnder objectAtIndex:i];
+            NSLog(@"%@",p.firstName);
+        }
+        
+        NSMutableArray*currentArray;
+        currentArray = arrayOf49PercentAndUnder;
+        
+        j = rand()%arrayOf49PercentAndUnder.count;
+        
+        
+        currentPerson =[currentArray objectAtIndex:j];
+    }
+    else
+    {
+        //show error message saying we dont have that filter
+    }
+}
+-(IBAction)enteredJobTitle
+{
+    contactGetter = [[MSContactManipulater alloc]init];
+    arrayOf49PercentAndUnder = [contactGetter getContactsWithJobTitle:jobTitleField.text];
+    arrayOf50PercentAndOver = [contactGetter getContactsWithJobTitle:jobTitleField.text];
+    for (int i = 0 ; i< arrayOf49PercentAndUnder.count; i++) {
+        Person *p = [arrayOf49PercentAndUnder objectAtIndex:i];
+        NSLog(@"%@",p.firstName);
+    }
+    
+    NSMutableArray*currentArray;
+    currentArray = arrayOf49PercentAndUnder;
+    
+    j = rand()%arrayOf49PercentAndUnder.count;
+    
+    
+    currentPerson =[currentArray objectAtIndex:j];
+    personPic.image = [currentPerson selfImage];
+    
+    if (currentPerson.lastName == NULL)
+    {
+        nameLabel.text = currentPerson.firstName;
+        
+    }
+    else
+    {
+        nameLabel.text = [NSString stringWithFormat:@"%@ %@", currentPerson.firstName,currentPerson.lastName];
+    }
+    FilterView.hidden = true;
 
-
+}
+-(IBAction)enteredDeptTitle
+{
+    
+    contactGetter = [[MSContactManipulater alloc]init];
+    arrayOf49PercentAndUnder = [contactGetter getContactsWithDept:deptTitleField.text];
+    arrayOf50PercentAndOver = [contactGetter getContactsWithDept:deptTitleField.text];
+    
+    
+    
+    for (int i = 0 ; i< arrayOf49PercentAndUnder.count; i++)
+    {
+        Person *p = [arrayOf49PercentAndUnder objectAtIndex:i];
+        NSLog(@"%@",p.firstName);
+    }
+    
+    NSMutableArray*currentArray;
+    currentArray = arrayOf49PercentAndUnder;
+    
+    j = rand()%arrayOf49PercentAndUnder.count;
+    
+    
+    currentPerson =[currentArray objectAtIndex:j];
+    
+    personPic.image = [currentPerson selfImage];
+    
+    if (currentPerson.lastName == NULL)
+    {
+        nameLabel.text = currentPerson.firstName;
+        
+    }
+    else
+    {
+        nameLabel.text = [NSString stringWithFormat:@"%@ %@", currentPerson.firstName,currentPerson.lastName];
+    }
+    FilterView.hidden = true;
+}
 @end

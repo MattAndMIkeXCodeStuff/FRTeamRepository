@@ -11,9 +11,9 @@
 @implementation MSContactManipulater
 
 
--(NSArray *)getContactsWithAnImage {
+-(NSMutableArray *)getContactsWithAnImage {
     ABAddressBookRef addressBook2  = ABAddressBookCreateWithOptions(NULL, NULL);
-    NSLog(@"HEllO");
+    NSLog(@"image");
     NSMutableArray *people = (__bridge NSMutableArray *)ABAddressBookCopyArrayOfAllPeople(addressBook2);
     NSMutableArray *finalPeople = [[NSMutableArray alloc]init];
     for (int i = 0; i<[people count]; i++) {
@@ -28,7 +28,71 @@
             myPerson.company = (__bridge NSString *)(ABRecordCopyValue(r, kABPersonOrganizationProperty));
             myPerson.department = (__bridge NSString *)(ABRecordCopyValue(r, kABPersonDepartmentProperty));
             [finalPeople addObject:myPerson];
+        }
+        
+        
+    }
+    return finalPeople;
+}
+-(NSMutableArray *)getContactsWithJobTitle:(NSString*)jobTitle
+{
+    NSLog(@"job");
+
+    ABAddressBookRef addressBook2  = ABAddressBookCreateWithOptions(NULL, NULL);
+    NSMutableArray *people = (__bridge NSMutableArray *)ABAddressBookCopyArrayOfAllPeople(addressBook2);
+    NSMutableArray *finalPeople = [[NSMutableArray alloc]init];
+    for (int i = 0; i<[people count]; i++) {
+        ABRecordRef r = (__bridge ABRecordRef)([people objectAtIndex:i]);
+        if (ABPersonHasImageData(r)) {
+            NSString *firstName = (__bridge NSString *)(ABRecordCopyValue(r, kABPersonFirstNameProperty));
+            NSString *lastName = (__bridge NSString *)(ABRecordCopyValue(r, kABPersonLastNameProperty));
+            UIImage *Cimage = [[UIImage alloc]init];
+            Cimage = [UIImage imageWithData:(__bridge NSData *)ABPersonCopyImageDataWithFormat(r, kABPersonImageFormatThumbnail)];
+            Person *myPerson = [[Person alloc] init];
+            [myPerson setWithFirstName:firstName andLastName:lastName andImage:Cimage andGender:true];
+            myPerson.company = (__bridge NSString *)(ABRecordCopyValue(r, kABPersonOrganizationProperty));
+            myPerson.department = (__bridge NSString *)(ABRecordCopyValue(r, kABPersonDepartmentProperty));
+            /*
+            if([myPerson.jobTitle uppercaseString] == [jobTitle uppercaseString])
+            {
+                [finalPeople addObject:myPerson];
+                NSLog(@" %@ has a picture and is of department %@",firstName, deptTitle);
+                
+            }
+             */
             NSLog(@" %@ has a picture",firstName);
+        }
+        
+        
+    }
+    return finalPeople;
+}
+-(NSMutableArray *)getContactsWithDept:(NSString*)deptTitle
+{
+    ABAddressBookRef addressBook2  = ABAddressBookCreateWithOptions(NULL, NULL);
+    NSLog(@"department");
+    NSMutableArray *people = (__bridge NSMutableArray *)ABAddressBookCopyArrayOfAllPeople(addressBook2);
+    NSMutableArray *finalPeople = [[NSMutableArray alloc]init];
+    for (int i = 0; i<[people count]; i++) {
+        ABRecordRef r = (__bridge ABRecordRef)([people objectAtIndex:i]);
+        if (ABPersonHasImageData(r))
+        {
+            NSString *firstName = (__bridge NSString *)(ABRecordCopyValue(r, kABPersonFirstNameProperty));
+            NSString *lastName = (__bridge NSString *)(ABRecordCopyValue(r, kABPersonLastNameProperty));
+            UIImage *Cimage = [[UIImage alloc]init];
+            Cimage = [UIImage imageWithData:(__bridge NSData *)ABPersonCopyImageDataWithFormat(r, kABPersonImageFormatThumbnail)];
+            Person *myPerson = [[Person alloc] init];
+            [myPerson setWithFirstName:firstName andLastName:lastName andImage:Cimage andGender:true];
+            myPerson.company = (__bridge NSString *)(ABRecordCopyValue(r, kABPersonOrganizationProperty));
+            myPerson.department = (__bridge NSString *)(ABRecordCopyValue(r, kABPersonDepartmentProperty));
+            NSLog(@" %@ has a picture",firstName);
+            NSLog(@" %@ department",myPerson.department);
+            if([[myPerson.department uppercaseString] isEqual: [deptTitle uppercaseString]])
+            {
+                [finalPeople addObject:myPerson];
+                NSLog(@" %@ has a picture and is of department %@",firstName, deptTitle);
+
+            }
         }
         
         

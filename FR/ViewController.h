@@ -20,12 +20,14 @@
     int wait;
     IBOutlet UIView *timerView;
     
+    IBOutlet UITextField *filterField;
+    
     Person* myPerson;
     NSMutableArray* arrayOfPeople;
     NSMutableArray* arrayOf50PercentAndOver;
     NSMutableArray* arrayOf49PercentAndUnder;
 
-    
+    IBOutlet UIView *FilterView;
     
     //MC stands for multiple choice
     IBOutlet UIView* MCGameView;
@@ -54,7 +56,10 @@
     
     Person *currentPerson;
     
-    
+    IBOutlet UILabel*filterLabel;
+    IBOutlet UITextField*jobTitleField;
+    IBOutlet UITextField*deptTitleField;
+
 }
 @property(nonatomic)int numberOfSmiths;
 @property(nonatomic)IBOutlet UIImageView *mcPersonPicture;
@@ -88,6 +93,10 @@
 -(IBAction)goToFTV;
 //go to multiple choice chooser view
 -(IBAction)goToMCCV;
+
+-(IBAction)enteredFilter;
+-(IBAction)enteredJobTitle;
+-(IBAction)enteredDeptTitle;
 -(IBAction)mcAnswerPressed:(id)sender;
 
 - (bool)isObjectIdenticalTo:(id)anObject inArray:(NSMutableArray*)aIQ;
