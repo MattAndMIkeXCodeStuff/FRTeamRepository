@@ -55,6 +55,7 @@
     IBOutlet UIButton*showInfoButton;
     
     Person *currentPerson;
+    Person *correctMCPerson;
     
     IBOutlet UILabel*filterLabel;
     IBOutlet UITextField*jobTitleField;

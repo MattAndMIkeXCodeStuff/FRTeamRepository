@@ -42,7 +42,6 @@
 -(IBAction)gotWrong:(id)sender {
     NSLog(@"Got Wrong");
     currentPerson.hasBeenGuessed = true;
-    currentPerson.hasBeenGuessedRight = true;
     [currentPerson gotWrong];
     [self loadNewPerson];
     totalGuessed++;
@@ -78,7 +77,7 @@
                 return arrayOf49PercentAndUnder;
                 
             }
-            else if(arrayOf50PercentAndOver.count > 0 && arrayOf49PercentAndUnder.count == 0)
+            else if(arrayOf50PercentAndOver.count > ((arrayOf49PercentAndUnder.count+arrayOf50PercentAndOver.count)/2) && arrayOf49PercentAndUnder.count == 0)
             {
                 //NSLog(@"50 and over");
                 
@@ -100,66 +99,105 @@
 -(void)loadNewPerson
 {
     NSLog(@"Percent Right = %f", [currentPerson returnPercentage]*100);
-    if (currentPerson.returnPercentage < 0.5)
+    if(MCGameView.hidden == false || FGameView.hidden == false)
     {
-        //if(arrayOf50PercentAndOver.count > 0) // the 1 is intentional, in order to add objects to the array the array must have at least one object
-        //{
-            //idk how to right now but eventually we'll need to test to make sure the person is not already in this array and if it is not then we can remove it from the other and add it to this one
-        if ([self isObjectIdenticalTo:currentPerson inArray:arrayOf50PercentAndOver]==true)
+        if (currentPerson.returnPercentage < 0.5)
         {
-            [arrayOf49PercentAndUnder addObject:currentPerson];
-            [arrayOf50PercentAndOver removeObjectIdenticalTo:currentPerson];
-        }
-        NSLog(@"%i people in 49 array", arrayOf49PercentAndUnder.count);
-        NSLog(@"%i people in 50 array", arrayOf50PercentAndOver.count);
-        NSLog(@"%i total people", arrayOf50PercentAndOver.count + arrayOf49PercentAndUnder.count);
-
-        //}
-    }
-    else if (currentPerson.returnPercentage >= 0.5)
-    {
-        //if(arrayOf49PercentAndUnder.count > 0)// the 1 is intentional, in order to add objects to the array the array must have at least one
-        //{
+            //if(arrayOf50PercentAndOver.count > 0) // the 1 is intentional, in order to add objects to the array the array must have at least one object
+            //{
             //idk how to right now but eventually we'll need to test to make sure the person is not already in this array and if it is not then we can remove it from the other and add it to this one
-        if ([self isObjectIdenticalTo:currentPerson inArray:arrayOf49PercentAndUnder]==true)
+            if ([self isObjectIdenticalTo:currentPerson inArray:arrayOf50PercentAndOver]==true)
+            {
+                [arrayOf49PercentAndUnder addObject:currentPerson];
+                [arrayOf50PercentAndOver removeObjectIdenticalTo:currentPerson];
+            }
+
+            //}
+        }
+        else if (currentPerson.returnPercentage >= 0.5)
+        {
+            //if(arrayOf49PercentAndUnder.count > 0)// the 1 is intentional, in order to add objects to the array the array must have at least one
+            //{
+            //idk how to right now but eventually we'll need to test to make sure the person is not already in this array and if it is not then we can remove it from the other and add it to this one
+            if ([self isObjectIdenticalTo:currentPerson inArray:arrayOf49PercentAndUnder]==true)
+            {
+                [arrayOf50PercentAndOver addObject:currentPerson];
+                [arrayOf49PercentAndUnder removeObjectIdenticalTo:currentPerson];
+            }
+
+            
+            //}
+        }
+        NSMutableArray*currentArray;
+        currentArray = [self chooseArray];
+        int x;
+        x =(currentArray.count-1);
+        // NSLog(@"%i val of x",x);
+        if(x == 0)
+        {
+            j = 0;
+        }
+        else
+        {
+            j = rand()%x;
+        }
+        // NSLog(@"%i val of j",j);
+        currentPerson = [currentArray objectAtIndex:j];
+        
+        personPic.image = [currentPerson selfImage];
+        
+        if (currentPerson.lastName == NULL)
+        {
+            nameLabel.text = currentPerson.firstName;
+            
+        }
+        else
+        {
+            nameLabel.text = [NSString stringWithFormat:@"%@ %@", currentPerson.firstName,currentPerson.lastName];
+        }
+        nameAndButtonsView.hidden = true;
+    }
+    if(MCTGameView.hidden == false || FTGameView.hidden == false)
+    {
+        if(currentPerson.hasBeenGuessedRight == true)
         {
             [arrayOf50PercentAndOver addObject:currentPerson];
             [arrayOf49PercentAndUnder removeObjectIdenticalTo:currentPerson];
+            
         }
-        NSLog(@"%i people in 49 array", arrayOf49PercentAndUnder.count);
-        NSLog(@"%i people in 50 array", arrayOf50PercentAndOver.count);
-        NSLog(@"%i total people", arrayOf50PercentAndOver.count + arrayOf49PercentAndUnder.count);
-        
-        //}
-    }
-    NSMutableArray*currentArray;
-    currentArray = [self chooseArray];
-    int x;
-    x =(currentArray.count-1);
-   // NSLog(@"%i val of x",x);
-    if(x == 0)
-    {
-        j = 0;
-    }
-    else
-    {
-        j = rand()%x;
-    }
-   // NSLog(@"%i val of j",j);
-    currentPerson = [currentArray objectAtIndex:j];
 
-    personPic.image = [currentPerson selfImage];
-    
-    if (currentPerson.lastName == NULL)
-    {
-        nameLabel.text = currentPerson.firstName;
+        NSMutableArray*currentArray;
+        currentArray = [self chooseArray];
+        int x;
+        x =(currentArray.count-1);
+        // NSLog(@"%i val of x",x);
+        if(x == 0)
+        {
+            j = 0;
+        }
+        else
+        {
+            j = rand()%x;
+        }
+        // NSLog(@"%i val of j",j);
+        currentPerson = [currentArray objectAtIndex:j];
         
+        personPic.image = [currentPerson selfImage];
+        
+        if (currentPerson.lastName == NULL)
+        {
+            nameLabel.text = currentPerson.firstName;
+            
+        }
+        else
+        {
+            nameLabel.text = [NSString stringWithFormat:@"%@ %@", currentPerson.firstName,currentPerson.lastName];
+        }
+        nameAndButtonsView.hidden = true;
     }
-    else
-    {
-        nameLabel.text = [NSString stringWithFormat:@"%@ %@", currentPerson.firstName,currentPerson.lastName];
-    }
-    nameAndButtonsView.hidden = true;
+    NSLog(@"%i people in 49 array", arrayOf49PercentAndUnder.count);
+    NSLog(@"%i people in 50 array", arrayOf50PercentAndOver.count);
+    NSLog(@"%i total people", arrayOf50PercentAndOver.count + arrayOf49PercentAndUnder.count);
 }
 - (void)viewDidLoad
 {
@@ -215,35 +253,6 @@
 }
 -(void)countUpDuration
 {
-    if(MCGameView.hidden == false || FGameView.hidden == false)
-    {
-        if([self checkIfAllPeopleHaveBeenGuessed]==true)
-        {
-            //game ends
-            //go to view that shows stats
-            MCGameView.hidden=true;
-            firstView.hidden=false;
-            //right now it just goes back to the first view but eventually it will go to the stats view
-            MCTGameView.hidden=true;
-            FCGameView.hidden=true;
-            MCCView.hidden = true;
-            FGameView.hidden = true;
-            FCGameView.hidden = true;
-            FTGameView.hidden = true;
-            FilterView.hidden = true;
-            
-            personPic.hidden = true;
-            showInfoButton.hidden = true;
-            deptTitleField.hidden = true;
-            jobTitleField.hidden = true;
-            filterField.text = @"";
-            filterLabel.text = @"Filter By:";
-            companyTitleField.hidden = true;
-            
-            [arrayOf49PercentAndUnder removeAllObjects];
-            [arrayOf50PercentAndOver removeAllObjects];
-        }
-    }
     if(MCTGameView.hidden == false || FTGameView.hidden == false ) //playing a timed game
     {
         if([self checkIfAllPeopleHaveBeenGuessedCorrectly]==true)
@@ -329,67 +338,31 @@
     filterField.text = @"";
     filterLabel.text = @"Filter By:";
     companyTitleField.hidden = true;
+    FilterView.hidden = false;
 
 }
 //go to multiple choice view
 -(IBAction)goToMCV
 {
     
-    //contactView.hidden=true;
-    FilterView.hidden = true;
-    MCGameView.hidden=false;
-    firstView.hidden=true;
-    MCTGameView.hidden=true;
-    FCGameView.hidden=true;
-    MCCView.hidden = true;
-    FGameView.hidden = true;
-    FCGameView.hidden = true;
-    FTGameView.hidden = true;
-    deptTitleField.hidden = true;
-    jobTitleField.hidden = true;
-    filterField.text = @"";
-    filterLabel.text = @"Filter By:";
-    companyTitleField.hidden = true;
-
-}
-//go to first view
--(IBAction)goToFV
-{
-    FilterView.hidden = true;
-    MCGameView.hidden=true;
-    firstView.hidden=false;
-    FilterView.hidden = true;
-    MCTGameView.hidden=true;
-    FCGameView.hidden=true;
-    MCCView.hidden = true;
-    FGameView.hidden = true;
-    FCGameView.hidden = true;
-    FTGameView.hidden = true;
-    deptTitleField.hidden = true;
-    jobTitleField.hidden = true;
-    filterField.text = @"";
-    companyTitleField.hidden = true;
-
-}
-//go to multiple choice timed view
--(IBAction)goToMCTV
-{
-    FilterView.hidden = true;
     deptTitleField.hidden = true;
     jobTitleField.hidden = true;
     mcButton1.titleLabel.text = @"";
     mcButton2.titleLabel.text = @"";
     mcButton3.titleLabel.text = @"";
     mcButton4.titleLabel.text = @"";
-    contactGetter = [[MSContactManipulater alloc]init];
-    currentContacts = [contactGetter getContactsWithAnImage];
+    /*
+     contactGetter = [[MSContactManipulater alloc]init];
+     currentContacts = [contactGetter getContactsWithAnImage];
+     */
     int currentContactIndex = rand()%currentContacts.count;
     currentPerson = [currentContacts objectAtIndex:currentContactIndex];
+    
     mcButton1.backgroundColor = [UIColor clearColor];
     mcButton2.backgroundColor = [UIColor clearColor];
     mcButton3.backgroundColor = [UIColor clearColor];
     mcButton4.backgroundColor = [UIColor clearColor];
-
+    
     mcPersonPicture.image = currentPerson.selfImage;
     int h = 0;
     do {
@@ -439,61 +412,244 @@
     filterField.text = @"";
     filterLabel.text = @"Filter By:";
     companyTitleField.hidden = true;
+    FilterView.hidden = true;
+
+
+
+}
+//go to first view
+-(IBAction)goToFV
+{
+    FilterView.hidden = true;
+    MCGameView.hidden=true;
+    firstView.hidden=false;
+    FilterView.hidden = true;
+    MCTGameView.hidden=true;
+    FCGameView.hidden=true;
+    MCCView.hidden = true;
+    FGameView.hidden = true;
+    FCGameView.hidden = true;
+    FTGameView.hidden = true;
+    deptTitleField.hidden = true;
+    jobTitleField.hidden = true;
+    filterField.text = @"";
+    companyTitleField.hidden = true;
+
+}
+//go to multiple choice timed view
+-(IBAction)goToMCTV
+{
+    FilterView.hidden = false;
+    
+    deptTitleField.hidden = true;
+    jobTitleField.hidden = true;
+    mcButton1.titleLabel.text = @"";
+    mcButton2.titleLabel.text = @"";
+    mcButton3.titleLabel.text = @"";
+    mcButton4.titleLabel.text = @"";
+    
+    contactGetter = [[MSContactManipulater alloc]init];
+    currentContacts = [contactGetter getContactsWithAnImage];
+     
+    int currentContactIndex = rand()%currentContacts.count;
+    correctMCPerson = [currentContacts objectAtIndex:currentContactIndex];
+     
+    mcButton1.backgroundColor = [UIColor clearColor];
+    mcButton2.backgroundColor = [UIColor clearColor];
+    mcButton3.backgroundColor = [UIColor clearColor];
+    mcButton4.backgroundColor = [UIColor clearColor];
+
+    mcPersonPicture.image = correctMCPerson.selfImage;
+    /*
+    int h = 0;
+    do {
+        h = rand()%currentContacts.count;
+    } while(h==currentContactIndex);
+    mcButton1.titleLabel.text = [NSString stringWithFormat:@"%@ %@",[[currentContacts objectAtIndex:h] firstName],[[currentContacts objectAtIndex:h] lastName]];
+    int i = 0;
+    do {
+        i = rand()%currentContacts.count;
+    } while(h==currentContactIndex || i==h);
+    mcButton2.titleLabel.text = [NSString stringWithFormat:@"%@ %@",[[currentContacts objectAtIndex:i] firstName],[[currentContacts objectAtIndex:i] lastName]];
+    int k = 0;
+    do {
+        k = rand()%currentContacts.count;
+    } while(k==currentContactIndex || k==h || k==i);
+    mcButton3.titleLabel.text = [NSString stringWithFormat:@"%@ %@",[[currentContacts objectAtIndex:k] firstName],[[currentContacts objectAtIndex:k] lastName]];
+    int l= 0;
+    do {
+        l = rand()%currentContacts.count;
+    } while(l==currentContactIndex || l==h || l==i || l==k);
+    mcButton4.titleLabel.text = [NSString stringWithFormat:@"%@ %@",[[currentContacts objectAtIndex:l] firstName],[[currentContacts objectAtIndex:l] lastName]];
+    */
+    
+    int h = 0;
+    h = rand()%currentPeopleArray.count-1;
+    [self loadNewPerson];
+    [mcButton1 setTitle:[NSString stringWithFormat:@"%@ %@",[currentPerson firstName],[currentPerson lastName]] forState:UIControlStateNormal];
+    mcButton1.titleLabel.text = [NSString stringWithFormat:@"%@ %@",[currentPerson firstName],[currentPerson lastName]];
+    NSLog(@"%@ %@",[currentPerson firstName],[currentPerson lastName]);
+    
+    //h gets a new value
+    h = rand()%currentPeopleArray.count-1;
+    [self loadNewPerson];
+    [mcButton2 setTitle:[NSString stringWithFormat:@"%@ %@",[currentPerson firstName],[currentPerson lastName]] forState:UIControlStateNormal];
+    mcButton2.titleLabel.text = [NSString stringWithFormat:@"%@",[currentPerson getFullName]];
+    NSLog(@"%@ %@",[currentPerson firstName],[currentPerson lastName]);
+    
+    //h gets a new value
+    h = rand()%currentPeopleArray.count-1;
+    [self loadNewPerson];
+    [mcButton3 setTitle:[NSString stringWithFormat:@"%@ %@",[currentPerson firstName],[currentPerson lastName]] forState:UIControlStateNormal];
+    mcButton3.titleLabel.text = [NSString stringWithFormat:@"%@",[currentPerson getFullName]];
+    NSLog(@"%@ %@",[currentPerson firstName],[currentPerson lastName]);
+    
+    //h gets a new value
+    h = rand()%currentPeopleArray.count-1;
+    [self loadNewPerson];
+    [mcButton4 setTitle:[NSString stringWithFormat:@"%@ %@",[currentPerson firstName],[currentPerson lastName]] forState:UIControlStateNormal];
+    mcButton4.titleLabel.text = [NSString stringWithFormat:@"%@",[currentPerson getFullName]];
+    NSLog(@"%@ %@",[currentPerson firstName],[currentPerson lastName]);
+    
+
+    
+    int ra = rand()%4;
+    if (ra==0)
+    {
+        mcButton1.titleLabel.text= [NSString stringWithFormat:@"%@ %@",correctMCPerson.firstName,correctMCPerson.lastName];
+        mcPersonPicture.image = correctMCPerson.selfImage;
+
+    }
+    else if (ra==1)
+    {
+        mcButton2.titleLabel.text= [NSString stringWithFormat:@"%@ %@",correctMCPerson.firstName,correctMCPerson.lastName];
+        mcPersonPicture.image = correctMCPerson.selfImage;
+
+    }
+    else if (ra==2)
+    {
+        mcButton3.titleLabel.text= [NSString stringWithFormat:@"%@ %@",correctMCPerson.firstName,correctMCPerson.lastName];
+        mcPersonPicture.image = correctMCPerson.selfImage;
+        
+    }
+    else if (ra==3)
+    {
+        mcButton4.titleLabel.text= [NSString stringWithFormat:@"%@ %@",correctMCPerson.firstName,correctMCPerson.lastName];
+        mcPersonPicture.image = correctMCPerson.selfImage;
+
+    }
+    //contactView.hidden=true;
+    MCGameView.hidden=true;
+    firstView.hidden=true;
+    MCTGameView.hidden=false;
+    FCGameView.hidden=true;
+    MCCView.hidden = true;
+    FGameView.hidden = true;
+    FCGameView.hidden = true;
+    FTGameView.hidden = true;
+    deptTitleField.hidden = true;
+    jobTitleField.hidden = true;
+    filterField.text = @"";
+    filterLabel.text = @"Filter By:";
+    companyTitleField.hidden = true;
+    FilterView.hidden = true;
 
 }
 -(IBAction)mcAnswerPressed:(id)sender {
     filterField.text = @"";
     filterLabel.text = @"Filter By:";
 
+    
     UIButton *b = (UIButton *)sender;
     NSLog(@"%@", b.titleLabel.text);
     NSLog(@"%@",[NSString stringWithFormat:@"%@ %@",currentPerson.firstName,currentPerson.lastName]);
-    if ([b.titleLabel.text isEqualToString:[currentPerson getFullName]]) {
-        int currentContactIndex = rand()%currentContacts.count;
-        currentPerson = [currentContacts objectAtIndex:currentContactIndex];
+    if ([b.titleLabel.text isEqualToString:correctMCPerson.fullName]) {
+        [currentPerson gotRight];
+        currentPerson.hasBeenGuessedRight = true;
+        currentPerson.hasBeenGuessed = true;
         
-        mcPersonPicture.image = currentPerson.selfImage;
-        mcButton1.backgroundColor = [UIColor clearColor];
-        mcButton2.backgroundColor = [UIColor clearColor];
-        mcButton3.backgroundColor = [UIColor clearColor];
-        mcButton4.backgroundColor = [UIColor clearColor];
+        int currentContactIndex = rand()%arrayOf49PercentAndUnder.count-1;
+        
+
 
         int h = 0;
+        h = rand()%currentPeopleArray.count-1;
+        /*
         do {
             h = rand()%currentContacts.count;
         } while(h==currentContactIndex);
-        [mcButton1 setTitle:[NSString stringWithFormat:@"%@ %@",[[currentContacts objectAtIndex:h] firstName],[[currentContacts objectAtIndex:h] lastName]] forState:UIControlStateNormal];
-        int i = 0;
+        */
+        [self loadNewPerson];
+        [mcButton1 setTitle:[NSString stringWithFormat:@"%@ %@",[currentPerson firstName],[currentPerson lastName]] forState:UIControlStateNormal];
+        mcButton1.titleLabel.text = [NSString stringWithFormat:@"%@ %@",[currentPerson firstName],[currentPerson lastName]];
+        NSLog(@"%@ %@",[currentPerson firstName],[currentPerson lastName]);
+        //h gets a new value
+        h = rand()%currentPeopleArray.count-1;
+        /*
         do {
             i = rand()%currentContacts.count;
         } while(h==currentContactIndex || i==h);
-        [mcButton2 setTitle:[NSString stringWithFormat:@"%@ %@",[[currentContacts objectAtIndex:i] firstName],[[currentContacts objectAtIndex:i] lastName]] forState:UIControlStateNormal];        int k = 0;
+         */
+        [self loadNewPerson];
+        [mcButton2 setTitle:[NSString stringWithFormat:@"%@ %@",[currentPerson firstName],[currentPerson lastName]] forState:UIControlStateNormal];
+        mcButton2.titleLabel.text = [NSString stringWithFormat:@"%@",[currentPerson getFullName]];
+        NSLog(@"%@ %@",[currentPerson firstName],[currentPerson lastName]);
+
+        //h gets a new value
+        h = rand()%currentPeopleArray.count-1;
+        /*
         do {
             k = rand()%currentContacts.count;
         } while(k==currentContactIndex || k==h || k==i);
-        [mcButton3 setTitle:[NSString stringWithFormat:@"%@ %@",[[currentContacts objectAtIndex:k] firstName],[[currentContacts objectAtIndex:k] lastName]] forState:UIControlStateNormal];
-        int l= 0;
+         */
+        [self loadNewPerson];
+        [mcButton3 setTitle:[NSString stringWithFormat:@"%@ %@",[currentPerson firstName],[currentPerson lastName]] forState:UIControlStateNormal];
+        mcButton3.titleLabel.text = [NSString stringWithFormat:@"%@",[currentPerson getFullName]];
+        NSLog(@"%@ %@",[currentPerson firstName],[currentPerson lastName]);
+
+        //h gets a new value
+        h = rand()%currentPeopleArray.count-1;
+        /*
         do {
             l = rand()%currentContacts.count;
         } while(l==currentContactIndex || l==h || l==i || l==k);
-        [mcButton4 setTitle:[NSString stringWithFormat:@"%@ %@",[[currentContacts objectAtIndex:l] firstName],[[currentContacts objectAtIndex:l] lastName]] forState:UIControlStateNormal];
-        
+         */
+        [self loadNewPerson];
+        [mcButton4 setTitle:[NSString stringWithFormat:@"%@ %@",[currentPerson firstName],[currentPerson lastName]] forState:UIControlStateNormal];
+        mcButton4.titleLabel.text = [NSString stringWithFormat:@"%@",[currentPerson getFullName]];
+        NSLog(@"%@ %@",[currentPerson firstName],[currentPerson lastName]);
+
         int ra = rand()%4;
-        if (ra==0) {
-            [mcButton1 setTitle: [currentPerson getFullName] forState:UIControlStateNormal];
+        if (ra==0)
+        {
+            mcButton1.titleLabel.text= [NSString stringWithFormat:@"%@ %@",correctMCPerson.firstName,correctMCPerson.lastName];
+            mcPersonPicture.image = correctMCPerson.selfImage;
+            
         }
-        if (ra==1) {
-            [mcButton2 setTitle:  [currentPerson getFullName]  forState:UIControlStateNormal];
+        else if (ra==1)
+        {
+            mcButton2.titleLabel.text= [NSString stringWithFormat:@"%@ %@",correctMCPerson.firstName,correctMCPerson.lastName];
+            mcPersonPicture.image = correctMCPerson.selfImage;
+            
         }
-        if (ra==2) {
-            [mcButton3 setTitle:  [currentPerson getFullName] forState:UIControlStateNormal];
+        else if (ra==2)
+        {
+            mcButton3.titleLabel.text= [NSString stringWithFormat:@"%@ %@",correctMCPerson.firstName,correctMCPerson.lastName];
+            mcPersonPicture.image = correctMCPerson.selfImage;
+            
         }
-        if (ra==3) {
-            [mcButton4 setTitle:  [currentPerson getFullName]  forState:UIControlStateNormal];
+        else if (ra==3)
+        {
+            mcButton4.titleLabel.text= [NSString stringWithFormat:@"%@ %@",correctMCPerson.firstName,correctMCPerson.lastName];
+            mcPersonPicture.image = correctMCPerson.selfImage;
+            
         }
 
-    } else {
+    } else
+    {
         b.backgroundColor = [UIColor redColor];
+        [currentPerson gotWrong];
+        currentPerson.hasBeenGuessed = true;
     }
 }
 //go to timed view
@@ -631,6 +787,10 @@
 }
 -(IBAction)enteredFilter
 {
+    
+    [arrayOf49PercentAndUnder removeAllObjects];
+    [arrayOf50PercentAndOver removeAllObjects];
+    
     NSLog(@"button succesfully pressed");
     if ([[filterField.text uppercaseString]  isEqual: @"DEPARTMENT"])
     {
