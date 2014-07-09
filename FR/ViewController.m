@@ -33,6 +33,7 @@
 -(IBAction)gotRight:(id)sender {
     NSLog(@"Got Right");
     currentPerson.hasBeenGuessed = true;
+    currentPerson.hasBeenGuessedRight = true;
     [currentPerson gotRight];
     [self loadNewPerson];
     totalGuessed++;
@@ -41,6 +42,7 @@
 -(IBAction)gotWrong:(id)sender {
     NSLog(@"Got Wrong");
     currentPerson.hasBeenGuessed = true;
+    currentPerson.hasBeenGuessedRight = true;
     [currentPerson gotWrong];
     [self loadNewPerson];
     totalGuessed++;
@@ -48,49 +50,51 @@
 }
 -(NSMutableArray*)chooseArray
 {
-    
-    if(arrayOf50PercentAndOver.count > 0 || arrayOf49PercentAndUnder.count>0)
+    if(FGameView.hidden == false || MCGameView.hidden == false)//not timed game
     {
-        if(arrayOf50PercentAndOver.count > 0 && arrayOf49PercentAndUnder.count > 0)
+        if(arrayOf50PercentAndOver.count > 0 || arrayOf49PercentAndUnder.count>0)
         {
-            int rn;
-            rn = (rand()%10);
-            if(rn <= 3 && arrayOf50PercentAndOver.count > 0)
+            if(arrayOf50PercentAndOver.count > 0 && arrayOf49PercentAndUnder.count > 0)
             {
-               // NSLog(@"50 and over");
-                
-                return arrayOf50PercentAndOver;
+                int rn;
+                rn = (rand()%10);
+                if(rn <= 3 && arrayOf50PercentAndOver.count > 0)
+                {
+                    // NSLog(@"50 and over");
+                    
+                    return arrayOf50PercentAndOver;
+                }
+                else
+                {
+                    //NSLog(@"49 and under");
+                    
+                    return arrayOf49PercentAndUnder;
+                }
             }
-            else
+            else if(arrayOf49PercentAndUnder.count > 0 && arrayOf50PercentAndOver.count == 0)
             {
                 //NSLog(@"49 and under");
                 
                 return arrayOf49PercentAndUnder;
+                
             }
-        }
-        else if(arrayOf49PercentAndUnder.count > 0 && arrayOf50PercentAndOver.count == 0)
-        {
-            //NSLog(@"49 and under");
+            else if(arrayOf50PercentAndOver.count > 0 && arrayOf49PercentAndUnder.count == 0)
+            {
+                //NSLog(@"50 and over");
+                
+                return arrayOf50PercentAndOver;
+            }
             
-            return arrayOf49PercentAndUnder;
-            
         }
-        else if(arrayOf50PercentAndOver.count > 0 && arrayOf49PercentAndUnder.count == 0)
-        {
-            //NSLog(@"50 and over");
-            
-            return arrayOf50PercentAndOver;
-        }
-        
     }
-    else
+    else if(FTGameView.hidden == false || MCTGameView.hidden == false)
     {
-        //error
-        return currentPeopleArray;
-        
+        if(arrayOf49PercentAndUnder.count>0)
+        {
+            return arrayOf49PercentAndUnder;
+        }
     }
-    return currentPeopleArray;
-    
+        return currentPeopleArray;
 }
 
 -(void)loadNewPerson
@@ -204,9 +208,6 @@
     }
     
 	// Do any additional setup after loading the view, typically from a nib.
-    myPerson = [[Person alloc] init];
-    [myPerson setWithFirstName:@"mike" andLastName:@"Selander" andImage:[UIImage imageNamed:@"Unkown.jpeg"] andGender:true];
-    [myPerson setFirstName:@"Michael"];
 }
 - (BOOL)prefersStatusBarHidden
 {
@@ -216,7 +217,7 @@
 {
     if(MCTGameView.hidden == false || FTGameView.hidden == false ) //playing a timed game
     {
-        if([self checkIfAllPeopleHaveBeenGuessed]==true)
+        if([self checkIfAllPeopleHaveBeenGuessedCorrectly]==true)
         {
             //game ends
             //go to view that shows stats
@@ -239,6 +240,8 @@
             filterLabel.text = @"Filter By:";
             companyTitleField.hidden = true;
             
+            [arrayOf49PercentAndUnder removeAllObjects];
+            [arrayOf50PercentAndOver removeAllObjects];
             
         }
         
@@ -293,6 +296,8 @@
                 filterLabel.text = @"Filter By:";
                 companyTitleField.hidden = true;
                 
+                [arrayOf49PercentAndUnder removeAllObjects];
+                [arrayOf50PercentAndOver removeAllObjects];
             }
         }
         
@@ -810,6 +815,34 @@
             Person *pIQ;
             pIQ = [arrayOf50PercentAndOver objectAtIndex:f];
             if(pIQ.hasBeenGuessed == false)
+            {
+                return false;
+            }
+        }
+    }
+    return true;
+}
+-(bool)checkIfAllPeopleHaveBeenGuessedCorrectly
+{
+    if(arrayOf49PercentAndUnder.count > 0)
+    {
+        for (int f = 0; f<arrayOf49PercentAndUnder.count; f++)
+        {
+            Person *pIQ;
+            pIQ = [arrayOf49PercentAndUnder objectAtIndex:f];
+            if(pIQ.hasBeenGuessedRight == false)
+            {
+                return false;
+            }
+        }
+    }
+    if(arrayOf50PercentAndOver.count > 0)
+    {
+        for (int f = 0; f<arrayOf50PercentAndOver.count; f++)
+        {
+            Person *pIQ;
+            pIQ = [arrayOf50PercentAndOver objectAtIndex:f];
+            if(pIQ.hasBeenGuessedRight == false)
             {
                 return false;
             }

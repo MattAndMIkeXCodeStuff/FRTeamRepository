@@ -109,6 +109,8 @@
 
 -(bool)checkIfAllPeopleHaveBeenGuessed;
 
+-(bool)checkIfAllPeopleHaveBeenGuessedCorrectly;
+
 -(NSMutableArray*)chooseArray;
 @end
 

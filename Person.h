@@ -22,7 +22,7 @@
 @property(nonatomic)double numTimesCorrect;
 @property(nonatomic)double numTimesGuessed;
 @property(nonatomic)bool hasBeenGuessed;
-
+@property(nonatomic)bool hasBeenGuessedRight;
 -(void)gotRight;
 -(void)gotWrong;
 -(double)returnPercentage;
