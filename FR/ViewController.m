@@ -180,6 +180,7 @@
     
     [super viewDidLoad];
     
+    arrayOf50PercentAndOver = [[NSMutableArray alloc]init];
     
     if (ABAddressBookGetAuthorizationStatus() == kABAuthorizationStatusDenied ||
         ABAddressBookGetAuthorizationStatus() == kABAuthorizationStatusRestricted){
@@ -657,7 +658,7 @@
         
         contactGetter = [[MSContactManipulater alloc]init];
         arrayOf49PercentAndUnder = [contactGetter getContactsWithAnImage];
-        arrayOf50PercentAndOver = [contactGetter getContactsWithAnImage];
+       // arrayOf50PercentAndOver = [contactGetter getContactsWithAnImage];
         for (int i = 0 ; i< arrayOf49PercentAndUnder.count; i++) {
             Person *p = [arrayOf49PercentAndUnder objectAtIndex:i];
             NSLog(@"%@",p.firstName);
@@ -691,7 +692,7 @@
 {
     contactGetter = [[MSContactManipulater alloc]init];
     arrayOf49PercentAndUnder = [contactGetter getContactsWithJobTitle:jobTitleField.text];
-    arrayOf50PercentAndOver = [contactGetter getContactsWithJobTitle:jobTitleField.text];
+    //arrayOf50PercentAndOver = [contactGetter getContactsWithJobTitle:jobTitleField.text];
     for (int i = 0 ; i< arrayOf49PercentAndUnder.count; i++) {
         Person *p = [arrayOf49PercentAndUnder objectAtIndex:i];
         NSLog(@"%@",p.firstName);
@@ -723,7 +724,7 @@
     
     contactGetter = [[MSContactManipulater alloc]init];
     arrayOf49PercentAndUnder = [contactGetter getContactsWithDept:deptTitleField.text];
-    arrayOf50PercentAndOver = [contactGetter getContactsWithDept:deptTitleField.text];
+  //  arrayOf50PercentAndOver = [contactGetter getContactsWithDept:deptTitleField.text];
     
     
     
@@ -758,8 +759,7 @@
 {
     contactGetter = [[MSContactManipulater alloc]init];
     arrayOf49PercentAndUnder = [contactGetter getContactsWithCompany:companyTitleField.text];
-    arrayOf50PercentAndOver = [contactGetter getContactsWithCompany:companyTitleField.text];
-    
+   // arrayOf50PercentAndOver = [contactGetter getContactsWithCompany:companyTitleField.text];
     
     
     for (int i = 0 ; i< arrayOf49PercentAndUnder.count; i++)
