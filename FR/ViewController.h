@@ -59,6 +59,8 @@
     IBOutlet UILabel*filterLabel;
     IBOutlet UITextField*jobTitleField;
     IBOutlet UITextField*deptTitleField;
+    IBOutlet UITextField*companyTitleField;
+
 
 }
 @property(nonatomic)int numberOfSmiths;
@@ -97,6 +99,8 @@
 -(IBAction)enteredFilter;
 -(IBAction)enteredJobTitle;
 -(IBAction)enteredDeptTitle;
+-(IBAction)enteredCompanyTitle;
+
 -(IBAction)mcAnswerPressed:(id)sender;
 
 - (bool)isObjectIdenticalTo:(id)anObject inArray:(NSMutableArray*)aIQ;

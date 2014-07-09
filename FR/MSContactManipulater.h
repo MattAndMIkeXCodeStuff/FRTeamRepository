@@ -17,5 +17,6 @@ ABAddressBookRef addressBook;
 -(NSMutableArray *)getContactsWithAnImage;
 -(NSMutableArray *)getContactsWithJobTitle:(NSString*)jobTitle;
 -(NSMutableArray *)getContactsWithDept:(NSString*)deptTitle;
+-(NSMutableArray *)getContactsWithCompany:(NSString*)company;
 
 @end

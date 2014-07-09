@@ -241,6 +241,8 @@
     deptTitleField.hidden = true;
     jobTitleField.hidden = true;
     filterField.text = @"";
+    filterLabel.text = @"Filter By:";
+    companyTitleField.hidden = true;
 
 }
 //go to multiple choice view
@@ -260,6 +262,8 @@
     deptTitleField.hidden = true;
     jobTitleField.hidden = true;
     filterField.text = @"";
+    filterLabel.text = @"Filter By:";
+    companyTitleField.hidden = true;
 
 }
 //go to first view
@@ -278,6 +282,7 @@
     deptTitleField.hidden = true;
     jobTitleField.hidden = true;
     filterField.text = @"";
+    companyTitleField.hidden = true;
 
 }
 //go to multiple choice timed view
@@ -346,10 +351,13 @@
     deptTitleField.hidden = true;
     jobTitleField.hidden = true;
     filterField.text = @"";
+    filterLabel.text = @"Filter By:";
+    companyTitleField.hidden = true;
 
 }
 -(IBAction)mcAnswerPressed:(id)sender {
     filterField.text = @"";
+    filterLabel.text = @"Filter By:";
 
     UIButton *b = (UIButton *)sender;
     NSLog(@"%@", b.titleLabel.text);
@@ -420,6 +428,8 @@
     deptTitleField.hidden = true;
     jobTitleField.hidden = true;
     filterField.text = @"";
+    filterLabel.text = @"Filter By:";
+    companyTitleField.hidden = true;
 
 }
 //go to flashcard view
@@ -440,6 +450,8 @@
     deptTitleField.hidden = true;
     jobTitleField.hidden = true;
     filterField.text = @"";
+    filterLabel.text = @"Filter By:";
+    companyTitleField.hidden = true;
 
 }
 //go to timed view
@@ -462,6 +474,8 @@
     deptTitleField.hidden = true;
     jobTitleField.hidden = true;
     filterField.text = @"";
+    filterLabel.text = @"Filter By:";
+    companyTitleField.hidden = true;
 
 }
 //go to flashcard timed view
@@ -481,7 +495,11 @@
     showInfoButton.hidden = false;
     deptTitleField.hidden = true;
     jobTitleField.hidden = true;
+    companyTitleField.hidden = true;
+
     filterField.text = @"";
+    filterLabel.text = @"Filter By:";
+
 }
 
 
@@ -542,6 +560,13 @@
         filterLabel.text = @"Job Title:";
         jobTitleField.hidden = false;
     }
+    else if ([[filterField.text uppercaseString]  isEqual: @"COMPANY"])
+    {
+        //show different JOB TITLES
+        NSLog(@"company");
+        filterLabel.text = @"Company:";
+        companyTitleField.hidden = false;
+    }
     else if ([[filterField.text uppercaseString]  isEqual: @"ALL"])
     {
         FilterView.hidden = true;
@@ -554,7 +579,6 @@
             Person *p = [arrayOf49PercentAndUnder objectAtIndex:i];
             NSLog(@"%@",p.firstName);
         }
-        
         NSMutableArray*currentArray;
         currentArray = arrayOf49PercentAndUnder;
         
@@ -562,6 +586,18 @@
         
         
         currentPerson =[currentArray objectAtIndex:j];
+        
+        personPic.image = [currentPerson selfImage];
+        
+        if (currentPerson.lastName == NULL)
+        {
+            nameLabel.text = currentPerson.firstName;
+            
+        }
+        else
+        {
+            nameLabel.text = [NSString stringWithFormat:@"%@ %@", currentPerson.firstName,currentPerson.lastName];
+        }
     }
     else
     {
@@ -605,6 +641,41 @@
     contactGetter = [[MSContactManipulater alloc]init];
     arrayOf49PercentAndUnder = [contactGetter getContactsWithDept:deptTitleField.text];
     arrayOf50PercentAndOver = [contactGetter getContactsWithDept:deptTitleField.text];
+    
+    
+    
+    for (int i = 0 ; i< arrayOf49PercentAndUnder.count; i++)
+    {
+        Person *p = [arrayOf49PercentAndUnder objectAtIndex:i];
+        NSLog(@"%@",p.firstName);
+    }
+    
+    NSMutableArray*currentArray;
+    currentArray = arrayOf49PercentAndUnder;
+    
+    j = rand()%arrayOf49PercentAndUnder.count;
+    
+    
+    currentPerson =[currentArray objectAtIndex:j];
+    
+    personPic.image = [currentPerson selfImage];
+    
+    if (currentPerson.lastName == NULL)
+    {
+        nameLabel.text = currentPerson.firstName;
+        
+    }
+    else
+    {
+        nameLabel.text = [NSString stringWithFormat:@"%@ %@", currentPerson.firstName,currentPerson.lastName];
+    }
+    FilterView.hidden = true;
+}
+-(IBAction)enteredCompanyTitle
+{
+    contactGetter = [[MSContactManipulater alloc]init];
+    arrayOf49PercentAndUnder = [contactGetter getContactsWithCompany:companyTitleField.text];
+    arrayOf50PercentAndOver = [contactGetter getContactsWithCompany:companyTitleField.text];
     
     
     

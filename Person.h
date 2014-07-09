@@ -18,6 +18,7 @@
 @property (nonatomic) bool isMale;
 @property(nonatomic) NSString *company;
 @property(nonatomic) NSString *department;
+@property(nonatomic) NSString *jobTitle;
 @property(nonatomic)double numTimesCorrect;
 @property(nonatomic)double numTimesGuessed;
 -(void)gotRight;

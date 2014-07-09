@@ -52,18 +52,45 @@
             [myPerson setWithFirstName:firstName andLastName:lastName andImage:Cimage andGender:true];
             myPerson.company = (__bridge NSString *)(ABRecordCopyValue(r, kABPersonOrganizationProperty));
             myPerson.department = (__bridge NSString *)(ABRecordCopyValue(r, kABPersonDepartmentProperty));
-            /*
-            if([myPerson.jobTitle uppercaseString] == [jobTitle uppercaseString])
+            myPerson.jobTitle = (__bridge NSString *)(ABRecordCopyValue(r, kABPersonJobTitleProperty));
+            if([[myPerson.jobTitle uppercaseString] isEqual: [jobTitle uppercaseString]])
             {
                 [finalPeople addObject:myPerson];
-                NSLog(@" %@ has a picture and is of department %@",firstName, deptTitle);
-                
+                NSLog(@" %@ has a picture has a job title of %@ ",firstName, jobTitle);
+             
             }
-             */
-            NSLog(@" %@ has a picture",firstName);
         }
-        
-        
+    }
+    return finalPeople;
+}
+-(NSMutableArray *)getContactsWithCompany:(NSString*)company
+{
+    NSLog(@"company");
+    
+    ABAddressBookRef addressBook2  = ABAddressBookCreateWithOptions(NULL, NULL);
+    NSMutableArray *people = (__bridge NSMutableArray *)ABAddressBookCopyArrayOfAllPeople(addressBook2);
+    NSMutableArray *finalPeople = [[NSMutableArray alloc]init];
+    for (int i = 0; i<[people count]; i++) {
+        ABRecordRef r = (__bridge ABRecordRef)([people objectAtIndex:i]);
+        if (ABPersonHasImageData(r)) {
+            NSString *firstName = (__bridge NSString *)(ABRecordCopyValue(r, kABPersonFirstNameProperty));
+            NSString *lastName = (__bridge NSString *)(ABRecordCopyValue(r, kABPersonLastNameProperty));
+            UIImage *Cimage = [[UIImage alloc]init];
+            Cimage = [UIImage imageWithData:(__bridge NSData *)ABPersonCopyImageDataWithFormat(r, kABPersonImageFormatThumbnail)];
+            Person *myPerson = [[Person alloc] init];
+            [myPerson setWithFirstName:firstName andLastName:lastName andImage:Cimage andGender:true];
+            myPerson.company = (__bridge NSString *)(ABRecordCopyValue(r, kABPersonOrganizationProperty));
+            myPerson.department = (__bridge NSString *)(ABRecordCopyValue(r, kABPersonDepartmentProperty));
+            myPerson.jobTitle = (__bridge NSString *)(ABRecordCopyValue(r, kABPersonJobTitleProperty));
+
+            
+             if([[myPerson.company uppercaseString] isEqual: [company uppercaseString]])
+             {
+             [finalPeople addObject:myPerson];
+             NSLog(@" %@ has a picture has a company of %@ ",firstName, company);
+             
+             }
+        }
     }
     return finalPeople;
 }
@@ -85,13 +112,12 @@
             [myPerson setWithFirstName:firstName andLastName:lastName andImage:Cimage andGender:true];
             myPerson.company = (__bridge NSString *)(ABRecordCopyValue(r, kABPersonOrganizationProperty));
             myPerson.department = (__bridge NSString *)(ABRecordCopyValue(r, kABPersonDepartmentProperty));
-            NSLog(@" %@ has a picture",firstName);
-            NSLog(@" %@ department",myPerson.department);
+            myPerson.jobTitle = (__bridge NSString *)(ABRecordCopyValue(r, kABPersonJobTitleProperty));
+
             if([[myPerson.department uppercaseString] isEqual: [deptTitle uppercaseString]])
             {
                 [finalPeople addObject:myPerson];
-                NSLog(@" %@ has a picture and is of department %@",firstName, deptTitle);
-
+                NSLog(@" %@ has a picture and is in the %@ department",firstName, deptTitle);
             }
         }
         
