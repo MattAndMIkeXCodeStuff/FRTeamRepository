@@ -62,9 +62,14 @@
     IBOutlet UITextField*deptTitleField;
     IBOutlet UITextField*companyTitleField;
 
-    int totalGuessed;
-    int totalCorrect;
+    IBOutlet UIView*gameOverView;
+    IBOutlet UILabel*percentLabel;
+    
+    double totalGuessed;
+    double totalCorrect;
     double totalPercentage;
+    
+    IBOutlet UIActivityIndicatorView*filteringIndicator;
 }
 @property(nonatomic)int numberOfSmiths;
 @property(nonatomic)IBOutlet UIImageView *mcPersonPicture;

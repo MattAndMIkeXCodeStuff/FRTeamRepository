@@ -13,7 +13,7 @@
 
 -(NSMutableArray *)getContactsWithAnImage {
     ABAddressBookRef addressBook2  = ABAddressBookCreateWithOptions(NULL, NULL);
-    NSLog(@"image");
+    //NSLog(@"image");
     NSMutableArray *people = (__bridge NSMutableArray *)ABAddressBookCopyArrayOfAllPeople(addressBook2);
     NSMutableArray *finalPeople = [[NSMutableArray alloc]init];
     for (int i = 0; i<[people count]; i++) {
@@ -36,7 +36,7 @@
 }
 -(NSMutableArray *)getContactsWithJobTitle:(NSString*)jobTitle
 {
-    NSLog(@"job");
+    //NSLog(@"job");
 
     ABAddressBookRef addressBook2  = ABAddressBookCreateWithOptions(NULL, NULL);
     NSMutableArray *people = (__bridge NSMutableArray *)ABAddressBookCopyArrayOfAllPeople(addressBook2);
@@ -56,7 +56,7 @@
             if([[myPerson.jobTitle uppercaseString] isEqual: [jobTitle uppercaseString]])
             {
                 [finalPeople addObject:myPerson];
-                NSLog(@" %@ has a picture his/her job is called %@ ",firstName, jobTitle);
+                //NSLog(@" %@ has a picture his/her job is called %@ ",firstName, jobTitle);
              
             }
         }
@@ -65,7 +65,7 @@
 }
 -(NSMutableArray *)getContactsWithCompany:(NSString*)company
 {
-    NSLog(@"company");
+    //NSLog(@"company");
     
     ABAddressBookRef addressBook2  = ABAddressBookCreateWithOptions(NULL, NULL);
     NSMutableArray *people = (__bridge NSMutableArray *)ABAddressBookCopyArrayOfAllPeople(addressBook2);
@@ -87,7 +87,7 @@
              if([[myPerson.company uppercaseString] isEqual: [company uppercaseString]])
              {
              [finalPeople addObject:myPerson];
-             NSLog(@" %@ has a picture and works at %@ ",firstName, company);
+             //NSLog(@" %@ has a picture and works at %@ ",firstName, company);
              
              }
         }
@@ -97,7 +97,7 @@
 -(NSMutableArray *)getContactsWithDept:(NSString*)deptTitle
 {
     ABAddressBookRef addressBook2  = ABAddressBookCreateWithOptions(NULL, NULL);
-    NSLog(@"department");
+   // NSLog(@"department");
     NSMutableArray *people = (__bridge NSMutableArray *)ABAddressBookCopyArrayOfAllPeople(addressBook2);
     NSMutableArray *finalPeople = [[NSMutableArray alloc]init];
     for (int i = 0; i<[people count]; i++) {
@@ -117,7 +117,7 @@
             if([[myPerson.department uppercaseString] isEqual: [deptTitle uppercaseString]])
             {
                 [finalPeople addObject:myPerson];
-                NSLog(@" %@ has a picture and is in the %@ department",firstName, deptTitle);
+                //NSLog(@" %@ has a picture and is in the %@ department",firstName, deptTitle);
             }
         }
         

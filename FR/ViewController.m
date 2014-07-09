@@ -219,9 +219,11 @@
     FilterView.hidden = true;
     deptTitleField.hidden = true;
     jobTitleField.hidden = true;
+    gameOverView.hidden = true;
+    filteringIndicator.hidesWhenStopped = true;
     
     [super viewDidLoad];
-    
+    filteringIndicator = [[UIActivityIndicatorView alloc]init];
     arrayOf50PercentAndOver = [[NSMutableArray alloc]init];
     
     if (ABAddressBookGetAuthorizationStatus() == kABAuthorizationStatusDenied ||
@@ -260,8 +262,7 @@
             //game ends
             //go to view that shows stats
             MCGameView.hidden=true;
-            firstView.hidden=false;
-            //right now it just goes back to the first view but eventually it will go to the stats view
+            firstView.hidden=true;
             MCTGameView.hidden=true;
             FCGameView.hidden=true;
             MCCView.hidden = true;
@@ -269,7 +270,7 @@
             FCGameView.hidden = true;
             FTGameView.hidden = true;
             FilterView.hidden = true;
-            
+            nameAndButtonsView.hidden = true;
             personPic.hidden = true;
             showInfoButton.hidden = true;
             deptTitleField.hidden = true;
@@ -281,6 +282,13 @@
             [arrayOf49PercentAndUnder removeAllObjects];
             [arrayOf50PercentAndOver removeAllObjects];
             
+            gameOverView.hidden = false;
+            totalPercentage = (totalCorrect/totalGuessed);
+            NSLog(@"%f",totalGuessed);
+            NSLog(@"%f",totalCorrect);
+            NSLog(@"%f",totalPercentage);
+            
+            percentLabel.text = [NSString stringWithFormat:@"YOU GOT %f%% IN %@",totalPercentage*100,timerLable.text];
         }
         timerView.hidden = false;
         ++wait;
@@ -339,6 +347,7 @@
     filterLabel.text = @"Filter By:";
     companyTitleField.hidden = true;
     FilterView.hidden = false;
+    gameOverView.hidden = true;
 
 }
 //go to multiple choice view
@@ -413,13 +422,15 @@
     filterLabel.text = @"Filter By:";
     companyTitleField.hidden = true;
     FilterView.hidden = true;
-
-
+    gameOverView.hidden = true;
+    nameAndButtonsView.hidden = true;
 
 }
 //go to first view
 -(IBAction)goToFV
 {
+    gameOverView.hidden = true;
+
     FilterView.hidden = true;
     MCGameView.hidden=true;
     firstView.hidden=false;
@@ -434,6 +445,7 @@
     jobTitleField.hidden = true;
     filterField.text = @"";
     companyTitleField.hidden = true;
+    nameAndButtonsView.hidden = true;
 
 }
 //go to multiple choice timed view
@@ -553,9 +565,13 @@
     filterLabel.text = @"Filter By:";
     companyTitleField.hidden = true;
     FilterView.hidden = true;
+    gameOverView.hidden = true;
+    nameAndButtonsView.hidden = true;
 
 }
--(IBAction)mcAnswerPressed:(id)sender {
+-(IBAction)mcAnswerPressed:(id)sender
+{
+    
     filterField.text = @"";
     filterLabel.text = @"Filter By:";
 
@@ -655,6 +671,7 @@
 //go to timed view
 -(IBAction)goToTV
 {
+    nameAndButtonsView.hidden = true;
     MCGameView.hidden=true;
     firstView.hidden=true;
     MCTGameView.hidden=true;
@@ -672,6 +689,7 @@
     filterField.text = @"";
     filterLabel.text = @"Filter By:";
     companyTitleField.hidden = true;
+    gameOverView.hidden = true;
 
 }
 //go to flashcard view
@@ -686,6 +704,8 @@
     FCGameView.hidden = true;
     FTGameView.hidden = true;
     FilterView.hidden = true;
+    gameOverView.hidden = true;
+    nameAndButtonsView.hidden = true;
 
     personPic.hidden = false;
     showInfoButton.hidden = false;
@@ -709,7 +729,8 @@
     FGameView.hidden = true;
     FCGameView.hidden = false;
     FTGameView.hidden = true;
-    
+    nameAndButtonsView.hidden = true;
+
     personPic.hidden = true;
     showInfoButton.hidden = true;
     nameAndButtonsView.hidden = true;
@@ -718,6 +739,7 @@
     filterField.text = @"";
     filterLabel.text = @"Filter By:";
     companyTitleField.hidden = true;
+    gameOverView.hidden = true;
 
 }
 //go to flashcard timed view
@@ -732,12 +754,14 @@
     FGameView.hidden = true;
     FCGameView.hidden = true;
     FTGameView.hidden = false;
-    
+    nameAndButtonsView.hidden = true;
+
     personPic.hidden = false;
     showInfoButton.hidden = false;
     deptTitleField.hidden = true;
     jobTitleField.hidden = true;
     companyTitleField.hidden = true;
+    gameOverView.hidden = true;
 
     filterField.text = @"";
     filterLabel.text = @"Filter By:";
@@ -787,10 +811,10 @@
 }
 -(IBAction)enteredFilter
 {
-    
     [arrayOf49PercentAndUnder removeAllObjects];
     [arrayOf50PercentAndOver removeAllObjects];
-    
+
+
     NSLog(@"button succesfully pressed");
     if ([[filterField.text uppercaseString]  isEqual: @"DEPARTMENT"])
     {
@@ -819,12 +843,11 @@
         NSLog(@"all contacts");
         
         contactGetter = [[MSContactManipulater alloc]init];
+        
+        [filteringIndicator startAnimating];
         arrayOf49PercentAndUnder = [contactGetter getContactsWithAnImage];
-       // arrayOf50PercentAndOver = [contactGetter getContactsWithAnImage];
-        for (int i = 0 ; i< arrayOf49PercentAndUnder.count; i++) {
-            Person *p = [arrayOf49PercentAndUnder objectAtIndex:i];
-            NSLog(@"%@",p.firstName);
-        }
+        [filteringIndicator stopAnimating];
+        
         NSMutableArray*currentArray;
         currentArray = arrayOf49PercentAndUnder;
         
@@ -847,19 +870,22 @@
     }
     else
     {
-        //show error message saying we dont have that filter
+
     }
 }
 -(IBAction)enteredJobTitle
 {
+    [filteringIndicator startAnimating];
+    filterField.hidden = true;
+    companyTitleField.hidden = true;
+    deptTitleField.hidden =true;
+    jobTitleField.hidden =true;
+    filterLabel.text = @"FILTERING";
+
     contactGetter = [[MSContactManipulater alloc]init];
+    [filteringIndicator startAnimating];
     arrayOf49PercentAndUnder = [contactGetter getContactsWithJobTitle:jobTitleField.text];
-    //arrayOf50PercentAndOver = [contactGetter getContactsWithJobTitle:jobTitleField.text];
-    for (int i = 0 ; i< arrayOf49PercentAndUnder.count; i++) {
-        Person *p = [arrayOf49PercentAndUnder objectAtIndex:i];
-        NSLog(@"%@",p.firstName);
-    }
-    
+    [filteringIndicator stopAnimating];
     NSMutableArray*currentArray;
     currentArray = arrayOf49PercentAndUnder;
     
@@ -879,23 +905,21 @@
         nameLabel.text = [NSString stringWithFormat:@"%@ %@", currentPerson.firstName,currentPerson.lastName];
     }
     FilterView.hidden = true;
-
+    [filteringIndicator stopAnimating];
 }
 -(IBAction)enteredDeptTitle
 {
-    
+    filteringIndicator.hidesWhenStopped = true;
+    filterField.hidden = true;
+    companyTitleField.hidden = true;
+    deptTitleField.hidden =true;
+    jobTitleField.hidden =true;
+    filterLabel.text = @"FILTERING";
+
     contactGetter = [[MSContactManipulater alloc]init];
+    [filteringIndicator startAnimating];
     arrayOf49PercentAndUnder = [contactGetter getContactsWithDept:deptTitleField.text];
-  //  arrayOf50PercentAndOver = [contactGetter getContactsWithDept:deptTitleField.text];
-    
-    
-    
-    for (int i = 0 ; i< arrayOf49PercentAndUnder.count; i++)
-    {
-        Person *p = [arrayOf49PercentAndUnder objectAtIndex:i];
-        NSLog(@"%@",p.firstName);
-    }
-    
+    [filteringIndicator stopAnimating];
     NSMutableArray*currentArray;
     currentArray = arrayOf49PercentAndUnder;
     
@@ -916,20 +940,17 @@
         nameLabel.text = [NSString stringWithFormat:@"%@ %@", currentPerson.firstName,currentPerson.lastName];
     }
     FilterView.hidden = true;
+    [filteringIndicator stopAnimating];
+
 }
 -(IBAction)enteredCompanyTitle
 {
+
     contactGetter = [[MSContactManipulater alloc]init];
+    [filteringIndicator startAnimating];
     arrayOf49PercentAndUnder = [contactGetter getContactsWithCompany:companyTitleField.text];
-   // arrayOf50PercentAndOver = [contactGetter getContactsWithCompany:companyTitleField.text];
-    
-    
-    for (int i = 0 ; i< arrayOf49PercentAndUnder.count; i++)
-    {
-        Person *p = [arrayOf49PercentAndUnder objectAtIndex:i];
-        NSLog(@"%@",p.firstName);
-    }
-    
+    [filteringIndicator stopAnimating];
+
     NSMutableArray*currentArray;
     currentArray = arrayOf49PercentAndUnder;
     

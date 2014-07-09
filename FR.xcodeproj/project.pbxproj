@@ -13,6 +13,8 @@
 		4CACF955195FA19B00056B92 /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CACF954195FA19B00056B92 /* AddressBookUI.framework */; };
 		4E28B2C3196C9F5500D41FEC /* CheckButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E28B2C2196C9F5500D41FEC /* CheckButton.png */; };
 		4E28B2C5196D02DF00D41FEC /* Frame.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E28B2C4196D02DF00D41FEC /* Frame.png */; };
+		4E28B2C7196DA0FA00D41FEC /* XButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E28B2C6196DA0FA00D41FEC /* XButton.png */; };
+		4E28B2C9196DB52900D41FEC /* RoundedRectBlackButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E28B2C8196DB52900D41FEC /* RoundedRectBlackButton.png */; };
 		4EC04F3D195297350017AA78 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EC04F3C195297350017AA78 /* Foundation.framework */; };
 		4EC04F3F195297350017AA78 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EC04F3E195297350017AA78 /* CoreGraphics.framework */; };
 		4EC04F41195297350017AA78 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EC04F40195297350017AA78 /* UIKit.framework */; };
@@ -50,6 +52,8 @@
 		4CACF954195FA19B00056B92 /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
 		4E28B2C2196C9F5500D41FEC /* CheckButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = CheckButton.png; path = "../../Desktop/App Images/CheckButton.png"; sourceTree = "<group>"; };
 		4E28B2C4196D02DF00D41FEC /* Frame.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Frame.png; path = "../../Desktop/App Images/Frame.png"; sourceTree = "<group>"; };
+		4E28B2C6196DA0FA00D41FEC /* XButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = XButton.png; path = "../../Desktop/App Images/XButton.png"; sourceTree = "<group>"; };
+		4E28B2C8196DB52900D41FEC /* RoundedRectBlackButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = RoundedRectBlackButton.png; path = "../../Desktop/App Images/RoundedRectBlackButton.png"; sourceTree = "<group>"; };
 		4EC04F39195297350017AA78 /* FR.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FR.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4EC04F3C195297350017AA78 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		4EC04F3E195297350017AA78 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -103,11 +107,13 @@
 		4EC04F30195297350017AA78 = {
 			isa = PBXGroup;
 			children = (
+				4E28B2C6196DA0FA00D41FEC /* XButton.png */,
 				4EC04F7419529C3A0017AA78 /* Unknown.jpeg */,
 				4E28B2C4196D02DF00D41FEC /* Frame.png */,
 				4EC04F71195297E90017AA78 /* Person.h */,
 				4EC04F72195297E90017AA78 /* Person.m */,
 				4E28B2C2196C9F5500D41FEC /* CheckButton.png */,
+				4E28B2C8196DB52900D41FEC /* RoundedRectBlackButton.png */,
 				4EC04F42195297350017AA78 /* FR */,
 				4EC04F61195297350017AA78 /* FRTests */,
 				4EC04F3B195297350017AA78 /* Frameworks */,
@@ -263,10 +269,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4E28B2C7196DA0FA00D41FEC /* XButton.png in Resources */,
 				4EC04F7519529C3A0017AA78 /* Unknown.jpeg in Resources */,
 				4EC04F55195297350017AA78 /* Images.xcassets in Resources */,
 				4EC04F47195297350017AA78 /* InfoPlist.strings in Resources */,
 				4E28B2C5196D02DF00D41FEC /* Frame.png in Resources */,
+				4E28B2C9196DB52900D41FEC /* RoundedRectBlackButton.png in Resources */,
 				4EC04F50195297350017AA78 /* Main.storyboard in Resources */,
 				4E28B2C3196C9F5500D41FEC /* CheckButton.png in Resources */,
 			);
