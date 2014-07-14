@@ -5,36 +5,36 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>683DFE36-0D59-4713-80B2-8938F3F62FF0</string>
+	<string>6FBDCA30-7902-43BE-8C82-1ADEE2E69E42</string>
 	<key>IDESourceControlProjectName</key>
 	<string>FR</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>1A0F2EB9-235A-4902-8BD0-4BBE626061B5</key>
-		<string>https://github.com/selandermichael/FRRepository.git</string>
+		<key>50FDF66C-BD27-4E81-A5B9-0E21FE46176F</key>
+		<string>https://github.com/MattAndMIkeXCodeStuff/FRTeamRepository.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>FR.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>1A0F2EB9-235A-4902-8BD0-4BBE626061B5</key>
+		<key>50FDF66C-BD27-4E81-A5B9-0E21FE46176F</key>
 		<string>../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>https://github.com/selandermichael/FRRepository.git</string>
+	<string>https://github.com/MattAndMIkeXCodeStuff/FRTeamRepository.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>110</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>1A0F2EB9-235A-4902-8BD0-4BBE626061B5</string>
+	<string>50FDF66C-BD27-4E81-A5B9-0E21FE46176F</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>1A0F2EB9-235A-4902-8BD0-4BBE626061B5</string>
+			<string>50FDF66C-BD27-4E81-A5B9-0E21FE46176F</string>
 			<key>IDESourceControlWCCName</key>
-			<string>FRRepository</string>
+			<string>FRTeamRepository</string>
 		</dict>
 	</array>
 </dict>

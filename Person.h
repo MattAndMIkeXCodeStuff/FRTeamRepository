@@ -23,7 +23,7 @@
 @property(nonatomic)double numTimesGuessed;
 @property(nonatomic)bool hasBeenGuessed;
 @property(nonatomic)bool hasBeenGuessedRight;
-@property(nonatomic)NSString *fullName;
+//@property(nonatomic)NSString *fullName;
 
 -(void)gotRight;
 -(void)gotWrong;
