@@ -77,10 +77,13 @@
     IBOutlet UILabel*moreInfoCompany;
     IBOutlet UITextView*moreInfoBio;
     IBOutlet UIView*moreInfoView;
+    IBOutlet UIScrollView*moreInfoScrollView;
+
     
     NSMutableArray* uniqueCompaniesArray;
     NSMutableArray* uniqueDepartmentsArray;
     NSMutableArray* uniqueJobTitlesArray;
+    
 }
 @property(nonatomic)int numberOfSmiths;
 @property(nonatomic)IBOutlet UIImageView *mcPersonPicture;

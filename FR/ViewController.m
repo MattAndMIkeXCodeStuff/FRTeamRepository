@@ -229,6 +229,10 @@
     filteringIndicator = [[UIActivityIndicatorView alloc]init];
     arrayOf50PercentAndOver = [[NSMutableArray alloc]init];
     
+    //moreInfoScrollView = [[UIScrollView alloc]init];
+    [moreInfoScrollView setScrollEnabled:YES];
+    [moreInfoScrollView setContentSize:CGSizeMake(moreInfoScrollView.bounds.size.width, 310)];
+
     if (ABAddressBookGetAuthorizationStatus() == kABAuthorizationStatusDenied ||
         ABAddressBookGetAuthorizationStatus() == kABAuthorizationStatusRestricted){
         //1
@@ -1210,7 +1214,7 @@
     moreInfoJobTitle.text = [NSString stringWithFormat:@"Job Title: %@", currentPerson.jobTitle];
     moreInfoCompany.text = [NSString stringWithFormat:@"Company: %@", currentPerson.company];
     moreInforDepartment.text = [NSString stringWithFormat:@"Department: %@", currentPerson.department];
-    //moreInfoBio.text = [NSString stringWithFormat:@"Bio: %@", currentPerson.notes];
+    moreInfoBio.text = [NSString stringWithFormat:@"Bio: %@", currentPerson.notes];
 
 }
 -(IBAction)lessInfo

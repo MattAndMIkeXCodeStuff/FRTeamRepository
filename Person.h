@@ -19,6 +19,7 @@
 @property(nonatomic) NSString *company;
 @property(nonatomic) NSString *department;
 @property(nonatomic) NSString *jobTitle;
+@property(nonatomic) NSString *notes;
 @property(nonatomic)double numTimesCorrect;
 @property(nonatomic)double numTimesGuessed;
 @property(nonatomic)bool hasBeenGuessed;
