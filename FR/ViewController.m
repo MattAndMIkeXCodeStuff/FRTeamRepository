@@ -317,29 +317,57 @@
     }
 }
 -(void)companySwitchValueChanged:(id)sender {
-    if ([[filterCompanySwitches objectAtIndex:0] isOn] && sender == [filterCompanySwitches objectAtIndex:0] ) {
+    if ([[filterCompanySwitches objectAtIndex:0] isOn] && sender == [filterCompanySwitches objectAtIndex:0] )
+    {
         for (int i = 0; i<filterCompanySwitches.count; i++) {
             [[filterCompanySwitches objectAtIndex:i] setOn:YES animated:YES];
+        }
+    }
+    else if ([[filterCompanySwitches objectAtIndex:0] isOn]==false && sender == [filterCompanySwitches objectAtIndex:0] )
+    {
+        for (int i = 0; i<filterCompanySwitches.count; i++)
+        {
+            [[filterCompanySwitches objectAtIndex:i] setOn:NO animated:YES];
         }
     }
     [self readValues];
     
 }
 -(void)departmentSwitchValueChanged:(id)sender {
-    if ([[filterDepartmentSwitches objectAtIndex:0] isOn] && sender == [filterDepartmentSwitches objectAtIndex:0] ) {
+    if ([[filterDepartmentSwitches objectAtIndex:0] isOn] && sender == [filterDepartmentSwitches objectAtIndex:0] )
+    {
         for (int i = 0; i<filterDepartmentSwitches.count; i++) {
             [[filterDepartmentSwitches objectAtIndex:i] setOn:YES animated:YES];
         }
     }
+    else if ([[filterDepartmentSwitches objectAtIndex:0] isOn]==false && sender == [filterDepartmentSwitches objectAtIndex:0] )
+    {
+        for (int i = 0; i<filterDepartmentSwitches.count; i++)
+        {
+            [[filterDepartmentSwitches objectAtIndex:i] setOn:NO animated:YES];
+        }
+    }
+    
     [self readValues];
     NSLog(@"yo");
 }
 -(void)jobTitleSwitchValueChanged:(id)sender {
-    if ([[filterJobTitlesSwitches objectAtIndex:0] isOn] && sender == [filterJobTitlesSwitches objectAtIndex:0] ) {
-        for (int i = 0; i<filterJobTitlesSwitches.count; i++) {
+    if ([[filterJobTitlesSwitches objectAtIndex:0] isOn] && sender == [filterJobTitlesSwitches objectAtIndex:0] )
+    {
+        for (int i = 0; i<filterJobTitlesSwitches.count; i++)
+        {
             [[filterJobTitlesSwitches objectAtIndex:i] setOn:YES animated:YES];
         }
     }
+    else if ([[filterJobTitlesSwitches objectAtIndex:0] isOn]==false && sender == [filterJobTitlesSwitches objectAtIndex:0] )
+    {
+        for (int i = 0; i<filterJobTitlesSwitches.count; i++)
+        {
+            [[filterJobTitlesSwitches objectAtIndex:i] setOn:NO animated:YES];
+        }
+    }
+    
+    
     [self readValues];
     NSLog(@"yo yo");
 }
