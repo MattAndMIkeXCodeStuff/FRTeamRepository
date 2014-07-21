@@ -323,8 +323,12 @@
             [[filterCompanySwitches objectAtIndex:i] setOn:YES animated:YES];
         }
     }
-    for (int i = 0;  i < filterCompanySwitches.count; i++) {
-        
+    else if ([[filterCompanySwitches objectAtIndex:0] isOn]==false && sender == [filterCompanySwitches objectAtIndex:0] )
+    {
+        for (int i = 0; i<filterCompanySwitches.count; i++)
+        {
+            [[filterCompanySwitches objectAtIndex:i] setOn:NO animated:YES];
+        }
     }
     [self readValues];
     
