@@ -50,7 +50,7 @@
     IBOutlet UIButton *mcButton2;
     IBOutlet UIButton *mcButton3;
     IBOutlet UIButton *mcButton4;
-    MSContactManipulater *contactGetter;
+   // MSContactManipulater *contactGetter;
     
     IBOutlet UIButton*showInfoButton;
     
@@ -89,7 +89,7 @@
 @property(nonatomic)IBOutlet UIImageView *mcPersonPicture;
 @property(nonatomic)NSArray *currentContacts;
 @property(nonatomic)NSMutableArray *currentPeopleArray;
-@property(nonatomic)MSContactManipulater *contactGetter;
+//@property(nonatomic)MSContactManipulater *contactGetter;
 //filter view buttons
 @property(nonatomic)IBOutlet UIButton *allButton;
 @property(nonatomic)IBOutlet UIButton *companyButton;

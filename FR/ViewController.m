@@ -16,7 +16,7 @@
 {
     int j;
 }
-@synthesize mcPersonPicture, currentContacts, contactGetter;
+@synthesize mcPersonPicture, currentContacts;
 @synthesize currentPeopleArray;
 @synthesize nameAndButtonsView, personPic, nameLabel, allButton, companyButton, jobTitleButton, departmentButton;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -911,11 +911,13 @@
     NSLog(@"object was not in the array");
     return false;
 }
--(IBAction)pressedAll:(id)sender {
+-(IBAction)pressedAll:(id)sender
+{
     [arrayOf49PercentAndUnder removeAllObjects];
     [arrayOf50PercentAndOver removeAllObjects];
-    
+    MSContactManipulater *contactGetter;
     contactGetter = [[MSContactManipulater alloc]init];
+    arrayOf49PercentAndUnder = [[NSMutableArray alloc]init];
     arrayOf49PercentAndUnder = [contactGetter getContactsWithAnImage];
     [self addFields];
     
@@ -951,7 +953,8 @@
 -(IBAction)pressedCompany:(id)sender {
     [arrayOf49PercentAndUnder removeAllObjects];
     [arrayOf50PercentAndOver removeAllObjects];
-    
+    MSContactManipulater *contactGetter;
+
     contactGetter = [[MSContactManipulater alloc]init];
     arrayOf49PercentAndUnder = [contactGetter getContactsWithAnImage];
     [self addFields];
@@ -965,7 +968,8 @@
 {
     [arrayOf49PercentAndUnder removeAllObjects];
     [arrayOf50PercentAndOver removeAllObjects];
-    
+    MSContactManipulater *contactGetter;
+
     contactGetter = [[MSContactManipulater alloc]init];
     arrayOf49PercentAndUnder = [contactGetter getContactsWithAnImage];
     [self addFields];
@@ -991,7 +995,8 @@
 -(IBAction)pressedJobTitle:(id)sender {
     [arrayOf49PercentAndUnder removeAllObjects];
     [arrayOf50PercentAndOver removeAllObjects];
-    
+    MSContactManipulater *contactGetter;
+
     contactGetter = [[MSContactManipulater alloc]init];
     arrayOf49PercentAndUnder = [contactGetter getContactsWithAnImage];
     [self addFields];
@@ -1007,7 +1012,8 @@
 {
     [arrayOf49PercentAndUnder removeAllObjects];
     [arrayOf50PercentAndOver removeAllObjects];
-    
+    MSContactManipulater *contactGetter;
+
     contactGetter = [[MSContactManipulater alloc]init];
     arrayOf49PercentAndUnder = [contactGetter getContactsWithAnImage];
     [self addFields];
@@ -1085,6 +1091,7 @@
     deptTitleField.hidden =true;
     jobTitleField.hidden =true;
     filterLabel.text = @"FILTERING";
+    MSContactManipulater *contactGetter;
 
     contactGetter = [[MSContactManipulater alloc]init];
     [filteringIndicator startAnimating];
@@ -1119,6 +1126,7 @@
     deptTitleField.hidden =true;
     jobTitleField.hidden =true;
     filterLabel.text = @"FILTERING";
+    MSContactManipulater *contactGetter;
 
     contactGetter = [[MSContactManipulater alloc]init];
     [filteringIndicator startAnimating];
@@ -1149,6 +1157,7 @@
 }
 -(IBAction)enteredCompanyTitle
 {
+    MSContactManipulater *contactGetter;
 
     contactGetter = [[MSContactManipulater alloc]init];
     [filteringIndicator startAnimating];
