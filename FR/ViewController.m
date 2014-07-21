@@ -912,14 +912,18 @@
     return false;
 }
 -(IBAction)pressedAll:(id)sender {
-    NSMutableArray*currentArray;
-    
     [arrayOf49PercentAndUnder removeAllObjects];
     [arrayOf50PercentAndOver removeAllObjects];
+    
+    contactGetter = [[MSContactManipulater alloc]init];
+    arrayOf49PercentAndUnder = [contactGetter getContactsWithAnImage];
+    [self addFields];
+    
+    NSMutableArray*currentArray;
+
     FilterView.hidden = true;
     NSLog(@"all contacts");
     
-    contactGetter = [[MSContactManipulater alloc]init];
     
     [filteringIndicator startAnimating];
     arrayOf49PercentAndUnder = [contactGetter getContactsWithAnImage];
@@ -945,13 +949,26 @@
 
 }
 -(IBAction)pressedCompany:(id)sender {
+    [arrayOf49PercentAndUnder removeAllObjects];
+    [arrayOf50PercentAndOver removeAllObjects];
+    
+    contactGetter = [[MSContactManipulater alloc]init];
+    arrayOf49PercentAndUnder = [contactGetter getContactsWithAnImage];
+    [self addFields];
     companyTitleField.hidden = false;
     allButton.enabled = false;
     jobTitleButton.enabled = false;
     departmentButton.enabled = false;
     //companyButton.enabled = false;
 }
--(IBAction)pressedDepartment:(id)sender {
+-(IBAction)pressedDepartment:(id)sender
+{
+    [arrayOf49PercentAndUnder removeAllObjects];
+    [arrayOf50PercentAndOver removeAllObjects];
+    
+    contactGetter = [[MSContactManipulater alloc]init];
+    arrayOf49PercentAndUnder = [contactGetter getContactsWithAnImage];
+    [self addFields];
     deptTitleField.hidden = false;
     allButton.enabled = false;
     jobTitleButton.enabled = false;
@@ -972,6 +989,13 @@
     return false;
 }
 -(IBAction)pressedJobTitle:(id)sender {
+    [arrayOf49PercentAndUnder removeAllObjects];
+    [arrayOf50PercentAndOver removeAllObjects];
+    
+    contactGetter = [[MSContactManipulater alloc]init];
+    arrayOf49PercentAndUnder = [contactGetter getContactsWithAnImage];
+    [self addFields];
+    
     jobTitleField.hidden = false;
     allButton.enabled = false;
     //jobTitleButton.enabled = false;
@@ -987,6 +1011,7 @@
     contactGetter = [[MSContactManipulater alloc]init];
     arrayOf49PercentAndUnder = [contactGetter getContactsWithAnImage];
     [self addFields];
+    
     NSMutableArray*currentArray;
 
     [arrayOf49PercentAndUnder removeAllObjects];
