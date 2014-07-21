@@ -18,10 +18,8 @@
     NSMutableArray *finalPeople = [[NSMutableArray alloc]init];
     for (int i = 0; i<[people count]; i++) {
         ABRecordRef r = (__bridge ABRecordRef)([people objectAtIndex:i]);
-        
-        ABRecordSetValue(r, kABPersonNicknameProperty, (__bridge CFStringRef)@"Healthy Catalyst", nil);
-        //ABRecordSetValue(r, kABPersonNicknameProperty, @"My Best Friend", nil);
-        if (ABPersonHasImageData(r)) {
+        if (ABPersonHasImageData(r))
+        {
             NSString *firstName = (__bridge NSString *)(ABRecordCopyValue(r, kABPersonFirstNameProperty));
             NSString *lastName = (__bridge NSString *)(ABRecordCopyValue(r, kABPersonLastNameProperty));
             UIImage *Cimage = [[UIImage alloc]init];
@@ -32,11 +30,17 @@
             myPerson.department = (__bridge NSString *)(ABRecordCopyValue(r, kABPersonDepartmentProperty));
             myPerson.jobTitle = (__bridge NSString *)(ABRecordCopyValue(r, kABPersonJobTitleProperty));
             myPerson.notes = (__bridge NSString *)(ABRecordCopyValue(r, kABPersonNoteProperty));
-
             [finalPeople addObject:myPerson];
-        } else {
+        } else
+        {
+            ABAddressBookRef addressBookRef = ABAddressBookCreateWithOptions(NULL, nil);
+            //ABRecordSetValue(r, kABPersonNicknameProperty, (__bridge CFStringRef)@"", nil);
+            //ABPersonSetImageData(r, (__bridge CFDataRef)(UIImageJPEGRepresentation([UIImage imageNamed:@"No Image Available.png"], 0.7f)), nil);
+            //ABPersonRemoveImageData(r, nil);
+            //ABRecordSetValue(r, kABPersonFirstNameProperty, (__bridge CFStringRef)@"asdf", nil);
+            ABAddressBookAddRecord(addressBookRef, r, nil);
+            ABAddressBookSave(addressBookRef, nil);
             //ABRecordSetImageData([UIImage imageNamed:@"No Image Available.png"]);
-            
             //asdfdddssdfsdsdfsdfsdfsdfsdfsdfsdfsdfdfas adf sABRecordSetImageData(r,(__bridge CFDataRef)(UIImageJPEGRepresentation([UIImage imageNamed:@"No Image Available.png"], 0.7f)),nil);
         
         }
@@ -257,6 +261,60 @@
         }
     }
     return finalPeople;
+}
+
+-(void)removeContactsWithJobTitle:(NSString*)jobTitle fromArray:(NSMutableArray *)array
+{
+    for (int l; l < array.count; l++)
+    {
+        Person *p;
+        p = [array objectAtIndex:l];
+    
+        if(p.jobTitle == jobTitle)
+        {
+            [array removeObjectIdenticalTo:p];
+        }
+    }
+}
+-(void)removeContactsWithDept:(NSString*)deptTitle fromArray:(NSMutableArray *)array
+{
+    for (int l; l < array.count; l++)
+    {
+        Person *p;
+        p = [array objectAtIndex:l];
+        
+        if(p.department == deptTitle)
+        {
+            [array removeObjectIdenticalTo:p];
+        }
+    }
+}
+-(void)removeContactsWithCompany:(NSString*)company fromArray:(NSMutableArray *)array
+{
+    for (int l; l < array.count; l++)
+    {
+        Person *p;
+        p = [array objectAtIndex:l];
+        
+        if(p.company == company)
+        {
+            [array removeObjectIdenticalTo:p];
+        }
+    }
+}
+
+-(bool)checkForString:(NSString*)str inArray:(NSMutableArray*)arr
+{
+    for(int p=0; p<arr.count;p++)
+    {
+        NSString *sIQ;
+        sIQ = [arr objectAtIndex:p];
+        if([sIQ isEqualToString: str])
+        {
+            return true;
+        }
+    }
+    return false;
 }
 
 @end

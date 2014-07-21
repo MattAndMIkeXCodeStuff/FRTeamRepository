@@ -16,7 +16,7 @@
 {
     int j;
 }
-@synthesize mcPersonPicture, currentContacts, contactGetter;
+@synthesize mcPersonPicture, currentContacts;
 @synthesize currentPeopleArray;
 @synthesize nameAndButtonsView, personPic, nameLabel, allButton, companyButton, jobTitleButton, departmentButton;
 @synthesize labelsScrollView;
@@ -1033,7 +1033,8 @@
     NSLog(@"object was not in the array");
     return false;
 }
--(IBAction)pressedAll:(id)sender {
+-(IBAction)pressedAll:(id)sender
+{
     [arrayOf49PercentAndUnder removeAllObjects];
     [arrayOf50PercentAndOver removeAllObjects];
     
@@ -1071,7 +1072,8 @@
 -(IBAction)pressedCompany:(id)sender {
     [arrayOf49PercentAndUnder removeAllObjects];
     [arrayOf50PercentAndOver removeAllObjects];
-    
+    MSContactManipulater *contactGetter;
+
     contactGetter = [[MSContactManipulater alloc]init];
     arrayOf49PercentAndUnder = [contactGetter getContactsWithAnImage];
     [self addFields];
@@ -1085,7 +1087,8 @@
 {
     [arrayOf49PercentAndUnder removeAllObjects];
     [arrayOf50PercentAndOver removeAllObjects];
-    
+    MSContactManipulater *contactGetter;
+
     contactGetter = [[MSContactManipulater alloc]init];
     arrayOf49PercentAndUnder = [contactGetter getContactsWithAnImage];
     [self addFields];
@@ -1111,7 +1114,8 @@
 -(IBAction)pressedJobTitle:(id)sender {
     [arrayOf49PercentAndUnder removeAllObjects];
     [arrayOf50PercentAndOver removeAllObjects];
-    
+    MSContactManipulater *contactGetter;
+
     contactGetter = [[MSContactManipulater alloc]init];
     arrayOf49PercentAndUnder = [contactGetter getContactsWithAnImage];
     [self addFields];
@@ -1127,7 +1131,8 @@
 {
     [arrayOf49PercentAndUnder removeAllObjects];
     [arrayOf50PercentAndOver removeAllObjects];
-    
+    MSContactManipulater *contactGetter;
+
     contactGetter = [[MSContactManipulater alloc]init];
     arrayOf49PercentAndUnder = [contactGetter getContactsWithAnImage];
     [self addFields];
@@ -1205,6 +1210,7 @@
     deptTitleField.hidden =true;
     jobTitleField.hidden =true;
     filterLabel.text = @"FILTERING";
+    MSContactManipulater *contactGetter;
 
     contactGetter = [[MSContactManipulater alloc]init];
     [filteringIndicator startAnimating];
@@ -1239,6 +1245,7 @@
     deptTitleField.hidden =true;
     jobTitleField.hidden =true;
     filterLabel.text = @"FILTERING";
+    MSContactManipulater *contactGetter;
 
     contactGetter = [[MSContactManipulater alloc]init];
     [filteringIndicator startAnimating];
@@ -1269,6 +1276,7 @@
 }
 -(IBAction)enteredCompanyTitle
 {
+    MSContactManipulater *contactGetter;
 
     contactGetter = [[MSContactManipulater alloc]init];
     [filteringIndicator startAnimating];
@@ -1355,11 +1363,53 @@
 -(IBAction)moreInfo
 {
     moreInfoView.hidden=false;
-    moreInfoName.text = [NSString stringWithFormat:@"%@ %@", currentPerson.firstName, currentPerson.lastName];
-    moreInfoJobTitle.text = [NSString stringWithFormat:@"Job Title: %@", currentPerson.jobTitle];
-    moreInfoCompany.text = [NSString stringWithFormat:@"Company: %@", currentPerson.company];
-    moreInforDepartment.text = [NSString stringWithFormat:@"Department: %@", currentPerson.department];
-    moreInfoBio.text = [NSString stringWithFormat:@"Bio: %@", currentPerson.notes];
+    if(currentPerson.firstName.length > 0 && currentPerson.lastName.length > 0)
+    {
+            moreInfoName.text = [NSString stringWithFormat:@"%@ %@", currentPerson.firstName, currentPerson.lastName];
+    }
+    else if(currentPerson.firstName.length > 0)
+    {
+        moreInfoName.text = [NSString stringWithFormat:@"%@", currentPerson.firstName];
+    }
+    else
+    {
+        moreInfoName.text = @"No Name Specified";
+    }
+    if(currentPerson.jobTitle.length > 0)
+    {
+        moreInfoJobTitle.text = [NSString stringWithFormat:@"Job Title: %@", currentPerson.jobTitle];
+    }
+    else
+    {
+        moreInfoJobTitle.text = @"No Job Specified";
+    }
+    if(currentPerson.company.length > 0)
+    {
+        moreInfoCompany.text = [NSString stringWithFormat:@"Company: %@", currentPerson.company];
+        
+    }
+    else
+    {
+        moreInfoCompany.text = @"No Company Specified";
+    }
+    if(currentPerson.department.length > 0)
+    {
+        moreInforDepartment.text = [NSString stringWithFormat:@"Department: %@", currentPerson.department];
+   
+    }
+    else
+    {
+        moreInforDepartment.text = @"No Department Specified";
+    }
+    if(currentPerson.notes.length > 0)
+    {
+        moreInfoBio.text = [NSString stringWithFormat:@"%@", currentPerson.notes];
+
+    }
+    else
+    {
+        moreInfoBio.text = @"No Notes";
+    }
 
 }
 -(IBAction)lessInfo

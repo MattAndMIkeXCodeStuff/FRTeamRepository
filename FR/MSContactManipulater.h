@@ -19,4 +19,10 @@ ABAddressBookRef addressBook;
 -(NSMutableArray *)getContactsWithDept:(NSString*)deptTitle;
 -(NSMutableArray *)getContactsWithCompany:(NSString*)company;
 
+-(void)removeContactsWithJobTitle:(NSString*)jobTitle fromArray:(NSMutableArray *)array;
+-(void)removeContactsWithDept:(NSString*)deptTitle fromArray:(NSMutableArray *)array;
+-(void)removeContactsWithCompany:(NSString*)company fromArray:(NSMutableArray *)array;
+
+-(bool)checkForString:(NSString*)str inArray:(NSMutableArray*)arr;
+
 @end
