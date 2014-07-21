@@ -19,7 +19,7 @@
 @synthesize mcPersonPicture, currentContacts;
 @synthesize currentPeopleArray;
 @synthesize nameAndButtonsView, personPic, nameLabel, allButton, companyButton, jobTitleButton, departmentButton;
-@synthesize labelsScrollView;
+@synthesize labelsScrollView, filterCompanyText, filterCompanySwitches, filterDepartmentSwitches, filterDepartmentText, filterJobTitles, filterJobTitlesSwitches;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -205,6 +205,12 @@
     
     
     timer = [NSTimer scheduledTimerWithTimeInterval:0.01 target:self selector:@selector(countUpDuration) userInfo:Nil repeats:YES];
+    filterJobTitlesText = [[NSMutableArray alloc]init];
+    filterJobTitlesSwitches = [[NSMutableArray alloc]init];
+    filterDepartmentSwitches = [[NSMutableArray alloc]init];
+    filterDepartmentText = [[NSMutableArray alloc]init];
+    filterCompanySwitches = [[NSMutableArray alloc]init];
+    filterCompanyText = [[NSMutableArray alloc]init];
     
     MCGameView.hidden=true;
     firstView.hidden=false;
@@ -300,18 +306,46 @@
         [self addJob:p.jobTitle];
     }
 }
+-(void)readValues {
+    for (int i = 0; i<filterCompanySwitches.count; i++) {
+        if ([[filterCompanySwitches objectAtIndex:i] isOn]) {
+            NSLog(@"%@ is On",[filterCompanyText objectAtIndex:i]);
+        } else {
+            NSLog(@"%@ is Off",[filterCompanyText objectAtIndex:i]);
+
+        }
+    }
+}
 -(void)companySwitchValueChanged:(id)sender {
-    NSLog(@"wassup");
+    if ([[filterCompanySwitches objectAtIndex:0] isOn]) {
+        for (int i = 0; i<filterCompanySwitches.count; i++) {
+            [[filterCompanySwitches objectAtIndex:i] setOn:YES animated:YES];
+        }
+    }
+    [self readValues];
+    
 }
 -(void)departmentSwitchValueChanged:(id)sender {
+    if ([[filterDepartmentSwitches objectAtIndex:0] isOn]) {
+        for (int i = 0; i<filterDepartmentSwitches.count; i++) {
+            [[filterDepartmentSwitches objectAtIndex:i] setOn:YES animated:YES];
+        }
+    }
+    [self readValues];
     NSLog(@"yo");
 }
 -(void)jobTitleSwitchValueChanged:(id)sender {
+    if ([[filterJobTitlesSwitches objectAtIndex:0] isOn]) {
+        for (int i = 0; i<filterJobTitlesSwitches.count; i++) {
+            [[filterJobTitlesSwitches objectAtIndex:i] setOn:YES animated:YES];
+        }
+    }
+    [self readValues];
     NSLog(@"yo yo");
 }
 
 -(void)loadLabels:(NSString *)labelType {
-    contactGetter = [[MSContactManipulater alloc]init];
+    MSContactManipulater *contactGetter = [[MSContactManipulater alloc]init];
     arrayOf49PercentAndUnder = [contactGetter getContactsWithAnImage];
     [self addFields];
 
@@ -331,11 +365,14 @@
         [labelsScrollView addSubview:switchThing];
         switchThing.center = CGPointMake(220, 36);
         if([labelType isEqual:@"Company"]) {
+            [switchThing addTarget:self action:@selector(companySwitchValueChanged:) forControlEvents:UIControlEventValueChanged];
+
             [filterCompanySwitches removeAllObjects];
             [filterCompanyText removeAllObjects];
             [filterCompanyText addObject:newLabel.text];
             [filterCompanySwitches addObject:switchThing];
             for (int i =0 ; i<uniqueCompaniesArray.count; i++) {
+                
                 UILabel *newLabel = [[UILabel alloc]init];
                 newLabel.text = [uniqueCompaniesArray objectAtIndex:i];
                 [labelsScrollView addSubview:newLabel];
@@ -357,8 +394,9 @@
         if ([labelType isEqual:@"Department"]) {
             [filterDepartmentSwitches removeAllObjects];
             [filterDepartmentText removeAllObjects];
-            [filterCompanyText addObject:newLabel.text];
-            [filterCompanySwitches addObject:switchThing];
+            [filterDepartmentText addObject:newLabel.text];
+            [filterDepartmentSwitches addObject:switchThing];
+            [switchThing addTarget:self action:@selector(departmentSwitchValueChanged:) forControlEvents:UIControlEventValueChanged];
 
             for (int i =0 ; i<uniqueDepartmentsArray.count; i++) {
                 UILabel *newLabel = [[UILabel alloc]init];
@@ -382,9 +420,10 @@
         }
         if ([labelType isEqual:@"Job Title"]) {
             [filterJobTitlesText removeAllObjects];
-            [filterJobTitleSwitches removeAllObjects];
-            [filterCompanyText addObject:newLabel.text];
-            [filterCompanySwitches addObject:switchThing];
+            [filterJobTitlesSwitches removeAllObjects];
+            [filterJobTitlesText addObject:newLabel.text];
+            [filterJobTitlesSwitches addObject:switchThing];
+            [switchThing addTarget:self action:@selector(jobTitleSwitchValueChanged:) forControlEvents:UIControlEventValueChanged];
 
             for (int i =0 ; i<uniqueJobTitlesArray.count; i++) {
                 UILabel *newLabel = [[UILabel alloc]init];
@@ -402,7 +441,7 @@
                 [switchThing addTarget:self action:@selector(jobTitleSwitchValueChanged:) forControlEvents:UIControlEventValueChanged];
 
                 [filterJobTitlesText addObject:newLabel.text];
-                [filterJobTitleSwitches addObject:switchThing];
+                [filterJobTitlesSwitches addObject:switchThing];
             }
         }
     }
@@ -1037,7 +1076,11 @@
 {
     [arrayOf49PercentAndUnder removeAllObjects];
     [arrayOf50PercentAndOver removeAllObjects];
-    
+    MSContactManipulater *contactGetter;
+    contactGetter = [[MSContactManipulater alloc]init];
+    arrayOf49PercentAndUnder = [[NSMutableArray alloc]init];
+    arrayOf49PercentAndUnder = [contactGetter getContactsWithAnImage];
+    [self addFields];
     
     
     NSMutableArray*currentArray;

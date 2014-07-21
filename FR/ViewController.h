@@ -88,7 +88,7 @@
     NSMutableArray* filterCompanyText;
     NSMutableArray* filterDepartmentSwitches;
     NSMutableArray* filterDepartmentText;
-    NSMutableArray* filterJobTitleSwitches;
+    NSMutableArray* filterJobTitlesSwitches;
     NSMutableArray* filterJobTitlesText;
     
 }
@@ -97,6 +97,18 @@
 @property(nonatomic)IBOutlet UIImageView *mcPersonPicture;
 @property(nonatomic)NSArray *currentContacts;
 @property(nonatomic)NSMutableArray *currentPeopleArray;
+@property(nonatomic)NSMutableArray *filterCompanySwitches;
+@property(nonatomic)NSMutableArray *filterCompanyText;
+
+@property(nonatomic)NSMutableArray *filterDepartmentSwitches;
+
+@property(nonatomic)NSMutableArray *filterDepartmentText;
+
+@property(nonatomic)NSMutableArray *filterJobTitlesSwitches;
+
+@property(nonatomic)NSMutableArray *filterJobTitles;
+
+
 //@property(nonatomic)MSContactManipulater *contactGetter;
 //filter view buttons
 @property(nonatomic)IBOutlet UIButton *allButton;
