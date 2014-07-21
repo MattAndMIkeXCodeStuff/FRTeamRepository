@@ -528,7 +528,7 @@
                                         <rect key="frame" x="131" y="116" width="37" height="37"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </activityIndicatorView>
-                                    <scrollView appearanceType="aqua" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="iVX-co-63z">
+                                    <scrollView appearanceType="aqua" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="iVX-co-63z" userLabel="LabelScrollView">
                                         <rect key="frame" x="20" y="56" width="260" height="147"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <color key="backgroundColor" red="0.20259760585952724" green="0.68835262223821114" blue="0.82895924937185927" alpha="1" colorSpace="calibratedRGB"/>
@@ -544,7 +544,7 @@
                                             <segment title="Job Title"/>
                                             <segment title="Date"/>
                                         </segments>
-                                        <color key="tintColor" red="0.56078431370000004" green="0.8862745098" blue="0.1019607843" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="tintColor" red="0.21960785984992981" green="0.84313732385635376" blue="0.45490199327468872" alpha="1" colorSpace="deviceRGB"/>
                                         <connections>
                                             <action selector="segmentValueChanged:" destination="vXZ-lx-hvc" eventType="valueChanged" id="sIo-6e-AHE"/>
                                         </connections>
