@@ -91,6 +91,8 @@
     NSMutableArray* filterJobTitlesSwitches;
     NSMutableArray* filterJobTitlesText;
     
+    NSMutableArray* allContacts;
+    
 }
 @property(nonatomic)int numberOfSmiths;
 @property(nonatomic)IBOutlet UIScrollView *labelsScrollView;
@@ -177,5 +179,7 @@
 -(void)addDepartment:(NSString*)str;
 -(void)addFields;
 -(NSMutableArray*)chooseArray;
+
+-(IBAction)hideFilter;
 @end
 

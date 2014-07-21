@@ -260,7 +260,7 @@
             NSLog(@"Just authorized");
         });
     }
-    
+   
 	// Do any additional setup after loading the view, typically from a nib.
 }
 - (BOOL)prefersStatusBarHidden
@@ -295,24 +295,70 @@
     }
 }
 
--(void)addFields
+-(void)addFields:(NSMutableArray *)theArray
 {
-    for (int t=0; t<arrayOf49PercentAndUnder.count; t++)
+    for (int t=0; t<theArray.count; t++)
     {
         Person*p;
-        p = [arrayOf49PercentAndUnder objectAtIndex:t];
+        p = [theArray objectAtIndex:t];
         [self addDepartment:p.department];
         [self addCompany:p.company];
         [self addJob:p.jobTitle];
     }
 }
--(void)readValues {
-    for (int i = 0; i<filterCompanySwitches.count; i++) {
-        if ([[filterCompanySwitches objectAtIndex:i] isOn]) {
+-(void)readValues
+{
+    MSContactManipulater *contactGetter;
+
+    for (int i = 0; i<filterCompanySwitches.count; i++)
+    {
+        if ([[filterCompanySwitches objectAtIndex:i] isOn])
+        {
             NSLog(@"%@ is On",[filterCompanyText objectAtIndex:i]);
-        } else {
+            
+            
+            [arrayOf49PercentAndUnder addObjectsFromArray:[contactGetter getContactsWithCompany:[filterCompanyText objectAtIndex:i]]];
+            
+        }
+        else
+        {
             NSLog(@"%@ is Off",[filterCompanyText objectAtIndex:i]);
 
+            [contactGetter removeContactsWithCompany:[filterCompanyText objectAtIndex:i] fromArray:arrayOf49PercentAndUnder];
+        }
+    }
+    for (int i = 0; i<filterDepartmentSwitches.count; i++)
+    {
+        if ([[filterDepartmentSwitches objectAtIndex:i] isOn])
+        {
+            NSLog(@"%@ is On",[filterDepartmentText objectAtIndex:i]);
+            
+            
+            [arrayOf49PercentAndUnder addObjectsFromArray:[contactGetter getContactsWithCompany:[filterDepartmentText objectAtIndex:i]]];
+            
+        }
+        else
+        {
+            NSLog(@"%@ is Off",[filterDepartmentText objectAtIndex:i]);
+            
+            [contactGetter removeContactsWithCompany:[filterDepartmentText objectAtIndex:i] fromArray:arrayOf49PercentAndUnder];
+        }
+    }
+    for (int i = 0; i<filterJobTitlesSwitches.count; i++)
+    {
+        if ([[filterJobTitlesSwitches objectAtIndex:i] isOn])
+        {
+            NSLog(@"%@ is On",[filterJobTitlesText objectAtIndex:i]);
+            
+            
+            [arrayOf49PercentAndUnder addObjectsFromArray:[contactGetter getContactsWithCompany:[filterJobTitlesText objectAtIndex:i]]];
+            
+        }
+        else
+        {
+            NSLog(@"%@ is Off",[filterJobTitlesText objectAtIndex:i]);
+            
+            [contactGetter removeContactsWithCompany:[filterJobTitlesText objectAtIndex:i] fromArray:arrayOf49PercentAndUnder];
         }
     }
 }
@@ -374,8 +420,8 @@
 
 -(void)loadLabels:(NSString *)labelType {
     MSContactManipulater *contactGetter = [[MSContactManipulater alloc]init];
-    arrayOf49PercentAndUnder = [contactGetter getContactsWithAnImage];
-    [self addFields];
+    allContacts = [contactGetter getContactsWithAnImage];
+    [self addFields:allContacts];
 
     if ([labelType  isEqual: @"Date"]) {
         
@@ -465,61 +511,141 @@
                 
         }
         if ([labelType isEqual:@"Department"]) {
-            [filterDepartmentSwitches removeAllObjects];
-            [filterDepartmentText removeAllObjects];
-            [filterDepartmentText addObject:newLabel.text];
-            [filterDepartmentSwitches addObject:switchThing];
-            [switchThing addTarget:self action:@selector(departmentSwitchValueChanged:) forControlEvents:UIControlEventValueChanged];
-
-            uniqueDepartmentsArray = [uniqueDepartmentsArray sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
-
-            
-            for (int i =0 ; i<uniqueDepartmentsArray.count; i++) {
-                UILabel *newLabel = [[UILabel alloc]init];
-                newLabel.text = [uniqueDepartmentsArray objectAtIndex:i];
-                [labelsScrollView addSubview:newLabel];
-                newLabel.bounds  = CGRectMake(100, 10, 170, 30);
-                newLabel.center = CGPointMake(100, 75+(40*i));
-                newLabel.textColor= [UIColor whiteColor];
-                [labelsScrollView insertSubview:newLabel atIndex:0];
-                UISwitch *switchThing = [[UISwitch alloc] init];
-                [labelsScrollView setContentSize:CGSizeMake(260, 75+(40*uniqueDepartmentsArray.count))];
-                NSLog(@"%@",newLabel.text);
-                [labelsScrollView addSubview:switchThing];
-                switchThing.center = CGPointMake(220, 76+(40*i));
-                [switchThing addTarget:self action:@selector(departmentSwitchValueChanged:) forControlEvents:UIControlEventValueChanged];
-
-                [filterDepartmentText addObject:newLabel.text];
-                [filterDepartmentSwitches addObject:switchThing];
-            }
-
+                if (filterDepartmentText.count == 0) {
+                    SEL theSelector = @selector(companySwitchValueChanged:);
+                    [switchThing addTarget:self action:@selector(departmentSwitchValueChanged:)  forControlEvents:UIControlEventValueChanged];
+                    
+                    [filterDepartmentSwitches removeAllObjects];
+                    [filterDepartmentText removeAllObjects];
+                    [filterDepartmentText addObject:newLabel.text];
+                    [filterDepartmentSwitches addObject:switchThing];
+                    
+                    uniqueDepartmentsArray = [uniqueDepartmentsArray sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
+                    
+                    for (int i =0 ; i<uniqueDepartmentsArray.count; i++) {
+                        
+                        
+                        UILabel *newLabel = [[UILabel alloc]init];
+                        newLabel.text = [uniqueDepartmentsArray objectAtIndex:i];
+                        [labelsScrollView addSubview:newLabel];
+                        newLabel.bounds  = CGRectMake(100, 10, 170, 30);
+                        newLabel.center = CGPointMake(100, 75+(40*i));
+                        newLabel.textColor= [UIColor whiteColor];
+                        [labelsScrollView insertSubview:newLabel atIndex:0];
+                        UISwitch *switchThing = [[UISwitch alloc] init];
+                        [labelsScrollView setContentSize:CGSizeMake(260, 75+(40*uniqueDepartmentsArray.count))];
+                        NSLog(@"%@",newLabel.text);
+                        [labelsScrollView addSubview:switchThing];
+                        switchThing.center = CGPointMake(220, 76+(40*i));
+                        [switchThing addTarget:self action:@selector(departmentSwitchValueChanged:) forControlEvents:UIControlEventValueChanged];
+                        [filterDepartmentText addObject:newLabel.text];
+                        [filterDepartmentSwitches addObject:switchThing];
+                        
+                    }
+                } else {
+                    NSMutableArray *newArray = [[NSMutableArray alloc] init];
+                    for (int i = 1; i<filterDepartmentSwitches.count; i++) {
+                        bool isiton = [[filterDepartmentSwitches objectAtIndex:i] isOn];
+                        [newArray addObject:[NSNumber numberWithBool:isiton]];
+                    }
+                    SEL theSelector = @selector(companySwitchValueChanged:);
+                    [switchThing addTarget:self action:@selector(departmentSwitchValueChanged:)  forControlEvents:UIControlEventValueChanged];
+                    
+                    [filterDepartmentSwitches removeAllObjects];
+                    [filterDepartmentText removeAllObjects];
+                    [filterDepartmentText addObject:newLabel.text];
+                    [filterDepartmentSwitches addObject:switchThing];
+                    for (int i =0 ; i<uniqueDepartmentsArray.count; i++) {
+                        
+                        UILabel *newLabel = [[UILabel alloc]init];
+                        newLabel.text = [uniqueDepartmentsArray objectAtIndex:i];
+                        [labelsScrollView addSubview:newLabel];
+                        newLabel.bounds  = CGRectMake(100, 10, 170, 30);
+                        newLabel.center = CGPointMake(100, 75+(40*i));
+                        newLabel.textColor= [UIColor whiteColor];
+                        [labelsScrollView insertSubview:newLabel atIndex:0];
+                        UISwitch *switchThing = [[UISwitch alloc] init];
+                        [labelsScrollView setContentSize:CGSizeMake(260, 75+(40*uniqueDepartmentsArray.count))];
+                        NSLog(@"%@",newLabel.text);
+                        [labelsScrollView addSubview:switchThing];
+                        switchThing.center = CGPointMake(220, 76+(40*i));
+                        [switchThing addTarget:self action:@selector(departmentSwitchValueChanged:) forControlEvents:UIControlEventValueChanged];
+                        
+                        [switchThing setOn:[[newArray objectAtIndex:i] boolValue] animated:NO];
+                        [filterDepartmentText addObject:newLabel.text];
+                        [filterDepartmentSwitches addObject:switchThing];
+                        
+                    }
+                    
+                }
         }
         if ([labelType isEqual:@"Job Title"]) {
-            [filterJobTitlesText removeAllObjects];
-            [filterJobTitlesSwitches removeAllObjects];
-            [filterJobTitlesText addObject:newLabel.text];
-            [filterJobTitlesSwitches addObject:switchThing];
-            [switchThing addTarget:self action:@selector(jobTitleSwitchValueChanged:) forControlEvents:UIControlEventValueChanged];
-
-            uniqueJobTitlesArray = [uniqueJobTitlesArray sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
-            
-            for (int i =0 ; i<uniqueJobTitlesArray.count; i++) {
-                UILabel *newLabel = [[UILabel alloc]init];
-                newLabel.text = [uniqueJobTitlesArray objectAtIndex:i];
-                [labelsScrollView addSubview:newLabel];
-                newLabel.bounds  = CGRectMake(100, 10, 170, 30);
-                newLabel.center = CGPointMake(100, 75+(40*i));
-                newLabel.textColor= [UIColor whiteColor];
-                [labelsScrollView insertSubview:newLabel atIndex:0];
-                UISwitch *switchThing = [[UISwitch alloc] init];
-                [labelsScrollView setContentSize:CGSizeMake(260, 75+(40*uniqueJobTitlesArray.count))];
-                NSLog(@"%@",newLabel.text);
-                [labelsScrollView addSubview:switchThing];
-                switchThing.center = CGPointMake(220, 76+(40*i));
-                [switchThing addTarget:self action:@selector(jobTitleSwitchValueChanged:) forControlEvents:UIControlEventValueChanged];
-
+            if (filterJobTitlesText.count == 0) {
+                SEL theSelector = @selector(companySwitchValueChanged:);
+                [switchThing addTarget:self action:@selector(jobTitleSwitchValueChanged:)  forControlEvents:UIControlEventValueChanged];
+                
+                [filterJobTitlesSwitches removeAllObjects];
+                [filterJobTitlesText removeAllObjects];
                 [filterJobTitlesText addObject:newLabel.text];
                 [filterJobTitlesSwitches addObject:switchThing];
+                
+                uniqueJobTitlesArray = [uniqueJobTitlesArray sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
+                
+                for (int i =0 ; i<uniqueJobTitlesArray.count; i++) {
+                    
+                    
+                    UILabel *newLabel = [[UILabel alloc]init];
+                    newLabel.text = [uniqueJobTitlesArray objectAtIndex:i];
+                    [labelsScrollView addSubview:newLabel];
+                    newLabel.bounds  = CGRectMake(100, 10, 170, 30);
+                    newLabel.center = CGPointMake(100, 75+(40*i));
+                    newLabel.textColor= [UIColor whiteColor];
+                    [labelsScrollView insertSubview:newLabel atIndex:0];
+                    UISwitch *switchThing = [[UISwitch alloc] init];
+                    [labelsScrollView setContentSize:CGSizeMake(260, 75+(40*uniqueJobTitlesArray.count))];
+                    NSLog(@"%@",newLabel.text);
+                    [labelsScrollView addSubview:switchThing];
+                    switchThing.center = CGPointMake(220, 76+(40*i));
+                    [switchThing addTarget:self action:@selector(jobTitleSwitchValueChanged:) forControlEvents:UIControlEventValueChanged];
+                    [filterJobTitlesText addObject:newLabel.text];
+                    [filterJobTitlesSwitches addObject:switchThing];
+                    
+                }
+            } else {
+                NSMutableArray *newArray = [[NSMutableArray alloc] init];
+                for (int i = 1; i<filterJobTitlesSwitches.count; i++) {
+                    bool isiton = [[filterJobTitlesSwitches objectAtIndex:i] isOn];
+                    [newArray addObject:[NSNumber numberWithBool:isiton]];
+                }
+                SEL theSelector = @selector(companySwitchValueChanged:);
+                [switchThing addTarget:self action:@selector(jobTitleSwitchValueChanged:)  forControlEvents:UIControlEventValueChanged];
+                
+                [filterJobTitlesSwitches removeAllObjects];
+                [filterJobTitlesText removeAllObjects];
+                [filterJobTitlesText addObject:newLabel.text];
+                [filterJobTitlesSwitches addObject:switchThing];
+                for (int i =0 ; i<uniqueJobTitlesArray.count; i++) {
+                    
+                    UILabel *newLabel = [[UILabel alloc]init];
+                    newLabel.text = [uniqueJobTitlesArray objectAtIndex:i];
+                    [labelsScrollView addSubview:newLabel];
+                    newLabel.bounds  = CGRectMake(100, 10, 170, 30);
+                    newLabel.center = CGPointMake(100, 75+(40*i));
+                    newLabel.textColor= [UIColor whiteColor];
+                    [labelsScrollView insertSubview:newLabel atIndex:0];
+                    UISwitch *switchThing = [[UISwitch alloc] init];
+                    [labelsScrollView setContentSize:CGSizeMake(260, 75+(40*uniqueJobTitlesArray.count))];
+                    NSLog(@"%@",newLabel.text);
+                    [labelsScrollView addSubview:switchThing];
+                    switchThing.center = CGPointMake(220, 76+(40*i));
+                    [switchThing addTarget:self action:@selector(jobTitleSwitchValueChanged:) forControlEvents:UIControlEventValueChanged];
+                    
+                    [switchThing setOn:[[newArray objectAtIndex:i] boolValue] animated:NO];
+                    [filterJobTitlesText addObject:newLabel.text];
+                    [filterJobTitlesSwitches addObject:switchThing];
+                    
+                }
+                
             }
         }
     }
@@ -1158,7 +1284,7 @@
     contactGetter = [[MSContactManipulater alloc]init];
     arrayOf49PercentAndUnder = [[NSMutableArray alloc]init];
     arrayOf49PercentAndUnder = [contactGetter getContactsWithAnImage];
-    [self addFields];
+    //[self addFields];
     
     
     NSMutableArray*currentArray;
@@ -1197,7 +1323,7 @@
 
     contactGetter = [[MSContactManipulater alloc]init];
     arrayOf49PercentAndUnder = [contactGetter getContactsWithAnImage];
-    [self addFields];
+    //[self addFields];
     companyTitleField.hidden = false;
     allButton.enabled = false;
     jobTitleButton.enabled = false;
@@ -1212,7 +1338,7 @@
 
     contactGetter = [[MSContactManipulater alloc]init];
     arrayOf49PercentAndUnder = [contactGetter getContactsWithAnImage];
-    [self addFields];
+    //[self addFields];
     deptTitleField.hidden = false;
     allButton.enabled = false;
     jobTitleButton.enabled = false;
@@ -1239,7 +1365,7 @@
 
     contactGetter = [[MSContactManipulater alloc]init];
     arrayOf49PercentAndUnder = [contactGetter getContactsWithAnImage];
-    [self addFields];
+    //[self addFields];
     
     jobTitleField.hidden = false;
     allButton.enabled = false;
@@ -1256,7 +1382,7 @@
 
     contactGetter = [[MSContactManipulater alloc]init];
     arrayOf49PercentAndUnder = [contactGetter getContactsWithAnImage];
-    [self addFields];
+    //[self addFields];
     
     NSMutableArray*currentArray;
 
