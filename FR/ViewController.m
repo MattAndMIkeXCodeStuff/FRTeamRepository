@@ -317,7 +317,8 @@
     }
 }
 -(void)companySwitchValueChanged:(id)sender {
-    if ([[filterCompanySwitches objectAtIndex:0] isOn] && sender == [filterCompanySwitches objectAtIndex:0] ) {
+    if ([[filterCompanySwitches objectAtIndex:0] isOn] && sender == [filterCompanySwitches objectAtIndex:0] )
+    {
         for (int i = 0; i<filterCompanySwitches.count; i++) {
             [[filterCompanySwitches objectAtIndex:i] setOn:YES animated:YES];
         }
@@ -329,20 +330,40 @@
     
 }
 -(void)departmentSwitchValueChanged:(id)sender {
-    if ([[filterDepartmentSwitches objectAtIndex:0] isOn] && sender == [filterDepartmentSwitches objectAtIndex:0] ) {
+    if ([[filterDepartmentSwitches objectAtIndex:0] isOn] && sender == [filterDepartmentSwitches objectAtIndex:0] )
+    {
         for (int i = 0; i<filterDepartmentSwitches.count; i++) {
             [[filterDepartmentSwitches objectAtIndex:i] setOn:YES animated:YES];
         }
     }
+    else if ([[filterDepartmentSwitches objectAtIndex:0] isOn]==false && sender == [filterDepartmentSwitches objectAtIndex:0] )
+    {
+        for (int i = 0; i<filterDepartmentSwitches.count; i++)
+        {
+            [[filterDepartmentSwitches objectAtIndex:i] setOn:NO animated:YES];
+        }
+    }
+    
     [self readValues];
     NSLog(@"yo");
 }
 -(void)jobTitleSwitchValueChanged:(id)sender {
-    if ([[filterJobTitlesSwitches objectAtIndex:0] isOn] && sender == [filterJobTitlesSwitches objectAtIndex:0] ) {
-        for (int i = 0; i<filterJobTitlesSwitches.count; i++) {
+    if ([[filterJobTitlesSwitches objectAtIndex:0] isOn] && sender == [filterJobTitlesSwitches objectAtIndex:0] )
+    {
+        for (int i = 0; i<filterJobTitlesSwitches.count; i++)
+        {
             [[filterJobTitlesSwitches objectAtIndex:i] setOn:YES animated:YES];
         }
     }
+    else if ([[filterJobTitlesSwitches objectAtIndex:0] isOn]==false && sender == [filterJobTitlesSwitches objectAtIndex:0] )
+    {
+        for (int i = 0; i<filterJobTitlesSwitches.count; i++)
+        {
+            [[filterJobTitlesSwitches objectAtIndex:i] setOn:NO animated:YES];
+        }
+    }
+    
+    
     [self readValues];
     NSLog(@"yo yo");
 }
@@ -378,8 +399,12 @@
                 [filterCompanyText removeAllObjects];
                 [filterCompanyText addObject:newLabel.text];
                 [filterCompanySwitches addObject:switchThing];
+                 
+                 uniqueCompaniesArray = [uniqueCompaniesArray sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
+                
                 for (int i =0 ; i<uniqueCompaniesArray.count; i++) {
                 
+                    
                     UILabel *newLabel = [[UILabel alloc]init];
                     newLabel.text = [uniqueCompaniesArray objectAtIndex:i];
                     [labelsScrollView addSubview:newLabel];
@@ -442,6 +467,9 @@
             [filterDepartmentSwitches addObject:switchThing];
             [switchThing addTarget:self action:@selector(departmentSwitchValueChanged:) forControlEvents:UIControlEventValueChanged];
 
+            uniqueDepartmentsArray = [uniqueDepartmentsArray sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
+
+            
             for (int i =0 ; i<uniqueDepartmentsArray.count; i++) {
                 UILabel *newLabel = [[UILabel alloc]init];
                 newLabel.text = [uniqueDepartmentsArray objectAtIndex:i];
@@ -469,6 +497,8 @@
             [filterJobTitlesSwitches addObject:switchThing];
             [switchThing addTarget:self action:@selector(jobTitleSwitchValueChanged:) forControlEvents:UIControlEventValueChanged];
 
+            uniqueJobTitlesArray = [uniqueJobTitlesArray sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
+            
             for (int i =0 ; i<uniqueJobTitlesArray.count; i++) {
                 UILabel *newLabel = [[UILabel alloc]init];
                 newLabel.text = [uniqueJobTitlesArray objectAtIndex:i];
