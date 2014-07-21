@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6154.17" systemVersion="14A238x" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="14A238x" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="vXZ-lx-hvc">
     <dependencies>
-        <deployment defaultVersion="1792" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6153.11"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -288,126 +287,14 @@
                                 <rect key="frame" x="35" y="85" width="250" height="250"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="YUF-66-wrg" userLabel="showInfoButton">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" reversesTitleShadowWhenHighlighted="YES" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" id="YUF-66-wrg" userLabel="showInfoButton">
                                 <rect key="frame" x="10" y="60" width="300" height="300"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" backgroundImage="Frame.png">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
+                                <state key="normal" backgroundImage="Frame.png"/>
                                 <connections>
                                     <action selector="showInfo:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="kH0-oK-Jy5"/>
                                 </connections>
                             </button>
-                            <view hidden="YES" appearanceType="aqua" contentMode="scaleToFill" id="NO8-CE-HIs" userLabel="NameAndButtonsView">
-                                <rect key="frame" x="32" y="370" width="256" height="150"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES"/>
-                                <subviews>
-                                    <view appearanceType="aqua" alpha="0.69999998807907104" contentMode="scaleToFill" id="bkc-Wj-ysl">
-                                        <rect key="frame" x="0.0" y="0.0" width="256" height="56"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                        <subviews>
-                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Harold Ray Clark III" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="qqd-ur-Djm">
-                                                <rect key="frame" x="1" y="13" width="254" height="30"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                                    </view>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="lCd-Et-gYF" userLabel="XButton">
-                                        <rect key="frame" x="38" y="64" width="50" height="50"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" image="XButton.png" backgroundImage="button-red.png">
-                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="gotWrong:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="7Wc-qO-CLX"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="T9p-Le-4Hl" userLabel="CheckButton">
-                                        <rect key="frame" x="169" y="64" width="50" height="50"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" image="CheckButton.png" backgroundImage="CheckButton.png">
-                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="gotRight:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="f4Z-Ip-6Ub"/>
-                                        </connections>
-                                    </button>
-                                    <button appearanceType="aqua" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="infoDark" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="Szw-bl-XKh">
-                                        <rect key="frame" x="117" y="108" width="22" height="22"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <connections>
-                                            <action selector="moreInfo" destination="vXZ-lx-hvc" eventType="touchUpInside" id="y3N-NA-xD0"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" red="0.80000001190000003" green="0.80000001190000003" blue="0.80000001190000003" alpha="1" colorSpace="calibratedRGB"/>
-                            </view>
-                            <view contentMode="scaleToFill" id="sh5-vt-dzL" userLabel="FilterView">
-                                <rect key="frame" x="10" y="224" width="300" height="120"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <subviews>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Filter By:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="nns-Ul-ne4">
-                                        <rect key="frame" x="73" y="30" width="165" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Filter" textAlignment="center" minimumFontSize="17" id="mMb-aT-8ht" userLabel="FilterField">
-                                        <rect key="frame" x="66" y="60" width="179" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" returnKeyType="next"/>
-                                        <connections>
-                                            <action selector="enteredFilter" destination="vXZ-lx-hvc" eventType="editingDidEndOnExit" id="Vaw-wN-M7p"/>
-                                        </connections>
-                                    </textField>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Job Title" textAlignment="center" minimumFontSize="17" id="a5u-q6-ARp" userLabel="JobTitleField">
-                                        <rect key="frame" x="66" y="60" width="179" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" returnKeyType="next"/>
-                                        <connections>
-                                            <action selector="enteredJobTitle" destination="vXZ-lx-hvc" eventType="editingDidEndOnExit" id="Qc3-Pz-KXJ"/>
-                                        </connections>
-                                    </textField>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Department Title" textAlignment="center" minimumFontSize="17" id="ltM-UI-t7q" userLabel="DeptTitleField">
-                                        <rect key="frame" x="66" y="60" width="179" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" returnKeyType="next"/>
-                                        <connections>
-                                            <action selector="enteredDeptTitle" destination="vXZ-lx-hvc" eventType="editingDidEndOnExit" id="WTh-tj-GG8"/>
-                                        </connections>
-                                    </textField>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Company Name" textAlignment="center" minimumFontSize="17" id="MFi-tI-YOx" userLabel="CompanyTitleField">
-                                        <rect key="frame" x="66" y="60" width="179" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" returnKeyType="next"/>
-                                        <connections>
-                                            <action selector="enteredCompanyTitle" destination="vXZ-lx-hvc" eventType="editingDidEndOnExit" id="Lbs-VP-3AK"/>
-                                        </connections>
-                                    </textField>
-                                    <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" id="L2u-YE-QFB">
-                                        <rect key="frame" x="253" y="41" width="37" height="37"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    </activityIndicatorView>
-                                    <switch hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="BT7-vn-A9d">
-                                        <rect key="frame" x="9" y="44" width="51" height="31"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <connections>
-                                            <action selector="enteredFilter" destination="vXZ-lx-hvc" eventType="valueChanged" id="G5x-kx-xZc"/>
-                                        </connections>
-                                    </switch>
-                                </subviews>
-                                <color key="backgroundColor" red="0.180392161" green="0.57647061349999995" blue="0.67450982329999998" alpha="1" colorSpace="deviceRGB"/>
-                            </view>
                             <view contentMode="scaleToFill" id="WiV-gJ-wew" userLabel="MoreInfoView">
                                 <rect key="frame" x="10" y="370" width="300" height="190"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -524,52 +411,208 @@
                                         <color key="textColor" red="0.0" green="0.50196081400000003" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
                                         <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </label>
-                                    <button appearanceType="aqua" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" id="Pt7-ax-ep9">
-                                        <rect key="frame" x="52" y="346" width="250" height="43"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                        <state key="normal" backgroundImage="button-black.png">
-                                            <attributedString key="attributedTitle"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="mcAnswerPressed:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="fOZ-Xw-b81"/>
-                                        </connections>
-                                    </button>
-                                    <button appearanceType="aqua" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" id="hp0-7e-483">
+                                    <button appearanceType="aqua" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="hp0-7e-483">
                                         <rect key="frame" x="52" y="397" width="250" height="43"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                        <state key="normal" backgroundImage="button-black.png">
-                                            <attributedString key="attributedTitle"/>
+                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.59999999999999998" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                                        <state key="normal" title="" backgroundImage="d">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
                                             <action selector="mcAnswerPressed:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="psy-hl-nZS"/>
                                         </connections>
                                     </button>
-                                    <button appearanceType="aqua" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" id="cxq-Xf-kWs">
-                                        <rect key="frame" x="52" y="499" width="250" height="43"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                        <state key="normal" backgroundImage="button-black.png">
-                                            <attributedString key="attributedTitle"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="mcAnswerPressed:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="9fE-gM-cvb"/>
-                                        </connections>
-                                    </button>
-                                    <button appearanceType="aqua" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" id="G1S-3G-aq4">
+                                    <button appearanceType="aqua" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="G1S-3G-aq4">
                                         <rect key="frame" x="52" y="448" width="250" height="43"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                        <state key="normal" backgroundImage="button-black.png">
-                                            <attributedString key="attributedTitle"/>
+                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.59999999999999998" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                                        <state key="normal" title="" backgroundImage="d">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
                                             <action selector="mcAnswerPressed:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="gSP-Vf-QeD"/>
                                         </connections>
                                     </button>
+                                    <button appearanceType="aqua" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="cxq-Xf-kWs">
+                                        <rect key="frame" x="52" y="499" width="250" height="43"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.59999999999999998" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                                        <state key="normal" title="" backgroundImage="d">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="mcAnswerPressed:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="9fE-gM-cvb"/>
+                                        </connections>
+                                    </button>
+                                    <button appearanceType="aqua" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Pt7-ax-ep9">
+                                        <rect key="frame" x="52" y="346" width="250" height="43"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.59999999999999998" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                                        <state key="normal" title="" backgroundImage="d">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="mcAnswerPressed:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="fOZ-Xw-b81"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                            </view>
+                            <view contentMode="scaleToFill" id="sh5-vt-dzL" userLabel="FilterView">
+                                <rect key="frame" x="10" y="85" width="300" height="259"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <subviews>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Filter By:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="nns-Ul-ne4">
+                                        <rect key="frame" x="73" y="30" width="165" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Filter" textAlignment="center" minimumFontSize="17" id="mMb-aT-8ht" userLabel="FilterField">
+                                        <rect key="frame" x="61" y="198" width="179" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" returnKeyType="next"/>
+                                        <connections>
+                                            <action selector="enteredFilter" destination="vXZ-lx-hvc" eventType="editingDidEndOnExit" id="Vaw-wN-M7p"/>
+                                        </connections>
+                                    </textField>
+                                    <textField hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Job Title" textAlignment="center" minimumFontSize="17" id="a5u-q6-ARp" userLabel="JobTitleField">
+                                        <rect key="frame" x="61" y="198" width="179" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" returnKeyType="next"/>
+                                        <connections>
+                                            <action selector="enteredJobTitle" destination="vXZ-lx-hvc" eventType="editingDidEndOnExit" id="Qc3-Pz-KXJ"/>
+                                        </connections>
+                                    </textField>
+                                    <textField hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Department Title" textAlignment="center" minimumFontSize="17" id="ltM-UI-t7q" userLabel="DeptTitleField">
+                                        <rect key="frame" x="61" y="198" width="179" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" returnKeyType="next"/>
+                                        <connections>
+                                            <action selector="enteredDeptTitle" destination="vXZ-lx-hvc" eventType="editingDidEndOnExit" id="WTh-tj-GG8"/>
+                                        </connections>
+                                    </textField>
+                                    <textField hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Company Name" textAlignment="center" minimumFontSize="17" id="MFi-tI-YOx" userLabel="CompanyTitleField">
+                                        <rect key="frame" x="61" y="198" width="179" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" returnKeyType="next"/>
+                                        <connections>
+                                            <action selector="enteredCompanyTitle" destination="vXZ-lx-hvc" eventType="editingDidEndOnExit" id="Lbs-VP-3AK"/>
+                                        </connections>
+                                    </textField>
+                                    <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" id="L2u-YE-QFB">
+                                        <rect key="frame" x="253" y="41" width="37" height="37"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </activityIndicatorView>
+                                    <switch hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="BT7-vn-A9d">
+                                        <rect key="frame" x="9" y="44" width="51" height="31"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <connections>
+                                            <action selector="enteredFilter" destination="vXZ-lx-hvc" eventType="valueChanged" id="G5x-kx-xZc"/>
+                                        </connections>
+                                    </switch>
+                                    <button appearanceType="aqua" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="cHF-s0-H6O">
+                                        <rect key="frame" x="61" y="68" width="179" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.59999999999999998" colorSpace="calibratedRGB"/>
+                                        <state key="normal" title="All">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="pressedAll:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="79I-SJ-apI"/>
+                                        </connections>
+                                    </button>
+                                    <button appearanceType="aqua" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="E8k-yc-iNT">
+                                        <rect key="frame" x="61" y="99" width="179" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.59999999999999998" colorSpace="calibratedRGB"/>
+                                        <state key="normal" title="Company">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="pressedCompany:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="6m3-ev-pda"/>
+                                        </connections>
+                                    </button>
+                                    <button appearanceType="aqua" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="pVz-ZC-BgV">
+                                        <rect key="frame" x="61" y="130" width="179" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.59999999999999998" colorSpace="calibratedRGB"/>
+                                        <state key="normal" title="Department">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="pressedDepartment:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="SEm-C7-DuX"/>
+                                        </connections>
+                                    </button>
+                                    <button appearanceType="aqua" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="UoF-kN-Lan">
+                                        <rect key="frame" x="61" y="161" width="179" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.59999999999999998" colorSpace="calibratedRGB"/>
+                                        <state key="normal" title="Job Title">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="pressedJobTitle:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="K2O-Al-OZh"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.180392161" green="0.57647061349999995" blue="0.67450982329999998" alpha="1" colorSpace="deviceRGB"/>
+                            </view>
+                            <view hidden="YES" appearanceType="aqua" contentMode="scaleToFill" id="NO8-CE-HIs" userLabel="NameAndButtonsView">
+                                <rect key="frame" x="32" y="370" width="256" height="150"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES"/>
+                                <subviews>
+                                    <view appearanceType="aqua" alpha="0.69999998807907104" contentMode="scaleToFill" id="bkc-Wj-ysl">
+                                        <rect key="frame" x="0.0" y="0.0" width="256" height="56"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                        <subviews>
+                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Harold Ray Clark III" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="qqd-ur-Djm">
+                                                <rect key="frame" x="1" y="13" width="254" height="30"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                    </view>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="lCd-Et-gYF" userLabel="XButton">
+                                        <rect key="frame" x="38" y="64" width="50" height="50"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" backgroundImage="XButton.png"/>
+                                        <connections>
+                                            <action selector="gotWrong:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="7Wc-qO-CLX"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="T9p-Le-4Hl" userLabel="CheckButton">
+                                        <rect key="frame" x="169" y="64" width="50" height="50"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" backgroundImage="CheckButton.png"/>
+                                        <connections>
+                                            <action selector="gotRight:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="f4Z-Ip-6Ub"/>
+                                        </connections>
+                                    </button>
+                                    <button appearanceType="aqua" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="infoDark" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="Szw-bl-XKh">
+                                        <rect key="frame" x="117" y="108" width="22" height="22"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <connections>
+                                            <action selector="moreInfo" destination="vXZ-lx-hvc" eventType="touchUpInside" id="y3N-NA-xD0"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.80000001190000003" green="0.80000001190000003" blue="0.80000001190000003" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -582,13 +625,17 @@
                         <outlet property="MCCView" destination="K5z-To-LPv" id="6b4-5r-yl0"/>
                         <outlet property="MCGameView" destination="l8c-Wh-fmz" id="hJw-NN-SWS"/>
                         <outlet property="MCTGameView" destination="QMj-5r-w61" id="PHM-s8-FKN"/>
+                        <outlet property="allButton" destination="cHF-s0-H6O" id="uj2-1n-0uY"/>
+                        <outlet property="companyButton" destination="E8k-yc-iNT" id="cuX-c0-RvW"/>
                         <outlet property="companyTitleField" destination="MFi-tI-YOx" id="AAr-lI-Rz5"/>
+                        <outlet property="departmentButton" destination="pVz-ZC-BgV" id="qHN-LD-Ut8"/>
                         <outlet property="deptTitleField" destination="ltM-UI-t7q" id="IXl-Lb-WdX"/>
                         <outlet property="filterField" destination="mMb-aT-8ht" id="QSe-mb-3zF"/>
                         <outlet property="filterLabel" destination="nns-Ul-ne4" id="Qq4-6f-cZa"/>
                         <outlet property="filteringIndicator" destination="L2u-YE-QFB" id="LF7-fk-mEY"/>
                         <outlet property="firstView" destination="LUd-Mz-gkw" id="LGV-FT-tcq"/>
                         <outlet property="gameOverView" destination="Cfx-sz-Cb9" id="jGP-kE-x8l"/>
+                        <outlet property="jobTitleButton" destination="UoF-kN-Lan" id="9XX-uo-tVn"/>
                         <outlet property="jobTitleField" destination="a5u-q6-ARp" id="qZr-tp-DWl"/>
                         <outlet property="mcButton1" destination="Pt7-ax-ep9" id="iR6-pE-k5m"/>
                         <outlet property="mcButton2" destination="hp0-7e-483" id="mbG-mM-jam"/>
@@ -714,12 +761,13 @@
         <image name="BlueBackground.png" width="337" height="559"/>
         <image name="CheckButton.png" width="125" height="125"/>
         <image name="Frame.png" width="155" height="154"/>
-        <image name="RoundedRectBlackButton.png" width="164" height="56"/>
+        <image name="RoundedRectBlackButton.png" width="251" height="240"/>
         <image name="XButton.png" width="125" height="125"/>
         <image name="bg.png" width="320" height="480"/>
         <image name="button-black.png" width="164" height="61"/>
         <image name="button-green.png" width="170" height="62"/>
         <image name="button-red.png" width="159" height="51"/>
+        <image name="d" width="164" height="56"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

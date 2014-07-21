@@ -77,12 +77,22 @@
     IBOutlet UILabel*moreInfoCompany;
     IBOutlet UITextView*moreInfoBio;
     IBOutlet UIView*moreInfoView;
+    
+    NSMutableArray* uniqueCompaniesArray;
+    NSMutableArray* uniqueDepartmentsArray;
+    NSMutableArray* uniqueJobTitlesArray;
 }
 @property(nonatomic)int numberOfSmiths;
 @property(nonatomic)IBOutlet UIImageView *mcPersonPicture;
 @property(nonatomic)NSArray *currentContacts;
 @property(nonatomic)NSMutableArray *currentPeopleArray;
 @property(nonatomic)MSContactManipulater *contactGetter;
+//filter view buttons
+@property(nonatomic)IBOutlet UIButton *allButton;
+@property(nonatomic)IBOutlet UIButton *companyButton;
+@property(nonatomic)IBOutlet UIButton *departmentButton;
+@property(nonatomic)IBOutlet UIButton *jobTitleButton;
+
 //go to contact view
 @property(nonatomic)IBOutlet UIView *nameAndButtonsView;
 @property(nonatomic)IBOutlet UIImageView *personPic;
@@ -123,12 +133,23 @@
 
 -(IBAction)mcAnswerPressed:(id)sender;
 
+-(bool)checkForString:(NSString*)str inArray:(NSMutableArray*)arr;
+
 - (bool)isObjectIdenticalTo:(id)anObject inArray:(NSMutableArray*)aIQ;
 
 -(bool)checkIfAllPeopleHaveBeenGuessed;
 
 -(bool)checkIfAllPeopleHaveBeenGuessedCorrectly;
+//When they press the button on the filter View
+-(IBAction)pressedAll:(id)sender;
+-(IBAction)pressedDepartment:(id)sender;
+-(IBAction)pressedCompany:(id)sender;
+-(IBAction)pressedJobTitle:(id)sender;
 
+-(void)addJob:(NSString*)str;
+-(void)Company:(NSString*)str;
+-(void)addDepartment:(NSString*)str;
+-(void)addFields;
 -(NSMutableArray*)chooseArray;
 @end
 

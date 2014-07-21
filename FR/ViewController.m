@@ -18,7 +18,7 @@
 }
 @synthesize mcPersonPicture, currentContacts, contactGetter;
 @synthesize currentPeopleArray;
-@synthesize nameAndButtonsView, personPic, nameLabel;
+@synthesize nameAndButtonsView, personPic, nameLabel, allButton, companyButton, jobTitleButton, departmentButton;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -223,6 +223,9 @@
     filteringIndicator.hidesWhenStopped = true;
     moreInfoView.hidden =true;
     [super viewDidLoad];
+    uniqueDepartmentsArray = [[NSMutableArray alloc]init];
+    uniqueCompaniesArray = [[NSMutableArray alloc]init];
+    uniqueJobTitlesArray = [[NSMutableArray alloc]init];
     filteringIndicator = [[UIActivityIndicatorView alloc]init];
     arrayOf50PercentAndOver = [[NSMutableArray alloc]init];
     
@@ -253,6 +256,48 @@
 {
     return YES;
 }
+-(void)addJob:(NSString*)str
+{
+    if([self checkForString:str inArray:uniqueJobTitlesArray]==false && str.length > 0)
+    {
+        [uniqueJobTitlesArray addObject:str];
+        //NSLog(@"J-%@,%i",str,uniqueJobTitlesArray.count);
+        
+    }
+}
+-(void)addCompany:(NSString*)str
+{
+    if([self checkForString:str inArray:uniqueCompaniesArray]==false && str.length > 0)
+    {
+        [uniqueCompaniesArray addObject:str];
+        //NSLog(@"C-%@,%i",str,uniqueCompaniesArray.count);
+        
+    }
+}
+-(void)addDepartment:(NSString*)str
+{
+    if([self checkForString:str inArray:uniqueDepartmentsArray]==false && str.length > 0)
+    {
+        [uniqueDepartmentsArray addObject:str];
+        //NSLog(@"D-%@,%i",str,uniqueDepartmentsArray.count);
+        
+    }
+}
+
+-(void)addFields
+{
+    for (int t=0; t<arrayOf49PercentAndUnder.count; t++)
+    {
+        Person*p;
+        p = [arrayOf49PercentAndUnder objectAtIndex:t];
+        [self addDepartment:p.department];
+        [self addCompany:p.company];
+        [self addJob:p.jobTitle];
+    }
+}
+
+
+
 -(void)countUpDuration
 {
     if(MCTGameView.hidden == false || FTGameView.hidden == false ) //playing a timed game
@@ -367,10 +412,10 @@
     int currentContactIndex = rand()%currentContacts.count;
     correctMCPerson = [currentContacts objectAtIndex:currentContactIndex];
     
-    mcButton1.backgroundColor = [UIColor clearColor];
-    mcButton2.backgroundColor = [UIColor clearColor];
-    mcButton3.backgroundColor = [UIColor clearColor];
-    mcButton4.backgroundColor = [UIColor clearColor];
+    mcButton1.backgroundColor = [UIColor lightGrayColor];
+    mcButton2.backgroundColor = [UIColor lightGrayColor];
+    mcButton3.backgroundColor = [UIColor lightGrayColor];
+    mcButton4.backgroundColor = [UIColor lightGrayColor];
     
     mcPersonPicture.image = correctMCPerson.selfImage;
     int h = 0;
@@ -499,35 +544,35 @@
     //[self chooseArray];
     correctMCPerson = [currentContacts objectAtIndex:currentContactIndex];
      
-    mcButton1.backgroundColor = [UIColor clearColor];
-    mcButton2.backgroundColor = [UIColor clearColor];
-    mcButton3.backgroundColor = [UIColor clearColor];
-    mcButton4.backgroundColor = [UIColor clearColor];
-
+    mcButton1.backgroundColor = [UIColor lightGrayColor];
+    mcButton2.backgroundColor = [UIColor lightGrayColor];
+    mcButton3.backgroundColor = [UIColor lightGrayColor];
+    mcButton4.backgroundColor = [UIColor lightGrayColor];
+//
     mcPersonPicture.image = correctMCPerson.selfImage;
     
     int h = 0;
     do {
-        h = rand()%currentPeopleArray.count;
+        h = rand()%currentContacts.count;
         NSLog(@"%i",h);
     } while(h==currentContactIndex);
     [mcButton1 setTitle:[NSString stringWithFormat:@"%@",[[currentContacts objectAtIndex:h] getFullName]] forState:UIControlStateNormal];
     NSLog(@"%@",[[currentContacts objectAtIndex:h] getFullName]);
     int i = 0;
     do {
-        i = rand()%currentPeopleArray.count;
+        i = rand()%currentContacts.count;
     } while(h==currentContactIndex || i==h);
     [mcButton2 setTitle:[NSString stringWithFormat:@"%@",[[currentContacts objectAtIndex:i] getFullName]] forState:UIControlStateNormal];
     NSLog(@"%@",[[currentContacts objectAtIndex:i] getFullName]);
     int k = 0;
     do {
-        k = rand()%currentPeopleArray.count;
+        k = rand()%currentContacts.count;
     } while(k==currentContactIndex || k==h || k==i);
     [mcButton3 setTitle:[NSString stringWithFormat:@"%@",[[currentContacts objectAtIndex:k] getFullName]] forState:UIControlStateNormal];
         NSLog(@"%@",[[currentContacts objectAtIndex:k] getFullName]);
     int l= 0;
     do {
-        l = rand()%currentPeopleArray.count;
+        l = rand()%currentContacts.count;
     } while(l==currentContactIndex || l==h || l==i || l==k);
     [mcButton4 setTitle:[NSString stringWithFormat:@"%@",[[currentContacts objectAtIndex:l] getFullName]] forState:UIControlStateNormal];
         NSLog(@"%@",[[currentContacts objectAtIndex:l] getFullName]);
@@ -609,7 +654,7 @@
         
 
 
-        FilterView.hidden = false;
+        //FilterView.hidden = false;
         
         deptTitleField.hidden = true;
         jobTitleField.hidden = true;
@@ -622,35 +667,35 @@
         //[self chooseArray];
         correctMCPerson = [arrayOf49PercentAndUnder objectAtIndex:currentContactIndex];
         
-        mcButton1.backgroundColor = [UIColor clearColor];
-        mcButton2.backgroundColor = [UIColor clearColor];
-        mcButton3.backgroundColor = [UIColor clearColor];
-        mcButton4.backgroundColor = [UIColor clearColor];
+        mcButton1.backgroundColor = [UIColor lightGrayColor];
+        mcButton2.backgroundColor = [UIColor lightGrayColor];
+        mcButton3.backgroundColor = [UIColor lightGrayColor];
+        mcButton4.backgroundColor = [UIColor lightGrayColor];
         
         mcPersonPicture.image = correctMCPerson.selfImage;
         
         int h = 0;
         do {
-            h = rand()%currentPeopleArray.count;
+            h = rand()%currentContacts.count;
             NSLog(@"%i",h);
         } while(h==currentContactIndex);
         [mcButton1 setTitle:[NSString stringWithFormat:@"%@",[[currentContacts objectAtIndex:h] getFullName]] forState:UIControlStateNormal];
         NSLog(@"%@",[[currentContacts objectAtIndex:h] getFullName]);
         int i = 0;
         do {
-            i = rand()%currentPeopleArray.count;
+            i = rand()%currentContacts.count;
         } while(h==currentContactIndex || i==h);
         [mcButton2 setTitle:[NSString stringWithFormat:@"%@",[[currentContacts objectAtIndex:i] getFullName]] forState:UIControlStateNormal];
         NSLog(@"%@",[[currentContacts objectAtIndex:i] getFullName]);
         int k = 0;
         do {
-            k = rand()%currentPeopleArray.count;
+            k = rand()%currentContacts.count;
         } while(k==currentContactIndex || k==h || k==i);
         [mcButton3 setTitle:[NSString stringWithFormat:@"%@",[[currentContacts objectAtIndex:k] getFullName]] forState:UIControlStateNormal];
         NSLog(@"%@",[[currentContacts objectAtIndex:k] getFullName]);
         int l= 0;
         do {
-            l = rand()%currentPeopleArray.count;
+            l = rand()%currentContacts.count;
         } while(l==currentContactIndex || l==h || l==i || l==k);
         [mcButton4 setTitle:[NSString stringWithFormat:@"%@",[[currentContacts objectAtIndex:l] getFullName]] forState:UIControlStateNormal];
         NSLog(@"%@",[[currentContacts objectAtIndex:l] getFullName]);
@@ -713,7 +758,7 @@
         }
         //contactView.hidden=true;
 
-        
+
     } else
     {
         b.backgroundColor = [UIColor redColor];
@@ -862,8 +907,82 @@
     NSLog(@"object was not in the array");
     return false;
 }
+-(IBAction)pressedAll:(id)sender {
+    NSMutableArray*currentArray;
+    
+    [arrayOf49PercentAndUnder removeAllObjects];
+    [arrayOf50PercentAndOver removeAllObjects];
+    FilterView.hidden = true;
+    NSLog(@"all contacts");
+    
+    contactGetter = [[MSContactManipulater alloc]init];
+    
+    [filteringIndicator startAnimating];
+    arrayOf49PercentAndUnder = [contactGetter getContactsWithAnImage];
+    [filteringIndicator stopAnimating];
+    
+    currentArray = arrayOf49PercentAndUnder;
+    
+    j = rand()%arrayOf49PercentAndUnder.count;
+    
+    
+    currentPerson =[currentArray objectAtIndex:j];
+    
+    personPic.image = [currentPerson selfImage];
+    if (currentPerson.lastName == NULL)
+    {
+        nameLabel.text = currentPerson.firstName;
+        
+    }
+    else
+    {
+        nameLabel.text = [NSString stringWithFormat:@"%@ %@", currentPerson.firstName,currentPerson.lastName];
+    }
+
+}
+-(IBAction)pressedCompany:(id)sender {
+    companyTitleField.hidden = false;
+    allButton.enabled = false;
+    jobTitleButton.enabled = false;
+    departmentButton.enabled = false;
+    //companyButton.enabled = false;
+}
+-(IBAction)pressedDepartment:(id)sender {
+    deptTitleField.hidden = false;
+    allButton.enabled = false;
+    jobTitleButton.enabled = false;
+    //departmentButton.enabled = false;
+    companyButton.enabled = false;
+}
+-(bool)checkForString:(NSString*)str inArray:(NSMutableArray*)arr
+{
+    for(int p=0; p<arr.count;p++)
+    {
+        NSString *sIQ;
+        sIQ = [arr objectAtIndex:p];
+        if([sIQ isEqualToString: str])
+        {
+            return true;
+        }
+    }
+    return false;
+}
+-(IBAction)pressedJobTitle:(id)sender {
+    jobTitleField.hidden = false;
+    allButton.enabled = false;
+    //jobTitleButton.enabled = false;
+    departmentButton.enabled = false;
+    companyButton.enabled = false;
+    
+}
 -(IBAction)enteredFilter
 {
+    [arrayOf49PercentAndUnder removeAllObjects];
+    [arrayOf50PercentAndOver removeAllObjects];
+    
+    contactGetter = [[MSContactManipulater alloc]init];
+    arrayOf49PercentAndUnder = [contactGetter getContactsWithAnImage];
+    [self addFields];
     NSMutableArray*currentArray;
 
     [arrayOf49PercentAndUnder removeAllObjects];

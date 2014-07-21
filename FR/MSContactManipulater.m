@@ -18,6 +18,9 @@
     NSMutableArray *finalPeople = [[NSMutableArray alloc]init];
     for (int i = 0; i<[people count]; i++) {
         ABRecordRef r = (__bridge ABRecordRef)([people objectAtIndex:i]);
+        
+        ABRecordSetValue(r, kABPersonNicknameProperty, (__bridge CFStringRef)@"Healthy Catalyst", nil);
+        //ABRecordSetValue(r, kABPersonNicknameProperty, @"My Best Friend", nil);
         if (ABPersonHasImageData(r)) {
             NSString *firstName = (__bridge NSString *)(ABRecordCopyValue(r, kABPersonFirstNameProperty));
             NSString *lastName = (__bridge NSString *)(ABRecordCopyValue(r, kABPersonLastNameProperty));
@@ -30,17 +33,24 @@
             myPerson.jobTitle = (__bridge NSString *)(ABRecordCopyValue(r, kABPersonJobTitleProperty));
 
             [finalPeople addObject:myPerson];
+        } else {
+            //ABRecordSetImageData([UIImage imageNamed:@"No Image Available.png"]);
+            
+            //asdfdddssdfsdsdfsdfsdfsdfsdfsdfsdfsdfdfas adf sABRecordSetImageData(r,(__bridge CFDataRef)(UIImageJPEGRepresentation([UIImage imageNamed:@"No Image Available.png"], 0.7f)),nil);
+        
         }
         
         
     }
+    ABAddressBookSave(addressBook, nil);
     return finalPeople;
 }
 -(NSMutableArray *)getContactsWithJobTitle:(NSString*)jobTitle
 {
     //NSLog(@"job");
 
-    ABAddressBookRef addressBook2  = ABAddressBookCreateWithOptions(NULL, NULL);
+    ABAddressBookRef addressBook2
+    = ABAddressBookCreateWithOptions(NULL, NULL);
     NSMutableArray *people = (__bridge NSMutableArray *)ABAddressBookCopyArrayOfAllPeople(addressBook2);
     NSMutableArray *finalPeople = [[NSMutableArray alloc]init];
     for (int i = 0; i<[people count]; i++) {
@@ -121,6 +131,38 @@
                 [finalPeople addObject:myPerson];
                 //NSLog(@" %@ has a picture and is in the %@ department",firstName, deptTitle);
             }
+        }
+        
+        
+    }
+    return finalPeople;
+}
+-(NSMutableArray *)getContactsWithEntryDate:(NSDate*)dateEntered
+{
+    ABAddressBookRef addressBook2  = ABAddressBookCreateWithOptions(NULL, NULL);
+    // NSLog(@"department");
+    NSMutableArray *people = (__bridge NSMutableArray *)ABAddressBookCopyArrayOfAllPeople(addressBook2);
+    NSMutableArray *finalPeople = [[NSMutableArray alloc]init];
+    for (int i = 0; i<[people count]; i++) {
+        ABRecordRef r = (__bridge ABRecordRef)([people objectAtIndex:i]);
+        if (ABPersonHasImageData(r))
+        {
+            NSString *firstName = (__bridge NSString *)(ABRecordCopyValue(r, kABPersonFirstNameProperty));
+            NSString *lastName = (__bridge NSString *)(ABRecordCopyValue(r, kABPersonLastNameProperty));
+            UIImage *Cimage = [[UIImage alloc]init];
+            Cimage = [UIImage imageWithData:(__bridge NSData *)ABPersonCopyImageDataWithFormat(r, kABPersonImageFormatThumbnail)];
+            Person *myPerson = [[Person alloc] init];
+            
+            [myPerson setWithFirstName:firstName andLastName:lastName andImage:Cimage andGender:true];
+            myPerson.company = (__bridge NSString *)(ABRecordCopyValue(r, kABPersonOrganizationProperty));
+            myPerson.department = (__bridge NSString *)(ABRecordCopyValue(r, kABPersonDepartmentProperty));
+            myPerson.jobTitle = (__bridge NSString *)(ABRecordCopyValue(r, kABPersonJobTitleProperty));
+ //           myPerson.entryDate = (__bridge NSDate *)(ABRecordCopyValue(r, kabda));
+//            if([[myPerson.department uppercaseString] isEqual: [dat uppercaseString]])
+//            {
+//                [finalPeople addObject:myPerson];
+//                //NSLog(@" %@ has a picture and is in the %@ department",firstName, deptTitle);
+//            }
         }
         
         
