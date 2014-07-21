@@ -270,7 +270,7 @@
         Person *p;
         p = [array objectAtIndex:l];
     
-        if(p.jobTitle == jobTitle)
+        if([p.jobTitle isEqualToString: jobTitle])
         {
             [array removeObjectIdenticalTo:p];
         }
@@ -283,7 +283,7 @@
         Person *p;
         p = [array objectAtIndex:l];
         
-        if(p.department == deptTitle)
+        if([p.department isEqualToString: deptTitle])
         {
             [array removeObjectIdenticalTo:p];
         }
@@ -296,7 +296,7 @@
         Person *p;
         p = [array objectAtIndex:l];
         
-        if(p.company == company)
+        if([p.company isEqualToString: company])
         {
             [array removeObjectIdenticalTo:p];
         }
