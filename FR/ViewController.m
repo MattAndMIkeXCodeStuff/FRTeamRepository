@@ -317,7 +317,7 @@
     }
 }
 -(void)companySwitchValueChanged:(id)sender {
-    if ([[filterCompanySwitches objectAtIndex:0] isOn]) {
+    if ([[filterCompanySwitches objectAtIndex:0] isOn] && sender == [filterCompanySwitches objectAtIndex:0] ) {
         for (int i = 0; i<filterCompanySwitches.count; i++) {
             [[filterCompanySwitches objectAtIndex:i] setOn:YES animated:YES];
         }
@@ -326,7 +326,7 @@
     
 }
 -(void)departmentSwitchValueChanged:(id)sender {
-    if ([[filterDepartmentSwitches objectAtIndex:0] isOn]) {
+    if ([[filterDepartmentSwitches objectAtIndex:0] isOn] && sender == [filterDepartmentSwitches objectAtIndex:0] ) {
         for (int i = 0; i<filterDepartmentSwitches.count; i++) {
             [[filterDepartmentSwitches objectAtIndex:i] setOn:YES animated:YES];
         }
@@ -335,7 +335,7 @@
     NSLog(@"yo");
 }
 -(void)jobTitleSwitchValueChanged:(id)sender {
-    if ([[filterJobTitlesSwitches objectAtIndex:0] isOn]) {
+    if ([[filterJobTitlesSwitches objectAtIndex:0] isOn] && sender == [filterJobTitlesSwitches objectAtIndex:0] ) {
         for (int i = 0; i<filterJobTitlesSwitches.count; i++) {
             [[filterJobTitlesSwitches objectAtIndex:i] setOn:YES animated:YES];
         }
@@ -353,6 +353,7 @@
         
     }
     else {
+        
         UILabel *newLabel = [[UILabel alloc]init];
         newLabel.text = @"All";
         [labelsScrollView addSubview:newLabel];
@@ -365,31 +366,54 @@
         [labelsScrollView addSubview:switchThing];
         switchThing.center = CGPointMake(220, 36);
         if([labelType isEqual:@"Company"]) {
-            [switchThing addTarget:self action:@selector(companySwitchValueChanged:) forControlEvents:UIControlEventValueChanged];
-
-            [filterCompanySwitches removeAllObjects];
-            [filterCompanyText removeAllObjects];
-            [filterCompanyText addObject:newLabel.text];
-            [filterCompanySwitches addObject:switchThing];
-            for (int i =0 ; i<uniqueCompaniesArray.count; i++) {
+            if (filterCompanyText.count == 0) {
                 
-                UILabel *newLabel = [[UILabel alloc]init];
-                newLabel.text = [uniqueCompaniesArray objectAtIndex:i];
-                [labelsScrollView addSubview:newLabel];
-                newLabel.bounds  = CGRectMake(100, 10, 170, 30);
-                newLabel.center = CGPointMake(100, 75+(40*i));
-                newLabel.textColor= [UIColor whiteColor];
-                [labelsScrollView insertSubview:newLabel atIndex:0];
-                UISwitch *switchThing = [[UISwitch alloc] init];
-                [labelsScrollView setContentSize:CGSizeMake(260, 75+(40*uniqueCompaniesArray.count))];
-                NSLog(@"%@",newLabel.text);
-                [labelsScrollView addSubview:switchThing];
-                switchThing.center = CGPointMake(220, 76+(40*i));
+            
                 [switchThing addTarget:self action:@selector(companySwitchValueChanged:) forControlEvents:UIControlEventValueChanged];
+
+                [filterCompanySwitches removeAllObjects];
+                [filterCompanyText removeAllObjects];
                 [filterCompanyText addObject:newLabel.text];
                 [filterCompanySwitches addObject:switchThing];
+                for (int i =0 ; i<uniqueCompaniesArray.count; i++) {
+                
+                    UILabel *newLabel = [[UILabel alloc]init];
+                    newLabel.text = [uniqueCompaniesArray objectAtIndex:i];
+                    [labelsScrollView addSubview:newLabel];
+                    newLabel.bounds  = CGRectMake(100, 10, 170, 30);
+                    newLabel.center = CGPointMake(100, 75+(40*i));
+                    newLabel.textColor= [UIColor whiteColor];
+                    [labelsScrollView insertSubview:newLabel atIndex:0];
+                    UISwitch *switchThing = [[UISwitch alloc] init];
+                    [labelsScrollView setContentSize:CGSizeMake(260, 75+(40*uniqueCompaniesArray.count))];
+                    NSLog(@"%@",newLabel.text);
+                    [labelsScrollView addSubview:switchThing];
+                    switchThing.center = CGPointMake(220, 76+(40*i));
+                    [switchThing addTarget:self action:@selector(companySwitchValueChanged:) forControlEvents:UIControlEventValueChanged];
+                    [filterCompanyText addObject:newLabel.text];
+                    [filterCompanySwitches addObject:switchThing];
 
+                }
+            } else {
+                for (int i =1 ; i<filterCompanyText.count; i++) {
+                    
+                    UILabel *newLabel = [[UILabel alloc]init];
+                    newLabel.text = [filterCompanyText objectAtIndex:i];
+                    [labelsScrollView addSubview:newLabel];
+                    newLabel.bounds  = CGRectMake(100, 10, 170, 30);
+                    newLabel.center = CGPointMake(100, 75+(40*i));
+                    newLabel.textColor= [UIColor whiteColor];
+                    [labelsScrollView insertSubview:newLabel atIndex:0];
+                    UISwitch *switchThing = [[UISwitch alloc] init];
+                    [labelsScrollView setContentSize:CGSizeMake(260, 75+(40*filterCompanyText.count))];
+                    NSLog(@"%@",newLabel.text);
+                    [labelsScrollView addSubview:switchThing];
+                    switchThing.center = CGPointMake(220, 76+(40*i));
+                    [switchThing addTarget:self action:@selector(companySwitchValueChanged:) forControlEvents:UIControlEventValueChanged];
+                    [switchThing setOn:[[filterCompanySwitches objectAtIndex:i] isOn] animated:NO];
+                }
             }
+                
         }
         if ([labelType isEqual:@"Department"]) {
             [filterDepartmentSwitches removeAllObjects];
