@@ -375,8 +375,12 @@
                 [filterCompanyText removeAllObjects];
                 [filterCompanyText addObject:newLabel.text];
                 [filterCompanySwitches addObject:switchThing];
+                 
+                 uniqueCompaniesArray = [uniqueCompaniesArray sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
+                
                 for (int i =0 ; i<uniqueCompaniesArray.count; i++) {
                 
+                    
                     UILabel *newLabel = [[UILabel alloc]init];
                     newLabel.text = [uniqueCompaniesArray objectAtIndex:i];
                     [labelsScrollView addSubview:newLabel];
@@ -422,6 +426,9 @@
             [filterDepartmentSwitches addObject:switchThing];
             [switchThing addTarget:self action:@selector(departmentSwitchValueChanged:) forControlEvents:UIControlEventValueChanged];
 
+            uniqueDepartmentsArray = [uniqueDepartmentsArray sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
+
+            
             for (int i =0 ; i<uniqueDepartmentsArray.count; i++) {
                 UILabel *newLabel = [[UILabel alloc]init];
                 newLabel.text = [uniqueDepartmentsArray objectAtIndex:i];
@@ -449,6 +456,8 @@
             [filterJobTitlesSwitches addObject:switchThing];
             [switchThing addTarget:self action:@selector(jobTitleSwitchValueChanged:) forControlEvents:UIControlEventValueChanged];
 
+            uniqueJobTitlesArray = [uniqueJobTitlesArray sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
+            
             for (int i =0 ; i<uniqueJobTitlesArray.count; i++) {
                 UILabel *newLabel = [[UILabel alloc]init];
                 newLabel.text = [uniqueJobTitlesArray objectAtIndex:i];
