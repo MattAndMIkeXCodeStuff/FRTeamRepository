@@ -196,9 +196,9 @@
         }
         nameAndButtonsView.hidden = true;
     }
-    NSLog(@"%i people in 49 array", arrayOf49PercentAndUnder.count);
-    NSLog(@"%i people in 50 array", arrayOf50PercentAndOver.count);
-    NSLog(@"%i total people", arrayOf50PercentAndOver.count + arrayOf49PercentAndUnder.count);
+    NSLog(@"%lu people in 49 array", (unsigned long)arrayOf49PercentAndUnder.count);
+    NSLog(@"%lu people in 50 array", (unsigned long)arrayOf50PercentAndOver.count);
+    NSLog(@"%lu total people", arrayOf50PercentAndOver.count + arrayOf49PercentAndUnder.count);
 }
 - (void)viewDidLoad
 {
@@ -322,6 +322,9 @@
             [[filterCompanySwitches objectAtIndex:i] setOn:YES animated:YES];
         }
     }
+    for (int i = 0;  i < filterCompanySwitches.count; i++) {
+        
+    }
     [self readValues];
     
 }
@@ -365,11 +368,11 @@
         NSLog(@"%@",newLabel.text);
         [labelsScrollView addSubview:switchThing];
         switchThing.center = CGPointMake(220, 36);
+    
         if([labelType isEqual:@"Company"]) {
             if (filterCompanyText.count == 0) {
-                
-            
-                [switchThing addTarget:self action:@selector(companySwitchValueChanged:) forControlEvents:UIControlEventValueChanged];
+                SEL theSelector = @selector(companySwitchValueChanged:);
+                [switchThing addTarget:self action:@selector(companySwitchValueChanged:)  forControlEvents:UIControlEventValueChanged];
 
                 [filterCompanySwitches removeAllObjects];
                 [filterCompanyText removeAllObjects];
@@ -395,23 +398,40 @@
 
                 }
             } else {
-                for (int i =1 ; i<filterCompanyText.count; i++) {
+                NSMutableArray *newArray = [[NSMutableArray alloc] init];
+                for (int i = 1; i<filterCompanySwitches.count; i++) {
+                    bool isiton = [[filterCompanySwitches objectAtIndex:i] isOn];
+                    [newArray addObject:[NSNumber numberWithBool:isiton]];
+                }
+                SEL theSelector = @selector(companySwitchValueChanged:);
+                [switchThing addTarget:self action:@selector(companySwitchValueChanged:)  forControlEvents:UIControlEventValueChanged];
+                
+                [filterCompanySwitches removeAllObjects];
+                [filterCompanyText removeAllObjects];
+                [filterCompanyText addObject:newLabel.text];
+                [filterCompanySwitches addObject:switchThing];
+                for (int i =0 ; i<uniqueCompaniesArray.count; i++) {
                     
                     UILabel *newLabel = [[UILabel alloc]init];
-                    newLabel.text = [filterCompanyText objectAtIndex:i];
+                    newLabel.text = [uniqueCompaniesArray objectAtIndex:i];
                     [labelsScrollView addSubview:newLabel];
                     newLabel.bounds  = CGRectMake(100, 10, 170, 30);
                     newLabel.center = CGPointMake(100, 75+(40*i));
                     newLabel.textColor= [UIColor whiteColor];
                     [labelsScrollView insertSubview:newLabel atIndex:0];
                     UISwitch *switchThing = [[UISwitch alloc] init];
-                    [labelsScrollView setContentSize:CGSizeMake(260, 75+(40*filterCompanyText.count))];
+                    [labelsScrollView setContentSize:CGSizeMake(260, 75+(40*uniqueCompaniesArray.count))];
                     NSLog(@"%@",newLabel.text);
                     [labelsScrollView addSubview:switchThing];
                     switchThing.center = CGPointMake(220, 76+(40*i));
                     [switchThing addTarget:self action:@selector(companySwitchValueChanged:) forControlEvents:UIControlEventValueChanged];
-                    [switchThing setOn:[[filterCompanySwitches objectAtIndex:i] isOn] animated:NO];
+                    
+                    [switchThing setOn:[[newArray objectAtIndex:i] boolValue] animated:NO];
+                    [filterCompanyText addObject:newLabel.text];
+                    [filterCompanySwitches addObject:switchThing];
+                    
                 }
+
             }
                 
         }
