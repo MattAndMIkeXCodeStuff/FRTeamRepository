@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4C35A609197D77FA007C2FEE /* RoundedRectBlackButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C35A608197D77FA007C2FEE /* RoundedRectBlackButton.png */; };
 		4C67F90C196A49EB0054A187 /* TestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C67F90B196A49EB0054A187 /* TestViewController.m */; };
 		4CACF951195F9F1500056B92 /* MSContactManipulater.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CACF950195F9F1500056B92 /* MSContactManipulater.m */; };
 		4CACF953195FA19400056B92 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CACF952195FA19400056B92 /* AddressBook.framework */; };
@@ -26,10 +27,6 @@
 		4EC04F66195297350017AA78 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4EC04F64195297350017AA78 /* InfoPlist.strings */; };
 		4EC04F68195297350017AA78 /* FRTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EC04F67195297350017AA78 /* FRTests.m */; };
 		4EC04F73195297E90017AA78 /* Person.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EC04F72195297E90017AA78 /* Person.m */; };
-		4EE67D9D197D6AC500DC979D /* RoundedRectBlackButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 4EE67D99197D6AC500DC979D /* RoundedRectBlackButton.png */; };
-		4EE67D9E197D6AC500DC979D /* Frame.png in Resources */ = {isa = PBXBuildFile; fileRef = 4EE67D9A197D6AC500DC979D /* Frame.png */; };
-		4EE67D9F197D6AC500DC979D /* CheckButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 4EE67D9B197D6AC500DC979D /* CheckButton.png */; };
-		4EE67DA0197D6AC500DC979D /* XButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 4EE67D9C197D6AC500DC979D /* XButton.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,6 +40,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4C35A608197D77FA007C2FEE /* RoundedRectBlackButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = RoundedRectBlackButton.png; path = "../../../Library/Containers/com.apple.mail/Data/Library/Mail Downloads/C5243D66-7986-4969-9539-CAFFB1C265E8/RoundedRectBlackButton.png"; sourceTree = "<group>"; };
 		4C67F90A196A49EB0054A187 /* TestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestViewController.h; sourceTree = "<group>"; };
 		4C67F90B196A49EB0054A187 /* TestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestViewController.m; sourceTree = "<group>"; };
 		4CACF94F195F9F1500056B92 /* MSContactManipulater.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSContactManipulater.h; sourceTree = "<group>"; };
@@ -70,10 +68,6 @@
 		4EC04F67195297350017AA78 /* FRTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FRTests.m; sourceTree = "<group>"; };
 		4EC04F71195297E90017AA78 /* Person.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Person.h; sourceTree = "<group>"; };
 		4EC04F72195297E90017AA78 /* Person.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Person.m; sourceTree = "<group>"; };
-		4EE67D99197D6AC500DC979D /* RoundedRectBlackButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = RoundedRectBlackButton.png; path = "../../Desktop/App Images/RoundedRectBlackButton.png"; sourceTree = "<group>"; };
-		4EE67D9A197D6AC500DC979D /* Frame.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Frame.png; path = "../../Desktop/App Images/Frame.png"; sourceTree = "<group>"; };
-		4EE67D9B197D6AC500DC979D /* CheckButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = CheckButton.png; path = "../../Desktop/App Images/CheckButton.png"; sourceTree = "<group>"; };
-		4EE67D9C197D6AC500DC979D /* XButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = XButton.png; path = "../../Desktop/App Images/XButton.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,10 +99,6 @@
 		4EC04F30195297350017AA78 = {
 			isa = PBXGroup;
 			children = (
-				4EE67D99197D6AC500DC979D /* RoundedRectBlackButton.png */,
-				4EE67D9A197D6AC500DC979D /* Frame.png */,
-				4EE67D9B197D6AC500DC979D /* CheckButton.png */,
-				4EE67D9C197D6AC500DC979D /* XButton.png */,
 				4EC04F71195297E90017AA78 /* Person.h */,
 				4EC04F72195297E90017AA78 /* Person.m */,
 				4EC04F42195297350017AA78 /* FR */,
@@ -143,6 +133,7 @@
 		4EC04F42195297350017AA78 /* FR */ = {
 			isa = PBXGroup;
 			children = (
+				4C35A608197D77FA007C2FEE /* RoundedRectBlackButton.png */,
 				4EC04F4B195297350017AA78 /* AppDelegate.h */,
 				4EC04F4C195297350017AA78 /* AppDelegate.m */,
 				4EC04F4E195297350017AA78 /* Main.storyboard */,
@@ -235,7 +226,7 @@
 				ORGANIZATIONNAME = "Mattehw Burton";
 				TargetAttributes = {
 					4EC04F38195297350017AA78 = {
-						DevelopmentTeam = YDK59Y5KW2;
+						DevelopmentTeam = STUDKFT6R9;
 					};
 					4EC04F59195297350017AA78 = {
 						TestTargetID = 4EC04F38195297350017AA78;
@@ -266,13 +257,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4EE67D9D197D6AC500DC979D /* RoundedRectBlackButton.png in Resources */,
 				4EC04F55195297350017AA78 /* Images.xcassets in Resources */,
-				4EE67DA0197D6AC500DC979D /* XButton.png in Resources */,
+				4C35A609197D77FA007C2FEE /* RoundedRectBlackButton.png in Resources */,
 				4EC04F47195297350017AA78 /* InfoPlist.strings in Resources */,
-				4EE67D9E197D6AC500DC979D /* Frame.png in Resources */,
 				4EC04F50195297350017AA78 /* Main.storyboard in Resources */,
-				4EE67D9F197D6AC500DC979D /* CheckButton.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

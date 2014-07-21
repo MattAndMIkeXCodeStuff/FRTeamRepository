@@ -84,8 +84,16 @@
     NSMutableArray* uniqueDepartmentsArray;
     NSMutableArray* uniqueJobTitlesArray;
     
+    NSMutableArray* filterCompanySwitches;
+    NSMutableArray* filterCompanyText;
+    NSMutableArray* filterDepartmentSwitches;
+    NSMutableArray* filterDepartmentText;
+    NSMutableArray* filterJobTitleSwitches;
+    NSMutableArray* filterJobTitlesText;
+    
 }
 @property(nonatomic)int numberOfSmiths;
+@property(nonatomic)IBOutlet UIScrollView *labelsScrollView;
 @property(nonatomic)IBOutlet UIImageView *mcPersonPicture;
 @property(nonatomic)NSArray *currentContacts;
 @property(nonatomic)NSMutableArray *currentPeopleArray;
@@ -104,6 +112,7 @@
 -(IBAction)gotRight:(id)sender;
 -(IBAction)gotWrong:(id)sender;
 
+-(void)loadLabels:(NSString *)labelType;
 
 -(IBAction)moreInfo;
 -(IBAction)lessInfo;
@@ -134,6 +143,8 @@
 -(IBAction)enteredDeptTitle;
 -(IBAction)enteredCompanyTitle;
 
+
+-(IBAction)segmentValueChanged:(id)sender;
 -(IBAction)mcAnswerPressed:(id)sender;
 
 -(bool)checkForString:(NSString*)str inArray:(NSMutableArray*)arr;
