@@ -269,9 +269,7 @@
             NSLog(@"Just authorized");
         });
     }
-    
-    
-    
+   
 	// Do any additional setup after loading the view, typically from a nib.
 }
 - (BOOL)prefersStatusBarHidden
@@ -570,6 +568,28 @@
 
                 [filterJobTitlesText addObject:newLabel.text];
                 [filterJobTitlesSwitches addObject:switchThing];
+                for (int i =0 ; i<uniqueJobTitlesArray.count; i++) {
+                    
+                    UILabel *newLabel = [[UILabel alloc]init];
+                    newLabel.text = [uniqueJobTitlesArray objectAtIndex:i];
+                    [labelsScrollView addSubview:newLabel];
+                    newLabel.bounds  = CGRectMake(100, 10, 170, 30);
+                    newLabel.center = CGPointMake(100, 75+(40*i));
+                    newLabel.textColor= [UIColor whiteColor];
+                    [labelsScrollView insertSubview:newLabel atIndex:0];
+                    UISwitch *switchThing = [[UISwitch alloc] init];
+                    [labelsScrollView setContentSize:CGSizeMake(260, 75+(40*uniqueJobTitlesArray.count))];
+                    NSLog(@"%@",newLabel.text);
+                    [labelsScrollView addSubview:switchThing];
+                    switchThing.center = CGPointMake(220, 76+(40*i));
+                    [switchThing addTarget:self action:@selector(jobTitleSwitchValueChanged:) forControlEvents:UIControlEventValueChanged];
+                    
+                    [switchThing setOn:[[newArray objectAtIndex:i] boolValue] animated:NO];
+                    [filterJobTitlesText addObject:newLabel.text];
+                    [filterJobTitlesSwitches addObject:switchThing];
+                    
+                }
+                
             }
         }
     }
@@ -1210,7 +1230,7 @@
     contactGetter = [[MSContactManipulater alloc]init];
     arrayOf49PercentAndUnder = [[NSMutableArray alloc]init];
     arrayOf49PercentAndUnder = [contactGetter getContactsWithAnImage];
-    [self addFields];
+    //[self addFields];
     
     
     NSMutableArray*currentArray;
@@ -1249,7 +1269,7 @@
 
     contactGetter = [[MSContactManipulater alloc]init];
     arrayOf49PercentAndUnder = [contactGetter getContactsWithAnImage];
-    [self addFields];
+    //[self addFields];
     companyTitleField.hidden = false;
     allButton.enabled = false;
     jobTitleButton.enabled = false;
@@ -1264,7 +1284,7 @@
 
     contactGetter = [[MSContactManipulater alloc]init];
     arrayOf49PercentAndUnder = [contactGetter getContactsWithAnImage];
-    [self addFields];
+    //[self addFields];
     deptTitleField.hidden = false;
     allButton.enabled = false;
     jobTitleButton.enabled = false;
@@ -1294,7 +1314,7 @@
 
     contactGetter = [[MSContactManipulater alloc]init];
     arrayOf49PercentAndUnder = [contactGetter getContactsWithAnImage];
-    [self addFields];
+    //[self addFields];
     
     jobTitleField.hidden = false;
     allButton.enabled = false;
@@ -1311,7 +1331,7 @@
 
     contactGetter = [[MSContactManipulater alloc]init];
     arrayOf49PercentAndUnder = [contactGetter getContactsWithAnImage];
-    [self addFields];
+    //[self addFields];
     
     NSMutableArray*currentArray;
 

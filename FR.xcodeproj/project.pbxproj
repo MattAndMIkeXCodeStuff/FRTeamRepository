@@ -11,6 +11,10 @@
 		4CACF951195F9F1500056B92 /* MSContactManipulater.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CACF950195F9F1500056B92 /* MSContactManipulater.m */; };
 		4CACF953195FA19400056B92 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CACF952195FA19400056B92 /* AddressBook.framework */; };
 		4CACF955195FA19B00056B92 /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CACF954195FA19B00056B92 /* AddressBookUI.framework */; };
+		4CFCE6A2197DCF8900EB6D49 /* RoundedRectBlackButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CFCE6A1197DCF8900EB6D49 /* RoundedRectBlackButton.png */; };
+		4CFCE6A4197DCFAB00EB6D49 /* Frame.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CFCE6A3197DCFAB00EB6D49 /* Frame.png */; };
+		4CFCE6A6197DCFC000EB6D49 /* CheckButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CFCE6A5197DCFC000EB6D49 /* CheckButton.png */; };
+		4CFCE6A8197DCFCB00EB6D49 /* XButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CFCE6A7197DCFCB00EB6D49 /* XButton.png */; };
 		4EC04F3D195297350017AA78 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EC04F3C195297350017AA78 /* Foundation.framework */; };
 		4EC04F3F195297350017AA78 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EC04F3E195297350017AA78 /* CoreGraphics.framework */; };
 		4EC04F41195297350017AA78 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EC04F40195297350017AA78 /* UIKit.framework */; };
@@ -45,6 +49,10 @@
 		4CACF950195F9F1500056B92 /* MSContactManipulater.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSContactManipulater.m; sourceTree = "<group>"; };
 		4CACF952195FA19400056B92 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		4CACF954195FA19B00056B92 /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
+		4CFCE6A1197DCF8900EB6D49 /* RoundedRectBlackButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = RoundedRectBlackButton.png; path = "../../Library/Containers/com.apple.mail/Data/Library/Mail Downloads/C5243D66-7986-4969-9539-CAFFB1C265E8/RoundedRectBlackButton.png"; sourceTree = "<group>"; };
+		4CFCE6A3197DCFAB00EB6D49 /* Frame.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Frame.png; path = "../../Library/Containers/com.apple.mail/Data/Library/Mail Downloads/883D3FD8-5D07-47F1-8D29-8B542A6C9AAE/Frame.png"; sourceTree = "<group>"; };
+		4CFCE6A5197DCFC000EB6D49 /* CheckButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = CheckButton.png; path = "../../Library/Containers/com.apple.mail/Data/Library/Mail Downloads/E6FAB585-3C14-403C-94A2-8A9733A4A464/CheckButton.png"; sourceTree = "<group>"; };
+		4CFCE6A7197DCFCB00EB6D49 /* XButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = XButton.png; path = "../../Library/Containers/com.apple.mail/Data/Library/Mail Downloads/57447481-6D1E-4C66-B833-89D9F843EAE2/XButton.png"; sourceTree = "<group>"; };
 		4EC04F39195297350017AA78 /* FR.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FR.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4EC04F3C195297350017AA78 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		4EC04F3E195297350017AA78 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -97,6 +105,10 @@
 		4EC04F30195297350017AA78 = {
 			isa = PBXGroup;
 			children = (
+				4CFCE6A7197DCFCB00EB6D49 /* XButton.png */,
+				4CFCE6A5197DCFC000EB6D49 /* CheckButton.png */,
+				4CFCE6A3197DCFAB00EB6D49 /* Frame.png */,
+				4CFCE6A1197DCF8900EB6D49 /* RoundedRectBlackButton.png */,
 				4EC04F71195297E90017AA78 /* Person.h */,
 				4EC04F72195297E90017AA78 /* Person.m */,
 				4EC04F42195297350017AA78 /* FR */,
@@ -223,7 +235,7 @@
 				ORGANIZATIONNAME = "Mattehw Burton";
 				TargetAttributes = {
 					4EC04F38195297350017AA78 = {
-						DevelopmentTeam = YDK59Y5KW2;
+						DevelopmentTeam = STUDKFT6R9;
 					};
 					4EC04F59195297350017AA78 = {
 						TestTargetID = 4EC04F38195297350017AA78;
@@ -254,7 +266,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4CFCE6A8197DCFCB00EB6D49 /* XButton.png in Resources */,
+				4CFCE6A6197DCFC000EB6D49 /* CheckButton.png in Resources */,
+				4CFCE6A4197DCFAB00EB6D49 /* Frame.png in Resources */,
 				4EC04F55195297350017AA78 /* Images.xcassets in Resources */,
+				4CFCE6A2197DCF8900EB6D49 /* RoundedRectBlackButton.png in Resources */,
 				4EC04F47195297350017AA78 /* InfoPlist.strings in Resources */,
 				4EC04F50195297350017AA78 /* Main.storyboard in Resources */,
 			);

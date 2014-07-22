@@ -31,7 +31,8 @@
             myPerson.jobTitle = (__bridge NSString *)(ABRecordCopyValue(r, kABPersonJobTitleProperty));
             myPerson.notes = (__bridge NSString *)(ABRecordCopyValue(r, kABPersonNoteProperty));
             [finalPeople addObject:myPerson];
-        } else
+        }
+        else
         {
             ABAddressBookRef addressBookRef = ABAddressBookCreateWithOptions(NULL, nil);
             //ABRecordSetValue(r, kABPersonNicknameProperty, (__bridge CFStringRef)@"", nil);
@@ -47,15 +48,14 @@
         
         
     }
-    ABAddressBookSave(addressBook, nil);
+    //ABAddressBookSave(addressBook, nil);
     return finalPeople;
 }
 -(NSMutableArray *)getContactsWithJobTitle:(NSString*)jobTitle
 {
     //NSLog(@"job");
-
-    ABAddressBookRef addressBook2
-    = ABAddressBookCreateWithOptions(NULL, NULL);
+    
+    ABAddressBookRef addressBook2 = ABAddressBookCreateWithOptions(NULL, NULL);
     NSMutableArray *people = (__bridge NSMutableArray *)ABAddressBookCopyArrayOfAllPeople(addressBook2);
     NSMutableArray *finalPeople = [[NSMutableArray alloc]init];
     for (int i = 0; i<[people count]; i++) {
@@ -80,6 +80,13 @@
             }
         }
     }
+    /*
+     if([[myPerson.jobTitle uppercaseString] isEqual: [jobTitle uppercaseString]])
+     {
+     [finalPeople addObject:myPerson];
+     //NSLog(@" %@ has a picture his/her job is called %@ ",firstName, jobTitle);
+     
+     }
     if([[jobTitle uppercaseString] isEqualToString:@"ALL"])
     {
         for (int i = 0; i<[people count]; i++) {
@@ -107,19 +114,20 @@
             }
         }
     }
-
+*/
     return finalPeople;
 }
 -(NSMutableArray *)getContactsWithCompany:(NSString*)company
 {
     //NSLog(@"company");
-    
     ABAddressBookRef addressBook2  = ABAddressBookCreateWithOptions(NULL, NULL);
-    NSMutableArray *people = (__bridge NSMutableArray *)ABAddressBookCopyArrayOfAllPeople(addressBook2);
+    NSMutableArray *people = [[NSMutableArray alloc] init];
+    people = (__bridge NSMutableArray *)ABAddressBookCopyArrayOfAllPeople(addressBook2);
     NSMutableArray *finalPeople = [[NSMutableArray alloc]init];
     for (int i = 0; i<[people count]; i++) {
         ABRecordRef r = (__bridge ABRecordRef)([people objectAtIndex:i]);
-        if (ABPersonHasImageData(r)) {
+        if (ABPersonHasImageData(r))
+        {
             NSString *firstName = (__bridge NSString *)(ABRecordCopyValue(r, kABPersonFirstNameProperty));
             NSString *lastName = (__bridge NSString *)(ABRecordCopyValue(r, kABPersonLastNameProperty));
             UIImage *Cimage = [[UIImage alloc]init];
@@ -130,7 +138,24 @@
             myPerson.department = (__bridge NSString *)(ABRecordCopyValue(r, kABPersonDepartmentProperty));
             myPerson.jobTitle = (__bridge NSString *)(ABRecordCopyValue(r, kABPersonJobTitleProperty));
             myPerson.notes = (__bridge NSString *)(ABRecordCopyValue(r, kABPersonNoteProperty));
-
+            if([[myPerson.company uppercaseString] isEqual: [company uppercaseString]])
+            {
+                [finalPeople addObject:myPerson];
+                //NSLog(@" %@ has a picture and works at %@ ",firstName, company);
+                
+            }
+        }
+        else
+        {
+            ABAddressBookRef addressBookRef = ABAddressBookCreateWithOptions(NULL, nil);
+            //ABRecordSetValue(r, kABPersonNicknameProperty, (__bridge CFStringRef)@"", nil);
+            //ABPersonSetImageData(r, (__bridge CFDataRef)(UIImageJPEGRepresentation([UIImage imageNamed:@"No Image Available.png"], 0.7f)), nil);
+            //ABPersonRemoveImageData(r, nil);
+            //ABRecordSetValue(r, kABPersonFirstNameProperty, (__bridge CFStringRef)@"asdf", nil);
+            ABAddressBookAddRecord(addressBookRef, r, nil);
+            ABAddressBookSave(addressBookRef, nil);
+            //ABRecordSetImageData([UIImage imageNamed:@"No Image Available.png"]);
+            //asdfdddssdfsdsdfsdfsdfsdfsdfsdfsdfsdfdfas adf sABRecordSetImageData(r,(__bridge CFDataRef)(UIImageJPEGRepresentation([UIImage imageNamed:@"No Image Available.png"], 0.7f)),nil);
             
              if([[myPerson.company uppercaseString] isEqual: [company uppercaseString]])
              {
@@ -139,9 +164,13 @@
              
              }
         }
-    }
+        
+        
+    }    /*
     if([[company uppercaseString] isEqualToString:@"ALL"])
     {
+    
+
         for (int i = 0; i<[people count]; i++) {
             ABRecordRef r = (__bridge ABRecordRef)([people objectAtIndex:i]);
             
@@ -167,6 +196,8 @@
             }
         }
     }
+     */
+    NSLog(@"Amount of people im returning is %i",finalPeople.count);
     return finalPeople;
 }
 -(NSMutableArray *)getContactsWithDept:(NSString*)deptTitle
@@ -199,6 +230,7 @@
         
         
     }
+    /*
     if([[deptTitle uppercaseString] isEqualToString:@"ALL"])
     {
         for (int i = 0; i<[people count]; i++) {
@@ -226,7 +258,7 @@
             }
         }
     }
-    
+    */
     
     return finalPeople;
 }
