@@ -308,23 +308,27 @@
 }
 -(void)readValues
 {
-    MSContactManipulater *contactGetter;
-
+    arrayOf49PercentAndUnder = [[NSMutableArray alloc]init];
     for (int i = 0; i<filterCompanySwitches.count; i++)
     {
         if ([[filterCompanySwitches objectAtIndex:i] isOn])
         {
             NSLog(@"%@ is On",[filterCompanyText objectAtIndex:i]);
-            
-            
-            [arrayOf49PercentAndUnder addObjectsFromArray:[contactGetter getContactsWithCompany:[filterCompanyText objectAtIndex:i]]];
-            
+            NSString *str;
+            str = [filterCompanyText objectAtIndex:i];
+            MSContactManipulater *thecontactGetter = [[MSContactManipulater alloc] init];
+            [arrayOf49PercentAndUnder addObjectsFromArray:[thecontactGetter getContactsWithCompany:@"Health Catalyst"]];
+            //arrayOf49PercentAndUnder =[thecontactGetter getContactsWithCompany:@"Health Catalyst"];
+            for (int i = 0 ; i<arrayOf49PercentAndUnder.count; i++) {
+                NSLog(@"%@ is in the Array", [[arrayOf49PercentAndUnder objectAtIndex:i] name]);
+            }
         }
         else
         {
             NSLog(@"%@ is Off",[filterCompanyText objectAtIndex:i]);
+            MSContactManipulater *thecontactGetter = [[MSContactManipulater alloc] init];
 
-            [contactGetter removeContactsWithCompany:[filterCompanyText objectAtIndex:i] fromArray:arrayOf49PercentAndUnder];
+            [thecontactGetter removeContactsWithCompany:[filterCompanyText objectAtIndex:i] fromArray:arrayOf49PercentAndUnder];
         }
     }
     for (int i = 0; i<filterDepartmentSwitches.count; i++)
@@ -333,15 +337,17 @@
         {
             NSLog(@"%@ is On",[filterDepartmentText objectAtIndex:i]);
             
-            
-            [arrayOf49PercentAndUnder addObjectsFromArray:[contactGetter getContactsWithCompany:[filterDepartmentText objectAtIndex:i]]];
+            MSContactManipulater *thecontactGetter = [[MSContactManipulater alloc] init];
+
+            [arrayOf49PercentAndUnder addObjectsFromArray:[thecontactGetter getContactsWithDept:[filterDepartmentText objectAtIndex:i]]];
             
         }
         else
         {
             NSLog(@"%@ is Off",[filterDepartmentText objectAtIndex:i]);
-            
-            [contactGetter removeContactsWithCompany:[filterDepartmentText objectAtIndex:i] fromArray:arrayOf49PercentAndUnder];
+            MSContactManipulater *thecontactGetter = [[MSContactManipulater alloc] init];
+
+            [thecontactGetter removeContactsWithDept:[filterDepartmentText objectAtIndex:i] fromArray:arrayOf49PercentAndUnder];
         }
     }
     for (int i = 0; i<filterJobTitlesSwitches.count; i++)
@@ -350,16 +356,21 @@
         {
             NSLog(@"%@ is On",[filterJobTitlesText objectAtIndex:i]);
             
-            
-            [arrayOf49PercentAndUnder addObjectsFromArray:[contactGetter getContactsWithCompany:[filterJobTitlesText objectAtIndex:i]]];
+            MSContactManipulater *thecontactGetter;// = [[MSContactManipulater alloc] init];
+
+            [arrayOf49PercentAndUnder addObjectsFromArray:[thecontactGetter getContactsWithJobTitle:[filterJobTitlesText objectAtIndex:i]]];
             
         }
         else
         {
             NSLog(@"%@ is Off",[filterJobTitlesText objectAtIndex:i]);
-            
-            [contactGetter removeContactsWithCompany:[filterJobTitlesText objectAtIndex:i] fromArray:arrayOf49PercentAndUnder];
+            MSContactManipulater *thecontactGetter;// = [[MSContactManipulater alloc] init];
+
+            [thecontactGetter removeContactsWithJobTitle:[filterJobTitlesText objectAtIndex:i] fromArray:arrayOf49PercentAndUnder];
         }
+    }
+    for (int i = 0 ; i<arrayOf49PercentAndUnder.count; i++) {
+        NSLog(@"%@ is in the Array", [[arrayOf49PercentAndUnder objectAtIndex:i] name]);
     }
 }
 -(void)companySwitchValueChanged:(id)sender {
@@ -1663,4 +1674,9 @@
 {
     moreInfoView.hidden=true;
 }
+-(IBAction)hideFilter
+{
+    FilterView.hidden = true;
+}
+
 @end

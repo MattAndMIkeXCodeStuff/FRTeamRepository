@@ -157,6 +157,7 @@
 -(IBAction)enteredDeptTitle;
 -(IBAction)enteredCompanyTitle;
 
+-(void)readValues;
 
 -(IBAction)segmentValueChanged:(id)sender;
 -(IBAction)mcAnswerPressed:(id)sender;
