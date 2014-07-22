@@ -32,7 +32,7 @@
     nameAndButtonsView.hidden = false;
 }
 -(IBAction)gotRight:(id)sender {
-    NSLog(@"Got Right");
+    //NSLog(@"Got Right");
     currentPerson.hasBeenGuessed = true;
     currentPerson.hasBeenGuessedRight = true;
     [currentPerson gotRight];
@@ -41,7 +41,7 @@
     totalCorrect++;
 }
 -(IBAction)gotWrong:(id)sender {
-    NSLog(@"Got Wrong");
+   // NSLog(@"Got Wrong");
     currentPerson.hasBeenGuessed = true;
     [currentPerson gotWrong];
     [self loadNewPerson];
@@ -230,6 +230,15 @@
     filteringIndicator.hidesWhenStopped = true;
     moreInfoView.hidden =true;
     [super viewDidLoad];
+    
+    MSContactManipulater *m;
+    m = [[MSContactManipulater alloc]init];
+    NSLog(@"%i",[m getContactsWithCompany:@"health catalyst"].count);
+    
+    
+    
+    //[self loadLabels:@"Company"];
+    
     uniqueDepartmentsArray = [[NSMutableArray alloc]init];
     uniqueCompaniesArray = [[NSMutableArray alloc]init];
     uniqueJobTitlesArray = [[NSMutableArray alloc]init];
@@ -297,25 +306,60 @@
     }
 }
 
--(void)addFields
+-(void)addFieldsFromArray:(NSMutableArray *)array
 {
-    for (int t=0; t<arrayOf49PercentAndUnder.count; t++)
+    for (int t=0; t<array.count; t++)
     {
         Person*p;
-        p = [arrayOf49PercentAndUnder objectAtIndex:t];
+        p = [array objectAtIndex:t];
         [self addDepartment:p.department];
         [self addCompany:p.company];
         [self addJob:p.jobTitle];
     }
 }
--(void)readValues {
-    for (int i = 0; i<filterCompanySwitches.count; i++) {
-        if ([[filterCompanySwitches objectAtIndex:i] isOn]) {
-            NSLog(@"%@ is On",[filterCompanyText objectAtIndex:i]);
-        } else {
-            NSLog(@"%@ is Off",[filterCompanyText objectAtIndex:i]);
+-(void)readValues
+{
+    NSMutableArray *array;
+    array = [[NSMutableArray alloc]init];
+    MSContactManipulater *contactManipulater;
+    contactManipulater = [[MSContactManipulater alloc]init];
+    NSString *string;
+    array = [contactManipulater getContactsWithAnImage];
+    NSLog(@"%i", array.count);
 
+    /*
+    for (int i = 0; i<filterCompanySwitches.count; i++)
+    {
+        if ([[filterCompanySwitches objectAtIndex:i] isOn])
+        {
+            NSLog(@"%@ is On",[filterCompanyText objectAtIndex:i]);
+
+            string =[filterCompanyText objectAtIndex:i];
+            string = @"Health Catalyst";
+            array = [contactManipulater getContactsWithCompany:string];
+            array = [contactManipulater getContactsWithAnImage];
+            
+           // arrayOf49PercentAndUnder = [contactGetter getContactsWithCompany:companyTitleField.text];
+
+            NSLog(@"%i", array.count);
+            if(array.count > 0)
+            {
+                [self fillArray:arrayOf49PercentAndUnder fromArray:array];
+            }
         }
+        else
+        {
+            NSLog(@"%@ is Off",[filterCompanyText objectAtIndex:i]);
+        }
+    }
+     */
+}
+-(void)fillArray:(NSMutableArray *)a fromArray:(NSMutableArray *)b
+{
+    for (int l = 0; l < b.count; l++)
+    {
+        [a addObject:[b objectAtIndex:l]];
+        NSLog(@"added");
     }
 }
 -(void)companySwitchValueChanged:(id)sender {
@@ -332,7 +376,6 @@
             [[filterCompanySwitches objectAtIndex:i] setOn:NO animated:YES];
         }
     }
-    [self readValues];
     
 }
 -(void)departmentSwitchValueChanged:(id)sender {
@@ -350,7 +393,6 @@
         }
     }
     
-    [self readValues];
     NSLog(@"yo");
 }
 -(void)jobTitleSwitchValueChanged:(id)sender {
@@ -370,14 +412,16 @@
     }
     
     
-    [self readValues];
     NSLog(@"yo yo");
 }
 
--(void)loadLabels:(NSString *)labelType {
+-(void)loadLabels:(NSString *)labelType
+{
     MSContactManipulater *contactGetter = [[MSContactManipulater alloc]init];
-    arrayOf49PercentAndUnder = [contactGetter getContactsWithAnImage];
-    [self addFields];
+    allPeople = [[NSMutableArray alloc]init];
+    allPeople = [contactGetter getContactsWithAnImage];
+        
+    [self addFieldsFromArray:allPeople];
 
     if ([labelType  isEqual: @"Date"]) {
         
@@ -397,9 +441,11 @@
         switchThing.center = CGPointMake(220, 36);
     
         if([labelType isEqual:@"Company"]) {
-            if (filterCompanyText.count == 0) {
-                SEL theSelector = @selector(companySwitchValueChanged:);
-                [switchThing addTarget:self action:@selector(companySwitchValueChanged:)  forControlEvents:UIControlEventValueChanged];
+            if (filterCompanyText.count == 0)
+            {
+                
+                //SEL theSelector = @selector(companySwitchValueChanged:);
+                //[switchThing addTarget:self action:@selector(companySwitchValueChanged:)  forControlEvents:UIControlEventValueChanged];
 
                 [filterCompanySwitches removeAllObjects];
                 [filterCompanyText removeAllObjects];
@@ -409,8 +455,6 @@
                  uniqueCompaniesArray = [uniqueCompaniesArray sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
                 
                 for (int i =0 ; i<uniqueCompaniesArray.count; i++) {
-                
-                    
                     UILabel *newLabel = [[UILabel alloc]init];
                     newLabel.text = [uniqueCompaniesArray objectAtIndex:i];
                     [labelsScrollView addSubview:newLabel];
@@ -428,7 +472,9 @@
                     [filterCompanySwitches addObject:switchThing];
 
                 }
-            } else {
+            }
+            else
+            {
                 NSMutableArray *newArray = [[NSMutableArray alloc] init];
                 for (int i = 1; i<filterCompanySwitches.count; i++) {
                     bool isiton = [[filterCompanySwitches objectAtIndex:i] isOn];
@@ -462,11 +508,12 @@
                     [filterCompanySwitches addObject:switchThing];
                     
                 }
-
-            }
                 
+            }
+            
         }
-        if ([labelType isEqual:@"Department"]) {
+        if ([labelType isEqual:@"Department"])
+        {
             [filterDepartmentSwitches removeAllObjects];
             [filterDepartmentText removeAllObjects];
             [filterDepartmentText addObject:newLabel.text];
@@ -496,7 +543,8 @@
             }
 
         }
-        if ([labelType isEqual:@"Job Title"]) {
+        if ([labelType isEqual:@"Job Title"])
+        {
             [filterJobTitlesText removeAllObjects];
             [filterJobTitlesSwitches removeAllObjects];
             [filterJobTitlesText addObject:newLabel.text];
@@ -1152,6 +1200,8 @@
     NSLog(@"object was not in the array");
     return false;
 }
+//depricated
+/*
 -(IBAction)pressedAll:(id)sender
 {
     [arrayOf49PercentAndUnder removeAllObjects];
@@ -1221,6 +1271,7 @@
     //departmentButton.enabled = false;
     companyButton.enabled = false;
 }
+*/
 -(bool)checkForString:(NSString*)str inArray:(NSMutableArray*)arr
 {
     for(int p=0; p<arr.count;p++)
@@ -1234,6 +1285,8 @@
     }
     return false;
 }
+//depricated
+/*
 -(IBAction)pressedJobTitle:(id)sender {
     [arrayOf49PercentAndUnder removeAllObjects];
     [arrayOf50PercentAndOver removeAllObjects];
@@ -1427,6 +1480,7 @@
     }
     FilterView.hidden = true;
 }
+ */
 -(bool)checkIfAllPeopleHaveBeenGuessed
 {
     if(arrayOf49PercentAndUnder.count > 0)
@@ -1538,5 +1592,11 @@
 -(IBAction)lessInfo
 {
     moreInfoView.hidden=true;
+}
+-(IBAction)hideFilterViewAndFilter
+{
+    [self readValues];
+    FilterView.hidden = true;
+    
 }
 @end

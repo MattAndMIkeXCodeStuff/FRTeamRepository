@@ -87,6 +87,7 @@
         nameLabel.text = [NSString stringWithFormat:@"%@ %@", currentPerson.firstName,currentPerson.lastName];
     }
     [super viewDidLoad];
+    
     // Do any additional setup after loading the view.
 }
 

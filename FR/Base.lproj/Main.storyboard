@@ -556,6 +556,9 @@
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="hideFilterViewAndFilter" destination="vXZ-lx-hvc" eventType="touchUpInside" id="5H0-CV-ltm"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.180392161" green="0.57647061349999995" blue="0.67450982329999998" alpha="1" colorSpace="deviceRGB"/>

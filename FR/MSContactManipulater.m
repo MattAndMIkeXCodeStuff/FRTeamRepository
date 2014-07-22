@@ -134,7 +134,7 @@
             
              if([[myPerson.company uppercaseString] isEqual: [company uppercaseString]])
              {
-             [finalPeople addObject:myPerson];
+                 [finalPeople addObject:myPerson];
              //NSLog(@" %@ has a picture and works at %@ ",firstName, company);
              
              }
