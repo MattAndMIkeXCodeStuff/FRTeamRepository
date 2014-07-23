@@ -48,7 +48,7 @@
         
         
     }
-    //ABAddressBookSave(addressBook, nil);
+    ABAddressBookSave(addressBook, nil);
     return finalPeople;
 }
 -(NSMutableArray *)getContactsWithJobTitle:(NSString*)jobTitle
@@ -156,13 +156,6 @@
             ABAddressBookSave(addressBookRef, nil);
             //ABRecordSetImageData([UIImage imageNamed:@"No Image Available.png"]);
             //asdfdddssdfsdsdfsdfsdfsdfsdfsdfsdfsdfdfas adf sABRecordSetImageData(r,(__bridge CFDataRef)(UIImageJPEGRepresentation([UIImage imageNamed:@"No Image Available.png"], 0.7f)),nil);
-            
-             if([[myPerson.company uppercaseString] isEqual: [company uppercaseString]])
-             {
-                 [finalPeople addObject:myPerson];
-             //NSLog(@" %@ has a picture and works at %@ ",firstName, company);
-             
-             }
         }
         
         

@@ -215,10 +215,10 @@
     MCGameView.hidden=true;
     firstView.hidden=false;
     MCTGameView.hidden=true;
-    FCGameView.hidden=true;
+    FCView.hidden=true;
     MCCView.hidden = true;
     FGameView.hidden = true;
-    FCGameView.hidden = true;
+    FCView.hidden = true;
     FTGameView.hidden = true;
     personPic.hidden = true;
     showInfoButton.hidden = true;
@@ -331,6 +331,19 @@
         if ([[filterCompanySwitches objectAtIndex:i] isOn])
         {
             NSLog(@"%@ is On",[filterCompanyText objectAtIndex:i]);
+            NSString *str;
+            str = [filterCompanyText objectAtIndex:i];
+            MSContactManipulater *thecontactGetter = [[MSContactManipulater alloc] init];
+            [arrayOf49PercentAndUnder addObjectsFromArray:[thecontactGetter getContactsWithCompany:@"Health Catalyst"]];
+            //arrayOf49PercentAndUnder =[thecontactGetter getContactsWithCompany:@"Health Catalyst"];
+            for (int i = 0 ; i<arrayOf49PercentAndUnder.count; i++) {
+                NSLog(@"%@ is in the Array", [[arrayOf49PercentAndUnder objectAtIndex:i] name]);
+            }
+        }
+        else
+        {
+            NSLog(@"%@ is Off",[filterCompanyText objectAtIndex:i]);
+            MSContactManipulater *thecontactGetter = [[MSContactManipulater alloc] init];
 
             string =[filterCompanyText objectAtIndex:i];
             string = @"Health Catalyst";
@@ -349,6 +362,47 @@
         {
             NSLog(@"%@ is Off",[filterCompanyText objectAtIndex:i]);
         }
+    }
+    for (int i = 0; i<filterDepartmentSwitches.count; i++)
+    {
+        if ([[filterDepartmentSwitches objectAtIndex:i] isOn])
+        {
+            NSLog(@"%@ is On",[filterDepartmentText objectAtIndex:i]);
+            
+            MSContactManipulater *thecontactGetter = [[MSContactManipulater alloc] init];
+
+            [arrayOf49PercentAndUnder addObjectsFromArray:[thecontactGetter getContactsWithDept:[filterDepartmentText objectAtIndex:i]]];
+            
+        }
+        else
+        {
+            NSLog(@"%@ is Off",[filterDepartmentText objectAtIndex:i]);
+            MSContactManipulater *thecontactGetter = [[MSContactManipulater alloc] init];
+
+            [thecontactGetter removeContactsWithDept:[filterDepartmentText objectAtIndex:i] fromArray:arrayOf49PercentAndUnder];
+        }
+    }
+    for (int i = 0; i<filterJobTitlesSwitches.count; i++)
+    {
+        if ([[filterJobTitlesSwitches objectAtIndex:i] isOn])
+        {
+            NSLog(@"%@ is On",[filterJobTitlesText objectAtIndex:i]);
+            
+            MSContactManipulater *thecontactGetter;// = [[MSContactManipulater alloc] init];
+
+            [arrayOf49PercentAndUnder addObjectsFromArray:[thecontactGetter getContactsWithJobTitle:[filterJobTitlesText objectAtIndex:i]]];
+            
+        }
+        else
+        {
+            NSLog(@"%@ is Off",[filterJobTitlesText objectAtIndex:i]);
+            MSContactManipulater *thecontactGetter;// = [[MSContactManipulater alloc] init];
+
+            [thecontactGetter removeContactsWithJobTitle:[filterJobTitlesText objectAtIndex:i] fromArray:arrayOf49PercentAndUnder];
+        }
+    }
+    for (int i = 0 ; i<arrayOf49PercentAndUnder.count; i++) {
+        NSLog(@"%@ is in the Array", [[arrayOf49PercentAndUnder objectAtIndex:i] name]);
     }
      */
 }
@@ -510,62 +564,118 @@
             }
             
         }
-        if ([labelType isEqual:@"Department"])
-        {
-            [filterDepartmentSwitches removeAllObjects];
-            [filterDepartmentText removeAllObjects];
-            [filterDepartmentText addObject:newLabel.text];
-            [filterDepartmentSwitches addObject:switchThing];
-            [switchThing addTarget:self action:@selector(departmentSwitchValueChanged:) forControlEvents:UIControlEventValueChanged];
-
-            uniqueDepartmentsArray = [uniqueDepartmentsArray sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
-
-            
-            for (int i =0 ; i<uniqueDepartmentsArray.count; i++) {
-                UILabel *newLabel = [[UILabel alloc]init];
-                newLabel.text = [uniqueDepartmentsArray objectAtIndex:i];
-                [labelsScrollView addSubview:newLabel];
-                newLabel.bounds  = CGRectMake(100, 10, 170, 30);
-                newLabel.center = CGPointMake(100, 75+(40*i));
-                newLabel.textColor= [UIColor whiteColor];
-                [labelsScrollView insertSubview:newLabel atIndex:0];
-                UISwitch *switchThing = [[UISwitch alloc] init];
-                [labelsScrollView setContentSize:CGSizeMake(260, 75+(40*uniqueDepartmentsArray.count))];
-                NSLog(@"%@",newLabel.text);
-                [labelsScrollView addSubview:switchThing];
-                switchThing.center = CGPointMake(220, 76+(40*i));
-                [switchThing addTarget:self action:@selector(departmentSwitchValueChanged:) forControlEvents:UIControlEventValueChanged];
-
-                [filterDepartmentText addObject:newLabel.text];
-                [filterDepartmentSwitches addObject:switchThing];
-            }
-
+        if ([labelType isEqual:@"Department"]) {
+                if (filterDepartmentText.count == 0) {
+                    SEL theSelector = @selector(companySwitchValueChanged:);
+                    [switchThing addTarget:self action:@selector(departmentSwitchValueChanged:)  forControlEvents:UIControlEventValueChanged];
+                    
+                    [filterDepartmentSwitches removeAllObjects];
+                    [filterDepartmentText removeAllObjects];
+                    [filterDepartmentText addObject:newLabel.text];
+                    [filterDepartmentSwitches addObject:switchThing];
+                    
+                    uniqueDepartmentsArray = [uniqueDepartmentsArray sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
+                    
+                    for (int i =0 ; i<uniqueDepartmentsArray.count; i++) {
+                        
+                        
+                        UILabel *newLabel = [[UILabel alloc]init];
+                        newLabel.text = [uniqueDepartmentsArray objectAtIndex:i];
+                        [labelsScrollView addSubview:newLabel];
+                        newLabel.bounds  = CGRectMake(100, 10, 170, 30);
+                        newLabel.center = CGPointMake(100, 75+(40*i));
+                        newLabel.textColor= [UIColor whiteColor];
+                        [labelsScrollView insertSubview:newLabel atIndex:0];
+                        UISwitch *switchThing = [[UISwitch alloc] init];
+                        [labelsScrollView setContentSize:CGSizeMake(260, 75+(40*uniqueDepartmentsArray.count))];
+                        NSLog(@"%@",newLabel.text);
+                        [labelsScrollView addSubview:switchThing];
+                        switchThing.center = CGPointMake(220, 76+(40*i));
+                        [switchThing addTarget:self action:@selector(departmentSwitchValueChanged:) forControlEvents:UIControlEventValueChanged];
+                        [filterDepartmentText addObject:newLabel.text];
+                        [filterDepartmentSwitches addObject:switchThing];
+                        
+                    }
+                } else {
+                    NSMutableArray *newArray = [[NSMutableArray alloc] init];
+                    for (int i = 1; i<filterDepartmentSwitches.count; i++) {
+                        bool isiton = [[filterDepartmentSwitches objectAtIndex:i] isOn];
+                        [newArray addObject:[NSNumber numberWithBool:isiton]];
+                    }
+                    SEL theSelector = @selector(companySwitchValueChanged:);
+                    [switchThing addTarget:self action:@selector(departmentSwitchValueChanged:)  forControlEvents:UIControlEventValueChanged];
+                    
+                    [filterDepartmentSwitches removeAllObjects];
+                    [filterDepartmentText removeAllObjects];
+                    [filterDepartmentText addObject:newLabel.text];
+                    [filterDepartmentSwitches addObject:switchThing];
+                    for (int i =0 ; i<uniqueDepartmentsArray.count; i++) {
+                        
+                        UILabel *newLabel = [[UILabel alloc]init];
+                        newLabel.text = [uniqueDepartmentsArray objectAtIndex:i];
+                        [labelsScrollView addSubview:newLabel];
+                        newLabel.bounds  = CGRectMake(100, 10, 170, 30);
+                        newLabel.center = CGPointMake(100, 75+(40*i));
+                        newLabel.textColor= [UIColor whiteColor];
+                        [labelsScrollView insertSubview:newLabel atIndex:0];
+                        UISwitch *switchThing = [[UISwitch alloc] init];
+                        [labelsScrollView setContentSize:CGSizeMake(260, 75+(40*uniqueDepartmentsArray.count))];
+                        NSLog(@"%@",newLabel.text);
+                        [labelsScrollView addSubview:switchThing];
+                        switchThing.center = CGPointMake(220, 76+(40*i));
+                        [switchThing addTarget:self action:@selector(departmentSwitchValueChanged:) forControlEvents:UIControlEventValueChanged];
+                        
+                        [switchThing setOn:[[newArray objectAtIndex:i] boolValue] animated:NO];
+                        [filterDepartmentText addObject:newLabel.text];
+                        [filterDepartmentSwitches addObject:switchThing];
+                        
+                    }
+                    
+                }
         }
-        if ([labelType isEqual:@"Job Title"])
-        {
-            [filterJobTitlesText removeAllObjects];
-            [filterJobTitlesSwitches removeAllObjects];
-            [filterJobTitlesText addObject:newLabel.text];
-            [filterJobTitlesSwitches addObject:switchThing];
-            [switchThing addTarget:self action:@selector(jobTitleSwitchValueChanged:) forControlEvents:UIControlEventValueChanged];
-
-            uniqueJobTitlesArray = [uniqueJobTitlesArray sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
-            
-            for (int i =0 ; i<uniqueJobTitlesArray.count; i++) {
-                UILabel *newLabel = [[UILabel alloc]init];
-                newLabel.text = [uniqueJobTitlesArray objectAtIndex:i];
-                [labelsScrollView addSubview:newLabel];
-                newLabel.bounds  = CGRectMake(100, 10, 170, 30);
-                newLabel.center = CGPointMake(100, 75+(40*i));
-                newLabel.textColor= [UIColor whiteColor];
-                [labelsScrollView insertSubview:newLabel atIndex:0];
-                UISwitch *switchThing = [[UISwitch alloc] init];
-                [labelsScrollView setContentSize:CGSizeMake(260, 75+(40*uniqueJobTitlesArray.count))];
-                NSLog(@"%@",newLabel.text);
-                [labelsScrollView addSubview:switchThing];
-                switchThing.center = CGPointMake(220, 76+(40*i));
-                [switchThing addTarget:self action:@selector(jobTitleSwitchValueChanged:) forControlEvents:UIControlEventValueChanged];
-
+        if ([labelType isEqual:@"Job Title"]) {
+            if (filterJobTitlesText.count == 0) {
+                SEL theSelector = @selector(companySwitchValueChanged:);
+                [switchThing addTarget:self action:@selector(jobTitleSwitchValueChanged:)  forControlEvents:UIControlEventValueChanged];
+                
+                [filterJobTitlesSwitches removeAllObjects];
+                [filterJobTitlesText removeAllObjects];
+                [filterJobTitlesText addObject:newLabel.text];
+                [filterJobTitlesSwitches addObject:switchThing];
+                
+                uniqueJobTitlesArray = [uniqueJobTitlesArray sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
+                
+                for (int i =0 ; i<uniqueJobTitlesArray.count; i++) {
+                    
+                    
+                    UILabel *newLabel = [[UILabel alloc]init];
+                    newLabel.text = [uniqueJobTitlesArray objectAtIndex:i];
+                    [labelsScrollView addSubview:newLabel];
+                    newLabel.bounds  = CGRectMake(100, 10, 170, 30);
+                    newLabel.center = CGPointMake(100, 75+(40*i));
+                    newLabel.textColor= [UIColor whiteColor];
+                    [labelsScrollView insertSubview:newLabel atIndex:0];
+                    UISwitch *switchThing = [[UISwitch alloc] init];
+                    [labelsScrollView setContentSize:CGSizeMake(260, 75+(40*uniqueJobTitlesArray.count))];
+                    NSLog(@"%@",newLabel.text);
+                    [labelsScrollView addSubview:switchThing];
+                    switchThing.center = CGPointMake(220, 76+(40*i));
+                    [switchThing addTarget:self action:@selector(jobTitleSwitchValueChanged:) forControlEvents:UIControlEventValueChanged];
+                    [filterJobTitlesText addObject:newLabel.text];
+                    [filterJobTitlesSwitches addObject:switchThing];
+                    
+                }
+            } else {
+                NSMutableArray *newArray = [[NSMutableArray alloc] init];
+                for (int i = 1; i<filterJobTitlesSwitches.count; i++) {
+                    bool isiton = [[filterJobTitlesSwitches objectAtIndex:i] isOn];
+                    [newArray addObject:[NSNumber numberWithBool:isiton]];
+                }
+                SEL theSelector = @selector(companySwitchValueChanged:);
+                [switchThing addTarget:self action:@selector(jobTitleSwitchValueChanged:)  forControlEvents:UIControlEventValueChanged];
+                
+                [filterJobTitlesSwitches removeAllObjects];
+                [filterJobTitlesText removeAllObjects];
                 [filterJobTitlesText addObject:newLabel.text];
                 [filterJobTitlesSwitches addObject:switchThing];
                 for (int i =0 ; i<uniqueJobTitlesArray.count; i++) {
@@ -613,6 +723,7 @@
 }
 -(void)countUpDuration
 {
+    ++wait;
     if(MCTGameView.hidden == false || FTGameView.hidden == false ) //playing a timed game
     {
         if([self checkIfAllPeopleHaveBeenGuessedCorrectly]==true)
@@ -622,10 +733,10 @@
             MCGameView.hidden=true;
             firstView.hidden=true;
             MCTGameView.hidden=true;
-            FCGameView.hidden=true;
+            FCView.hidden=true;
             MCCView.hidden = true;
             FGameView.hidden = true;
-            FCGameView.hidden = true;
+            FCView.hidden = true;
             FTGameView.hidden = true;
             FilterView.hidden = true;
             nameAndButtonsView.hidden = true;
@@ -649,7 +760,6 @@
             percentLabel.text = [NSString stringWithFormat:@"YOU GOT %d%% IN %@",(int)round(totalPercentage*100),timerLable.text];
         }
         timerView.hidden = false;
-        ++wait;
         if(wait == 100)
         {
             wait = 0;
@@ -683,7 +793,95 @@
         timerLable.text = [NSString stringWithFormat:@"%i:0%i", minutes,seconds];
 
     }
+    if(animating == true && wait%10 == 0)
+    {
+        if([nextView isEqualToString:@"FCV"])
+        {
+            //move the view to the right side of the screen
+            [self animateView:FCView fromDirection:@"R"];
+        }
+        if([nextView isEqualToString:@"MCCV"])
+        {
+            //move the view to the right side of the screen
+            [self animateView:MCCView fromDirection:@"R"];
+        }
+        if([nextView isEqualToString:@"MCGV"])
+        {
+            //move the view to the right side of the screen
+            [self animateView:MCGameView fromDirection:@"R"];
+        }
+        if([nextView isEqualToString:@"FV"])
+        {
+            //move the view to the right side of the screen
+            [self animateView:firstView fromDirection:@"R"];
+        }
+        if([nextView isEqualToString:@"MCTV"])
+        {
+            //move the view to the right side of the screen
+            [self animateView:MCTGameView fromDirection:@"R"];
+        }
+        if([nextView isEqualToString:@"FTGV"])
+        {
+            //move the view to the right side of the screen
+            [self animateView:FTGameView fromDirection:@"R"];
+        }
+        if([nextView isEqualToString:@"FTGV"])
+        {
+            //move the view to the right side of the screen
+            [self animateView:FTGameView fromDirection:@"R"];
+        }
+        if([nextView isEqualToString:@"FGV"])
+        {
+            //move the view to the right side of the screen
+            [self animateView:FGameView fromDirection:@"R"];
+        }
+
+    }
+    else
+    {
+        xValR = firstView.center.x - firstView.bounds.size.width;
+    }
+    if(animatingBack == true)
+    {
+        if([nextView isEqualToString:@"FCV"])
+        {
+            //move the view to the right side of the screen
+            [self animateView:FCView fromDirection:@"L"];
+        }
+    }
+    else
+    {
+        xValL = firstView.center.x + firstView.bounds.size.width;
+    }
 }
+
+-(void)animateView:(UIView*)v fromDirection:(NSString*)direction
+{
+    if([direction isEqualToString:@"R"])
+    {
+        //xValR++;
+        v.center = CGPointMake(v.center.x+40, v.center.y);
+        NSLog(@"%f", v.center.x);
+        if(160 <= v.center.x)
+        {
+            animating = false;
+            nextView = @"";
+        }
+    }
+    else
+    {
+        xValL--;
+        v.center = CGPointMake(v.center.x-40, v.center.y);
+        NSLog(@"%f", v.center.x);
+        if(160 <= v.center.x)
+        {
+            animatingBack = false;
+            nextView = @"";
+        }
+    }
+}
+
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -694,9 +892,9 @@
     MCGameView.hidden=true;
     firstView.hidden=true;
     MCTGameView.hidden=true;
-    FCGameView.hidden=true;
+    FCView.hidden=true;
     FGameView.hidden = true;
-    FCGameView.hidden = true;
+    FCView.hidden = true;
     FTGameView.hidden = true;
     FilterView.hidden = true;
     deptTitleField.hidden = true;
@@ -706,7 +904,10 @@
     companyTitleField.hidden = true;
     FilterView.hidden = false;
     gameOverView.hidden = true;
+    nextView = @"MCCV";
+    MCCView.center = CGPointMake(MCCView.center.x - MCCView.bounds.size.width, MCCView.center.y);
 
+    animating = true;
 }
 //go to multiple choice view
 -(IBAction)goToMCV
@@ -783,10 +984,10 @@
     MCGameView.hidden=true;
     firstView.hidden=true;
     MCTGameView.hidden=false;
-    FCGameView.hidden=true;
+    FCView.hidden=true;
     MCCView.hidden = true;
     FGameView.hidden = true;
-    FCGameView.hidden = true;
+    FCView.hidden = true;
     FTGameView.hidden = true;
     deptTitleField.hidden = true;
     jobTitleField.hidden = true;
@@ -796,22 +997,30 @@
     FilterView.hidden = true;
     gameOverView.hidden = true;
     nameAndButtonsView.hidden = true;
+    nextView = @"MCGV";
+    MCGameView.center = CGPointMake(MCGameView.center.x - MCGameView.bounds.size.width, MCGameView.center.y);
+
+    animating = true;
 
 }
 //go to first view
 -(IBAction)goToFV
 {
     gameOverView.hidden = true;
+    nextView = @"FV";
+    firstView.center = CGPointMake(firstView.center.x - firstView.bounds.size.width, firstView.center.y);
+
+    animating = true;
 
     FilterView.hidden = true;
     MCGameView.hidden=true;
     firstView.hidden=false;
     FilterView.hidden = true;
     MCTGameView.hidden=true;
-    FCGameView.hidden=true;
+    FCView.hidden=true;
     MCCView.hidden = true;
     FGameView.hidden = true;
-    FCGameView.hidden = true;
+    FCView.hidden = true;
     FTGameView.hidden = true;
     deptTitleField.hidden = true;
     jobTitleField.hidden = true;
@@ -823,13 +1032,18 @@
 //go to multiple choice timed view
 -(IBAction)goToMCTV
 {
+    nextView = @"MCTV";
+    MCTGameView.center = CGPointMake(MCTGameView.center.x - MCTGameView.bounds.size.width, MCTGameView.center.y);
+
+    animating = true;
+
     MCGameView.hidden=true;
     firstView.hidden=true;
     MCTGameView.hidden=false;
-    FCGameView.hidden=true;
+    FCView.hidden=true;
     MCCView.hidden = true;
     FGameView.hidden = true;
-    FCGameView.hidden = true;
+    FCView.hidden = true;
     FTGameView.hidden = true;
     deptTitleField.hidden = true;
     jobTitleField.hidden = true;
@@ -1080,16 +1294,18 @@
     }
 }
 //go to timed view
+//depricated
+/*
 -(IBAction)goToTV
 {
     nameAndButtonsView.hidden = true;
     MCGameView.hidden=true;
     firstView.hidden=true;
     MCTGameView.hidden=true;
-    FCGameView.hidden=true;
+    FCView.hidden=true;
     MCCView.hidden = false;
     FGameView.hidden = true;
-    FCGameView.hidden = true;
+    FCView.hidden = true;
     FTGameView.hidden = true;
     FilterView.hidden = true;
     personPic.hidden = true;
@@ -1103,16 +1319,17 @@
     gameOverView.hidden = true;
 
 }
+ */
 //go to flashcard view
 -(IBAction)goToFlashV
 {
     MCGameView.hidden=true;
     firstView.hidden=true;
     MCTGameView.hidden=true;
-    FCGameView.hidden=true;
+    FCView.hidden=true;
     MCCView.hidden = true;
     FGameView.hidden = false;
-    FCGameView.hidden = true;
+    FCView.hidden = true;
     FTGameView.hidden = true;
     FilterView.hidden = true;
     gameOverView.hidden = true;
@@ -1125,6 +1342,10 @@
     filterField.text = @"";
     filterLabel.text = @"Filter By:";
     companyTitleField.hidden = true;
+    nextView = @"FGV";
+    FGameView.center = CGPointMake(FGameView.center.x - FGameView.bounds.size.width, FGameView.center.y);
+
+    animating = true;
 
 }
 //go to timed view
@@ -1135,10 +1356,10 @@
     MCGameView.hidden=true;
     firstView.hidden=true;
     MCTGameView.hidden=true;
-    FCGameView.hidden=true;
+    FCView.hidden=true;
     MCCView.hidden = true;
     FGameView.hidden = true;
-    FCGameView.hidden = false;
+    FCView.hidden = false;
     FTGameView.hidden = true;
     nameAndButtonsView.hidden = true;
 
@@ -1151,6 +1372,10 @@
     filterLabel.text = @"Filter By:";
     companyTitleField.hidden = true;
     gameOverView.hidden = true;
+    nextView = @"FCV";
+    FCView.center = CGPointMake(FCView.center.x - FCView.bounds.size.width, FCView.center.y);
+
+    animating = true;
 
 }
 //go to flashcard timed view
@@ -1160,10 +1385,10 @@
     MCGameView.hidden=true;
     firstView.hidden=true;
     MCTGameView.hidden=true;
-    FCGameView.hidden=true;
+    FCView.hidden=true;
     MCCView.hidden = true;
     FGameView.hidden = true;
-    FCGameView.hidden = true;
+    FCView.hidden = true;
     FTGameView.hidden = false;
     nameAndButtonsView.hidden = true;
 
@@ -1176,6 +1401,10 @@
 
     filterField.text = @"";
     filterLabel.text = @"Filter By:";
+    nextView = @"FTGV";
+    FTGameView.center = CGPointMake(FTGameView.center.x - FTGameView.bounds.size.width, FTGameView.center.y);
+
+    animating = true;
 
 }
 
@@ -1619,4 +1848,5 @@
     FilterView.hidden = true;
     
 }
+
 @end

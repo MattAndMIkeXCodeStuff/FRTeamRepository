@@ -38,7 +38,7 @@
     //FT stands for flashcard timed game
     IBOutlet UIView* FTGameView;
     //FT stands for flashcard timed game
-    IBOutlet UIView* FCGameView;
+    IBOutlet UIView* FCView;
     //The first view
     IBOutlet UIView* firstView;
     //mcc stands for multiple choice chooser
@@ -91,8 +91,16 @@
     NSMutableArray* filterJobTitlesSwitches;
     NSMutableArray* filterJobTitlesText;
     
+    NSMutableArray* allContacts;
     
     NSMutableArray* allPeople;
+    
+    bool animating;
+    bool animatingBack;
+    NSString *nextView;
+    
+    int xValR;
+    int xValL;
 }
 @property(nonatomic)int numberOfSmiths;
 @property(nonatomic)IBOutlet UIScrollView *labelsScrollView;
@@ -122,6 +130,9 @@
 @property(nonatomic)IBOutlet UIView *nameAndButtonsView;
 @property(nonatomic)IBOutlet UIImageView *personPic;
 @property(nonatomic)IBOutlet UILabel *nameLabel;
+
+
+
 -(IBAction)showInfo:(id)sender;
 -(IBAction)gotRight:(id)sender;
 -(IBAction)gotWrong:(id)sender;
@@ -184,6 +195,7 @@
 -(NSMutableArray*)chooseArray;
 -(void)fillArray:(NSMutableArray *)a fromArray:(NSMutableArray *)b;
 
+-(void)animateView:(UIView*)v fromDirection:(NSString*)direction;
 
 @end
 
