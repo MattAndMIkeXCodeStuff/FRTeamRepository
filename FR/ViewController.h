@@ -196,6 +196,9 @@
 -(void)fillArray:(NSMutableArray *)a fromArray:(NSMutableArray *)b;
 
 -(void)animateView:(UIView*)v fromDirection:(NSString*)direction;
+-(NSMutableArray*)getContactsWithCompany:(NSString*)company fromArray:(NSMutableArray*)array;
+-(NSMutableArray*)getContactsWithJobTitle:(NSString*)jobTitle fromArray:(NSMutableArray*)array;
+-(NSMutableArray*)getContactsWithDepartment:(NSString*)dept fromArray:(NSMutableArray*)array;
 
 @end
 

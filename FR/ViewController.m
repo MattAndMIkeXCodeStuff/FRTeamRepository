@@ -28,7 +28,8 @@
     }
     return self;
 }
--(IBAction)showInfo:(id)sender {
+-(IBAction)showInfo:(id)sender
+{
     nameAndButtonsView.hidden = false;
 }
 -(IBAction)gotRight:(id)sender {
@@ -231,11 +232,9 @@
     moreInfoView.hidden =true;
     [super viewDidLoad];
     
-    MSContactManipulater *m;
-    m = [[MSContactManipulater alloc]init];
-    NSLog(@"%i",[m getContactsWithCompany:@"health catalyst"].count);
-    
-    
+    MSContactManipulater *contactGetter = [[MSContactManipulater alloc]init];
+    allPeople = [[NSMutableArray alloc]init];
+    allPeople = [contactGetter getContactsWithAnImage];
     
     //[self loadLabels:@"Company"];
     
@@ -315,71 +314,91 @@
         [self addJob:p.jobTitle];
     }
 }
+-(NSMutableArray*)getContactsWithCompany:(NSString*)company fromArray:(NSMutableArray*)array
+{
+    NSMutableArray*finalPeople;
+    finalPeople = [[NSMutableArray alloc]init];
+    for (int l = 0; l < array.count; l++)
+    {
+        Person *p;
+        p = [[Person alloc]init];
+        p = [array objectAtIndex:l];
+       // NSLog(@"%@",p.company);
+        if ([p.company isEqualToString: company])
+        {
+            NSLog(@"it worked");
+            [finalPeople addObject:p];
+        }
+    }
+    
+    return finalPeople;
+}
+-(NSMutableArray*)getContactsWithJobTitle:(NSString*)jobTitle fromArray:(NSMutableArray*)array
+{
+    NSMutableArray*finalPeople;
+    finalPeople = [[NSMutableArray alloc]init];
+    for (int l = 0; l < array.count; l++)
+    {
+        Person *p;
+        p = [[Person alloc]init];
+        p = [array objectAtIndex:l];
+        //NSLog(@"%@",p.jobTitle);
+        if ([p.jobTitle isEqualToString: jobTitle])
+        {
+            NSLog(@"it worked");
+            [finalPeople addObject:p];
+        }
+    }
+    
+    return finalPeople;
+}
+-(NSMutableArray*)getContactsWithDepartment:(NSString*)dept fromArray:(NSMutableArray*)array
+{
+    NSMutableArray*finalPeople;
+    finalPeople = [[NSMutableArray alloc]init];
+    for (int l = 0; l < array.count; l++)
+    {
+        Person *p;
+        p = [[Person alloc]init];
+        p = [array objectAtIndex:l];
+       // NSLog(@"%@",p.department);
+        if ([p.department isEqualToString: dept])
+        {
+            NSLog(@"it worked");
+            [finalPeople addObject:p];
+        }
+    }
+    
+    return finalPeople;
+}
+
 -(void)readValues
 {
-    NSMutableArray *array;
-    array = [[NSMutableArray alloc]init];
-    MSContactManipulater *contactManipulater;
-    contactManipulater = [[MSContactManipulater alloc]init];
-    NSString *string;
-    array = [contactManipulater getContactsWithAnImage];
-    NSLog(@"%i", array.count);
-
-    /*
+    [arrayOf49PercentAndUnder removeAllObjects];
+    arrayOf49PercentAndUnder = [[NSMutableArray alloc]init];
+    NSLog(@"allPeople - %i",allPeople.count);
     for (int i = 0; i<filterCompanySwitches.count; i++)
     {
         if ([[filterCompanySwitches objectAtIndex:i] isOn])
         {
+            //so because the mscontact manipulater was not working i decided that we could just use the array allpeople instead, and then filter out the ones we dont want with a method i created. the method is similar to the getContactsWithCompany method, the only difference is it works;)
             NSLog(@"%@ is On",[filterCompanyText objectAtIndex:i]);
-            NSString *str;
-            str = [filterCompanyText objectAtIndex:i];
-            MSContactManipulater *thecontactGetter = [[MSContactManipulater alloc] init];
-            [arrayOf49PercentAndUnder addObjectsFromArray:[thecontactGetter getContactsWithCompany:@"Health Catalyst"]];
-            //arrayOf49PercentAndUnder =[thecontactGetter getContactsWithCompany:@"Health Catalyst"];
-            for (int i = 0 ; i<arrayOf49PercentAndUnder.count; i++) {
-                NSLog(@"%@ is in the Array", [[arrayOf49PercentAndUnder objectAtIndex:i] name]);
-            }
-        }
-        else
-        {
-            NSLog(@"%@ is Off",[filterCompanyText objectAtIndex:i]);
-            MSContactManipulater *thecontactGetter = [[MSContactManipulater alloc] init];
-
-            string =[filterCompanyText objectAtIndex:i];
-            string = @"Health Catalyst";
-            array = [contactManipulater getContactsWithCompany:string];
-            array = [contactManipulater getContactsWithAnImage];
-            
-           // arrayOf49PercentAndUnder = [contactGetter getContactsWithCompany:companyTitleField.text];
-
-            NSLog(@"%i", array.count);
-            if(array.count > 0)
-            {
-                [self fillArray:arrayOf49PercentAndUnder fromArray:array];
-            }
-        }
-        else
-        {
-            NSLog(@"%@ is Off",[filterCompanyText objectAtIndex:i]);
+            [arrayOf49PercentAndUnder addObjectsFromArray: [self getContactsWithCompany:[filterCompanyText objectAtIndex:i] fromArray:allPeople]];
         }
     }
+    
+    //NSLog(@"%i",arrayOf49PercentAndUnder.count);
+    /*
     for (int i = 0; i<filterDepartmentSwitches.count; i++)
     {
         if ([[filterDepartmentSwitches objectAtIndex:i] isOn])
         {
             NSLog(@"%@ is On",[filterDepartmentText objectAtIndex:i]);
-            
-            MSContactManipulater *thecontactGetter = [[MSContactManipulater alloc] init];
-
-            [arrayOf49PercentAndUnder addObjectsFromArray:[thecontactGetter getContactsWithDept:[filterDepartmentText objectAtIndex:i]]];
-            
+            [arrayOf49PercentAndUnder addObjectsFromArray: [self getContactsWithDepartment:[filterDepartmentText objectAtIndex:i] fromArray:allPeople]];
         }
         else
         {
-            NSLog(@"%@ is Off",[filterDepartmentText objectAtIndex:i]);
-            MSContactManipulater *thecontactGetter = [[MSContactManipulater alloc] init];
-
-            [thecontactGetter removeContactsWithDept:[filterDepartmentText objectAtIndex:i] fromArray:arrayOf49PercentAndUnder];
+            
         }
     }
     for (int i = 0; i<filterJobTitlesSwitches.count; i++)
@@ -387,24 +406,25 @@
         if ([[filterJobTitlesSwitches objectAtIndex:i] isOn])
         {
             NSLog(@"%@ is On",[filterJobTitlesText objectAtIndex:i]);
-            
-            MSContactManipulater *thecontactGetter;// = [[MSContactManipulater alloc] init];
-
-            [arrayOf49PercentAndUnder addObjectsFromArray:[thecontactGetter getContactsWithJobTitle:[filterJobTitlesText objectAtIndex:i]]];
-            
+            [arrayOf49PercentAndUnder addObjectsFromArray: [self getContactsWithJobTitle:[filterJobTitlesText objectAtIndex:i] fromArray:allPeople]];
         }
         else
         {
-            NSLog(@"%@ is Off",[filterJobTitlesText objectAtIndex:i]);
-            MSContactManipulater *thecontactGetter;// = [[MSContactManipulater alloc] init];
-
-            [thecontactGetter removeContactsWithJobTitle:[filterJobTitlesText objectAtIndex:i] fromArray:arrayOf49PercentAndUnder];
+            
         }
     }
-    for (int i = 0 ; i<arrayOf49PercentAndUnder.count; i++) {
-        NSLog(@"%@ is in the Array", [[arrayOf49PercentAndUnder objectAtIndex:i] name]);
-    }
      */
+    NSMutableArray* currentArray;
+    
+    currentArray = arrayOf49PercentAndUnder;
+    
+    j = rand()%arrayOf49PercentAndUnder.count;
+    
+    
+    currentPerson =[currentArray objectAtIndex:j];
+    currentPeopleArray = currentArray;
+    personPic.image = [currentPerson selfImage];
+    nameLabel.text = [NSString stringWithFormat:@"%@ %@",currentPerson.firstName, currentPerson.lastName];
 }
 -(void)fillArray:(NSMutableArray *)a fromArray:(NSMutableArray *)b
 {
@@ -469,16 +489,15 @@
 
 -(void)loadLabels:(NSString *)labelType
 {
-    MSContactManipulater *contactGetter = [[MSContactManipulater alloc]init];
-    allPeople = [[NSMutableArray alloc]init];
-    allPeople = [contactGetter getContactsWithAnImage];
-        
     [self addFieldsFromArray:allPeople];
 
-    if ([labelType  isEqual: @"Date"]) {
+    NSLog(@"allPeople(top) - %i",allPeople.count);
+    if ([labelType  isEqual: @"Date"])
+    {
         
     }
-    else {
+    else
+    {
         
         UILabel *newLabel = [[UILabel alloc]init];
         newLabel.text = @"All";
@@ -703,6 +722,7 @@
             }
         }
     }
+    NSLog(@"allPeople(bottom) - %i",allPeople.count);
 }
 -(IBAction)segmentValueChanged:(id)sender {
     UISegmentedControl *s=  sender;
@@ -1403,7 +1423,7 @@
     filterLabel.text = @"Filter By:";
     nextView = @"FTGV";
     FTGameView.center = CGPointMake(FTGameView.center.x - FTGameView.bounds.size.width, FTGameView.center.y);
-
+    
     animating = true;
 
 }
