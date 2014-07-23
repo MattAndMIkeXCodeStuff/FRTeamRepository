@@ -30,6 +30,11 @@
             myPerson.department = (__bridge NSString *)(ABRecordCopyValue(r, kABPersonDepartmentProperty));
             myPerson.jobTitle = (__bridge NSString *)(ABRecordCopyValue(r, kABPersonJobTitleProperty));
             myPerson.notes = (__bridge NSString *)(ABRecordCopyValue(r, kABPersonNoteProperty));
+            //i dont really know how to get the date right now but using the kABPersonAnniversaryLabel does not work
+            myPerson.date = (__bridge NSDate*)(ABRecordCopyValue(r, kABDateTimePropertyType));
+            
+            NSLog(@"%@ date", myPerson.date);
+            
             [finalPeople addObject:myPerson];
         }
         else
@@ -138,6 +143,7 @@
             myPerson.department = (__bridge NSString *)(ABRecordCopyValue(r, kABPersonDepartmentProperty));
             myPerson.jobTitle = (__bridge NSString *)(ABRecordCopyValue(r, kABPersonJobTitleProperty));
             myPerson.notes = (__bridge NSString *)(ABRecordCopyValue(r, kABPersonNoteProperty));
+            
             if([[myPerson.company uppercaseString] isEqual: [company uppercaseString]])
             {
                 [finalPeople addObject:myPerson];

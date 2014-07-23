@@ -25,7 +25,7 @@
 @property(nonatomic)bool hasBeenGuessed;
 @property(nonatomic)bool hasBeenGuessedRight;
 @property(nonatomic)bool entryDate;
-
+@property(nonatomic)NSDate* date;
 //@property(nonatomic)NSString *fullName;
 
 -(void)gotRight;

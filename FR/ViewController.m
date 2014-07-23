@@ -386,8 +386,6 @@
             [arrayOf49PercentAndUnder addObjectsFromArray: [self getContactsWithCompany:[filterCompanyText objectAtIndex:i] fromArray:allPeople]];
         }
     }
-    
-    //NSLog(@"%i",arrayOf49PercentAndUnder.count);
     /*
     for (int i = 0; i<filterDepartmentSwitches.count; i++)
     {
@@ -415,12 +413,8 @@
     }
      */
     NSMutableArray* currentArray;
-    
     currentArray = arrayOf49PercentAndUnder;
-    
     j = rand()%arrayOf49PercentAndUnder.count;
-    
-    
     currentPerson =[currentArray objectAtIndex:j];
     currentPeopleArray = currentArray;
     personPic.image = [currentPerson selfImage];
