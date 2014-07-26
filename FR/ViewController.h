@@ -54,6 +54,8 @@
     
     IBOutlet UIButton*showInfoButton;
     
+    IBOutlet UIView*nameView;
+    
     Person *currentPerson;
     Person *correctMCPerson;
     
@@ -101,6 +103,31 @@
     
     int xValR;
     int xValL;
+    
+    UIImage *frame0;
+    UIImage *frame1;
+    UIImage *frame2;
+    UIImage *frame3;
+    UIImage *frame4;
+    UIImage *frame5;
+    UIImage *frame6;
+    UIImage *frame7;
+    UIImage *frame8;
+    UIImage *frame9;
+    UIImage *frame10;
+    
+    IBOutlet UIImageView *igniteChange;
+    
+    NSMutableArray *imageArray;
+
+    IBOutlet UIButton*guessButton;
+    
+    IBOutlet UIButton*infoButton;
+    IBOutlet UIButton*hintButton;
+    
+    IBOutlet UISwitch*practiceModeSwitch;
+    
+    IBOutlet UIImageView*moreInfoViewImage;
 }
 @property(nonatomic)int numberOfSmiths;
 @property(nonatomic)IBOutlet UIScrollView *labelsScrollView;
@@ -136,6 +163,8 @@
 -(IBAction)showInfo:(id)sender;
 -(IBAction)gotRight:(id)sender;
 -(IBAction)gotWrong:(id)sender;
+
+-(IBAction)goButtonPressed;
 
 -(void)loadLabels:(NSString *)labelType;
 
@@ -194,6 +223,8 @@
 -(void)addFieldsFromArray:(NSMutableArray*)array;
 -(NSMutableArray*)chooseArray;
 -(void)fillArray:(NSMutableArray *)a fromArray:(NSMutableArray *)b;
+
+-(void)generateDots;
 
 -(void)animateView:(UIView*)v fromDirection:(NSString*)direction;
 -(NSMutableArray*)getContactsWithCompany:(NSString*)company fromArray:(NSMutableArray*)array;

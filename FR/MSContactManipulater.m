@@ -15,45 +15,48 @@
     ABAddressBookRef addressBook2  = ABAddressBookCreateWithOptions(NULL, NULL);
     //NSLog(@"image");
     NSMutableArray *people = (__bridge NSMutableArray *)ABAddressBookCopyArrayOfAllPeople(addressBook2);
+    NSLog(@"%lu people",(unsigned long)people.count);
     NSMutableArray *finalPeople = [[NSMutableArray alloc]init];
-    for (int i = 0; i<[people count]; i++) {
+    for (int i = 0; i<[people count]; i++)
+    {
         ABRecordRef r = (__bridge ABRecordRef)([people objectAtIndex:i]);
-        if (ABPersonHasImageData(r))
+        if (ABPersonHasImageData(r) == true)
         {
             NSString *firstName = (__bridge NSString *)(ABRecordCopyValue(r, kABPersonFirstNameProperty));
             NSString *lastName = (__bridge NSString *)(ABRecordCopyValue(r, kABPersonLastNameProperty));
             UIImage *Cimage = [[UIImage alloc]init];
             Cimage = [UIImage imageWithData:(__bridge NSData *)ABPersonCopyImageDataWithFormat(r, kABPersonImageFormatThumbnail)];
             Person *myPerson = [[Person alloc] init];
-            [myPerson setWithFirstName:firstName andLastName:lastName andImage:Cimage andGender:true];
-            myPerson.company = (__bridge NSString *)(ABRecordCopyValue(r, kABPersonOrganizationProperty));
-            myPerson.department = (__bridge NSString *)(ABRecordCopyValue(r, kABPersonDepartmentProperty));
-            myPerson.jobTitle = (__bridge NSString *)(ABRecordCopyValue(r, kABPersonJobTitleProperty));
-            myPerson.notes = (__bridge NSString *)(ABRecordCopyValue(r, kABPersonNoteProperty));
+            if(Cimage != nil)
+            {
+                [myPerson setWithFirstName:firstName andLastName:lastName andImage:Cimage andGender:true];
+                myPerson.company = (__bridge NSString *)(ABRecordCopyValue(r, kABPersonOrganizationProperty));
+                myPerson.department = (__bridge NSString *)(ABRecordCopyValue(r, kABPersonDepartmentProperty));
+                myPerson.jobTitle = (__bridge NSString *)(ABRecordCopyValue(r, kABPersonJobTitleProperty));
+                myPerson.notes = (__bridge NSString *)(ABRecordCopyValue(r, kABPersonNoteProperty));
+                [finalPeople addObject:myPerson];
+            }
             //i dont really know how to get the date right now but using the kABPersonAnniversaryLabel does not work
-            myPerson.date = (__bridge NSDate*)(ABRecordCopyValue(r, kABDateTimePropertyType));
+            //myPerson.date = (__bridge NSDate*)(ABRecordCopyValue(r, kABDateTimePropertyType));
             
-            NSLog(@"%@ date", myPerson.date);
-            
-            [finalPeople addObject:myPerson];
+            //NSLog(@"%@ date", myPerson.date);
         }
         else
         {
-            ABAddressBookRef addressBookRef = ABAddressBookCreateWithOptions(NULL, nil);
+            //ABAddressBookRef addressBookRef = ABAddressBookCreateWithOptions(NULL, nil);
             //ABRecordSetValue(r, kABPersonNicknameProperty, (__bridge CFStringRef)@"", nil);
             //ABPersonSetImageData(r, (__bridge CFDataRef)(UIImageJPEGRepresentation([UIImage imageNamed:@"No Image Available.png"], 0.7f)), nil);
             //ABPersonRemoveImageData(r, nil);
             //ABRecordSetValue(r, kABPersonFirstNameProperty, (__bridge CFStringRef)@"asdf", nil);
-            ABAddressBookAddRecord(addressBookRef, r, nil);
-            ABAddressBookSave(addressBookRef, nil);
+            //ABAddressBookAddRecord(addressBookRef, r, nil);
+            //ABAddressBookSave(addressBookRef, nil);
             //ABRecordSetImageData([UIImage imageNamed:@"No Image Available.png"]);
             //asdfdddssdfsdsdfsdfsdfsdfsdfsdfsdfsdfdfas adf sABRecordSetImageData(r,(__bridge CFDataRef)(UIImageJPEGRepresentation([UIImage imageNamed:@"No Image Available.png"], 0.7f)),nil);
         
         }
-        
-        
+        NSLog(@"%lu of %i",(unsigned long)finalPeople.count, i+1);
     }
-    ABAddressBookSave(addressBook, nil);
+    //ABAddressBookSave(addressBook, nil);
     return finalPeople;
 }
 -(NSMutableArray *)getContactsWithJobTitle:(NSString*)jobTitle

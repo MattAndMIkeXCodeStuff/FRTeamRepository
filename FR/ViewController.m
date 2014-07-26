@@ -30,16 +30,50 @@
 }
 -(IBAction)showInfo:(id)sender
 {
-    nameAndButtonsView.hidden = false;
+    //nameAndButtonsView.hidden = false;
+    guessButton.hidden = true;
+    nameView.hidden = false;
+    infoButton.hidden = false;
+    hintButton.hidden = true;
+
 }
 -(IBAction)gotRight:(id)sender {
     //NSLog(@"Got Right");
     currentPerson.hasBeenGuessed = true;
     currentPerson.hasBeenGuessedRight = true;
     [currentPerson gotRight];
-    [self loadNewPerson];
     totalGuessed++;
     totalCorrect++;
+    if([self checkIfAllPeopleHaveBeenGuessed] == false)
+    {
+        [self loadNewPerson];
+        guessButton.hidden = false;
+        nameView.hidden = true;
+        infoButton.hidden = true;
+        hintButton.hidden = false;
+    }
+    else if([self checkIfAllPeopleHaveBeenGuessed] == true)
+    {
+        FTGameView.hidden = true;
+        gameOverView.hidden = false;
+        timerView.hidden = true;
+        guessButton.hidden = true;
+        nameView.hidden = true;
+        infoButton.hidden = true;
+        hintButton.hidden = true;
+        nameAndButtonsView.hidden = true;
+        personPic.hidden = true;
+        [arrayOf49PercentAndUnder removeAllObjects];
+        [arrayOf50PercentAndOver removeAllObjects];
+        
+        for(int i =0; i < allPeople.count; i++)
+        {
+            Person *p;
+            p =[allPeople objectAtIndex:i];
+            p.hasBeenGuessed = false;
+            //NSLog(@"%id", p.hasBeenGuessed);
+        }
+    }
 }
 -(IBAction)gotWrong:(id)sender {
    // NSLog(@"Got Wrong");
@@ -47,6 +81,10 @@
     [currentPerson gotWrong];
     [self loadNewPerson];
     totalGuessed++;
+    guessButton.hidden = false;
+    nameView.hidden = true;
+    infoButton.hidden = true;
+    hintButton.hidden = false;
 
 }
 -(NSMutableArray*)chooseArray
@@ -94,8 +132,13 @@
         {
             return arrayOf49PercentAndUnder;
         }
+        else
+        {
+            //game over, they have done every person in the array right
+        }
     }
-        return currentPeopleArray;
+    return currentPeopleArray;
+    
 }
 
 -(void)loadNewPerson
@@ -126,38 +169,75 @@
                 [arrayOf50PercentAndOver addObject:currentPerson];
                 [arrayOf49PercentAndUnder removeObjectIdenticalTo:currentPerson];
             }
+        }
+        
+        if(arrayOf49PercentAndUnder.count > 0)
+        {
+            //load new array
+            NSMutableArray*currentArray;
+            currentArray = [self chooseArray];
+            int x;
+            x =(currentArray.count-1);
+            // NSLog(@"%i val of x",x);
+            if(x == 0)
+            {
+                j = 0;
+            }
+            else
+            {
+                j = rand()%x;
+            }
+            // NSLog(@"%i val of j",j);
+            currentPerson = [currentArray objectAtIndex:j];
+            
+            personPic.image = [currentPerson selfImage];
+            
+            if (currentPerson.lastName == NULL)
+            {
+                nameLabel.text = currentPerson.firstName;
+                
+            }
+            else
+            {
+                nameLabel.text = [NSString stringWithFormat:@"%@ %@", currentPerson.firstName,currentPerson.lastName];
+            }
+            // nameAndButtonsView.hidden = true;
 
-            
-            //}
-        }
-        NSMutableArray*currentArray;
-        currentArray = [self chooseArray];
-        int x;
-        x =(currentArray.count-1);
-        // NSLog(@"%i val of x",x);
-        if(x == 0)
-        {
-            j = 0;
         }
         else
         {
-            j = rand()%x;
-        }
-        // NSLog(@"%i val of j",j);
-        currentPerson = [currentArray objectAtIndex:j];
-        
-        personPic.image = [currentPerson selfImage];
-        
-        if (currentPerson.lastName == NULL)
-        {
-            nameLabel.text = currentPerson.firstName;
+            //game ends
+            //go to view that shows stats
+            MCGameView.hidden=true;
+            firstView.hidden=true;
+            MCTGameView.hidden=true;
+            FCView.hidden=true;
+            MCCView.hidden = true;
+            FGameView.hidden = true;
+            FCView.hidden = true;
+            FTGameView.hidden = true;
+            FilterView.hidden = true;
+            // nameAndButtonsView.hidden = true;
+            personPic.hidden = true;
+            showInfoButton.hidden = true;
+            deptTitleField.hidden = true;
+            jobTitleField.hidden = true;
+            filterField.text = @"";
+            filterLabel.text = @"Filter By:";
+            companyTitleField.hidden = true;
+            nameView.hidden = true;
             
+            [arrayOf49PercentAndUnder removeAllObjects];
+            [arrayOf50PercentAndOver removeAllObjects];
+            
+            gameOverView.hidden = false;
+            totalPercentage = (totalCorrect/totalGuessed);
+            NSLog(@"%f",totalGuessed);
+            NSLog(@"%f",totalCorrect);
+            NSLog(@"%f",totalPercentage);
+            
+            percentLabel.text = [NSString stringWithFormat:@"YOU GOT %d%% IN %@",(int)round(totalPercentage*100),timerLable.text];
         }
-        else
-        {
-            nameLabel.text = [NSString stringWithFormat:@"%@ %@", currentPerson.firstName,currentPerson.lastName];
-        }
-        nameAndButtonsView.hidden = true;
     }
     if(MCTGameView.hidden == false || FTGameView.hidden == false)
     {
@@ -195,7 +275,7 @@
         {
             nameLabel.text = [NSString stringWithFormat:@"%@ %@", currentPerson.firstName,currentPerson.lastName];
         }
-        nameAndButtonsView.hidden = true;
+        //nameAndButtonsView.hidden = true;
     }
     NSLog(@"%lu people in 49 array", (unsigned long)arrayOf49PercentAndUnder.count);
     NSLog(@"%lu people in 50 array", (unsigned long)arrayOf50PercentAndOver.count);
@@ -203,7 +283,27 @@
 }
 - (void)viewDidLoad
 {
+    frame0 = [UIImage imageNamed:@"IMG_0929.png"];
+    frame1 = [UIImage imageNamed:@"IMG_0930.png"];
+    frame2 = [UIImage imageNamed:@"IMG_0931.png"];
+    frame3 = [UIImage imageNamed:@"IMG_0932.PNG"];
+    frame4 = [UIImage imageNamed:@"IMG_0933.PNG"];
+    frame5 = [UIImage imageNamed:@"IMG_0935.PNG"];
+    frame6 = [UIImage imageNamed:@"IMG_0936.PNG"];
+    frame7 = [UIImage imageNamed:@"IMG_0937.PNG"];
+    frame8 = [UIImage imageNamed:@"IMG_0938.PNG"];
+    frame9 = [UIImage imageNamed:@"IMG_0939.png"];
+    frame10 =[UIImage imageNamed:@"IMG_0940.png"];
+
+    //moreInfoBio.text = @"No Notes";
+    //moreInfoBio = [[UITextView alloc]init];
     
+    imageArray = [NSMutableArray arrayWithObjects:frame0, frame1, frame2, frame3, frame4, frame5, frame6, frame7,frame8,frame9,frame10, nil];
+    
+    igniteChange.animationImages = imageArray;
+    igniteChange.animationDuration = 0.075*(imageArray.count);
+    igniteChange.animationRepeatCount=100;
+    [igniteChange startAnimating];
     
     timer = [NSTimer scheduledTimerWithTimeInterval:0.01 target:self selector:@selector(countUpDuration) userInfo:Nil repeats:YES];
     filterJobTitlesText = [[NSMutableArray alloc]init];
@@ -213,6 +313,7 @@
     filterCompanySwitches = [[NSMutableArray alloc]init];
     filterCompanyText = [[NSMutableArray alloc]init];
     
+    nameView.hidden = true;
     MCGameView.hidden=true;
     firstView.hidden=false;
     MCTGameView.hidden=true;
@@ -230,12 +331,13 @@
     gameOverView.hidden = true;
     filteringIndicator.hidesWhenStopped = true;
     moreInfoView.hidden =true;
+    nameView.hidden = true;
+    infoButton.hidden = true;
+    hintButton.hidden = true;
+
     [super viewDidLoad];
     
-    MSContactManipulater *contactGetter = [[MSContactManipulater alloc]init];
-    allPeople = [[NSMutableArray alloc]init];
-    allPeople = [contactGetter getContactsWithAnImage];
-    
+
     //[self loadLabels:@"Company"];
     
     uniqueDepartmentsArray = [[NSMutableArray alloc]init];
@@ -268,7 +370,11 @@
             NSLog(@"Just authorized");
         });
     }
-   
+    
+    MSContactManipulater *contactGetter = [[MSContactManipulater alloc]init];
+    allPeople = [[NSMutableArray alloc]init];
+    allPeople = [contactGetter getContactsWithAnImage];
+    
 	// Do any additional setup after loading the view, typically from a nib.
 }
 - (BOOL)prefersStatusBarHidden
@@ -740,6 +846,7 @@
     ++wait;
     if(MCTGameView.hidden == false || FTGameView.hidden == false ) //playing a timed game
     {
+        /*
         if([self checkIfAllPeopleHaveBeenGuessedCorrectly]==true)
         {
             //game ends
@@ -753,7 +860,7 @@
             FCView.hidden = true;
             FTGameView.hidden = true;
             FilterView.hidden = true;
-            nameAndButtonsView.hidden = true;
+           // nameAndButtonsView.hidden = true;
             personPic.hidden = true;
             showInfoButton.hidden = true;
             deptTitleField.hidden = true;
@@ -761,7 +868,8 @@
             filterField.text = @"";
             filterLabel.text = @"Filter By:";
             companyTitleField.hidden = true;
-            
+            nameView.hidden = true;
+
             [arrayOf49PercentAndUnder removeAllObjects];
             [arrayOf50PercentAndOver removeAllObjects];
             
@@ -773,30 +881,30 @@
             
             percentLabel.text = [NSString stringWithFormat:@"YOU GOT %d%% IN %@",(int)round(totalPercentage*100),timerLable.text];
         }
+         */
         timerView.hidden = false;
-        if(wait == 100)
+        if(wait%100 ==0 && moreInfoView.hidden == true)
         {
             wait = 0;
             seconds += 1;
             if(seconds <= 9)
             {
-                timerLable.text = [NSString stringWithFormat:@"%i:0%i", minutes,seconds];
+                timerLable.text = [NSString stringWithFormat:@"Time: %i:0%i", minutes,seconds];
             }
             else
             {
-                timerLable.text = [NSString stringWithFormat:@"%i:%i", minutes,seconds];
+                timerLable.text = [NSString stringWithFormat:@"Time: %i:%i", minutes,seconds];
             }
-            
-            
             if(seconds == 59)
             {
                 seconds = 0;
                 //timerLableSeconds.text = [NSString stringWithFormat:@"0%i", countUpValue];
 
                 minutes +=1;
-                timerLable.text = [NSString stringWithFormat:@"%i:0%i", minutes,seconds];
+                timerLable.text = [NSString stringWithFormat:@"Time: %i:0%i", minutes,seconds];
 
             }
+            
         }
     }
     else
@@ -804,7 +912,7 @@
         timerView.hidden = true;
         seconds=0;
         minutes =0;
-        timerLable.text = [NSString stringWithFormat:@"%i:0%i", minutes,seconds];
+        timerLable.text = [NSString stringWithFormat:@"Time: %i:0%i", minutes,seconds];
 
     }
     if(animating == true && wait%10 == 0)
@@ -901,7 +1009,8 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
--(IBAction)goToMCCV:(id)sender {
+-(IBAction)goToMCCV
+{
     MCCView.hidden = false;
     MCGameView.hidden=true;
     firstView.hidden=true;
@@ -920,6 +1029,7 @@
     gameOverView.hidden = true;
     nextView = @"MCCV";
     MCCView.center = CGPointMake(MCCView.center.x - MCCView.bounds.size.width, MCCView.center.y);
+    nameView.hidden = true;
 
     animating = true;
 }
@@ -1013,6 +1123,7 @@
     nameAndButtonsView.hidden = true;
     nextView = @"MCGV";
     MCGameView.center = CGPointMake(MCGameView.center.x - MCGameView.bounds.size.width, MCGameView.center.y);
+    nameView.hidden = true;
 
     animating = true;
 
@@ -1040,7 +1151,8 @@
     jobTitleField.hidden = true;
     filterField.text = @"";
     companyTitleField.hidden = true;
-    nameAndButtonsView.hidden = true;
+    //nameAndButtonsView.hidden = true;
+    nameView.hidden = true;
 
 }
 //go to multiple choice timed view
@@ -1066,8 +1178,9 @@
     companyTitleField.hidden = true;
     FilterView.hidden = true;
     gameOverView.hidden = true;
-    nameAndButtonsView.hidden = true;
+    //nameAndButtonsView.hidden = true;
     
+    nameView.hidden = true;
 
     FilterView.hidden = false;
     
@@ -1347,7 +1460,8 @@
     FTGameView.hidden = true;
     FilterView.hidden = true;
     gameOverView.hidden = true;
-    nameAndButtonsView.hidden = true;
+    nameAndButtonsView.hidden = false;
+    nameView.hidden = true;
 
     personPic.hidden = false;
     showInfoButton.hidden = false;
@@ -1404,7 +1518,8 @@
     FGameView.hidden = true;
     FCView.hidden = true;
     FTGameView.hidden = false;
-    nameAndButtonsView.hidden = true;
+    nameAndButtonsView.hidden = false;
+    nameView.hidden = false;
 
     personPic.hidden = false;
     showInfoButton.hidden = false;
@@ -1418,10 +1533,29 @@
     nextView = @"FTGV";
     FTGameView.center = CGPointMake(FTGameView.center.x - FTGameView.bounds.size.width, FTGameView.center.y);
     
+    nameView.hidden = true;
+
     animating = true;
 
 }
 
+-(void)generateDots
+{
+    NSString*fNDots;
+    NSString*lNDots;
+/*
+    for(int l = 0; l<currentPerson.firstName.length; ++l)
+    {
+        fNDots = fNDots + @"-";
+    }
+    for(int l = 0; l<currentPerson.lastName.length; ++l)
+    {
+        lNDots = lNDots + @"-";
+    }
+    */
+    nameLabel.text = [NSString stringWithFormat:@"%@ %@",fNDots,lNDots];
+    
+}
 
 - (bool)isObjectIdenticalTo:(id)anObject inArray:(NSMutableArray*)aIQ
 {
@@ -1803,6 +1937,8 @@
 -(IBAction)moreInfo
 {
     moreInfoView.hidden=false;
+    moreInfoViewImage.image = personPic.image;
+    timerLable.text = @"Paused";
     if(currentPerson.firstName.length > 0 && currentPerson.lastName.length > 0)
     {
             moreInfoName.text = [NSString stringWithFormat:@"%@ %@", currentPerson.firstName, currentPerson.lastName];
@@ -1843,7 +1979,7 @@
     }
     if(currentPerson.notes.length > 0)
     {
-        moreInfoBio.text = [NSString stringWithFormat:@"%@", currentPerson.notes];
+        moreInfoBio.text = [NSString stringWithFormat:@"     %@", currentPerson.notes];
 
     }
     else
@@ -1862,5 +1998,48 @@
     FilterView.hidden = true;
     
 }
+-(IBAction)goButtonPressed
+{
+    personPic.hidden = false;
+    guessButton.hidden = false;
+    FilterView.hidden= true;
+    FTGameView.hidden = false;
+    [self readValues];
+    FilterView.hidden = true;
+    MCGameView.hidden=true;
+    firstView.hidden=true;
+    MCTGameView.hidden=true;
+    FCView.hidden=true;
+    MCCView.hidden = true;
+    FGameView.hidden = true;
+    FCView.hidden = true;
+    FTGameView.hidden = false;
+    nameAndButtonsView.hidden = false;
+    nameView.hidden = false;
+    hintButton.hidden=false;
+    personPic.hidden = false;
+    showInfoButton.hidden = false;
+    deptTitleField.hidden = true;
+    jobTitleField.hidden = true;
+    companyTitleField.hidden = true;
+    gameOverView.hidden = true;
+    
+    filterField.text = @"";
+    filterLabel.text = @"Filter By:";
+    nextView = @"FTGV";
+    FTGameView.center = CGPointMake(FTGameView.center.x - FTGameView.bounds.size.width, FTGameView.center.y);
+    nameView.hidden = true;
+    animating = true;
+    if(practiceModeSwitch.isOn == true)
+    {
+        NSLog(@"in practice mode");
+        timerLable.hidden = true;
+    }
+    else if (practiceModeSwitch.isOn == false)
+    {
+        NSLog(@"not in practice mode");
 
+        timerLable.hidden = false;
+    }
+}
 @end
