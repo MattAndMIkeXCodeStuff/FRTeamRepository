@@ -665,6 +665,34 @@
 
     return finalPeople;
 }
+
+-(NSMutableArray*)getContactsWithDateFromArray:(NSMutableArray*)array
+{
+    NSMutableArray*finalPeople;
+    finalPeople = [[NSMutableArray alloc]init];
+    for (int l = 0; l < array.count; l++)
+    {
+        Person *p;
+        p = [[Person alloc]init];
+        p = [array objectAtIndex:l];
+        
+        NSDateFormatter*dF = [[NSDateFormatter alloc]init];
+        //NSLog(@"%@",p.jobTitle);
+        if ([p.date laterDate:[dF dateFromString:toField.text]] != p.date || [p.date laterDate:[dF dateFromString:fromField.text]] == p.date)
+        {
+            NSLog(@"it worked");
+            [finalPeople removeObjectIdenticalTo:p];
+        }
+        //if([jobTitle isEqualToString:[filterCompanyText objectAtIndex:1]] == false)
+        //{
+         //   [finalPeople removeObjectIdenticalTo:p];
+        //}
+    }
+    
+    
+    return finalPeople;
+}
+
 -(NSMutableArray*)getContactsWithDepartment:(NSString*)dept fromArray:(NSMutableArray*)array
 {
     NSMutableArray*finalPeople;
@@ -674,7 +702,6 @@
         Person *p;
         p = [[Person alloc]init];
         p = [array objectAtIndex:l];
-       // NSLog(@"%@",p.department);
         if ([p.department isEqualToString: dept])
         {
             NSLog(@"it worked");
@@ -709,6 +736,14 @@
         }
     }
     
+    for (int i = 0; i<filterCompanySwitches.count; i++)
+    {
+
+        //so because the mscontact manipulater was not working i decided that we could just use the array allpeople instead, and then filter out the ones we dont want with a method i created. the method is similar to the getContactsWithCompany method, the only difference is it works;)
+        NSLog(@"%@ is On",[filterCompanyText objectAtIndex:i]);
+            
+        [self getContactsWithDateFromArray:arrayOf49PercentAndUnder];
+    }
     
     
     

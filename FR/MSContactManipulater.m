@@ -34,6 +34,24 @@
                 myPerson.department = (__bridge NSString *)(ABRecordCopyValue(r, kABPersonDepartmentProperty));
                 myPerson.jobTitle = (__bridge NSString *)(ABRecordCopyValue(r, kABPersonJobTitleProperty));
                 myPerson.notes = (__bridge NSString *)(ABRecordCopyValue(r, kABPersonNoteProperty));
+                //NSDateFormatter *dF = [[NSDateFormatter alloc]init];
+                //[dF setDateFormat:@"dd-MM-yyyy"];
+                 //NSDate *dS = [[NSDate alloc] init];
+                //dS=[dF dateFromString:(__bridge NSString *)(ABRecordCopyValue(r, kABPersonAnniversaryLabel))];
+               // myPerson.date = dS;
+                ABMultiValueRef anniversaries = ABRecordCopyValue(r, kABPersonDateProperty);
+                NSString *anniversaryLabel;
+                for (CFIndex j=0; j < ABMultiValueGetCount(anniversaries); j++) {
+                    anniversaryLabel = (__bridge NSString*)ABMultiValueCopyLabelAtIndex(anniversaries, j);
+                    if([anniversaryLabel isEqualToString:(NSString *)kABPersonAnniversaryLabel]||[anniversaryLabel isEqualToString:@"Start Date"])
+                    {
+                        NSDate *anniversaryDate=(__bridge NSDate *)ABMultiValueCopyValueAtIndex(anniversaries, j);
+                        myPerson.date = (__bridge NSDate *)ABMultiValueCopyValueAtIndex(anniversaries, j);
+
+                        NSLog(@"%@",anniversaryDate);
+                    }
+                }
+                
                 [finalPeople addObject:myPerson];
             }
             //i dont really know how to get the date right now but using the kABPersonAnniversaryLabel does not work

@@ -313,6 +313,7 @@
 -(NSMutableArray*)getContactsWithCompany:(NSString*)company fromArray:(NSMutableArray*)array;
 -(NSMutableArray*)getContactsWithJobTitle:(NSString*)jobTitle fromArray:(NSMutableArray*)array;
 -(NSMutableArray*)getContactsWithDepartment:(NSString*)dept fromArray:(NSMutableArray*)array;
+-(NSMutableArray*)getContactsWithDateFromArray:(NSMutableArray*)array;
 
 -(IBAction)showFilterView:(id)sender;
 
