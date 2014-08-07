@@ -26,6 +26,10 @@
 @property(nonatomic)bool hasBeenGuessedRight;
 @property(nonatomic)bool entryDate;
 @property(nonatomic)NSDate* date;
+@property(nonatomic)int secondsTaken;
+@property(nonatomic)int minutesTaken;
+
+
 //@property(nonatomic)NSString *fullName;
 
 -(void)gotRight;

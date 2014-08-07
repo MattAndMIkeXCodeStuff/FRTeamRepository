@@ -11,6 +11,13 @@
 		4CACF951195F9F1500056B92 /* MSContactManipulater.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CACF950195F9F1500056B92 /* MSContactManipulater.m */; };
 		4CACF953195FA19400056B92 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CACF952195FA19400056B92 /* AddressBook.framework */; };
 		4CACF955195FA19B00056B92 /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CACF954195FA19B00056B92 /* AddressBookUI.framework */; };
+		4E5CBD6919894B5700E1A3D6 /* NextButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E5CBD6819894B5700E1A3D6 /* NextButton.png */; };
+		4E5CBD6B198A88B400E1A3D6 /* PersonHCContacts.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E5CBD6A198A88B400E1A3D6 /* PersonHCContacts.png */; };
+		4E5CBD6D198A88BA00E1A3D6 /* TimerHCContacts.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E5CBD6C198A88BA00E1A3D6 /* TimerHCContacts.png */; };
+		4E9B394C1990DA20009B8306 /* SmallTU.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E9B394B1990DA20009B8306 /* SmallTU.png */; };
+		4E9B394E1990DA2B009B8306 /* SmallTD.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E9B394D1990DA2B009B8306 /* SmallTD.png */; };
+		4E9B39501990DA34009B8306 /* BackgroundImageMC.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E9B394F1990DA34009B8306 /* BackgroundImageMC.png */; };
+		4E9B39521990DE3F009B8306 /* Alex Day.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E9B39511990DE3F009B8306 /* Alex Day.png */; };
 		4EC04F3D195297350017AA78 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EC04F3C195297350017AA78 /* Foundation.framework */; };
 		4EC04F3F195297350017AA78 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EC04F3E195297350017AA78 /* CoreGraphics.framework */; };
 		4EC04F41195297350017AA78 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EC04F40195297350017AA78 /* UIKit.framework */; };
@@ -90,6 +97,15 @@
 		4CACF950195F9F1500056B92 /* MSContactManipulater.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSContactManipulater.m; sourceTree = "<group>"; };
 		4CACF952195FA19400056B92 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		4CACF954195FA19B00056B92 /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
+		4E5CBD6819894B5700E1A3D6 /* NextButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = NextButton.png; path = "../../Desktop/App Images/NextButton.png"; sourceTree = "<group>"; };
+		4E5CBD6A198A88B400E1A3D6 /* PersonHCContacts.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = PersonHCContacts.png; path = "../../Desktop/App Images/PersonHCContacts.png"; sourceTree = "<group>"; };
+		4E5CBD6C198A88BA00E1A3D6 /* TimerHCContacts.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = TimerHCContacts.png; path = "../../Desktop/App Images/TimerHCContacts.png"; sourceTree = "<group>"; };
+		4E5CBD6E198F89C600E1A3D6 /* Cheers Theme.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Cheers Theme.m4a"; path = "../../Desktop/Cheers Theme.m4a"; sourceTree = "<group>"; };
+		4E5CBD73198F99F000E1A3D6 /* Can I Get To Know You Better Clip.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Can I Get To Know You Better Clip.m4a"; path = "../../Desktop/Can I Get To Know You Better Clip.m4a"; sourceTree = "<group>"; };
+		4E9B394B1990DA20009B8306 /* SmallTU.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = SmallTU.png; path = "../../Desktop/App Images/SmallTU.png"; sourceTree = "<group>"; };
+		4E9B394D1990DA2B009B8306 /* SmallTD.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = SmallTD.png; path = "../../Desktop/App Images/SmallTD.png"; sourceTree = "<group>"; };
+		4E9B394F1990DA34009B8306 /* BackgroundImageMC.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BackgroundImageMC.png; path = "../../Desktop/App Images/BackgroundImageMC.png"; sourceTree = "<group>"; };
+		4E9B39511990DE3F009B8306 /* Alex Day.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Alex Day.png"; path = "../../Desktop/App Images/Alex Day.png"; sourceTree = "<group>"; };
 		4EC04F39195297350017AA78 /* FR.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FR.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4EC04F3C195297350017AA78 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		4EC04F3E195297350017AA78 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -187,7 +203,14 @@
 		4EC04F30195297350017AA78 = {
 			isa = PBXGroup;
 			children = (
+				4E9B39511990DE3F009B8306 /* Alex Day.png */,
+				4E9B394D1990DA2B009B8306 /* SmallTD.png */,
+				4E9B394F1990DA34009B8306 /* BackgroundImageMC.png */,
+				4E5CBD6E198F89C600E1A3D6 /* Cheers Theme.m4a */,
+				4E5CBD73198F99F000E1A3D6 /* Can I Get To Know You Better Clip.m4a */,
+				4E5CBD6819894B5700E1A3D6 /* NextButton.png */,
 				4EE67E7819829C6B00DC979D /* BackgroundImageHCContacts.png */,
+				4E9B394B1990DA20009B8306 /* SmallTU.png */,
 				4EE67E74198291AA00DC979D /* GotRightTU.png */,
 				4EE67E75198291AA00DC979D /* GotWrongTD.png */,
 				4EE67E721982912600DC979D /* GuessButton.png */,
@@ -200,6 +223,8 @@
 				4EE67E6E1982143600DC979D /* HCNamesIcon58X58.png */,
 				4EE67E6A198208AA00DC979D /* TimedFlashcard.png */,
 				4EE67E661982052400DC979D /* MultipleChoiceNames.png */,
+				4E5CBD6A198A88B400E1A3D6 /* PersonHCContacts.png */,
+				4E5CBD6C198A88BA00E1A3D6 /* TimerHCContacts.png */,
 				4EE67E64198202FB00DC979D /* HintButton.png */,
 				4EE67E62198202F200DC979D /* InfoButton.png */,
 				4EE67E5E198202CE00DC979D /* LeaderBoard.png */,
@@ -232,11 +257,11 @@
 		4EC04F3B195297350017AA78 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4EC04F40195297350017AA78 /* UIKit.framework */,
 				4CACF954195FA19B00056B92 /* AddressBookUI.framework */,
 				4CACF952195FA19400056B92 /* AddressBook.framework */,
 				4EC04F3C195297350017AA78 /* Foundation.framework */,
 				4EC04F3E195297350017AA78 /* CoreGraphics.framework */,
-				4EC04F40195297350017AA78 /* UIKit.framework */,
 				4EC04F5B195297350017AA78 /* XCTest.framework */,
 			);
 			name = Frameworks;
@@ -400,6 +425,7 @@
 				4EE67E2E1981587100DC979D /* IMG_0940.png in Resources */,
 				4EE67E77198291AA00DC979D /* GotWrongTD.png in Resources */,
 				4EE67DFD197F28FE00DC979D /* Frame.png in Resources */,
+				4E9B39501990DA34009B8306 /* BackgroundImageMC.png in Resources */,
 				4EE67E101981520B00DC979D /* IMG_0932.png in Resources */,
 				4EE67E6B198208AA00DC979D /* TimedFlashcard.png in Resources */,
 				4EE67E5D198202B800DC979D /* MultipleChoiceFaces.png in Resources */,
@@ -412,10 +438,12 @@
 				4EE67E6F1982143600DC979D /* HCNamesIcon120X120.png in Resources */,
 				4EE67E7D1983280700DC979D /* GoButton.png in Resources */,
 				4EE67E8119835ECC00DC979D /* BackButton.png in Resources */,
+				4E5CBD6D198A88BA00E1A3D6 /* TimerHCContacts.png in Resources */,
 				4EE67E731982912600DC979D /* GuessButton.png in Resources */,
 				4EE67E281981587100DC979D /* IMG_0933.png in Resources */,
 				4EE67E76198291AA00DC979D /* GotRightTU.png in Resources */,
 				4EE67E011980640C00DC979D /* healthCatalystIgniteChange.png in Resources */,
+				4E9B394C1990DA20009B8306 /* SmallTU.png in Resources */,
 				4EE67E65198202FB00DC979D /* HintButton.png in Resources */,
 				4EE67E2F1981587100DC979D /* IMG_0929.png in Resources */,
 				4EC04F55195297350017AA78 /* Images.xcassets in Resources */,
@@ -426,12 +454,16 @@
 				4EE67E111981520B00DC979D /* IMG_0933.png in Resources */,
 				4EE67E151981520B00DC979D /* IMG_0938.png in Resources */,
 				4EE67E251981587100DC979D /* IMG_0930.png in Resources */,
+				4E5CBD6919894B5700E1A3D6 /* NextButton.png in Resources */,
 				4EE67E671982052400DC979D /* MultipleChoiceNames.png in Resources */,
 				4EE67E271981587100DC979D /* IMG_0932.png in Resources */,
 				4EC04F47195297350017AA78 /* InfoPlist.strings in Resources */,
 				4EE67E7919829C6B00DC979D /* BackgroundImageHCContacts.png in Resources */,
 				4EE67E2A1981587100DC979D /* IMG_0936.png in Resources */,
+				4E9B394E1990DA2B009B8306 /* SmallTD.png in Resources */,
 				4EE67E701982143600DC979D /* HCNamesIcon80X80.png in Resources */,
+				4E5CBD6B198A88B400E1A3D6 /* PersonHCContacts.png in Resources */,
+				4E9B39521990DE3F009B8306 /* Alex Day.png in Resources */,
 				4EE67E0F1981520B00DC979D /* IMG_0931.png in Resources */,
 				4EE67DFF197F28FE00DC979D /* XButton.png in Resources */,
 				4EE67E3119815B0A00DC979D /* IMG_0929.png in Resources */,
@@ -595,6 +627,18 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "LaunchImage-2";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(USER_LIBRARY_DIR)/Developer/Xcode/iOS",
+					DeviceSupport/7.0.4,
+					"(11B554a)/Symbols/System/Library/Frameworks",
+					"$(USER_LIBRARY_DIR)/Developer/Xcode/iOS",
+					DeviceSupport/7.0,
+					"(11A465)/Symbols/System/Library/Frameworks",
+					"$(USER_LIBRARY_DIR)/Developer/Xcode/iOS",
+					DeviceSupport/6.1.3,
+					"(10B329)/Symbols/System/Library/Frameworks",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "FR/FR-Prefix.pch";
 				INFOPLIST_FILE = "FR/FR-Info.plist";
@@ -613,6 +657,18 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "LaunchImage-2";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(USER_LIBRARY_DIR)/Developer/Xcode/iOS",
+					DeviceSupport/7.0.4,
+					"(11B554a)/Symbols/System/Library/Frameworks",
+					"$(USER_LIBRARY_DIR)/Developer/Xcode/iOS",
+					DeviceSupport/7.0,
+					"(11A465)/Symbols/System/Library/Frameworks",
+					"$(USER_LIBRARY_DIR)/Developer/Xcode/iOS",
+					DeviceSupport/6.1.3,
+					"(10B329)/Symbols/System/Library/Frameworks",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "FR/FR-Prefix.pch";
 				INFOPLIST_FILE = "FR/FR-Info.plist";

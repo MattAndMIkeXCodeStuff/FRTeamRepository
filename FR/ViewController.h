@@ -11,6 +11,8 @@
 #import <AddressBook/AddressBook.h>
 #import <AddressBookUI/AddressBookUI.h>
 #import "MSContactManipulater.h"
+
+
 @interface ViewController : UIViewController
 {
     IBOutlet UILabel* timerLable;
@@ -22,6 +24,25 @@
     
     IBOutlet UITextField *filterField;
     
+    int timeOnThisCard;
+    IBOutlet UILabel* timeOnThisCardLabel;
+    
+    IBOutlet UILabel* numOfContactsLeftLabel;
+    int numOfContactsLeft;
+    
+    IBOutlet UILabel *pointsLabel;
+    int totalSeconds;
+    int currentScore;
+    int highscore;
+    
+    IBOutlet UILabel*typeOfGame;
+    
+    IBOutlet UIDatePicker *date;
+    
+    IBOutlet UIButton*tFButton;
+    IBOutlet UIButton*mCNamesButton;
+    IBOutlet UIButton*mCFacesButton;
+
     Person* myPerson;
     NSMutableArray* arrayOfPeople;
     NSMutableArray* arrayOf50PercentAndOver;
@@ -128,7 +149,67 @@
     IBOutlet UISwitch*practiceModeSwitch;
     
     IBOutlet UIImageView*moreInfoViewImage;
+    
+    int numberOfHintsPressed;
+    
+    IBOutlet UILabel*hintLabel;
+    
+    IBOutlet UILabel*from;
+    IBOutlet UILabel*to;
+    IBOutlet UITextField*fromField;
+    IBOutlet UITextField*toField;
+    IBOutlet UIButton*fromButton;
+    IBOutlet UIButton*toButton;
+    
+    bool onFrom;
+    
+    IBOutlet UIView*mCFacesView;
+    //name 1, 2, 3, and 4
+    IBOutlet UILabel*n1;
+    IBOutlet UILabel*n2;
+    IBOutlet UILabel*n3;
+    IBOutlet UILabel*n4;
+    //image multiple choice faces 1, 2, 3, and 4
+    IBOutlet UIImageView*iMCF1;
+    IBOutlet UIImageView*iMCF2;
+    IBOutlet UIImageView*iMCF3;
+    IBOutlet UIImageView*iMCF4;
+    //info button multiple choice faces 1, 2, 3, and 4
+    IBOutlet UIButton*iBMCF1;
+    IBOutlet UIButton*iBMCF2;
+    IBOutlet UIButton*iBMCF3;
+    IBOutlet UIButton*iBMCF4;
+    //guess button multiple choice faces 1, 2, 3, and 4
+    IBOutlet UIButton*gBMCF1;
+    IBOutlet UIButton*gBMCF2;
+    IBOutlet UIButton*gBMCF3;
+    IBOutlet UIButton*gBMCF4;
+    //person multiple choice faces 1, 2, 3, and 4
+    Person*pMCF1;
+    Person*pMCF2;
+    Person*pMCF3;
+    Person*pMCF4;
+    Person*correctPersonMCF;
+    IBOutlet UILabel*correctPersonLabelMCF;
+    IBOutlet UIButton*nextButtonMCF;
+    // image thum icon
+    IBOutlet UIImageView*iTIMCF1;
+    IBOutlet UIImageView*iTIMCF2;
+    IBOutlet UIImageView*iTIMCF3;
+    IBOutlet UIImageView*iTIMCF4;
+    
 }
+//more info multiple choice faces
+-(IBAction)moreInfoMCF:(id)sender;
+-(void)showMoreInfo:(Person*)pIQ;
+-(IBAction)personGuessedMCF:(id)sender;
+-(void)assignCorrectPersonMCF;
+-(void)generateNewPeopleMCF;
+-(void)checkIfCorrectMCF:(Person*)pIQ;
+-(IBAction)nextMCF;
+-(IBAction)hintMCF;
+
+
 @property(nonatomic)int numberOfSmiths;
 @property(nonatomic)IBOutlet UIScrollView *labelsScrollView;
 @property(nonatomic)IBOutlet UIImageView *mcPersonPicture;
@@ -158,7 +239,8 @@
 @property(nonatomic)IBOutlet UIImageView *personPic;
 @property(nonatomic)IBOutlet UILabel *nameLabel;
 
-
+-(IBAction)showPicker:(id)sender;
+-(IBAction)dateChanged;
 
 -(IBAction)showInfo:(id)sender;
 -(IBAction)gotRight:(id)sender;
@@ -174,6 +256,7 @@
 
 -(void)loadNewPerson;
 
+-(void)printHighScore;
 
 -(void)countUpDuration;
 
@@ -224,12 +307,15 @@
 -(NSMutableArray*)chooseArray;
 -(void)fillArray:(NSMutableArray *)a fromArray:(NSMutableArray *)b;
 
--(void)generateDots;
+-(void)generateDotsForTime:(int)t;
 
 -(void)animateView:(UIView*)v fromDirection:(NSString*)direction;
 -(NSMutableArray*)getContactsWithCompany:(NSString*)company fromArray:(NSMutableArray*)array;
 -(NSMutableArray*)getContactsWithJobTitle:(NSString*)jobTitle fromArray:(NSMutableArray*)array;
 -(NSMutableArray*)getContactsWithDepartment:(NSString*)dept fromArray:(NSMutableArray*)array;
 
+-(IBAction)showFilterView:(id)sender;
+
+-(IBAction)hintButtonPressed;
 @end
 
