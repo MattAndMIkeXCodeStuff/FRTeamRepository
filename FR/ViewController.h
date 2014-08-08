@@ -12,8 +12,7 @@
 #import <AddressBookUI/AddressBookUI.h>
 #import "MSContactManipulater.h"
 
-
-@interface ViewController : UIViewController
+@interface ViewController : UIViewController <UIAlertViewDelegate>
 {
     IBOutlet UILabel* timerLable;
     NSTimer *timer;
@@ -35,6 +34,12 @@
     int currentScore;
     int highscore;
     
+    int currentScoreMCF;
+    int highscoreMCF;
+    
+    int currentScoreMCN;
+    int highscoreMCN;
+    
     IBOutlet UILabel*typeOfGame;
     
     IBOutlet UIDatePicker *date;
@@ -43,6 +48,8 @@
     IBOutlet UIButton*mCNamesButton;
     IBOutlet UIButton*mCFacesButton;
 
+    UIAlertView*alert;
+    
     Person* myPerson;
     NSMutableArray* arrayOfPeople;
     NSMutableArray* arrayOf50PercentAndOver;
@@ -72,7 +79,13 @@
     IBOutlet UIButton *mcButton3;
     IBOutlet UIButton *mcButton4;
    // MSContactManipulater *contactGetter;
-    
+    IBOutlet UIButton *nextMCN;
+    //info button multiple choice names 1, 2, 3, and 4
+    IBOutlet UIButton *iBMCN1;
+    IBOutlet UIButton *iBMCN2;
+    IBOutlet UIButton *iBMCN3;
+    IBOutlet UIButton *iBMCN4;
+
     IBOutlet UIButton*showInfoButton;
     
     IBOutlet UIView*nameView;
@@ -160,6 +173,7 @@
     IBOutlet UITextField*toField;
     IBOutlet UIButton*fromButton;
     IBOutlet UIButton*toButton;
+    IBOutlet UILabel*fromOrTo;
     
     bool onFrom;
     
@@ -198,6 +212,7 @@
     IBOutlet UIImageView*iTIMCF3;
     IBOutlet UIImageView*iTIMCF4;
     
+    Person*lastPerson;
 }
 //more info multiple choice faces
 -(IBAction)moreInfoMCF:(id)sender;
@@ -209,6 +224,8 @@
 -(IBAction)nextMCF;
 -(IBAction)hintMCF;
 
+-(void)generateNewPeopleMCN;
+-(IBAction)nextMCN;
 
 @property(nonatomic)int numberOfSmiths;
 @property(nonatomic)IBOutlet UIScrollView *labelsScrollView;
@@ -257,6 +274,8 @@
 -(void)loadNewPerson;
 
 -(void)printHighScore;
+-(void)printHighScoreMCF;
+-(void)printHighScoreMCN;
 
 -(void)countUpDuration;
 
@@ -312,6 +331,9 @@
 -(void)animateView:(UIView*)v fromDirection:(NSString*)direction;
 -(NSMutableArray*)getContactsWithCompany:(NSString*)company fromArray:(NSMutableArray*)array;
 -(NSMutableArray*)getContactsWithJobTitle:(NSString*)jobTitle fromArray:(NSMutableArray*)array;
+
+-(NSMutableArray*)deleteContacsWithoutJobTitle:(NSString*)jobTitle fromArray:(NSMutableArray*)array;
+
 -(NSMutableArray*)getContactsWithDepartment:(NSString*)dept fromArray:(NSMutableArray*)array;
 -(NSMutableArray*)getContactsWithDateFromArray:(NSMutableArray*)array;
 
