@@ -15,6 +15,15 @@
 @synthesize isMale;
 @synthesize numTimesCorrect;
 @synthesize numTimesGuessed;
+
+@synthesize totalNumTimesCorrectF;
+@synthesize totalNumTimesGuessedF;
+@synthesize totalNumTimesCorrectMCF;
+@synthesize totalNumTimesGuessedMCF;
+@synthesize totalNumTimesCorrectMCN;
+@synthesize totalNumTimesGuessedMCN;
+@synthesize hasEverEverBeenGuessedInTheHistoryOfThisWholeGame;
+
 - (void)setWithFirstName:(NSString*) fName andLastName:(NSString*) lName andImage:(UIImage*)img andGender:(bool)iM
 {
     firstName = fName;

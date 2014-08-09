@@ -115,6 +115,7 @@
     IBOutlet UIView*moreInfoView;
     IBOutlet UIScrollView*moreInfoScrollView;
 
+    IBOutlet UIView*iV;
     
     NSMutableArray* uniqueCompaniesArray;
     NSMutableArray* uniqueDepartmentsArray;
@@ -213,6 +214,48 @@
     IBOutlet UIImageView*iTIMCF4;
     
     Person*lastPerson;
+    
+    
+    IBOutlet UIView*leaderBoardView;
+    IBOutlet UIButton*leaderBoardButton;
+    IBOutlet UIView*statsView;
+    IBOutlet UIButton*statsButton;
+    IBOutlet UIView*settingsView;
+    IBOutlet UIButton*settingsButton;
+
+    //for stats
+    
+    IBOutlet UIScrollView*statsScrollView;
+    
+    IBOutlet UISwitch*dateSwitch;
+    
+    //the values
+    int bestTimeMCF;
+    int bestTimeMCN;
+    int bestTimeF;
+
+    Person*mostTimeMCF;
+    Person*mostTimeMCN;
+    Person*mostTimeF;
+    int mostTimeIntMCF;
+    int mostTimeIntMCN;
+    int mostTimeIntF;
+    //the displays
+    IBOutlet UILabel*bestTimeLabelMCF;
+    IBOutlet UILabel* bestTimeLabelMCN;
+    IBOutlet UILabel* bestTimeLabelF;
+    
+    IBOutlet UILabel* bestScoreLabelMCF;
+    IBOutlet UILabel* bestScoreLabelMCN;
+    IBOutlet UILabel* bestScoreLabelF;
+    
+    IBOutlet UILabel*mostTimeLabelMCF;
+    IBOutlet UILabel*mostTimeLabelMCN;
+    IBOutlet UILabel*mostTimeLabelF;
+    
+    IBOutlet UIImageView*mostTimeImageViewMCF;
+    IBOutlet UIImageView*mostTimeImageViewMCN;
+    IBOutlet UIImageView*mostTimeImageViewF;
 }
 //more info multiple choice faces
 -(IBAction)moreInfoMCF:(id)sender;
@@ -255,6 +298,9 @@
 @property(nonatomic)IBOutlet UIView *nameAndButtonsView;
 @property(nonatomic)IBOutlet UIImageView *personPic;
 @property(nonatomic)IBOutlet UILabel *nameLabel;
+
+-(IBAction)goToNewView:(id)sender;
+
 
 -(IBAction)showPicker:(id)sender;
 -(IBAction)dateChanged;

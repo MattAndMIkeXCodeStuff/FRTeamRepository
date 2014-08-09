@@ -11,6 +11,9 @@
 		4CACF951195F9F1500056B92 /* MSContactManipulater.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CACF950195F9F1500056B92 /* MSContactManipulater.m */; };
 		4CACF953195FA19400056B92 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CACF952195FA19400056B92 /* AddressBook.framework */; };
 		4CACF955195FA19B00056B92 /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CACF954195FA19B00056B92 /* AddressBookUI.framework */; };
+		4E8F5DF019956ECD00D7F690 /* Settings.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E8F5DEF19956ECD00D7F690 /* Settings.png */; };
+		4E8F5DF219956ED500D7F690 /* My Stats.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E8F5DF119956ED500D7F690 /* My Stats.png */; };
+		4E8F5DF4199576D300D7F690 /* separater.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E8F5DF3199576D300D7F690 /* separater.png */; };
 		4EBF34CA1995101700E5B3BA /* SmallTD.png in Resources */ = {isa = PBXBuildFile; fileRef = 4EBF349D1995101700E5B3BA /* SmallTD.png */; };
 		4EBF34CB1995101700E5B3BA /* SmallTU.png in Resources */ = {isa = PBXBuildFile; fileRef = 4EBF349E1995101700E5B3BA /* SmallTU.png */; };
 		4EBF34CC1995101700E5B3BA /* BackgroundImageMC.png in Resources */ = {isa = PBXBuildFile; fileRef = 4EBF349F1995101700E5B3BA /* BackgroundImageMC.png */; };
@@ -90,6 +93,9 @@
 		4CACF950195F9F1500056B92 /* MSContactManipulater.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSContactManipulater.m; sourceTree = "<group>"; };
 		4CACF952195FA19400056B92 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		4CACF954195FA19B00056B92 /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
+		4E8F5DEF19956ECD00D7F690 /* Settings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Settings.png; path = "../../Desktop/App Images/Settings.png"; sourceTree = "<group>"; };
+		4E8F5DF119956ED500D7F690 /* My Stats.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "My Stats.png"; path = "../../Desktop/App Images/My Stats.png"; sourceTree = "<group>"; };
+		4E8F5DF3199576D300D7F690 /* separater.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = separater.png; path = "../../Desktop/App Images/separater.png"; sourceTree = "<group>"; };
 		4EBF349D1995101700E5B3BA /* SmallTD.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = SmallTD.png; path = "../../Desktop/App Images/SmallTD.png"; sourceTree = "<group>"; };
 		4EBF349E1995101700E5B3BA /* SmallTU.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = SmallTU.png; path = "../../Desktop/App Images/SmallTU.png"; sourceTree = "<group>"; };
 		4EBF349F1995101700E5B3BA /* BackgroundImageMC.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BackgroundImageMC.png; path = "../../Desktop/App Images/BackgroundImageMC.png"; sourceTree = "<group>"; };
@@ -232,6 +238,9 @@
 				4EBF34C71995101700E5B3BA /* Frame.png */,
 				4EBF34C81995101700E5B3BA /* CheckButton.png */,
 				4EBF34C91995101700E5B3BA /* XButton.png */,
+				4E8F5DEF19956ECD00D7F690 /* Settings.png */,
+				4E8F5DF119956ED500D7F690 /* My Stats.png */,
+				4E8F5DF3199576D300D7F690 /* separater.png */,
 				4EC04F71195297E90017AA78 /* Person.h */,
 				4EC04F72195297E90017AA78 /* Person.m */,
 				4EC04F42195297350017AA78 /* FR */,
@@ -403,6 +412,8 @@
 				4EBF34CD1995101700E5B3BA /* MultipleChoiceFaces.png in Resources */,
 				4EBF34E81995101700E5B3BA /* IMG_0938.png in Resources */,
 				4EBF34DC1995101700E5B3BA /* HCNamesIcon120X120.png in Resources */,
+				4E8F5DF019956ECD00D7F690 /* Settings.png in Resources */,
+				4E8F5DF4199576D300D7F690 /* separater.png in Resources */,
 				4EBF34DE1995101700E5B3BA /* HCNamesIcon58X58.png in Resources */,
 				4EBF34E01995101700E5B3BA /* HintButton.png in Resources */,
 				4EBF34CB1995101700E5B3BA /* SmallTU.png in Resources */,
@@ -422,6 +433,7 @@
 				4EBF34EC1995101700E5B3BA /* healthCatalystIgniteChangeSmallVerson.png in Resources */,
 				4EBF34D61995101700E5B3BA /* BackgroundImageHCCountactsMoreInfoPage.png in Resources */,
 				4EBF34DF1995101700E5B3BA /* InfoButton.png in Resources */,
+				4E8F5DF219956ED500D7F690 /* My Stats.png in Resources */,
 				4EBF34D11995101700E5B3BA /* BackgroundImageHCContacts.png in Resources */,
 				4EBF34F61995101700E5B3BA /* XButton.png in Resources */,
 				4EBF34E91995101700E5B3BA /* IMG_0939.png in Resources */,

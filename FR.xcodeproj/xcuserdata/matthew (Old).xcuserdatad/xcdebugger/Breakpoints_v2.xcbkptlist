@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FR/ViewController.m"
-            timestampString = "429221420.861978"
+            timestampString = "429307656.601293"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "873"
-            endingLineNumber = "873"
+            startingLineNumber = "912"
+            endingLineNumber = "912"
             landmarkName = "-swichValueChanged:fromSwitch:"
             landmarkType = "5">
          </BreakpointContent>
@@ -42,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FR/ViewController.m"
-            timestampString = "429221420.861978"
+            timestampString = "429307656.601293"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "690"
-            endingLineNumber = "690"
+            startingLineNumber = "726"
+            endingLineNumber = "726"
             landmarkName = "-getContactsWithCompany:fromArray:"
             landmarkType = "5">
          </BreakpointContent>

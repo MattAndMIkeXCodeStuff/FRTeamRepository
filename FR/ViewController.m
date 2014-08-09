@@ -61,6 +61,12 @@
     filterCompanySwitches = [[NSMutableArray alloc]init];
     filterCompanyText = [[NSMutableArray alloc]init];
     
+    bestTimeF = 1000000;
+    bestTimeMCF = 1000000;
+    bestTimeMCN = 1000000;
+
+    
+    
     nameView.hidden = true;
     MCGameView.hidden=true;
     firstView.hidden=false;
@@ -95,15 +101,20 @@
     iTIMCF3.hidden = true;
     iTIMCF4.hidden = true;
     fromOrTo.hidden = true;
+    statsView.hidden = true;
+    settingsView.hidden = true;
+    leaderBoardView.hidden = true;
+    
+    mostTimeIntMCN =0;
+    mostTimeIntMCF =0;
+    mostTimeIntF =0;
 
-    NSDate*d = [[NSDate alloc]init];
-    NSDateFormatter *formatter=[[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"MM/dd/yy"];
-    toField.text = [formatter stringFromDate:d];
+    dateSwitch.on = false;
     
-    alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"You have filtered out every person. " delegate:self cancelButtonTitle:@"Oh, sorry" otherButtonTitles:@"Cancel", nil];
-    
-    alert = [[UIAlertView alloc] initWithTitle:@"Errorr" message:@"You have filtered out every person, therfore you cannot be tested" delegate:self cancelButtonTitle:@"Okay, it won't happen again" otherButtonTitles:NULL, nil];
+
+    [statsScrollView setScrollEnabled:YES];
+    [statsScrollView setContentSize:CGSizeMake(320, 798)];
+
     
     [super viewDidLoad];
     
@@ -187,6 +198,10 @@
     //[self loadLabels:@"Company"];
 
 	// Do any additional setup after loading the view, typically from a nib.
+    NSDate*d = [[NSDate alloc]init];
+    NSDateFormatter *formatter=[[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"MM/dd/yy"];
+    toField.text = [formatter stringFromDate:d];
 }
 
 
@@ -215,6 +230,13 @@
 }
 -(IBAction)gotRight:(id)sender {
     //NSLog(@"Got Right");
+    if(timeOnThisCard > mostTimeIntF)
+    {
+        mostTimeIntF = timeOnThisCard;
+        mostTimeF = currentPerson;
+    }
+    
+    
     numberOfHintsPressed = 0;
     hintLabel.text = [NSString stringWithFormat:@"H:%i", 3-numberOfHintsPressed];
     timeOnThisCard = 0;
@@ -267,6 +289,8 @@
         }
         
         totalSeconds = minutes*60 + seconds;
+        
+
         
         currentScore = (int)round(((1000*totalGuessed*totalGuessed*totalPercentage)/(totalSeconds)));
         [self printHighScore];
@@ -331,6 +355,11 @@
 -(IBAction)gotWrong:(id)sender {
 
    // NSLog(@"Got Wrong");
+    if(timeOnThisCard > mostTimeIntF)
+    {
+        mostTimeIntF = timeOnThisCard;
+        mostTimeF = currentPerson;
+    }
     timeOnThisCard = 0;
     timeOnThisCardLabel.text =@"0";
     
@@ -424,9 +453,11 @@
     else
     {
         pointsLabel.text = [NSString stringWithFormat:@"You scored %i", currentScoreMCF];
-        
     }
-
+    if(totalSeconds < bestTimeMCF)
+    {
+        bestTimeMCF = totalSeconds;
+    }
 }
 -(void)printHighScoreMCN
 {
@@ -439,9 +470,11 @@
     else
     {
         pointsLabel.text = [NSString stringWithFormat:@"You scored %i", currentScoreMCN];
-        
     }
-    
+    if(totalSeconds < bestTimeMCN)
+    {
+        bestTimeMCN = totalSeconds;
+    }
 }
 
 -(void)printHighScore
@@ -455,7 +488,10 @@
     else
     {
         pointsLabel.text = [NSString stringWithFormat:@"You scored %i", currentScore];
-        
+    }
+    if(totalSeconds < bestTimeF)
+    {
+        bestTimeF = totalSeconds;
     }
 }
 -(NSMutableArray*)chooseArray
@@ -759,23 +795,30 @@
 
 -(NSMutableArray*)getContactsWithDateFromArray:(NSMutableArray*)array
 {
-    NSMutableArray*finalPeople = [[NSMutableArray alloc]init];
-    for (int l = 0; l < array.count; l++)
+    if(dateSwitch.isOn == true)
     {
-        Person *p;
-        p = [[Person alloc]init];
-        p = [array objectAtIndex:l];
-        NSDateFormatter*dF = [[NSDateFormatter alloc]init];
-        [dF setDateFormat:@"MM/dd/yy"];
-        
-        ///NSLog(@"%@ for %@", [dF stringFromDate: p.date], p.firstName);
-        
-        if(([p.date laterDate:[dF dateFromString:toField.text]] != p.date && [p.date laterDate:[dF dateFromString:fromField.text]] == p.date))// || ( p.date == NULL))
+        NSMutableArray*finalPeople = [[NSMutableArray alloc]init];
+        for (int l = 0; l < array.count; l++)
         {
-            [finalPeople addObject:p];
+            Person *p;
+            p = [[Person alloc]init];
+            p = [array objectAtIndex:l];
+            NSDateFormatter*dF = [[NSDateFormatter alloc]init];
+            [dF setDateFormat:@"MM/dd/yy"];
+            
+            ///NSLog(@"%@ for %@", [dF stringFromDate: p.date], p.firstName);
+            
+            if(([p.date laterDate:[dF dateFromString:toField.text]] != p.date && [p.date laterDate:[dF dateFromString:fromField.text]] == p.date))// || ( p.date == NULL))
+            {
+                [finalPeople addObject:p];
+            }
         }
+        return finalPeople;
     }
-    return finalPeople;
+    else
+    {
+        return array;
+    }
 }
 
 
@@ -820,32 +863,28 @@
             [arrayOf49PercentAndUnder addObjectsFromArray: [self getContactsWithCompany:[filterCompanyText objectAtIndex:i] fromArray:allPeople]];
         }
     }
-    
-    if(arrayOf49PercentAndUnder.count < 1)
-    {
-        NSLog(@"show the alert");
-        [alert show];
-    }
+    alert = [[UIAlertView alloc] initWithTitle:@"Errorr" message:@"You have filtered out every person, therfore you cannot be tested" delegate:self cancelButtonTitle:@"Okay, it won't happen again" otherButtonTitles:NULL, nil];
     arrayOf49PercentAndUnder = [self getContactsWithDateFromArray:arrayOf49PercentAndUnder];
-    if(arrayOf49PercentAndUnder.count < 1)
-    {
-        NSLog(@"show the alert");
-        [alert show];
-    }
     arrayOf49PercentAndUnder = [self getContactsWithDepartment:@"test:" fromArray:arrayOf49PercentAndUnder];
-    if(arrayOf49PercentAndUnder.count < 1)
-    {
-        NSLog(@"show the alert");
-        [alert show];
-    }
     arrayOf49PercentAndUnder = [self getContactsWithJobTitle:@"test" fromArray:arrayOf49PercentAndUnder];
-    if(arrayOf49PercentAndUnder.count < 1)
+    
+    if(arrayOf49PercentAndUnder.count == 0)
     {
         NSLog(@"show the alert");
         [alert show];
     }
     
-    if(arrayOf49PercentAndUnder.count > 0 )
+    
+    if([typeOfGame.text isEqualToString:@"Multiple Choice Faces"] || [typeOfGame.text isEqualToString:@"Multiple Choice Names"])
+    {
+        alert = [[UIAlertView alloc] initWithTitle:@"Errorr" message:@"In a Multiple Choice Game you must have at least 4 people" delegate:self cancelButtonTitle:@"Okay, it won't happen again" otherButtonTitles:NULL, nil];
+        if(arrayOf49PercentAndUnder.count < 4)
+        {
+            [alert show];
+        }
+    }
+    
+    if((arrayOf49PercentAndUnder.count > 0 && [typeOfGame.text isEqualToString:@"Flashcard Game"]) || (([typeOfGame.text isEqualToString:@"Multiple Choice Faces"] || [typeOfGame.text isEqualToString:@"Multiple Choice Names"]) && arrayOf49PercentAndUnder.count > 3))
     {
         NSMutableArray* currentArray;
         currentArray = arrayOf49PercentAndUnder;
@@ -1020,6 +1059,8 @@
         toButton.hidden = false;
         date.hidden=false;
         fromOrTo.hidden = false;
+        iV.hidden = false;
+        dateSwitch.hidden = false;
     }
     else
     {
@@ -1031,6 +1072,8 @@
         toButton.hidden = true;
         date.hidden=true;
         fromOrTo.hidden = true;
+        iV.hidden = true;
+        dateSwitch.hidden = true;
 
         UILabel *newLabel = [[UILabel alloc]init];
         newLabel.text = @"All";
@@ -1598,7 +1641,9 @@
     companyTitleField.hidden = true;
     //nameAndButtonsView.hidden = true;
     nameView.hidden = true;
-
+    settingsView.hidden = true;
+    statsView.hidden = true;
+    leaderBoardView.hidden = true;
 }
 //go to multiple choice timed view
 -(IBAction)goToMCTV
@@ -1975,6 +2020,7 @@
     totalSeconds=0;
     seconds=0;
     minutes=0;
+    timerView.hidden=true;
     
     [arrayOf49PercentAndUnder removeAllObjects];
     [arrayOf50PercentAndOver removeAllObjects];
@@ -2031,6 +2077,95 @@
 
 
 }
+-(IBAction)goToNewView:(id)sender
+{
+    if(sender == leaderBoardButton)
+    {
+        leaderBoardView.hidden = false;
+        firstView.hidden = true;
+
+    }
+    else if(sender == statsButton)
+    {
+        bestScoreLabelF.text = [NSString stringWithFormat:@"Highest Score: %i",highscore];
+        bestScoreLabelMCF.text = [NSString stringWithFormat:@"Highest Score: %i",highscoreMCF];
+        bestScoreLabelMCN.text = [NSString stringWithFormat:@"Highest Score: %i",highscoreMCN];
+
+        int m;
+        int bT = bestTimeF;
+        m=0;
+                
+        while(bT > 60)
+        {
+            bT-=60;
+            m++;
+        }
+        if(bT < 10)
+        {
+            bestTimeLabelF.text = [NSString stringWithFormat:@"Best Time: %i:0%i",m,bT];
+        }
+        else
+        {
+            bestTimeLabelF.text = [NSString stringWithFormat:@"Best Time: %i:%i",m,bT];
+        }
+        
+        m=0;
+        bT = bestTimeMCF;
+        while(bT > 60)
+        {
+            bT-=60;
+            m++;
+        }
+            
+        if(bT < 10)
+        {
+            bestTimeLabelMCF.text = [NSString stringWithFormat:@"Best Time: %i:0%i",m,bT];
+        }
+        else
+        {
+            bestTimeLabelMCF.text = [NSString stringWithFormat:@"Best Time: %i:%i",m,bT];
+        }
+        
+        m=0;
+        bT = bestTimeMCN;
+
+        while(bT > 60)
+        {
+            bT-=60;
+            m++;
+        }
+            
+        if(bT < 10)
+        {
+            bestTimeLabelMCN.text = [NSString stringWithFormat:@"Best Time: %i:0%i",m,bT];
+        }
+        else
+        {
+            bestTimeLabelMCN.text = [NSString stringWithFormat:@"Best Time: %i:%i",m,bT];
+        }
+        
+        mostTimeLabelF.text = [NSString stringWithFormat:@"Most Time Taken On: %@ (%i Seconds)", mostTimeF.getFullName,mostTimeIntF];
+        mostTimeLabelMCF.text = [NSString stringWithFormat:@"Most Time Taken On: %@ (%i Seconds)", mostTimeMCF.getFullName,mostTimeIntMCF];
+        mostTimeLabelMCN.text = [NSString stringWithFormat:@"Most Time Taken On: %@ (%i Seconds)", mostTimeMCN.getFullName,mostTimeIntMCN];
+        
+        mostTimeImageViewF.image = mostTimeF.selfImage;
+        mostTimeImageViewMCF.image = mostTimeMCF.selfImage;
+        mostTimeImageViewMCN.image = mostTimeMCN.selfImage;
+
+        statsView.hidden = false;
+        firstView.hidden = true;
+
+    }
+    else if(sender == settingsButton)
+    {
+        settingsView.hidden = false;
+        firstView.hidden = true;
+
+    }
+}
+
+
+
 -(IBAction)hintButtonPressed
 {
     ++numberOfHintsPressed;
@@ -2704,6 +2839,11 @@
 }
 -(void)generateNewPeopleMCF
 {
+    if(timeOnThisCard > mostTimeIntMCF)
+    {
+        mostTimeIntMCF = timeOnThisCard;
+        mostTimeMCF = currentPerson;
+    }
     timeOnThisCard = 0;
 
     if (arrayOf49PercentAndUnder.count > 3)
@@ -2934,7 +3074,7 @@
 -(IBAction)hideFilterViewAndFilter
 {
     [self readValues];
-    if(arrayOf49PercentAndUnder.count > 0)
+    if((arrayOf49PercentAndUnder.count > 0 && [typeOfGame.text isEqualToString:@"Flashcard Game"]) || (([typeOfGame.text isEqualToString:@"Multiple Choice Faces"] || [typeOfGame.text isEqualToString:@"Multiple Choice Names"]) && arrayOf49PercentAndUnder.count > 3))
     {
         FilterView.hidden = true;
     }
@@ -2942,6 +3082,11 @@
 
 -(void)generateNewPeopleMCN
 {
+    if(timeOnThisCard > mostTimeIntMCN)
+    {
+        mostTimeIntMCN = timeOnThisCard;
+        mostTimeMCN = currentPerson;
+    }
     timeOnThisCard = 0;
     int rn;
     
@@ -3061,8 +3206,11 @@
 
 -(IBAction)goButtonPressed
 {
+
+    
+    
     [self readValues];
-    if(arrayOf49PercentAndUnder.count > 0)
+    if((arrayOf49PercentAndUnder.count > 0 && [typeOfGame.text isEqualToString:@"Flashcard Game"]) || (([typeOfGame.text isEqualToString:@"Multiple Choice Faces"] || [typeOfGame.text isEqualToString:@"Multiple Choice Names"]) && arrayOf49PercentAndUnder.count > 3))
     {
         FilterView.hidden= true;
         timerView.hidden=false;

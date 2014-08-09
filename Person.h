@@ -29,6 +29,13 @@
 @property(nonatomic)int secondsTaken;
 @property(nonatomic)int minutesTaken;
 
+@property(nonatomic)double totalNumTimesCorrectF;
+@property(nonatomic)double totalNumTimesGuessedF;
+@property(nonatomic)double totalNumTimesCorrectMCF;
+@property(nonatomic)double totalNumTimesGuessedMCF;
+@property(nonatomic)double totalNumTimesCorrectMCN;
+@property(nonatomic)double totalNumTimesGuessedMCN;
+@property(nonatomic)bool hasEverEverBeenGuessedInTheHistoryOfThisWholeGame;
 
 //@property(nonatomic)NSString *fullName;
 
