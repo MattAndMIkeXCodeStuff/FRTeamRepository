@@ -1106,7 +1106,7 @@
         noneSpecifiedSwitch.on = true;
 
         if([labelType isEqual:@"Company"]) {
-            if (filterCompanyText.count == 0)
+            if (filterCompanyText.count == 0 || filterCompanyText.count == 1)
             {
                 
                 //SEL theSelector = @selector(companySwitchValueChanged:);
@@ -1147,13 +1147,20 @@
             else
             {
                 NSMutableArray *newArray = [[NSMutableArray alloc] init];
-                for (int i = 1; i<filterCompanySwitches.count; i++) {
+                for (int i = 0; i<filterCompanySwitches.count; i++) {
                     bool isiton = [[filterCompanySwitches objectAtIndex:i] isOn];
+                    if (isiton) {
+                        NSLog(@"#%i is On",i);
+                    } else {
+                        NSLog(@"#%i is Off",i);
+
+                    }
                     [newArray addObject:[NSNumber numberWithBool:isiton]];
                 }
                 SEL theSelector = @selector(companySwitchValueChanged:);
                 [switchThing addTarget:self action:@selector(companySwitchValueChanged:)  forControlEvents:UIControlEventValueChanged];
-                
+                noneSpecifiedSwitch.on = [[filterCompanySwitches objectAtIndex:1] isOn];
+                switchThing.on = [[filterCompanySwitches objectAtIndex:0] isOn];
                 [filterCompanySwitches removeAllObjects];
                 [filterCompanyText removeAllObjects];
                 [filterCompanyText addObject:newLabel.text];
@@ -1178,23 +1185,26 @@
                     switchThing.center = CGPointMake(220, 116+(40*i));
                     [switchThing addTarget:self action:@selector(companySwitchValueChanged:) forControlEvents:UIControlEventValueChanged];
                     
-                    [switchThing setOn:[[newArray objectAtIndex:i] boolValue] animated:NO];
+                    [switchThing setOn:[[newArray objectAtIndex:i+2] boolValue] animated:NO];
                     [filterCompanyText addObject:newLabel.text];
                     [filterCompanySwitches addObject:switchThing];
-                    [filterCompanyText addObject:noneSpecified.text];
-                    [filterCompanySwitches addObject:noneSpecifiedSwitch];
+                    //[filterCompanyText addObject:noneSpecified.text];
+                    //[filterCompanySwitches addObject:noneSpecifiedSwitch];
                     
+                }
+                for (int i = 0; i<uniqueCompaniesArray.count; i++) {
+                    //[[filterCompanySwitches objectAtIndex:i] setOn:[[newArray objectAtIndex:i] boolValue]animated:NO];
                 }
                 
             }
             
         }
         
-        
+        NSLog(@"Num Dept = %i",filterDepartmentText.count);
         if ([labelType isEqual:@"Department"]) {
-                if (filterDepartmentText.count == 0)
+                if (filterDepartmentText.count == 0 || filterDepartmentText.count == 1)
                 {
-                    [switchThing addTarget:self action:@selector(departmentSwitchValueChanged:)  forControlEvents:UIControlEventValueChanged];
+                    //[switchThing addTarget:self action:@selector(departmentSwitchValueChanged:)  forControlEvents:UIControlEventValueChanged];
                     [filterDepartmentSwitches removeAllObjects];
                     [filterDepartmentText removeAllObjects];
                     [filterDepartmentText addObject:newLabel.text];
@@ -1226,15 +1236,25 @@
                         [filterDepartmentSwitches addObject:switchThing];
                         
                     }
-                } else {
+                }
+                else
+                {
                     NSMutableArray *newArray = [[NSMutableArray alloc] init];
-                    for (int i = 1; i<filterDepartmentSwitches.count; i++) {
+                    for (int i = 0; i<filterDepartmentSwitches.count; i++) {
                         bool isiton = [[filterDepartmentSwitches objectAtIndex:i] isOn];
                         [newArray addObject:[NSNumber numberWithBool:isiton]];
+                        if (isiton) {
+                            NSLog(@"%@ #%i is On",[filterDepartmentText objectAtIndex:i],i);
+                        } else {
+                            NSLog(@"%@ #%i is Off",[filterDepartmentText objectAtIndex:i],i);
+                            
+                        }
                     }
                     SEL theSelector = @selector(companySwitchValueChanged:);
                     [switchThing addTarget:self action:@selector(departmentSwitchValueChanged:)  forControlEvents:UIControlEventValueChanged];
-                    
+                    noneSpecifiedSwitch.on = [[filterDepartmentSwitches objectAtIndex:1] isOn];
+                    switchThing.on = [[filterDepartmentSwitches objectAtIndex:0] isOn];
+
                     [filterDepartmentSwitches removeAllObjects];
                     [filterDepartmentText removeAllObjects];
                     [filterDepartmentText addObject:newLabel.text];
@@ -1261,8 +1281,8 @@
                         [switchThing setOn:[[newArray objectAtIndex:i] boolValue] animated:NO];
                         [filterDepartmentText addObject:newLabel.text];
                         [filterDepartmentSwitches addObject:switchThing];
-                        [filterDepartmentText addObject:noneSpecified.text];
-                        [filterDepartmentSwitches addObject:noneSpecifiedSwitch];
+                        //[filterDepartmentText addObject:noneSpecified.text];
+                        //[filterDepartmentSwitches addObject:noneSpecifiedSwitch];
                         
                     }
                     
@@ -3111,6 +3131,7 @@
     mcButton3.backgroundColor = [UIColor lightGrayColor];
     mcButton4.backgroundColor = [UIColor lightGrayColor];
     //
+    if(arrayOf49PercentAndUnder.count >3) {
     mcPersonPicture.image = correctMCPerson.selfImage;
     
     rn = rand()%arrayOf49PercentAndUnder.count;
@@ -3159,7 +3180,9 @@
 
     mcPersonPicture.image = correctMCPerson.selfImage;
     currentPerson = correctMCPerson;
-    
+    } else {
+        
+    }
     /*
     
     
