@@ -1278,7 +1278,7 @@
                         switchThing.center = CGPointMake(220, 116+(40*i));
                         [switchThing addTarget:self action:@selector(departmentSwitchValueChanged:) forControlEvents:UIControlEventValueChanged];
                         
-                        [switchThing setOn:[[newArray objectAtIndex:i] boolValue] animated:NO];
+                        [switchThing setOn:[[newArray objectAtIndex:i+2] boolValue] animated:NO];
                         [filterDepartmentText addObject:newLabel.text];
                         [filterDepartmentSwitches addObject:switchThing];
                         //[filterDepartmentText addObject:noneSpecified.text];
@@ -1326,13 +1326,14 @@
                 }
             } else {
                 NSMutableArray *newArray = [[NSMutableArray alloc] init];
-                for (int i = 1; i<filterJobTitlesSwitches.count; i++) {
+                for (int i = 0; i<filterJobTitlesSwitches.count; i++) {
                     bool isiton = [[filterJobTitlesSwitches objectAtIndex:i] isOn];
                     [newArray addObject:[NSNumber numberWithBool:isiton]];
                 }
                 SEL theSelector = @selector(companySwitchValueChanged:);
                 [switchThing addTarget:self action:@selector(jobTitleSwitchValueChanged:)  forControlEvents:UIControlEventValueChanged];
-                
+                noneSpecifiedSwitch.on = [[filterJobTitlesSwitches objectAtIndex:1] isOn];
+                switchThing.on = [[filterJobTitlesSwitches objectAtIndex:0] isOn];
                 [filterJobTitlesSwitches removeAllObjects];
                 [filterJobTitlesText removeAllObjects];
                 [filterJobTitlesText addObject:newLabel.text];
@@ -1356,11 +1357,11 @@
                     switchThing.center = CGPointMake(220, 116+(40*i));
                     [switchThing addTarget:self action:@selector(jobTitleSwitchValueChanged:) forControlEvents:UIControlEventValueChanged];
                     
-                    [switchThing setOn:[[newArray objectAtIndex:i] boolValue] animated:NO];
+                    [switchThing setOn:[[newArray objectAtIndex:i+2] boolValue] animated:NO];
                     [filterJobTitlesText addObject:newLabel.text];
                     [filterJobTitlesSwitches addObject:switchThing];
-                    [filterJobTitlesText addObject:noneSpecified.text];
-                    [filterJobTitlesSwitches addObject:noneSpecifiedSwitch];
+                    //[filterJobTitlesText addObject:noneSpecified.text];
+                    //[filterJobTitlesSwitches addObject:noneSpecifiedSwitch];
                 }
             }
         }
