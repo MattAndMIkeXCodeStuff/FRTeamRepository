@@ -256,6 +256,19 @@
     IBOutlet UIImageView*mostTimeImageViewMCF;
     IBOutlet UIImageView*mostTimeImageViewMCN;
     IBOutlet UIImageView*mostTimeImageViewF;
+    
+    IBOutlet UISwitch*musicSwitchSetting;
+    IBOutlet UISwitch*fxSwitchSetting;
+    
+    IBOutlet UISwitch*birthdaySwitchSetting;
+    IBOutlet UISwitch*companySwitchSetting;
+    IBOutlet UISwitch*dateSwitchSetting;
+    IBOutlet UISwitch*departmentSwitchSetting;
+    IBOutlet UISwitch*jobTitleSwitchSetting;
+
+    IBOutlet UISegmentedControl*filters;
+    
+    NSString*dateTypeString;
 }
 //more info multiple choice faces
 -(IBAction)moreInfoMCF:(id)sender;
@@ -269,6 +282,8 @@
 
 -(void)generateNewPeopleMCN;
 -(IBAction)nextMCN;
+
+-(IBAction)customDate;
 
 @property(nonatomic)int numberOfSmiths;
 @property(nonatomic)IBOutlet UIScrollView *labelsScrollView;
@@ -315,6 +330,9 @@
 
 -(IBAction)moreInfo;
 -(IBAction)lessInfo;
+
+-(void)playSoundNamed:(NSString*)soundName;
+-(void)updateCurrentFilters;
 
 
 -(void)loadNewPerson;

@@ -114,7 +114,7 @@
 
     [statsScrollView setScrollEnabled:YES];
     [statsScrollView setContentSize:CGSizeMake(320, 798)];
-
+    [self updateCurrentFilters];
     
     [super viewDidLoad];
     
@@ -728,9 +728,8 @@
         //NSLog(@"%@ name",p.firstName);
         //NSLog(@"%i", p.company.length);
         //NSLog(@"%@ sent value", company);
-        if([company isEqualToString:@"None Specified"] && p.company.length == 0)
+        if([company isEqualToString:@"None Specified"] && p.company.length == 0 && [self isObjectIdenticalTo:p inArray:finalPeople] == false)
         {
-            //p.company = @"None Specified";
             [finalPeople addObject:p];
         }
         else if ([p.company isEqualToString: company])
@@ -747,43 +746,25 @@
 }
 -(NSMutableArray*)getContactsWithJobTitle:(NSString*)jobTitle fromArray:(NSMutableArray*)array
 {
-    /*
-    NSMutableArray*finalPeople;
-    finalPeople = [[NSMutableArray alloc]init];
-    for (int l = 0; l < array.count; l++)
-    {
-        Person *p;
-        p = [[Person alloc]init];
-        p = [array objectAtIndex:l];
-        //NSLog(@"%@",p.jobTitle);
-        if ([p.jobTitle isEqualToString: jobTitle])
-        {
-            NSLog(@"it worked");
-            [finalPeople addObject:p];
-        }
-        if([jobTitle isEqualToString:[filterCompanyText objectAtIndex:1]])
-        {
-            //[finalPeople addObject:p];
-        }
-    }
-    
-
-    return finalPeople;\
-     
-     */
     NSMutableArray*finalPeople = [[NSMutableArray alloc]init];
     for (int i = 0; i<filterJobTitlesSwitches.count; i++)
     {
+        jobTitle = [filterJobTitlesText objectAtIndex:i];
         if ([[filterJobTitlesSwitches objectAtIndex:i] isOn] == true)
         {
             //NSLog(@"%@ is On",[filterJobTitlesText objectAtIndex:i]);
+            
             for (int l = 0; l < array.count; l++)
             {
                 Person *p;
                 p = [[Person alloc]init];
                 p = [array objectAtIndex:l];
                 //NSLog(p.jobTitle);
-                if([p.jobTitle isEqualToString:[filterJobTitlesText objectAtIndex:i]])
+                if([jobTitle isEqualToString:@"None Specified"] && p.jobTitle.length == 0 && [self isObjectIdenticalTo:p inArray:finalPeople] == false)
+                {
+                    [finalPeople addObject:p];
+                }
+                if([p.jobTitle isEqualToString:[filterJobTitlesText objectAtIndex:i]] && [self isObjectIdenticalTo:p inArray:finalPeople] == false)
                 {
                     [finalPeople addObject:p];
                 }
@@ -808,7 +789,7 @@
             
             ///NSLog(@"%@ for %@", [dF stringFromDate: p.date], p.firstName);
             
-            if(([p.date laterDate:[dF dateFromString:toField.text]] != p.date && [p.date laterDate:[dF dateFromString:fromField.text]] == p.date))// || ( p.date == NULL))
+            if((([p.date laterDate:[dF dateFromString:toField.text]] != p.date && [p.date laterDate:[dF dateFromString:fromField.text]] == p.date))&& [self isObjectIdenticalTo:p inArray:finalPeople] == false)// || ( p.date == NULL))
             {
                 [finalPeople addObject:p];
             }
@@ -829,6 +810,7 @@
     {
         if ([[filterDepartmentSwitches objectAtIndex:i] isOn] == true)
         {
+            dept = [filterDepartmentText objectAtIndex:i];
             //NSLog(@"%@ is On",[filterDepartmentText objectAtIndex:i]);
             for (int l = 0; l < array.count; l++)
             {
@@ -836,7 +818,11 @@
                 p = [[Person alloc]init];
                 p = [array objectAtIndex:l];
                 //NSLog(p.department);
-                if([p.department isEqualToString:[filterDepartmentText objectAtIndex:i]])
+                if([dept isEqualToString:@"None Specified"] && p.department.length == 0 && [self isObjectIdenticalTo:p inArray:finalPeople] == false)
+                {
+                    [finalPeople addObject:p];
+                }
+                if([p.department isEqualToString:[filterDepartmentText objectAtIndex:i]] && [self isObjectIdenticalTo:p inArray:finalPeople] == false)
                 {
                     [finalPeople addObject:p];
                 }
@@ -863,13 +849,13 @@
             [arrayOf49PercentAndUnder addObjectsFromArray: [self getContactsWithCompany:[filterCompanyText objectAtIndex:i] fromArray:allPeople]];
         }
     }
-    alert = [[UIAlertView alloc] initWithTitle:@"Errorr" message:@"You have filtered out every person, therfore you cannot be tested" delegate:self cancelButtonTitle:@"Okay, it won't happen again" otherButtonTitles:NULL, nil];
+    alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"You have filtered out every person, therfore you cannot be tested." delegate:self cancelButtonTitle:@"Okay" otherButtonTitles:NULL, nil];
      NSLog(@"Number of Contacts = %lu",(unsigned long)arrayOf49PercentAndUnder.count);
     arrayOf49PercentAndUnder = [self getContactsWithDateFromArray:arrayOf49PercentAndUnder];
      NSLog(@"Number of Contacts = %lu",(unsigned long)arrayOf49PercentAndUnder.count);
-    //arrayOf49PercentAndUnder = [self getContactsWithDepartment:@"test:" fromArray:arrayOf49PercentAndUnder];
+    arrayOf49PercentAndUnder = [self getContactsWithDepartment:@"test:" fromArray:arrayOf49PercentAndUnder];
      NSLog(@"Number of Contacts = %lu",(unsigned long)arrayOf49PercentAndUnder.count);
-    //arrayOf49PercentAndUnder = [self getContactsWithJobTitle:@"test" fromArray:arrayOf49PercentAndUnder];
+    arrayOf49PercentAndUnder = [self getContactsWithJobTitle:@"test" fromArray:arrayOf49PercentAndUnder];
      NSLog(@"Number of Contacts = %lu",(unsigned long)arrayOf49PercentAndUnder.count);
     
     if(arrayOf49PercentAndUnder.count == 0)
@@ -881,7 +867,7 @@
     NSLog(@"Number of Contacts = %i",arrayOf49PercentAndUnder.count);
     if([typeOfGame.text isEqualToString:@"Multiple Choice Faces"] || [typeOfGame.text isEqualToString:@"Multiple Choice Names"])
     {
-        alert = [[UIAlertView alloc] initWithTitle:@"Errorr" message:@"In a Multiple Choice Game you must have at least 4 people" delegate:self cancelButtonTitle:@"Okay, it won't happen again" otherButtonTitles:NULL, nil];
+        alert = [[UIAlertView alloc] initWithTitle:@"Errorr" message:@"In a Multiple Choice Game you must have at least four people." delegate:self cancelButtonTitle:@"Okay" otherButtonTitles:NULL, nil];
         if(arrayOf49PercentAndUnder.count < 4)
         {
             [alert show];
@@ -1374,7 +1360,9 @@
     {
         [object removeFromSuperview];
     }
-    if ([s selectedSegmentIndex]==0) {
+    [self loadLabels: [s titleForSegmentAtIndex:s.selectedSegmentIndex]];
+     /*
+    if (s.) {
         [self loadLabels:@"Company"];
     }
     if ([s selectedSegmentIndex]==1) {
@@ -1387,7 +1375,7 @@
     if([s selectedSegmentIndex] == 3){
         [self loadLabels:@"Date"];
     }
-
+*/
 }
 -(void)countUpDuration
 {
@@ -1644,31 +1632,35 @@
 //go to first view
 -(IBAction)goToFV
 {
-    gameOverView.hidden = true;
-    nextView = @"FV";
-    firstView.center = CGPointMake(firstView.center.x - firstView.bounds.size.width, firstView.center.y);
-
-    animating = true;
-
-    FilterView.hidden = true;
-    MCGameView.hidden=true;
-    firstView.hidden=false;
-    FilterView.hidden = true;
-    MCTGameView.hidden=true;
-    FCView.hidden=true;
-    MCCView.hidden = true;
-    FGameView.hidden = true;
-    FCView.hidden = true;
-    FTGameView.hidden = true;
-    deptTitleField.hidden = true;
-    jobTitleField.hidden = true;
-    filterField.text = @"";
-    companyTitleField.hidden = true;
-    //nameAndButtonsView.hidden = true;
-    nameView.hidden = true;
-    settingsView.hidden = true;
-    statsView.hidden = true;
-    leaderBoardView.hidden = true;
+    [self updateCurrentFilters];
+    if(filters.numberOfSegments <=4)
+    {
+        gameOverView.hidden = true;
+        nextView = @"FV";
+        firstView.center = CGPointMake(firstView.center.x - firstView.bounds.size.width, firstView.center.y);
+        
+        animating = true;
+        
+        FilterView.hidden = true;
+        MCGameView.hidden=true;
+        firstView.hidden=false;
+        FilterView.hidden = true;
+        MCTGameView.hidden=true;
+        FCView.hidden=true;
+        MCCView.hidden = true;
+        FGameView.hidden = true;
+        FCView.hidden = true;
+        FTGameView.hidden = true;
+        deptTitleField.hidden = true;
+        jobTitleField.hidden = true;
+        filterField.text = @"";
+        companyTitleField.hidden = true;
+        //nameAndButtonsView.hidden = true;
+        nameView.hidden = true;
+        settingsView.hidden = true;
+        statsView.hidden = true;
+        leaderBoardView.hidden = true;
+    }
 }
 //go to multiple choice timed view
 -(IBAction)goToMCTV
@@ -2026,52 +2018,69 @@
 
 -(IBAction)showFilterView:(id)sender
 {
-    firstView.hidden=true;
-    MCTGameView.hidden=true;
-    FCView.hidden=true;
-    MCCView.hidden = true;
-    FGameView.hidden = true;
-    FTGameView.hidden = true;
-    nameAndButtonsView.hidden = true;
-    companyTitleField.hidden = true;
-    gameOverView.hidden = true;
-    infoButton.hidden = true;
-    personPic.hidden = true;
-    showInfoButton.hidden = true;
-    nameAndButtonsView.hidden = true;
-    deptTitleField.hidden = true;
-    jobTitleField.hidden = true;
-    mCFacesView.hidden=true;
-    hintButton.hidden = true;
-    moreInfoView.hidden = true;
-    totalCorrect=0;
-    totalGuessed=0;
-    totalSeconds=0;
-    seconds=0;
-    minutes=0;
-    timerView.hidden=true;
-    
-    [arrayOf49PercentAndUnder removeAllObjects];
-    [arrayOf50PercentAndOver removeAllObjects];
-    //nextView = @"Filter";
-    //FilterView.center = CGPointMake(FilterView.center.x - FilterView.bounds.size.width, FilterView.center.y);
-    //animating = true;
-    
-    //NSLog(@"%@",sender);
-    
     if(sender ==tFButton)
     {
         typeOfGame.text = @"Flashcard Game";
     }
-    if(sender == mCNamesButton)
+    else if(sender == mCNamesButton)
     {
         typeOfGame.text = @"Multiple Choice Names";
     }
-    if(sender == mCFacesButton)
+    else if(sender == mCFacesButton)
     {
         typeOfGame.text = @"Multiple Choice Faces";
     }
-    FilterView.hidden=false;
+
+    if(filters.numberOfSegments > 0)
+    {
+        firstView.hidden=true;
+        MCTGameView.hidden=true;
+        FCView.hidden=true;
+        MCCView.hidden = true;
+        FGameView.hidden = true;
+        FTGameView.hidden = true;
+        nameAndButtonsView.hidden = true;
+        companyTitleField.hidden = true;
+        gameOverView.hidden = true;
+        infoButton.hidden = true;
+        personPic.hidden = true;
+        showInfoButton.hidden = true;
+        nameAndButtonsView.hidden = true;
+        deptTitleField.hidden = true;
+        jobTitleField.hidden = true;
+        mCFacesView.hidden=true;
+        hintButton.hidden = true;
+        moreInfoView.hidden = true;
+        totalCorrect=0;
+        totalGuessed=0;
+        totalSeconds=0;
+        seconds=0;
+        minutes=0;
+        timerView.hidden=true;
+        
+        [arrayOf49PercentAndUnder removeAllObjects];
+        [arrayOf50PercentAndOver removeAllObjects];
+        //nextView = @"Filter";
+        //FilterView.center = CGPointMake(FilterView.center.x - FilterView.bounds.size.width, FilterView.center.y);
+        //animating = true;
+        
+        //NSLog(@"%@",sender);
+        
+
+        FilterView.hidden=false;
+    }
+    else
+    {
+        [self goButtonPressed];
+        if(sender != tFButton || sender != mCNamesButton || sender != mCFacesButton)
+        {
+            
+            MCTGameView.hidden = true;
+            FTGameView.hidden = true;
+            mCFacesView.hidden = true;
+            firstView.hidden = false;
+        }
+    }
 }
 
 //go to flashcard timed view
@@ -3314,5 +3323,71 @@
             timerLable.hidden = false;
         }
     }
+}
+-(void)playSoundNamed:(NSString*)soundName
+{
+    if(fxSwitchSetting.isOn == false)
+    {
+        
+    }
+    if(musicSwitchSetting == false)
+    {
+        
+    }
+}
+-(void)updateCurrentFilters
+{
+    [filters removeAllSegments];
+    
+    
+    
+    if(dateSwitchSetting.isOn == true)
+    {
+        [filters insertSegmentWithTitle:@"Date" atIndex:0 animated:NO];
+    }
+    if(birthdaySwitchSetting.isOn == true)
+    {
+        [filters insertSegmentWithTitle:@"Birthday" atIndex:0 animated:NO];
+    }
+    if(jobTitleSwitchSetting.isOn == true)
+    {
+        [filters insertSegmentWithTitle:@"Job Title" atIndex:0 animated:NO];
+    }
+    if(departmentSwitchSetting.isOn == true)
+    {
+        [filters insertSegmentWithTitle:@"Department" atIndex:0 animated:NO];
+    }
+    if(companySwitchSetting.isOn == true)
+    {
+        [filters insertSegmentWithTitle:@"Company" atIndex:0 animated:NO];
+    }
+    
+    if(filters.numberOfSegments > 4)
+    {
+        alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"You may only have a maximum of four filters." delegate:self cancelButtonTitle:@"Okay" otherButtonTitles:NULL, nil];
+        [alert show];
+    }
+}
+-(IBAction)customDate
+{
+    if(dateSwitchSetting.isOn == true)
+    {
+        UIAlertView *dateAlertView = [[UIAlertView alloc]initWithTitle:@"Enter a Date Type" message:@"" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Add", nil];
+        [dateAlertView setAlertViewStyle:UIAlertViewStylePlainTextInput];
+        [[dateAlertView textFieldAtIndex:0] setKeyboardType:UIKeyboardTypeAlphabet];
+        [dateAlertView show];
+    }
+}
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (buttonIndex == 0)
+    {
+        dateSwitchSetting.on = false;
+        return; //Cancel
+    }
+    else
+    {
+        dateTypeString = [alertView textFieldAtIndex:0].text;
+    }
+    UITextField *field = (UITextField *)[[alertView subviews] lastObject];
 }
 @end
