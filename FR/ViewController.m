@@ -9,7 +9,67 @@
 #import "ViewController.h"
 
 @interface ViewController ()
+// This object that will be used to count the 60 seconds of each level.
+@property (nonatomic, strong) NSTimer *gameTimer;
 
+// It will be used to display the Game Center related options and handle the user selection in a block.
+//@property (nonatomic, strong) CustomActionSheet *customActionSheet;
+
+// These two member variables that will store the operand values of the addition.
+@property (nonatomic) int operand1;
+@property (nonatomic) int operand2;
+
+// The timer value.
+@property (nonatomic) int timerValue;
+
+// The current level.
+@property (nonatomic) int level;
+
+// The current round of a level.
+@property (nonatomic) int currentAdditionCounter;
+
+// The player's score. Its type is int64_t so as to match the expected type by the respective method of GameKit.
+@property (nonatomic) int64_t score;
+
+// The number of remaining "lives" in the game.
+@property (nonatomic) int lives;
+
+// A flag indicating whether the Game Center features can be used after a user has been authenticated.
+@property (nonatomic) BOOL gameCenterEnabled;
+
+// This property stores the default leaderboard's identifier.
+@property (nonatomic, strong) NSString *leaderboardIdentifier;
+
+
+
+// This method is used to set the initial values to all member variables.
+-(void)initValues;
+
+
+// When it's called, the timerValue member variable gets its initial value, which is 0, and the timer
+// is re-scheduled in order to start counting the time for a new level.
+-(void)startTimer;
+
+
+// It updates the time label on the view with the current timer value.
+-(void)updateTimerLabel:(NSTimer *)timer;
+
+
+// It creates a new ramdom addition operation and shows is to the lblAddition label, as well as all the three
+// possible answers.
+-(void)createAddition;
+
+
+// It updates the level, both internally and visually.
+-(void)updateLevelLabel;
+
+
+// It sets the initial value to the lives member variable and makes visible all "life" images.
+-(void)initLives;
+
+-(void)reportScore;
+-(void)authenticateLocalPlayer;
+-(void)showLeaderboardAndAchievements:(BOOL)shouldShowLeaderboard;
 @end
 
 @implementation ViewController
@@ -20,6 +80,7 @@
 @synthesize currentPeopleArray;
 @synthesize nameAndButtonsView, personPic, nameLabel, allButton, companyButton, jobTitleButton, departmentButton;
 @synthesize labelsScrollView, filterCompanyText, filterCompanySwitches, filterDepartmentSwitches, filterDepartmentText, filterJobTitles, filterJobTitlesSwitches;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -28,9 +89,70 @@
     }
     return self;
 }
-
+-(void)reportScore{
+    GKScore *score = [[GKScore alloc] initWithLeaderboardIdentifier:_leaderboardIdentifier];
+    score.value = _score;
+    
+    [GKScore reportScores:@[score] withCompletionHandler:^(NSError *error) {
+        if (error != nil) {
+            NSLog(@"%@", [error localizedDescription]);
+        }
+    }];
+}
+-(void)authenticateLocalPlayer{
+    GKLocalPlayer *localPlayer = [GKLocalPlayer localPlayer];
+    
+    localPlayer.authenticateHandler = ^(UIViewController *viewController, NSError *error){
+        if (viewController != nil) {
+            [self presentViewController:viewController animated:YES completion:nil];
+        }
+        else{
+            if ([GKLocalPlayer localPlayer].authenticated) {
+                _gameCenterEnabled = YES;
+                
+                // Get the default leaderboard identifier.
+                [[GKLocalPlayer localPlayer] loadDefaultLeaderboardIdentifierWithCompletionHandler:^(NSString *leaderboardIdentifier, NSError *error) {
+                    
+                    if (error != nil) {
+                        NSLog(@"%@", [error localizedDescription]);
+                    }
+                    else{
+                        _leaderboardIdentifier = leaderboardIdentifier;
+                    }
+                }];
+            }
+            
+            else{
+                _gameCenterEnabled = NO;
+            }
+        }
+    };
+}
+-(void)showLeaderboardAndAchievements:(BOOL)shouldShowLeaderboard{
+    GKGameCenterViewController *gcViewController = [[GKGameCenterViewController alloc] init];
+    
+    gcViewController.gameCenterDelegate = self;
+    
+    if (shouldShowLeaderboard) {
+        gcViewController.viewState = GKGameCenterViewControllerStateLeaderboards;
+        gcViewController.leaderboardIdentifier = _leaderboardIdentifier;
+    }
+    else{
+        gcViewController.viewState = GKGameCenterViewControllerStateAchievements;
+    }
+    
+    [self presentViewController:gcViewController animated:YES completion:nil];
+}
+-(void)reportScore:(int)score toLeaderboard:(NSString *)identifier {
+    _score = score;
+    _leaderboardIdentifier = identifier;
+    [self reportScore];
+    
+}
 - (void)viewDidLoad
 {
+
+    
     frame0 = [UIImage imageNamed:@"IMG_0929.png"];
     frame1 = [UIImage imageNamed:@"IMG_0930.png"];
     frame2 = [UIImage imageNamed:@"IMG_0931.png"];
@@ -119,6 +241,21 @@
     [super viewDidLoad];
     
     hintLabel.text = [NSString stringWithFormat:@"H:%i", 3-numberOfHintsPressed];
+    
+    _gameCenterEnabled = NO;
+    _leaderboardIdentifier = @"";
+    [self authenticateLocalPlayer];
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
 /*
     SystemSoundID soundID;
@@ -440,6 +577,7 @@
             [self loadNewPerson];
         }while (lastPerson == currentPerson);
 
+
     }
 }
 -(void)printHighScoreMCF
@@ -447,6 +585,8 @@
     if(currentScoreMCF > highscoreMCF)
     {
         highscoreMCF = currentScoreMCF;
+        [self reportScore:highscoreMCF toLeaderboard:@"MC_Faces_Leaderboard"];
+
         pointsLabel.text = [NSString stringWithFormat:@"NEW HIGH SCORE! %i", currentScoreMCF];
         
     }
@@ -464,6 +604,8 @@
     if(currentScoreMCN > highscoreMCN)
     {
         highscoreMCN = currentScoreMCN;
+        [self reportScore:highscoreMCN toLeaderboard:@"MCN_Leader_Board"];
+
         pointsLabel.text = [NSString stringWithFormat:@"NEW HIGH SCORE! %i", currentScoreMCN];
         
     }
@@ -482,6 +624,7 @@
     if(currentScore > highscore)
     {
         highscore = currentScore;
+        [self reportScore:highscore toLeaderboard:@"Flashcard_Leader_Board"];
         pointsLabel.text = [NSString stringWithFormat:@"NEW HIGH SCORE! %i", currentScore];
         
     }
@@ -2115,12 +2258,17 @@
 
 
 }
+-(void)gameCenterViewControllerDidFinish:(GKGameCenterViewController *)gameCenterViewController
+{
+    [gameCenterViewController dismissViewControllerAnimated:YES completion:nil];
+}
 -(IBAction)goToNewView:(id)sender
 {
     if(sender == leaderBoardButton)
     {
-        leaderBoardView.hidden = false;
-        firstView.hidden = true;
+        [self showLeaderboardAndAchievements:NO];
+        //leaderBoardView.hidden = false;
+        //firstView.hidden = true;
 
     }
     else if(sender == statsButton)
