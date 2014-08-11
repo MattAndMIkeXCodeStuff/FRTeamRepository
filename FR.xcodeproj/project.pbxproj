@@ -381,7 +381,12 @@
 				ORGANIZATIONNAME = "Mattehw Burton";
 				TargetAttributes = {
 					4EC04F38195297350017AA78 = {
-						DevelopmentTeam = YDK59Y5KW2;
+						DevelopmentTeam = STUDKFT6R9;
+						SystemCapabilities = {
+							com.apple.GameCenter = {
+								enabled = 1;
+							};
+						};
 					};
 					4EC04F59195297350017AA78 = {
 						TestTargetID = 4EC04F38195297350017AA78;

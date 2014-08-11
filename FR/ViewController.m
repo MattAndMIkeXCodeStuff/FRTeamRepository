@@ -1941,7 +1941,6 @@
  }
 -(IBAction)mcAnswerPressed:(id)sender
 {
-    nextMCN.hidden = false;
     totalGuessed++;
     filterField.text = @"";
     filterLabel.text = @"Filter By:";
@@ -1951,24 +1950,24 @@
         UIButton *b = (UIButton *)sender;
         if ([b.titleLabel.text isEqualToString:correctMCPerson.getFullName])
         {
+            b.backgroundColor = [UIColor greenColor];
             [currentPerson gotRight];
             totalCorrect++;
             currentPerson.hasBeenGuessedRight = true;
             currentPerson.hasBeenGuessed = true;
             [arrayOf49PercentAndUnder removeObjectIdenticalTo:correctMCPerson];
             [arrayOf50PercentAndOver addObject:correctMCPerson];
-            [self generateNewPeopleMCN];
-
+            nextMCN.hidden =false;
         }
         else
         {
             b.backgroundColor = [UIColor redColor];
             [currentPerson gotWrong];
-            currentPerson.hasBeenGuessed = true;
         }
     }
-    else if (practiceModeSwitch.isOn == false && currentPerson.hasBeenGuessedRight == false)
+    else if (practiceModeSwitch.isOn == false && currentPerson.hasBeenGuessed == false)
     {
+        nextMCN.hidden = false;
         UIButton *b = (UIButton *)sender;
         [arrayOf49PercentAndUnder removeObjectIdenticalTo:correctMCPerson];
         [arrayOf50PercentAndOver addObject:correctMCPerson];
@@ -1978,7 +1977,6 @@
             totalCorrect++;
             currentPerson.hasBeenGuessedRight = true;
             currentPerson.hasBeenGuessed = true;
-            [self generateNewPeopleMCN];
         }
         else
         {
@@ -1986,38 +1984,38 @@
             [currentPerson gotWrong];
             currentPerson.hasBeenGuessed = true;
         }
-//        if([mcButton1.titleLabel.text isEqualToString:correctMCPerson.getFullName])
-//        {
-//            mcButton1.backgroundColor = [UIColor greenColor];
-//        }
-//        else
-//        {
-//            mcButton1.backgroundColor = [UIColor redColor];
-//        }
-//        if([mcButton2.titleLabel.text isEqualToString:correctMCPerson.getFullName])
-//        {
-//            mcButton2.backgroundColor = [UIColor greenColor];
-//        }
-//        else
-//        {
-//            mcButton2.backgroundColor = [UIColor redColor];
-//        }
-//        if([mcButton3.titleLabel.text isEqualToString:correctMCPerson.getFullName])
-//        {
-//            mcButton3.backgroundColor = [UIColor greenColor];
-//        }
-//        else
-//        {
-//            mcButton3.backgroundColor = [UIColor redColor];
-//        }
-//        if([mcButton4.titleLabel.text isEqualToString:correctMCPerson.getFullName])
-//        {
-//            mcButton4.backgroundColor = [UIColor greenColor];
-//        }
-//        else
-//        {
-//            mcButton4.backgroundColor = [UIColor redColor];
-//        }
+        if([mcButton1.titleLabel.text isEqualToString:correctMCPerson.getFullName])
+        {
+            mcButton1.backgroundColor = [UIColor greenColor];
+        }
+        else
+        {
+            mcButton1.backgroundColor = [UIColor redColor];
+        }
+        if([mcButton2.titleLabel.text isEqualToString:correctMCPerson.getFullName])
+        {
+            mcButton2.backgroundColor = [UIColor greenColor];
+        }
+        else
+        {
+            mcButton2.backgroundColor = [UIColor redColor];
+        }
+        if([mcButton3.titleLabel.text isEqualToString:correctMCPerson.getFullName])
+        {
+            mcButton3.backgroundColor = [UIColor greenColor];
+        }
+        else
+        {
+            mcButton3.backgroundColor = [UIColor redColor];
+        }
+        if([mcButton4.titleLabel.text isEqualToString:correctMCPerson.getFullName])
+        {
+            mcButton4.backgroundColor = [UIColor greenColor];
+        }
+        else
+        {
+            mcButton4.backgroundColor = [UIColor redColor];
+        }
     }
     if(arrayOf49PercentAndUnder.count < 4)
     {
@@ -3398,10 +3396,7 @@
 }
 
 -(IBAction)goButtonPressed
-{
-
-    
-    
+{    
     [self readValues];
     if((arrayOf49PercentAndUnder.count > 0 && [typeOfGame.text isEqualToString:@"Flashcard Game"]) || (([typeOfGame.text isEqualToString:@"Multiple Choice Faces"] || [typeOfGame.text isEqualToString:@"Multiple Choice Names"]) && arrayOf49PercentAndUnder.count > 3))
     {
@@ -3416,6 +3411,8 @@
         
         if([typeOfGame.text  isEqual: @"Flashcard Game"])
         {
+            mostTimeIntF =0;
+            mostTimeF = NULL;
             personPic.hidden = false;
             guessButton.hidden = false;
             FTGameView.hidden = false;
@@ -3439,12 +3436,16 @@
         }
         if([typeOfGame.text  isEqual: @"Multiple Choice Names"])
         {
-            
+            mostTimeIntMCN =0;
+            mostTimeMCN = NULL;
             MCTGameView.hidden = false;
             [self generateNewPeopleMCN];
         }
         if([typeOfGame.text  isEqual: @"Multiple Choice Faces"])
         {
+            mostTimeMCF = NULL;
+            
+            mostTimeIntMCF = 0;
             mCFacesView.hidden = false;
             nextButtonMCF.hidden = true;
             iBMCF1.hidden = true;
