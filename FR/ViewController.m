@@ -864,9 +864,13 @@
         }
     }
     alert = [[UIAlertView alloc] initWithTitle:@"Errorr" message:@"You have filtered out every person, therfore you cannot be tested" delegate:self cancelButtonTitle:@"Okay, it won't happen again" otherButtonTitles:NULL, nil];
+     NSLog(@"Number of Contacts = %lu",(unsigned long)arrayOf49PercentAndUnder.count);
     arrayOf49PercentAndUnder = [self getContactsWithDateFromArray:arrayOf49PercentAndUnder];
-    arrayOf49PercentAndUnder = [self getContactsWithDepartment:@"test:" fromArray:arrayOf49PercentAndUnder];
-    arrayOf49PercentAndUnder = [self getContactsWithJobTitle:@"test" fromArray:arrayOf49PercentAndUnder];
+     NSLog(@"Number of Contacts = %lu",(unsigned long)arrayOf49PercentAndUnder.count);
+    //arrayOf49PercentAndUnder = [self getContactsWithDepartment:@"test:" fromArray:arrayOf49PercentAndUnder];
+     NSLog(@"Number of Contacts = %lu",(unsigned long)arrayOf49PercentAndUnder.count);
+    //arrayOf49PercentAndUnder = [self getContactsWithJobTitle:@"test" fromArray:arrayOf49PercentAndUnder];
+     NSLog(@"Number of Contacts = %lu",(unsigned long)arrayOf49PercentAndUnder.count);
     
     if(arrayOf49PercentAndUnder.count == 0)
     {
@@ -874,7 +878,7 @@
         [alert show];
     }
     
-    
+    NSLog(@"Number of Contacts = %i",arrayOf49PercentAndUnder.count);
     if([typeOfGame.text isEqualToString:@"Multiple Choice Faces"] || [typeOfGame.text isEqualToString:@"Multiple Choice Names"])
     {
         alert = [[UIAlertView alloc] initWithTitle:@"Errorr" message:@"In a Multiple Choice Game you must have at least 4 people" delegate:self cancelButtonTitle:@"Okay, it won't happen again" otherButtonTitles:NULL, nil];
@@ -1785,7 +1789,7 @@
     totalGuessed++;
     filterField.text = @"";
     filterLabel.text = @"Filter By:";
-
+    NSLog(@"%i",arrayOf49PercentAndUnder.count);
     if(practiceModeSwitch.isOn == true && currentPerson.hasBeenGuessed == false)
     {
         UIButton *b = (UIButton *)sender;
@@ -1797,6 +1801,8 @@
             currentPerson.hasBeenGuessed = true;
             [arrayOf49PercentAndUnder removeObjectIdenticalTo:correctMCPerson];
             [arrayOf50PercentAndOver addObject:correctMCPerson];
+            [self generateNewPeopleMCN];
+
         }
         else
         {
@@ -1805,7 +1811,7 @@
             currentPerson.hasBeenGuessed = true;
         }
     }
-    else if (practiceModeSwitch.isOn == false && currentPerson.hasBeenGuessed == false)
+    else if (practiceModeSwitch.isOn == false && currentPerson.hasBeenGuessedRight == false)
     {
         UIButton *b = (UIButton *)sender;
         [arrayOf49PercentAndUnder removeObjectIdenticalTo:correctMCPerson];
@@ -1816,44 +1822,46 @@
             totalCorrect++;
             currentPerson.hasBeenGuessedRight = true;
             currentPerson.hasBeenGuessed = true;
+            [self generateNewPeopleMCN];
         }
         else
         {
+            b.backgroundColor = [UIColor redColor];
             [currentPerson gotWrong];
             currentPerson.hasBeenGuessed = true;
         }
-        if([mcButton1.titleLabel.text isEqualToString:correctMCPerson.getFullName])
-        {
-            mcButton1.backgroundColor = [UIColor greenColor];
-        }
-        else
-        {
-            mcButton1.backgroundColor = [UIColor redColor];
-        }
-        if([mcButton2.titleLabel.text isEqualToString:correctMCPerson.getFullName])
-        {
-            mcButton2.backgroundColor = [UIColor greenColor];
-        }
-        else
-        {
-            mcButton2.backgroundColor = [UIColor redColor];
-        }
-        if([mcButton3.titleLabel.text isEqualToString:correctMCPerson.getFullName])
-        {
-            mcButton3.backgroundColor = [UIColor greenColor];
-        }
-        else
-        {
-            mcButton3.backgroundColor = [UIColor redColor];
-        }
-        if([mcButton4.titleLabel.text isEqualToString:correctMCPerson.getFullName])
-        {
-            mcButton4.backgroundColor = [UIColor greenColor];
-        }
-        else
-        {
-            mcButton4.backgroundColor = [UIColor redColor];
-        }
+//        if([mcButton1.titleLabel.text isEqualToString:correctMCPerson.getFullName])
+//        {
+//            mcButton1.backgroundColor = [UIColor greenColor];
+//        }
+//        else
+//        {
+//            mcButton1.backgroundColor = [UIColor redColor];
+//        }
+//        if([mcButton2.titleLabel.text isEqualToString:correctMCPerson.getFullName])
+//        {
+//            mcButton2.backgroundColor = [UIColor greenColor];
+//        }
+//        else
+//        {
+//            mcButton2.backgroundColor = [UIColor redColor];
+//        }
+//        if([mcButton3.titleLabel.text isEqualToString:correctMCPerson.getFullName])
+//        {
+//            mcButton3.backgroundColor = [UIColor greenColor];
+//        }
+//        else
+//        {
+//            mcButton3.backgroundColor = [UIColor redColor];
+//        }
+//        if([mcButton4.titleLabel.text isEqualToString:correctMCPerson.getFullName])
+//        {
+//            mcButton4.backgroundColor = [UIColor greenColor];
+//        }
+//        else
+//        {
+//            mcButton4.backgroundColor = [UIColor redColor];
+//        }
     }
     if(arrayOf49PercentAndUnder.count < 4)
     {
@@ -3070,6 +3078,7 @@
 -(IBAction)lessInfo
 {
     moreInfoView.hidden=true;
+    
 }
 -(IBAction)hideFilterViewAndFilter
 {
@@ -3082,6 +3091,8 @@
 
 -(void)generateNewPeopleMCN
 {
+    
+    
     if(timeOnThisCard > mostTimeIntMCN)
     {
         mostTimeIntMCN = timeOnThisCard;
@@ -3147,7 +3158,8 @@
     }
 
     mcPersonPicture.image = correctMCPerson.selfImage;
-
+    currentPerson = correctMCPerson;
+    
     /*
     
     
