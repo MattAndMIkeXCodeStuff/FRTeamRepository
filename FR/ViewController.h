@@ -11,8 +11,9 @@
 #import <AddressBook/AddressBook.h>
 #import <AddressBookUI/AddressBookUI.h>
 #import "MSContactManipulater.h"
+#import <GameKit/GameKit.h>
 
-@interface ViewController : UIViewController <UIAlertViewDelegate>
+@interface ViewController : UIViewController <UIAlertViewDelegate, GKGameCenterControllerDelegate>
 {
     IBOutlet UILabel* timerLable;
     NSTimer *timer;

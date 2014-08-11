@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		4C67F90C196A49EB0054A187 /* TestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C67F90B196A49EB0054A187 /* TestViewController.m */; };
+		4CA584D819995395003ED355 /* GameController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CA584D719995395003ED355 /* GameController.framework */; };
+		4CA584DA19995815003ED355 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CA584D919995815003ED355 /* GameKit.framework */; };
 		4CACF951195F9F1500056B92 /* MSContactManipulater.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CACF950195F9F1500056B92 /* MSContactManipulater.m */; };
 		4CACF953195FA19400056B92 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CACF952195FA19400056B92 /* AddressBook.framework */; };
 		4CACF955195FA19B00056B92 /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CACF954195FA19B00056B92 /* AddressBookUI.framework */; };
@@ -82,6 +84,8 @@
 /* Begin PBXFileReference section */
 		4C67F90A196A49EB0054A187 /* TestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestViewController.h; sourceTree = "<group>"; };
 		4C67F90B196A49EB0054A187 /* TestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestViewController.m; sourceTree = "<group>"; };
+		4CA584D719995395003ED355 /* GameController.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameController.framework; path = System/Library/Frameworks/GameController.framework; sourceTree = SDKROOT; };
+		4CA584D919995815003ED355 /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
 		4CACF94F195F9F1500056B92 /* MSContactManipulater.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSContactManipulater.h; sourceTree = "<group>"; };
 		4CACF950195F9F1500056B92 /* MSContactManipulater.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSContactManipulater.m; sourceTree = "<group>"; };
 		4CACF952195FA19400056B92 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
@@ -155,7 +159,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4CA584D819995395003ED355 /* GameController.framework in Frameworks */,
 				4CACF955195FA19B00056B92 /* AddressBookUI.framework in Frameworks */,
+				4CA584DA19995815003ED355 /* GameKit.framework in Frameworks */,
 				4CACF953195FA19400056B92 /* AddressBook.framework in Frameworks */,
 				4EC04F3F195297350017AA78 /* CoreGraphics.framework in Frameworks */,
 				4EC04F41195297350017AA78 /* UIKit.framework in Frameworks */,
@@ -241,6 +247,8 @@
 		4EC04F3B195297350017AA78 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4CA584D919995815003ED355 /* GameKit.framework */,
+				4CA584D719995395003ED355 /* GameController.framework */,
 				4EC04F40195297350017AA78 /* UIKit.framework */,
 				4CACF954195FA19B00056B92 /* AddressBookUI.framework */,
 				4CACF952195FA19400056B92 /* AddressBook.framework */,
@@ -347,6 +355,11 @@
 				TargetAttributes = {
 					4EC04F38195297350017AA78 = {
 						DevelopmentTeam = STUDKFT6R9;
+						SystemCapabilities = {
+							com.apple.GameCenter = {
+								enabled = 1;
+							};
+						};
 					};
 					4EC04F59195297350017AA78 = {
 						TestTargetID = 4EC04F38195297350017AA78;
