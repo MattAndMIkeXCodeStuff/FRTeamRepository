@@ -202,6 +202,15 @@
         bestTimeMCN = j;
     }
 
+    birthdaySwitchSetting.on = [defaults boolForKey:kbirthdayBool];
+    companySwitchSetting.on = [defaults boolForKey:kcompanyBool];
+    departmentSwitchSetting.on = [defaults boolForKey:kdepartmentBool];
+    dateSwitchSetting.on = [defaults boolForKey:kdateBool];
+    jobTitleSwitchSetting.on = [defaults boolForKey:kjobTitleBool];
+    musicSwitchSetting.on = [defaults boolForKey:kmusicBool];
+    fxSwitchSetting.on = [defaults boolForKey:kfxBool];
+    
+    
     highscore = (int)[defaults integerForKey:khighscoreF];
     highscoreMCN = (int)[defaults integerForKey:khighscoreMCN];
     highscoreMCF = (int)[defaults integerForKey:khighscoreMCF];
@@ -1983,6 +1992,7 @@
  }
 -(IBAction)mcAnswerPressed:(id)sender
 {
+    [self playSoundNamed:@"test" andType:@"wav" andFX:true];
     totalGuessed++;
     filterField.text = @"";
     filterLabel.text = @"Filter By:";
@@ -3525,22 +3535,33 @@
         }
     }
 }
--(void)playSoundNamed:(NSString*)soundName
+-(void)playSoundNamed:(NSString*)soundName andType:(NSString*)type andFX:(BOOL)isFX;
 {
-    if(fxSwitchSetting.isOn == false)
+    NSURL *soundURL = [NSURL fileURLWithPath:[[NSBundle mainBundle]pathForResource:soundName ofType:type ]];
+    AudioServicesCreateSystemSoundID((__bridge CFURLRef)soundURL, &SoundID);
+    
+    if(fxSwitchSetting.isOn  && isFX)
     {
-        
+        AudioServicesPlaySystemSound(SoundID);
     }
-    if(musicSwitchSetting == false)
+    else if(musicSwitchSetting.isOn && !isFX)
     {
-        
+        AudioServicesPlaySystemSound(SoundID);
     }
 }
 -(void)updateCurrentFilters
 {
     [filters removeAllSegments];
     
-    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setBool:dateSwitchSetting.on forKey:kdateBool];
+    [defaults setBool:birthdaySwitchSetting.on forKey:kbirthdayBool];
+    [defaults setBool:jobTitleSwitchSetting.on forKey:kjobTitleBool];
+    [defaults setBool:departmentSwitchSetting.on forKey:kdepartmentBool];
+    [defaults setBool:companySwitchSetting.on forKey:kcompanyBool];
+    [defaults setBool:musicSwitchSetting.on forKey:kmusicBool];
+    [defaults setBool:fxSwitchSetting.on forKey:kfxBool];
+    [defaults synchronize];
     
     if(dateSwitchSetting.isOn == true)
     {
