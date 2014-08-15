@@ -5,6 +5,17 @@
 //  Created by Matthew C Burton on 6/18/14.
 //  Copyright (c) 2014 Mattehw Burton. All rights reserved.
 //
+#define kmostTimeMCF @"timeMCF"
+#define kmostTimeMCN @"timeMCN"
+#define kmostTimeF @"timeF"
+
+#define kbestTimeMCF @"bestTimeMCF"
+#define kbestTimeMCN @"bestTimeMCN"
+#define kbestTimeF @"bestTimeF"
+
+#define khighscoreMCF @"highscoreMCF"
+#define khighscoreMCN @"highscoreMCN"
+#define khighscoreF @"highscoreF"
 
 #import <UIKit/UIKit.h>
 #import "Person.h"
@@ -226,6 +237,7 @@
 
     //for stats
     
+    NSMutableArray *lowest;
     IBOutlet UIScrollView*statsScrollView;
     
     IBOutlet UISwitch*dateSwitch;

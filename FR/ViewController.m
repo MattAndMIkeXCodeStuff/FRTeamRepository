@@ -182,12 +182,29 @@
     filterDepartmentText = [[NSMutableArray alloc]init];
     filterCompanySwitches = [[NSMutableArray alloc]init];
     filterCompanyText = [[NSMutableArray alloc]init];
-    
-    bestTimeF = 1000000;
-    bestTimeMCF = 1000000;
-    bestTimeMCN = 1000000;
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    int j = (int)[defaults integerForKey:kbestTimeF];
+    if (j==0) {
+        bestTimeF = 10000000000;
+    } else {
+        bestTimeF = j;
+    }
+    j = (int)[defaults integerForKey:kbestTimeMCF];
+    if (j==0) {
+        bestTimeMCF= 10000000000;
+    } else {
+        bestTimeMCF = j;
+    }
+    j = (int)[defaults integerForKey:kbestTimeMCN];
+    if (j==0) {
+        bestTimeMCN = 10000000000;
+    } else {
+        bestTimeMCN = j;
+    }
 
-    
+    highscore = (int)[defaults integerForKey:khighscoreF];
+    highscoreMCN = (int)[defaults integerForKey:khighscoreMCN];
+    highscoreMCF = (int)[defaults integerForKey:khighscoreMCF];
     
     nameView.hidden = true;
     MCGameView.hidden=true;
@@ -585,6 +602,11 @@
     if(currentScoreMCF > highscoreMCF)
     {
         highscoreMCF = currentScoreMCF;
+        
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        NSInteger i = (NSInteger) highscoreMCF;
+        [defaults setInteger:i forKey:khighscoreMCF];
+        
         [self reportScore:highscoreMCF toLeaderboard:@"MC_Faces_Leaderboard"];
 
         pointsLabel.text = [NSString stringWithFormat:@"NEW HIGH SCORE! %i", currentScoreMCF];
@@ -597,6 +619,10 @@
     if(totalSeconds < bestTimeMCF)
     {
         bestTimeMCF = totalSeconds;
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        NSInteger i = (NSInteger) bestTimeMCF;
+        [defaults setInteger:bestTimeMCF forKey:kbestTimeMCF];
+        [defaults synchronize];
     }
 }
 -(void)printHighScoreMCN
@@ -604,6 +630,11 @@
     if(currentScoreMCN > highscoreMCN)
     {
         highscoreMCN = currentScoreMCN;
+        //highscore = currentScore;
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        NSInteger i = (NSInteger) highscoreMCN;
+        [defaults setInteger:i forKey:khighscoreMCN];
+        
         [self reportScore:highscoreMCN toLeaderboard:@"MCN_Leader_Board"];
 
         pointsLabel.text = [NSString stringWithFormat:@"NEW HIGH SCORE! %i", currentScoreMCN];
@@ -616,6 +647,10 @@
     if(totalSeconds < bestTimeMCN)
     {
         bestTimeMCN = totalSeconds;
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        NSInteger i = (NSInteger) bestTimeMCN;
+        [defaults setInteger:bestTimeMCN forKey:kbestTimeMCN];
+        [defaults synchronize];
     }
 }
 
@@ -624,6 +659,9 @@
     if(currentScore > highscore)
     {
         highscore = currentScore;
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        NSInteger i = (NSInteger) highscore;
+        [defaults setInteger:i forKey:khighscoreF];
         [self reportScore:highscore toLeaderboard:@"Flashcard_Leader_Board"];
         pointsLabel.text = [NSString stringWithFormat:@"NEW HIGH SCORE! %i", currentScore];
         
@@ -635,6 +673,10 @@
     if(totalSeconds < bestTimeF)
     {
         bestTimeF = totalSeconds;
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        NSInteger i = (NSInteger) bestTimeF;
+        [defaults setInteger:bestTimeF forKey:kbestTimeF];
+        [defaults synchronize];
     }
 }
 -(NSMutableArray*)chooseArray
@@ -3026,6 +3068,9 @@
     if(timeOnThisCard > mostTimeIntMCF)
     {
         mostTimeIntMCF = timeOnThisCard;
+        NSUserDefaults *defaults =[NSUserDefaults standardUserDefaults];
+        NSInteger i = (NSInteger) mostTimeIntMCF;
+        [defaults setInteger:i forKey:kmostTimeMCF];
         mostTimeMCF = currentPerson;
     }
     timeOnThisCard = 0;
@@ -3272,6 +3317,9 @@
     if(timeOnThisCard > mostTimeIntMCN)
     {
         mostTimeIntMCN = timeOnThisCard;
+        NSUserDefaults *defaults =[NSUserDefaults standardUserDefaults];
+        NSInteger i = (NSInteger) mostTimeIntMCN;
+        [defaults setInteger:i forKey:kmostTimeMCN];
         mostTimeMCN = currentPerson;
     }
     timeOnThisCard = 0;
@@ -3436,7 +3484,9 @@
         }
         if([typeOfGame.text  isEqual: @"Multiple Choice Names"])
         {
-            mostTimeIntMCN =0;
+            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+
+            mostTimeIntMCN =(int)[defaults integerForKey:@"timeMCN"];
             mostTimeMCN = NULL;
             MCTGameView.hidden = false;
             [self generateNewPeopleMCN];
@@ -3444,8 +3494,10 @@
         if([typeOfGame.text  isEqual: @"Multiple Choice Faces"])
         {
             mostTimeMCF = NULL;
+            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
             
-            mostTimeIntMCF = 0;
+            mostTimeIntMCF = (int)[defaults integerForKey:@"timeMCF"];
+            NSLog(@"Saved Value = %i", mostTimeIntMCF);
             mCFacesView.hidden = false;
             nextButtonMCF.hidden = true;
             iBMCF1.hidden = true;
