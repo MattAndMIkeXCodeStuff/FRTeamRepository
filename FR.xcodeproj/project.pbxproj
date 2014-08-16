@@ -15,6 +15,9 @@
 		4CACF955195FA19B00056B92 /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CACF954195FA19B00056B92 /* AddressBookUI.framework */; };
 		4CB7481B199ECC4600721DD4 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CB7481A199ECC4600721DD4 /* AudioToolbox.framework */; };
 		4CB7481D199ED27600721DD4 /* test.wav in Resources */ = {isa = PBXBuildFile; fileRef = 4CB7481C199ED27600721DD4 /* test.wav */; };
+		4CB74821199EE68B00721DD4 /* Cheers Theme.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 4CB7481E199EE36900721DD4 /* Cheers Theme.m4a */; };
+		4CB74822199EE68B00721DD4 /* GetKnowU.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 4CB74820199EE43E00721DD4 /* GetKnowU.m4a */; };
+		4CB74823199EE68B00721DD4 /* ClickSound.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 4CB7481F199EE41700721DD4 /* ClickSound.m4a */; };
 		4EC04F3D195297350017AA78 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EC04F3C195297350017AA78 /* Foundation.framework */; };
 		4EC04F3F195297350017AA78 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EC04F3E195297350017AA78 /* CoreGraphics.framework */; };
 		4EC04F41195297350017AA78 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EC04F40195297350017AA78 /* UIKit.framework */; };
@@ -53,6 +56,9 @@
 		4CACF954195FA19B00056B92 /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
 		4CB7481A199ECC4600721DD4 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		4CB7481C199ED27600721DD4 /* test.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = test.wav; path = "../../../../Shared/Unity/4-0_AngryBots/Assets/Sounds/SFX/test.wav"; sourceTree = "<group>"; };
+		4CB7481E199EE36900721DD4 /* Cheers Theme.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Cheers Theme.m4a"; path = "../../../Music/iTunes/iTunes Media/Music/Various Artists/Garage Band/Cheers Theme.m4a"; sourceTree = "<group>"; };
+		4CB7481F199EE41700721DD4 /* ClickSound.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = ClickSound.m4a; path = "../../../Music/iTunes/iTunes Media/Music/Matt Burton/App Sounds/ClickSound.m4a"; sourceTree = "<group>"; };
+		4CB74820199EE43E00721DD4 /* GetKnowU.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = GetKnowU.m4a; path = "../../../Music/iTunes/iTunes Media/Music/Matt Burton/Unknown Album/GetKnowU.m4a"; sourceTree = "<group>"; };
 		4EC04F39195297350017AA78 /* FR.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FR.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4EC04F3C195297350017AA78 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		4EC04F3E195297350017AA78 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -146,6 +152,7 @@
 			isa = PBXGroup;
 			children = (
 				4CB7481C199ED27600721DD4 /* test.wav */,
+				4CB7481E199EE36900721DD4 /* Cheers Theme.m4a */,
 				4EC04F4B195297350017AA78 /* AppDelegate.h */,
 				4EC04F4C195297350017AA78 /* AppDelegate.m */,
 				4EC04F4E195297350017AA78 /* Main.storyboard */,
@@ -153,6 +160,8 @@
 				4C67F90B196A49EB0054A187 /* TestViewController.m */,
 				4EC04F51195297350017AA78 /* ViewController.h */,
 				4EC04F52195297350017AA78 /* ViewController.m */,
+				4CB74820199EE43E00721DD4 /* GetKnowU.m4a */,
+				4CB7481F199EE41700721DD4 /* ClickSound.m4a */,
 				4CACF94F195F9F1500056B92 /* MSContactManipulater.h */,
 				4CACF950195F9F1500056B92 /* MSContactManipulater.m */,
 				4EC04F54195297350017AA78 /* Images.xcassets */,
@@ -274,6 +283,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4CB74821199EE68B00721DD4 /* Cheers Theme.m4a in Resources */,
+				4CB74822199EE68B00721DD4 /* GetKnowU.m4a in Resources */,
+				4CB74823199EE68B00721DD4 /* ClickSound.m4a in Resources */,
 				4EC04F55195297350017AA78 /* Images.xcassets in Resources */,
 				4CB7481D199ED27600721DD4 /* test.wav in Resources */,
 				4EC04F47195297350017AA78 /* InfoPlist.strings in Resources */,

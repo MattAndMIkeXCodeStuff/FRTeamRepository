@@ -239,6 +239,7 @@
     Person*lastPerson;
     
     SystemSoundID SoundID;
+    NSURL *soundURL;
     
     IBOutlet UIView*leaderBoardView;
     IBOutlet UIButton*leaderBoardButton;

@@ -152,8 +152,7 @@
 - (void)viewDidLoad
 {
 
-    
-    frame0 = [UIImage imageNamed:@"IMG_0929.png"];
+        frame0 = [UIImage imageNamed:@"IMG_0929.png"];
     frame1 = [UIImage imageNamed:@"IMG_0930.png"];
     frame2 = [UIImage imageNamed:@"IMG_0931.png"];
     frame3 = [UIImage imageNamed:@"IMG_0932.PNG"];
@@ -191,13 +190,13 @@
     }
     j = (int)[defaults integerForKey:kbestTimeMCF];
     if (j==0) {
-        bestTimeMCF= 10000000000;
+        bestTimeMCF= 10000000;
     } else {
         bestTimeMCF = j;
     }
     j = (int)[defaults integerForKey:kbestTimeMCN];
     if (j==0) {
-        bestTimeMCN = 10000000000;
+        bestTimeMCN = 10000000;
     } else {
         bestTimeMCN = j;
     }
@@ -215,6 +214,9 @@
     highscoreMCN = (int)[defaults integerForKey:khighscoreMCN];
     highscoreMCF = (int)[defaults integerForKey:khighscoreMCF];
     
+    [self playSoundNamed:@"GetKnowU" andType:@"m4a" andFX:true];
+    
+
     nameView.hidden = true;
     MCGameView.hidden=true;
     firstView.hidden=false;
@@ -375,11 +377,13 @@
 
 -(IBAction)showInfo:(id)sender
 {
+    [self playSoundNamed:@"ClickSound" andType:@"m4a" andFX:true];
     if (currentPerson.lastName == NULL)
     {
         nameLabel.text = currentPerson.firstName;
         
     }
+    
     else
     {
         nameLabel.text = [NSString stringWithFormat:@"%@ %@", currentPerson.firstName,currentPerson.lastName];
@@ -392,6 +396,8 @@
 
 }
 -(IBAction)gotRight:(id)sender {
+    [self playSoundNamed:@"ClickSound" andType:@"m4a" andFX:true];
+
     //NSLog(@"Got Right");
     if(timeOnThisCard > mostTimeIntF)
     {
@@ -516,6 +522,7 @@
 
 }
 -(IBAction)gotWrong:(id)sender {
+    [self playSoundNamed:@"ClickSound" andType:@"m4a" andFX:true];
 
    // NSLog(@"Got Wrong");
     if(timeOnThisCard > mostTimeIntF)
@@ -611,7 +618,9 @@
     if(currentScoreMCF > highscoreMCF)
     {
         highscoreMCF = currentScoreMCF;
+        [self playSoundNamed:@"Cheers Theme" andType:@"m4a" andFX:true];
         
+
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
         NSInteger i = (NSInteger) highscoreMCF;
         [defaults setInteger:i forKey:khighscoreMCF];
@@ -642,6 +651,8 @@
         //highscore = currentScore;
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
         NSInteger i = (NSInteger) highscoreMCN;
+        [self playSoundNamed:@"Cheers Theme" andType:@"m4a" andFX:true];
+
         [defaults setInteger:i forKey:khighscoreMCN];
         
         [self reportScore:highscoreMCN toLeaderboard:@"MCN_Leader_Board"];
@@ -670,6 +681,8 @@
         highscore = currentScore;
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
         NSInteger i = (NSInteger) highscore;
+        [self playSoundNamed:@"Cheers Theme" andType:@"m4a" andFX:true];
+
         [defaults setInteger:i forKey:khighscoreF];
         [self reportScore:highscore toLeaderboard:@"Flashcard_Leader_Board"];
         pointsLabel.text = [NSString stringWithFormat:@"NEW HIGH SCORE! %i", currentScore];
@@ -1162,6 +1175,8 @@
 }
 -(IBAction)dateChanged
 {
+    [self playSoundNamed:@"ClickSound" andType:@"m4a" andFX:true];
+
     NSDateFormatter *formatter=[[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"MM/dd/yy"];
     
@@ -1176,6 +1191,8 @@
 }
 -(IBAction)showPicker:(id)sender
 {
+    [self playSoundNamed:@"ClickSound" andType:@"m4a" andFX:true];
+
     NSDate* currentDate;
     currentDate = [[NSDate alloc]init];
     NSDateFormatter*dF = [[NSDateFormatter alloc]init];
@@ -1549,6 +1566,8 @@
     //NSLog(@"allPeople(bottom) - %i",allPeople.count);
 }
 -(IBAction)segmentValueChanged:(id)sender {
+    [self playSoundNamed:@"ClickSound" andType:@"m4a" andFX:true];
+
     UISegmentedControl *s=  sender;
     for (UIView *object in [labelsScrollView subviews])
     {
@@ -1703,6 +1722,8 @@
 }
 -(IBAction)goToMCCV
 {
+    [self playSoundNamed:@"ClickSound" andType:@"m4a" andFX:true];
+
     MCCView.hidden = false;
     MCGameView.hidden=true;
     firstView.hidden=true;
@@ -1731,7 +1752,8 @@
 //go to multiple choice view
 -(IBAction)goToMCV
 {
-    
+    [self playSoundNamed:@"ClickSound" andType:@"m4a" andFX:true];
+
     deptTitleField.hidden = true;
     jobTitleField.hidden = true;
     mcButton1.titleLabel.text = @"";
@@ -1826,6 +1848,8 @@
 //go to first view
 -(IBAction)goToFV
 {
+    [self playSoundNamed:@"ClickSound" andType:@"m4a" andFX:true];
+
     [self updateCurrentFilters];
     if(filters.numberOfSegments <=4)
     {
@@ -1859,6 +1883,8 @@
 //go to multiple choice timed view
 -(IBAction)goToMCTV
 {
+    [self playSoundNamed:@"ClickSound" andType:@"m4a" andFX:true];
+
     nextView = @"MCTV";
     MCTGameView.center = CGPointMake(MCTGameView.center.x - MCTGameView.bounds.size.width, MCTGameView.center.y);
 
@@ -1992,7 +2018,9 @@
  }
 -(IBAction)mcAnswerPressed:(id)sender
 {
-    [self playSoundNamed:@"test" andType:@"wav" andFX:true];
+    [self playSoundNamed:@"ClickSound" andType:@"m4a" andFX:true];
+
+    //[self playSoundNamed:@"test" andType:@"wav" andFX:true];
     totalGuessed++;
     filterField.text = @"";
     filterLabel.text = @"Filter By:";
@@ -2114,6 +2142,8 @@
 }
 -(IBAction)nextMCN
 {
+    [self playSoundNamed:@"ClickSound" andType:@"m4a" andFX:true];
+
     [self generateNewPeopleMCN];
     nextMCN.hidden = true;
     currentPerson.hasBeenGuessed = false;
@@ -2150,6 +2180,8 @@
 //go to flashcard view
 -(IBAction)goToFlashV
 {
+    [self playSoundNamed:@"ClickSound" andType:@"m4a" andFX:true];
+
     MCGameView.hidden=true;
     firstView.hidden=true;
     MCTGameView.hidden=true;
@@ -2180,6 +2212,8 @@
 //go to flashcard chooser view
 -(IBAction)goToFCV
 {
+    [self playSoundNamed:@"ClickSound" andType:@"m4a" andFX:true];
+
     FilterView.hidden = false;
     MCGameView.hidden=true;
     firstView.hidden=true;
@@ -2211,6 +2245,8 @@
 
 -(IBAction)showFilterView:(id)sender
 {
+    [self playSoundNamed:@"ClickSound" andType:@"m4a" andFX:true];
+
     if(sender ==tFButton)
     {
         typeOfGame.text = @"Flashcard Game";
@@ -2279,7 +2315,8 @@
 //go to flashcard timed view
 -(IBAction)goToFTV
 {
-    
+    [self playSoundNamed:@"ClickSound" andType:@"m4a" andFX:true];
+
     FilterView.hidden = true;
     MCGameView.hidden=true;
     firstView.hidden=true;
@@ -2314,6 +2351,8 @@
 }
 -(IBAction)goToNewView:(id)sender
 {
+    [self playSoundNamed:@"ClickSound" andType:@"m4a" andFX:true];
+
     if(sender == leaderBoardButton)
     {
         [self showLeaderboardAndAchievements:NO];
@@ -2404,6 +2443,8 @@
 
 -(IBAction)hintButtonPressed
 {
+    [self playSoundNamed:@"ClickSound" andType:@"m4a" andFX:true];
+
     ++numberOfHintsPressed;
     hintLabel.text = [NSString stringWithFormat:@"H:%i", 3-numberOfHintsPressed];
     [self generateDotsForTime:numberOfHintsPressed];
@@ -2884,7 +2925,8 @@
 }
 -(IBAction)personGuessedMCF:(id)sender
 {
-    
+    [self playSoundNamed:@"ClickSound" andType:@"m4a" andFX:true];
+
     totalGuessed++;
     
     if(sender == gBMCF1)
@@ -3028,10 +3070,13 @@
 }
 -(IBAction)hintMCF
 {
-    
+    [self playSoundNamed:@"ClickSound" andType:@"m4a" andFX:true];
+
 }
 -(IBAction)nextMCF
 {
+    [self playSoundNamed:@"ClickSound" andType:@"m4a" andFX:true];
+
     [self generateNewPeopleMCF];
     nextButtonMCF.hidden = true;
     iBMCF1.hidden = true;
@@ -3178,6 +3223,8 @@
 }
 -(IBAction)moreInfoMCF:(id)sender
 {
+    [self playSoundNamed:@"ClickSound" andType:@"m4a" andFX:true];
+
     if(sender == iBMCF1)
     {
         [self showMoreInfo:pMCF1];
@@ -3250,6 +3297,8 @@
 }
 -(IBAction)moreInfo
 {
+    [self playSoundNamed:@"ClickSound" andType:@"m4a" andFX:true];
+
     moreInfoView.hidden=false;
     moreInfoViewImage.image = personPic.image;
     timerLable.text = @"Pause";
@@ -3308,11 +3357,15 @@
 }
 -(IBAction)lessInfo
 {
+    [self playSoundNamed:@"ClickSound" andType:@"m4a" andFX:true];
+
     moreInfoView.hidden=true;
     
 }
 -(IBAction)hideFilterViewAndFilter
 {
+    [self playSoundNamed:@"ClickSound" andType:@"m4a" andFX:true];
+
     [self readValues];
     if((arrayOf49PercentAndUnder.count > 0 && [typeOfGame.text isEqualToString:@"Flashcard Game"]) || (([typeOfGame.text isEqualToString:@"Multiple Choice Faces"] || [typeOfGame.text isEqualToString:@"Multiple Choice Names"]) && arrayOf49PercentAndUnder.count > 3))
     {
@@ -3454,7 +3507,9 @@
 }
 
 -(IBAction)goButtonPressed
-{    
+{
+    [self playSoundNamed:@"ClickSound" andType:@"m4a" andFX:true];
+
     [self readValues];
     if((arrayOf49PercentAndUnder.count > 0 && [typeOfGame.text isEqualToString:@"Flashcard Game"]) || (([typeOfGame.text isEqualToString:@"Multiple Choice Faces"] || [typeOfGame.text isEqualToString:@"Multiple Choice Names"]) && arrayOf49PercentAndUnder.count > 3))
     {
@@ -3537,7 +3592,7 @@
 }
 -(void)playSoundNamed:(NSString*)soundName andType:(NSString*)type andFX:(BOOL)isFX;
 {
-    NSURL *soundURL = [NSURL fileURLWithPath:[[NSBundle mainBundle]pathForResource:soundName ofType:type ]];
+    soundURL = [NSURL fileURLWithPath:[[NSBundle mainBundle]pathForResource:soundName ofType:type]];
     AudioServicesCreateSystemSoundID((__bridge CFURLRef)soundURL, &SoundID);
     
     if(fxSwitchSetting.isOn  && isFX)
@@ -3592,6 +3647,8 @@
 }
 -(IBAction)customDate
 {
+    [self playSoundNamed:@"ClickSound" andType:@"m4a" andFX:true];
+
     if(dateSwitchSetting.isOn == true)
     {
         UIAlertView *dateAlertView = [[UIAlertView alloc]initWithTitle:@"Enter a Date Type" message:@"" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Add", nil];
