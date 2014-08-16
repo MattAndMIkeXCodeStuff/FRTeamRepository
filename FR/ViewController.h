@@ -5,6 +5,27 @@
 //  Created by Matthew C Burton on 6/18/14.
 //  Copyright (c) 2014 Mattehw Burton. All rights reserved.
 //
+#define kmostTimeMCF @"timeMCF"
+#define kmostTimeMCN @"timeMCN"
+#define kmostTimeF @"timeF"
+
+#define kbestTimeMCF @"bestTimeMCF"
+#define kbestTimeMCN @"bestTimeMCN"
+#define kbestTimeF @"bestTimeF"
+
+#define khighscoreMCF @"highscoreMCF"
+#define khighscoreMCN @"highscoreMCN"
+#define khighscoreF @"highscoreF"
+
+#define kmusicBool @"musicBool"
+#define kfxBool @"fxBool"
+
+#define kbirthdayBool @"birthdayBool"
+#define kcompanyBool @"companyBool"
+#define kdepartmentBool @"departmentBool"
+#define kdateBool @"dateBool"
+#define kjobTitleBool @"jobTitleBool"
+
 
 #import <UIKit/UIKit.h>
 #import "Person.h"
@@ -12,6 +33,7 @@
 #import <AddressBookUI/AddressBookUI.h>
 #import "MSContactManipulater.h"
 #import <GameKit/GameKit.h>
+#import <AudioToolbox/AudioToolbox.h>
 
 @interface ViewController : UIViewController <UIAlertViewDelegate, GKGameCenterControllerDelegate>
 {
@@ -222,6 +244,8 @@
     
     Person*lastPerson;
     
+    SystemSoundID SoundID;
+    NSURL *soundURL;
     
     IBOutlet UIView*leaderBoardView;
     IBOutlet UIButton*leaderBoardButton;
@@ -232,6 +256,7 @@
 
     //for stats
     
+    NSMutableArray *lowest;
     IBOutlet UIScrollView*statsScrollView;
     
     IBOutlet UISwitch*dateSwitch;
