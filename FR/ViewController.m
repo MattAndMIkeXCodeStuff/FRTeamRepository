@@ -226,6 +226,10 @@
     statsView.hidden = true;
     settingsView.hidden = true;
     leaderBoardView.hidden = true;
+    iBMCN1.hidden = true;
+    iBMCN2.hidden = true;
+    iBMCN3.hidden = true;
+    iBMCN4.hidden = true;
     
     mostTimeIntMCN =0;
     mostTimeIntMCF =0;
@@ -573,11 +577,16 @@
     else if(practiceModeSwitch.isOn == true)
     {
         lastPerson = currentPerson;
-        do{
+        if(arrayOf49PercentAndUnder.count > 1)
+        {
+            do{
+                [self loadNewPerson];
+            }while (lastPerson == currentPerson);
+        }
+        else
+        {
             [self loadNewPerson];
-        }while (lastPerson == currentPerson);
-
-
+        }
     }
 }
 -(void)printHighScoreMCF
@@ -1941,6 +1950,11 @@
  }
 -(IBAction)mcAnswerPressed:(id)sender
 {
+    iBMCN1.hidden = false;
+    iBMCN2.hidden = false;
+    iBMCN3.hidden = false;
+    iBMCN4.hidden = false;
+    
     totalGuessed++;
     filterField.text = @"";
     filterLabel.text = @"Filter By:";
@@ -2062,6 +2076,11 @@
 }
 -(IBAction)nextMCN
 {
+    numberOfHintsPressed = 0;
+    iBMCN1.hidden = true;
+    iBMCN2.hidden = true;
+    iBMCN3.hidden = true;
+    iBMCN4.hidden = true;
     [self generateNewPeopleMCN];
     nextMCN.hidden = true;
     currentPerson.hasBeenGuessed = false;
@@ -2213,6 +2232,9 @@
     else
     {
         [self goButtonPressed];
+        numberOfHintsPressed =0;
+        hintLabel.text = [NSString stringWithFormat:@"H:%i", 3-numberOfHintsPressed];
+
         if(sender != tFButton || sender != mCNamesButton || sender != mCFacesButton)
         {
             
@@ -2442,9 +2464,17 @@
     {
         timerLable.text = [NSString stringWithFormat:@"%i:%i", minutes,seconds];
     }
-    if(seconds >= 59)
+    if(seconds == 59)
     {
         seconds = 0;
+        //timerLableSeconds.text = [NSString stringWithFormat:@"0%i", countUpValue];
+        
+        minutes +=1;
+        timerLable.text = [NSString stringWithFormat:@"%i:0%i", minutes,seconds];
+    }
+    else if(seconds > 59)
+    {
+        seconds = seconds - 60;
         //timerLableSeconds.text = [NSString stringWithFormat:@"0%i", countUpValue];
         
         minutes +=1;
@@ -2976,10 +3006,192 @@
 }
 -(IBAction)hintMCF
 {
-    
+    if(numberOfHintsPressed < 2)
+    {
+        int x;
+        Person* randomPerson;
+        bool canGoOn;
+        canGoOn = false;
+        do
+        {
+            x = rand()%4;
+            if(x == 0 && iBMCF1.hidden == true)
+            {
+                randomPerson = pMCF1;
+                canGoOn = true;
+            }
+            if(x == 1 && iBMCF2.hidden == true)
+            {
+                randomPerson = pMCF2;
+                canGoOn = true;
+            }
+            if(x == 2 && iBMCF3.hidden == true)
+            {
+                randomPerson = pMCF3;
+                canGoOn = true;
+            }
+            if(x == 3 && iBMCF4.hidden == true)
+            {
+                randomPerson = pMCF4;
+                canGoOn = true;
+            }
+            
+        }while(randomPerson == correctPersonMCF || canGoOn == false);
+        
+        if(randomPerson == pMCF1)
+        {
+            iBMCF1.hidden = false;
+            iTIMCF1.hidden = false;
+            n1.text = [NSString stringWithFormat:@"%@ %@",pMCF1.firstName,pMCF1.lastName];
+            iTIMCF1.image = [UIImage imageNamed:@"SmallTD.png"];
+        }
+        if(randomPerson == pMCF2)
+        {
+            iBMCF2.hidden = false;
+            iTIMCF2.hidden = false;
+            n2.text = [NSString stringWithFormat:@"%@ %@",pMCF2.firstName,pMCF2.lastName];
+            iTIMCF2.image = [UIImage imageNamed:@"SmallTD.png"];
+        }
+        if(randomPerson == pMCF3)
+        {
+            iBMCF3.hidden = false;
+            iTIMCF3.hidden = false;
+            n3.text = [NSString stringWithFormat:@"%@ %@",pMCF3.firstName,pMCF3.lastName];
+            iTIMCF3.image = [UIImage imageNamed:@"SmallTD.png"];
+        }
+        if(randomPerson == pMCF4)
+        {
+            iBMCF4.hidden = false;
+            iTIMCF4.hidden = false;
+            n4.text = [NSString stringWithFormat:@"%@ %@",pMCF4.firstName,pMCF4.lastName];
+            iTIMCF4.image = [UIImage imageNamed:@"SmallTD.png"];
+        }
+        
+        ++numberOfHintsPressed;
+        hintLabel.text = [NSString stringWithFormat:@"H:%i", 2-numberOfHintsPressed];
+        seconds+=5;
+        if( numberOfHintsPressed > 2)
+        {
+            hintLabel.text = @"H:0";
+        }
+        if(seconds <= 9)
+        {
+            timerLable.text = [NSString stringWithFormat:@"%i:0%i", minutes,seconds];
+        }
+        else
+        {
+            timerLable.text = [NSString stringWithFormat:@"%i:%i", minutes,seconds];
+        }
+        if(seconds == 59)
+        {
+            seconds = 0;
+            //timerLableSeconds.text = [NSString stringWithFormat:@"0%i", countUpValue];
+            
+            minutes +=1;
+            timerLable.text = [NSString stringWithFormat:@"%i:0%i", minutes,seconds];
+        }
+        else if(seconds > 59)
+        {
+            seconds = seconds - 60;
+            //timerLableSeconds.text = [NSString stringWithFormat:@"0%i", countUpValue];
+            
+            minutes +=1;
+            timerLable.text = [NSString stringWithFormat:@"%i:0%i", minutes,seconds];
+        }
+    }
 }
+-(IBAction)hintMCN
+{
+    if(numberOfHintsPressed < 2)
+    {
+        int x;
+        Person* randomPerson;
+        bool canGoOn;
+        canGoOn = false;
+        do
+        {
+            x = rand()%4;
+            if(x == 0 && iBMCN1.hidden == true)
+            {
+                randomPerson = pMCN1;
+                canGoOn = true;
+            }
+            if(x == 1 && iBMCN1.hidden == true)
+            {
+                randomPerson = pMCN2;
+                canGoOn = true;
+            }
+            if(x == 2 && iBMCN1.hidden == true)
+            {
+                randomPerson = pMCN3;
+                canGoOn = true;
+            }
+            if(x == 3 && iBMCN1.hidden == true)
+            {
+                randomPerson = pMCN4;
+                canGoOn = true;
+            }
+            
+        }while(randomPerson == correctMCPerson || canGoOn == false);
+        
+        if(randomPerson == pMCN1)
+        {
+            iBMCN1.hidden = false;
+            mcButton1.backgroundColor = [UIColor redColor];
+        }
+        if(randomPerson == pMCN2)
+        {
+            iBMCN2.hidden = false;
+            mcButton2.backgroundColor = [UIColor redColor];
+        }
+        if(randomPerson == pMCN3)
+        {
+            iBMCN3.hidden = false;
+            mcButton3.backgroundColor = [UIColor redColor];
+        }
+        if(randomPerson == pMCN4)
+        {
+            iBMCN4.hidden = false;
+            mcButton4.backgroundColor = [UIColor redColor];
+        }
+        
+        ++numberOfHintsPressed;
+        hintLabel.text = [NSString stringWithFormat:@"H:%i", 2-numberOfHintsPressed];
+        seconds+=5;
+        if( numberOfHintsPressed > 2)
+        {
+            hintLabel.text = @"H:0";
+        }
+        if(seconds <= 9)
+        {
+            timerLable.text = [NSString stringWithFormat:@"%i:0%i", minutes,seconds];
+        }
+        else
+        {
+            timerLable.text = [NSString stringWithFormat:@"%i:%i", minutes,seconds];
+        }
+        if(seconds == 59)
+        {
+            seconds = 0;
+            //timerLableSeconds.text = [NSString stringWithFormat:@"0%i", countUpValue];
+            
+            minutes +=1;
+            timerLable.text = [NSString stringWithFormat:@"%i:0%i", minutes,seconds];
+        }
+        else if(seconds > 59)
+        {
+            seconds = seconds - 60;
+            //timerLableSeconds.text = [NSString stringWithFormat:@"0%i", countUpValue];
+            
+            minutes +=1;
+            timerLable.text = [NSString stringWithFormat:@"%i:0%i", minutes,seconds];
+        }
+    }
+}
+
 -(IBAction)nextMCF
 {
+    numberOfHintsPressed = 0;
     [self generateNewPeopleMCF];
     nextButtonMCF.hidden = true;
     iBMCF1.hidden = true;
@@ -3121,7 +3333,7 @@
 
     }
 }
--(IBAction)moreInfoMCF:(id)sender
+-(IBAction)moreInfoMC:(id)sender
 {
     if(sender == iBMCF1)
     {
@@ -3138,6 +3350,22 @@
     if(sender == iBMCF4)
     {
         [self showMoreInfo:pMCF4];
+    }
+    if(sender == iBMCN1)
+    {
+        [self showMoreInfo:pMCN1];
+    }
+    if(sender == iBMCN2)
+    {
+        [self showMoreInfo:pMCN2];
+    }
+    if(sender == iBMCN3)
+    {
+        [self showMoreInfo:pMCN3];
+    }
+    if(sender == iBMCN4)
+    {
+        [self showMoreInfo:pMCN4];
     }
 }
 -(void)showMoreInfo:(Person *)pIQ
@@ -3277,10 +3505,7 @@
     timeOnThisCard = 0;
     int rn;
     
-    Person*pMCN1;
-    Person*pMCN2;
-    Person*pMCN3;
-    Person*pMCN4;
+
 
     mcButton1.backgroundColor = [UIColor lightGrayColor];
     mcButton2.backgroundColor = [UIColor lightGrayColor];
@@ -3396,7 +3621,10 @@
 }
 
 -(IBAction)goButtonPressed
-{    
+{
+    numberOfHintsPressed = 0;
+    hintLabel.text = [NSString stringWithFormat:@"H:%i", 3-numberOfHintsPressed];
+
     [self readValues];
     if((arrayOf49PercentAndUnder.count > 0 && [typeOfGame.text isEqualToString:@"Flashcard Game"]) || (([typeOfGame.text isEqualToString:@"Multiple Choice Faces"] || [typeOfGame.text isEqualToString:@"Multiple Choice Names"]) && arrayOf49PercentAndUnder.count > 3))
     {

@@ -32,6 +32,7 @@
     
     IBOutlet UILabel *pointsLabel;
     int totalSeconds;
+    
     int currentScore;
     int highscore;
     
@@ -86,6 +87,11 @@
     IBOutlet UIButton *iBMCN2;
     IBOutlet UIButton *iBMCN3;
     IBOutlet UIButton *iBMCN4;
+    
+    Person*pMCN1;
+    Person*pMCN2;
+    Person*pMCN3;
+    Person*pMCN4;
 
     IBOutlet UIButton*showInfoButton;
     
@@ -270,9 +276,13 @@
     IBOutlet UISegmentedControl*filters;
     
     NSString*dateTypeString;
+    
+
+
 }
 //more info multiple choice faces
--(IBAction)moreInfoMCF:(id)sender;
+-(IBAction)moreInfoMC:(id)sender;
+
 -(void)showMoreInfo:(Person*)pIQ;
 -(IBAction)personGuessedMCF:(id)sender;
 -(void)assignCorrectPersonMCF;
@@ -283,6 +293,7 @@
 
 -(void)generateNewPeopleMCN;
 -(IBAction)nextMCN;
+-(IBAction)hintMCN;
 
 -(IBAction)customDate;
 
