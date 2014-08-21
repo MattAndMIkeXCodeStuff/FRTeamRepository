@@ -25,7 +25,7 @@
 #define kdepartmentBool @"departmentBool"
 #define kdateBool @"dateBool"
 #define kjobTitleBool @"jobTitleBool"
-
+#define kmissedBool @"missedBool"
 
 #import <UIKit/UIKit.h>
 #import "Person.h"
@@ -261,6 +261,9 @@
     
     IBOutlet UISwitch*dateSwitch;
     
+    IBOutlet UISwitch*missedSwitch;
+    IBOutlet UITextField*percentField;
+    IBOutlet UIView*percentView;
     //the values
     int bestTimeMCF;
     int bestTimeMCN;
@@ -297,13 +300,24 @@
     IBOutlet UISwitch*dateSwitchSetting;
     IBOutlet UISwitch*departmentSwitchSetting;
     IBOutlet UISwitch*jobTitleSwitchSetting;
+    IBOutlet UISwitch*percentMissedSwichSetting;
 
     IBOutlet UISegmentedControl*filters;
     
     NSString*dateTypeString;
     
-
-
+    IBOutlet UIScrollView*peopleStatsScrollView;
+    
+    IBOutlet UIImageView*columnSpacer1;
+    IBOutlet UIImageView*columnSpacer2;
+    IBOutlet UIImageView*columnSpacer3;
+    IBOutlet UIImageView*columnSpacer4;
+    IBOutlet UIImageView*rowSpacer1;
+    IBOutlet UIImageView*image1;
+    IBOutlet UILabel*name1;
+    IBOutlet UILabel*percent1;
+    IBOutlet UILabel*myTitle;
+    IBOutlet UIImageView*mySeparater1;
 }
 //more info multiple choice faces
 -(IBAction)moreInfoMC:(id)sender;
@@ -321,6 +335,9 @@
 -(IBAction)hintMCN;
 
 -(IBAction)customDate;
+
+-(IBAction)changeStatsView:(id)sender;
+-(NSArray*)sortByPercentageArrayOfPeople:(NSMutableArray*)array;
 
 @property(nonatomic)int numberOfSmiths;
 @property(nonatomic)IBOutlet UIScrollView *labelsScrollView;
@@ -367,6 +384,10 @@
 
 -(IBAction)moreInfo;
 -(IBAction)lessInfo;
+
+-(IBAction)hidePercentEditer;
+-(IBAction)percentChanged;
+
 
 -(void)playSoundNamed:(NSString*)soundName;
 -(void)updateCurrentFilters;
@@ -420,6 +441,8 @@
 
 -(IBAction)hideFilterViewAndFilter;
 
+-(IBAction)showPeopleStatsView;
+
 -(void)addJob:(NSString*)str;
 -(void)Company:(NSString*)str;
 -(void)addDepartment:(NSString*)str;
@@ -437,6 +460,7 @@
 
 -(NSMutableArray*)getContactsWithDepartment:(NSString*)dept fromArray:(NSMutableArray*)array;
 -(NSMutableArray*)getContactsWithDateFromArray:(NSMutableArray*)array;
+-(NSMutableArray*)getContactsWithPercentage:(NSString*)percentage fromArray:(NSMutableArray*)array;
 
 -(IBAction)showFilterView:(id)sender;
 

@@ -151,8 +151,7 @@
 }
 - (void)viewDidLoad
 {
-
-        frame0 = [UIImage imageNamed:@"IMG_0929.png"];
+    frame0 = [UIImage imageNamed:@"IMG_0929.png"];
     frame1 = [UIImage imageNamed:@"IMG_0930.png"];
     frame2 = [UIImage imageNamed:@"IMG_0931.png"];
     frame3 = [UIImage imageNamed:@"IMG_0932.PNG"];
@@ -208,15 +207,12 @@
     jobTitleSwitchSetting.on = [defaults boolForKey:kjobTitleBool];
     musicSwitchSetting.on = [defaults boolForKey:kmusicBool];
     fxSwitchSetting.on = [defaults boolForKey:kfxBool];
-    
+    percentMissedSwichSetting.on = [defaults boolForKey:kmissedBool];
     
     highscore = (int)[defaults integerForKey:khighscoreF];
     highscoreMCN = (int)[defaults integerForKey:khighscoreMCN];
     highscoreMCF = (int)[defaults integerForKey:khighscoreMCF];
     
-    [self playSoundNamed:@"GetKnowU" andType:@"m4a" andFX:true];
-    
-
     nameView.hidden = true;
     MCGameView.hidden=true;
     firstView.hidden=false;
@@ -271,52 +267,18 @@
     [self updateCurrentFilters];
     
     [super viewDidLoad];
-    
+    [self playSoundNamed:@"Cheers Theme" andType:@"m4a" andFX:false];
+
     hintLabel.text = [NSString stringWithFormat:@"H:%i", 3-numberOfHintsPressed];
     
     _gameCenterEnabled = NO;
     _leaderboardIdentifier = @"";
     [self authenticateLocalPlayer];
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-
-/*
-    SystemSoundID soundID;
-    NSString *soundFile = [[NSBundle mainBundle] pathForResource:@"HoHey" ofType:@"mp3"];
-    if(soundFile)
-    {
-        OSStatus status = AudioServicesCreateSystemSoundID((__bridge CFURLRef)[NSURL fileURLWithPath:soundFile], &soundID);
-        if(status == noErr)
-        {
-            AudioServicesPlaySystemSound(soundID);
-            NSLog(@"%@ is playing\n", soundFile);
-        } else {
-            NSLog( @"no sound id created; error status code is %d", status);
-        }
-    } else {
-        NSLog( @"couldn't find sound file... is it really in your app bundle?");
-    }
-    */
-    
-    //[self loadLabels:@"Company"];
-    
     uniqueDepartmentsArray = [[NSMutableArray alloc]init];
     uniqueCompaniesArray = [[NSMutableArray alloc]init];
     uniqueJobTitlesArray = [[NSMutableArray alloc]init];
     filteringIndicator = [[UIActivityIndicatorView alloc]init];
     arrayOf50PercentAndOver = [[NSMutableArray alloc]init];
-    
-    
-    //moreInfoScrollView = [[UIScrollView alloc]init];
     [moreInfoScrollView setScrollEnabled:YES];
     [moreInfoScrollView setContentSize:CGSizeMake(moreInfoScrollView.bounds.size.width, 310)];
     
@@ -363,9 +325,6 @@
         [object removeFromSuperview];
     }
     [self loadLabels:@"Company"];
-    //[self loadLabels:@"Department"];
-    //[self loadLabels:@"Company"];
-
 	// Do any additional setup after loading the view, typically from a nib.
     NSDate*d = [[NSDate alloc]init];
     NSDateFormatter *formatter=[[NSDateFormatter alloc] init];
@@ -400,7 +359,7 @@
 
 }
 -(IBAction)gotRight:(id)sender {
-    [self playSoundNamed:@"ClickSound" andType:@"m4a" andFX:true];
+    [self playSoundNamed:@"DingSound" andType:@"m4a" andFX:true];
 
     //NSLog(@"Got Right");
     if(timeOnThisCard > mostTimeIntF)
@@ -526,7 +485,6 @@
 
 }
 -(IBAction)gotWrong:(id)sender {
-    [self playSoundNamed:@"ClickSound" andType:@"m4a" andFX:true];
 
    // NSLog(@"Got Wrong");
     if(timeOnThisCard > mostTimeIntF)
@@ -542,7 +500,8 @@
     
     currentPerson.hasBeenGuessed = true;
     [currentPerson gotWrong];
-    
+    [self playSoundNamed:@"DongSound" andType:@"m4a" andFX:true];
+
     totalGuessed++;
     guessButton.hidden = false;
     nameView.hidden = true;
@@ -624,90 +583,100 @@
 }
 -(void)printHighScoreMCF
 {
-    if(currentScoreMCF > highscoreMCF)
+    if(practiceModeSwitch.isOn == false)
     {
-        highscoreMCF = currentScoreMCF;
-        [self playSoundNamed:@"Cheers Theme" andType:@"m4a" andFX:true];
-        
-
-        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        NSInteger i = (NSInteger) highscoreMCF;
-        [defaults setInteger:i forKey:khighscoreMCF];
-        
-        [self reportScore:highscoreMCF toLeaderboard:@"MC_Faces_Leaderboard"];
-
-        pointsLabel.text = [NSString stringWithFormat:@"NEW HIGH SCORE! %i", currentScoreMCF];
-        
-    }
-    else
-    {
-        pointsLabel.text = [NSString stringWithFormat:@"You scored %i", currentScoreMCF];
-    }
-    if(totalSeconds < bestTimeMCF)
-    {
-        bestTimeMCF = totalSeconds;
-        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        NSInteger i = (NSInteger) bestTimeMCF;
-        [defaults setInteger:bestTimeMCF forKey:kbestTimeMCF];
-        [defaults synchronize];
+        if(currentScoreMCF > highscoreMCF)
+        {
+            highscoreMCF = currentScoreMCF;
+            [self playSoundNamed:@"Cheers Theme" andType:@"m4a" andFX:true];
+            
+            
+            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+            NSInteger i = (NSInteger) highscoreMCF;
+            [defaults setInteger:i forKey:khighscoreMCF];
+            
+            [self reportScore:highscoreMCF toLeaderboard:@"MC_Faces_Leaderboard"];
+            
+            pointsLabel.text = [NSString stringWithFormat:@"NEW HIGH SCORE! %i", currentScoreMCF];
+        }
+        else
+        {
+            pointsLabel.text = [NSString stringWithFormat:@"You scored %i", currentScoreMCF];
+        }
+        if(totalSeconds < bestTimeMCF)
+        {
+            bestTimeMCF = totalSeconds;
+            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+            NSInteger i = (NSInteger) bestTimeMCF;
+            [defaults setInteger:bestTimeMCF forKey:kbestTimeMCF];
+            [defaults synchronize];
+        }
     }
 }
 -(void)printHighScoreMCN
 {
-    if(currentScoreMCN > highscoreMCN)
+    if(practiceModeSwitch.isOn == false)
     {
-        highscoreMCN = currentScoreMCN;
-        //highscore = currentScore;
-        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        NSInteger i = (NSInteger) highscoreMCN;
-        [self playSoundNamed:@"Cheers Theme" andType:@"m4a" andFX:true];
+        if(currentScoreMCN > highscoreMCN)
+        {
+            highscoreMCN = currentScoreMCN;
+            //highscore = currentScore;
+            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+            NSInteger i = (NSInteger) highscoreMCN;
+            [self playSoundNamed:@"Cheers Theme" andType:@"m4a" andFX:true];
+            
+            [defaults setInteger:i forKey:khighscoreMCN];
+            
+            [self reportScore:highscoreMCN toLeaderboard:@"MCN_Leader_Board"];
+            
+            pointsLabel.text = [NSString stringWithFormat:@"NEW HIGH SCORE! %i", currentScoreMCN];
+            
+        }
+        else
+        {
+            pointsLabel.text = [NSString stringWithFormat:@"You scored %i", currentScoreMCN];
+        }
+        if(totalSeconds < bestTimeMCN)
+        {
+            bestTimeMCN = totalSeconds;
+            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+            NSInteger i = (NSInteger) bestTimeMCN;
+            [defaults setInteger:bestTimeMCN forKey:kbestTimeMCN];
+            [defaults synchronize];
+        }
 
-        [defaults setInteger:i forKey:khighscoreMCN];
-        
-        [self reportScore:highscoreMCN toLeaderboard:@"MCN_Leader_Board"];
-
-        pointsLabel.text = [NSString stringWithFormat:@"NEW HIGH SCORE! %i", currentScoreMCN];
-        
-    }
-    else
-    {
-        pointsLabel.text = [NSString stringWithFormat:@"You scored %i", currentScoreMCN];
-    }
-    if(totalSeconds < bestTimeMCN)
-    {
-        bestTimeMCN = totalSeconds;
-        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        NSInteger i = (NSInteger) bestTimeMCN;
-        [defaults setInteger:bestTimeMCN forKey:kbestTimeMCN];
-        [defaults synchronize];
     }
 }
 
 -(void)printHighScore
 {
-    if(currentScore > highscore)
+    if(practiceModeSwitch.isOn == false)
     {
-        highscore = currentScore;
-        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        NSInteger i = (NSInteger) highscore;
-        [self playSoundNamed:@"Cheers Theme" andType:@"m4a" andFX:true];
+        if(currentScore > highscore)
+        {
+            highscore = currentScore;
+            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+            NSInteger i = (NSInteger) highscore;
+            [self playSoundNamed:@"Cheers Theme" andType:@"m4a" andFX:true];
+            
+            [defaults setInteger:i forKey:khighscoreF];
+            [self reportScore:highscore toLeaderboard:@"Flashcard_Leader_Board"];
+            pointsLabel.text = [NSString stringWithFormat:@"NEW HIGH SCORE! %i", currentScore];
+            
+        }
+        else
+        {
+            pointsLabel.text = [NSString stringWithFormat:@"You scored %i", currentScore];
+        }
+        if(totalSeconds < bestTimeF)
+        {
+            bestTimeF = totalSeconds;
+            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+            NSInteger i = (NSInteger) bestTimeF;
+            [defaults setInteger:bestTimeF forKey:kbestTimeF];
+            [defaults synchronize];
+        }
 
-        [defaults setInteger:i forKey:khighscoreF];
-        [self reportScore:highscore toLeaderboard:@"Flashcard_Leader_Board"];
-        pointsLabel.text = [NSString stringWithFormat:@"NEW HIGH SCORE! %i", currentScore];
-        
-    }
-    else
-    {
-        pointsLabel.text = [NSString stringWithFormat:@"You scored %i", currentScore];
-    }
-    if(totalSeconds < bestTimeF)
-    {
-        bestTimeF = totalSeconds;
-        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        NSInteger i = (NSInteger) bestTimeF;
-        [defaults setInteger:bestTimeF forKey:kbestTimeF];
-        [defaults synchronize];
     }
 }
 -(NSMutableArray*)chooseArray
@@ -989,7 +958,31 @@
     }
     return finalPeople;
 }
+-(NSMutableArray*)getContactsWithPercentage:(NSString*)percentage fromArray:(NSMutableArray*)array
+{
+    if(missedSwitch.isOn == true)
+    {
+        NSMutableArray*finalPeople = [[NSMutableArray alloc]init];
+        for (int l = 0 ; l<array.count; l++) {
+            Person *p;
+            p = [[Person alloc]init];
+            p = [array objectAtIndex:l];
+            NSLog(@"%f=person",[p returnPercentage]*100);
+            NSLog(@"%f=chosenvalue",[percentage doubleValue]);
 
+            if([p returnPercentage]*100 <= [percentage doubleValue])
+            {
+                NSLog(@"added");
+                [finalPeople addObject:p];
+            }
+        }
+        return finalPeople;
+    }
+    else
+    {
+        return  array;
+    }
+}
 -(NSMutableArray*)getContactsWithDateFromArray:(NSMutableArray*)array
 {
     if(dateSwitch.isOn == true)
@@ -1073,6 +1066,8 @@
      NSLog(@"Number of Contacts = %lu",(unsigned long)arrayOf49PercentAndUnder.count);
     arrayOf49PercentAndUnder = [self getContactsWithJobTitle:@"test" fromArray:arrayOf49PercentAndUnder];
      NSLog(@"Number of Contacts = %lu",(unsigned long)arrayOf49PercentAndUnder.count);
+    arrayOf49PercentAndUnder = [self getContactsWithPercentage:percentField.text fromArray:arrayOf49PercentAndUnder];
+    
     
     if(arrayOf49PercentAndUnder.count == 0)
     {
@@ -1198,6 +1193,155 @@
         toField.text = [formatter stringFromDate:date.date];
     }
 }
+-(IBAction)changeStatsView:(id)sender
+{
+    UISegmentedControl *s=  sender;
+    if([[s titleForSegmentAtIndex:s.selectedSegmentIndex] isEqualToString:@"Game Stats"])
+    {
+        statsScrollView.hidden = false;
+        peopleStatsScrollView.hidden = true;
+        for (UIView *object in [peopleStatsScrollView subviews])
+        {
+            [object removeFromSuperview];
+        }
+    }
+    if([[s titleForSegmentAtIndex:s.selectedSegmentIndex] isEqualToString:@"Player Stats"])
+    {
+        statsScrollView.hidden = true;
+        peopleStatsScrollView.hidden = false;
+        [self showPeopleStatsView];
+    }
+}
+-(IBAction)showPeopleStatsView
+{
+    
+    NSMutableArray*peopleArray;
+    peopleArray = allPeople;
+    
+    peopleArray = [self sortByPercentageArrayOfPeople:peopleArray];
+    
+    [peopleStatsScrollView addSubview:myTitle];
+    [peopleStatsScrollView addSubview:mySeparater1];
+    [peopleStatsScrollView addSubview:rowSpacer1];
+    [peopleStatsScrollView addSubview:columnSpacer1];
+    [peopleStatsScrollView addSubview:columnSpacer2];
+    [peopleStatsScrollView addSubview:columnSpacer3];
+    [peopleStatsScrollView addSubview:columnSpacer4];
+
+    
+    [columnSpacer1 setBounds:CGRectMake(columnSpacer1.center.x, columnSpacer1.center.y, columnSpacer1.bounds.size.width,  48*peopleArray.count+2)];
+    columnSpacer1.center = CGPointMake(columnSpacer1.center.x, (columnSpacer1.bounds.size.height/2 + rowSpacer1.center.y)-rowSpacer1.bounds.size.height/2);
+    
+    [columnSpacer2 setBounds:CGRectMake(columnSpacer2.center.x, columnSpacer2.center.y, columnSpacer2.bounds.size.width,  48*peopleArray.count+2)];
+    columnSpacer2.center = CGPointMake(columnSpacer2.center.x, (columnSpacer2.bounds.size.height/2 + rowSpacer1.center.y)-rowSpacer1.bounds.size.height/2);
+    
+    [columnSpacer3 setBounds:CGRectMake(columnSpacer3.center.x, columnSpacer3.center.y, columnSpacer3.bounds.size.width,  48*peopleArray.count+2)];
+    columnSpacer3.center = CGPointMake(columnSpacer3.center.x, (columnSpacer3.bounds.size.height/2 + rowSpacer1.center.y)-rowSpacer1.bounds.size.height/2);
+    
+    [columnSpacer4 setBounds:CGRectMake(columnSpacer4.center.x, columnSpacer4.center.y, columnSpacer4.bounds.size.width,  48*peopleArray.count+2)];
+    columnSpacer4.center = CGPointMake(columnSpacer4.center.x, (columnSpacer4.bounds.size.height/2 + rowSpacer1.center.y)-rowSpacer1.bounds.size.height/2);
+    
+    for(int i = 0; i < peopleArray.count; ++i)
+    {
+        UIButton*button;
+        button = [[UIButton alloc]init];
+        UIImageView*spacer;
+        spacer = [[UIImageView alloc]init];
+        UIImageView*image;
+        image = [[UIImageView alloc]init];
+        UILabel*name;
+        name = [[UILabel alloc]init];
+        UILabel*percent;
+        percent = [[UILabel alloc]init];
+        
+        Person*pIQ;
+        pIQ =[peopleArray objectAtIndex:i];
+        image.image = pIQ.selfImage;
+        spacer.image = [UIImage imageNamed:@"separater.png"];
+        name.text = [pIQ getFullName];
+        name.textAlignment = name1.textAlignment;
+        percent.text = [NSString stringWithFormat:@"%d%%",(int)round([pIQ returnPercentage]*100)];
+        percent.textAlignment = percent1.textAlignment;
+        
+        double colorMultiplier;
+        colorMultiplier = [pIQ returnPercentage];
+        UIColor *myColor;
+        myColor = [UIColor colorWithRed:(200.0)*(1-colorMultiplier) green:(100.0)*(colorMultiplier) blue:0.0-1.0 alpha:1.0f];
+        [button setBackgroundColor: myColor];
+        
+        if(colorMultiplier>0.5)
+        {
+            button.alpha = 0.5*colorMultiplier + 0.1;
+            [button setBackgroundColor: [UIColor greenColor]];
+        }
+        else
+        {
+            button.alpha = 0.5*(1-colorMultiplier) + 0.1;
+            [button setBackgroundColor: [UIColor redColor]];
+        }
+        [button addTarget:self action:@selector(moreInfo) forControlEvents:UIControlEventTouchUpInside];
+        button.reversesTitleShadowWhenHighlighted = true;
+        
+        [peopleStatsScrollView addSubview:name];
+        [peopleStatsScrollView addSubview:percent];
+        [peopleStatsScrollView addSubview:spacer];
+        [peopleStatsScrollView addSubview:button];
+        [peopleStatsScrollView addSubview:columnSpacer1];
+        [peopleStatsScrollView addSubview:columnSpacer2];
+        [peopleStatsScrollView addSubview:columnSpacer3];
+        [peopleStatsScrollView addSubview:columnSpacer4];
+        [peopleStatsScrollView addSubview:image];
+
+        //[percent set]
+        
+        [spacer setBounds:CGRectMake(rowSpacer1.center.x, rowSpacer1.center.x, rowSpacer1.bounds.size.width,  rowSpacer1.bounds.size.height)];
+        spacer.center = CGPointMake(rowSpacer1.center.x, rowSpacer1.center.y+i*48);
+        image.center=CGPointMake(image1.center.x, image1.center.y+i*48);
+        [image setBounds:CGRectMake(image1.center.x, image1.center.x, image1.bounds.size.width,  image1.bounds.size.height)];
+
+        name.bounds  = CGRectMake(100, 10, name1.bounds.size.width ,name1.bounds.size.height);
+        name.center=CGPointMake(name1.center.x, name1.center.y+i*48);
+        button.bounds = CGRectMake(100, 10, 280, 40);
+        button.center=CGPointMake(160, name.center.y);
+        name.textColor = name1.textColor;
+        percent.bounds  = CGRectMake(100, 10, percent1.bounds.size.width ,percent1.bounds.size.height);
+        percent.textColor = percent1.textColor;
+        percent.center=CGPointMake(percent1.center.x, percent1.center.y+i*48);
+    }
+    [peopleStatsScrollView setContentSize:CGSizeMake(peopleStatsScrollView.bounds.size.width, 48*(peopleArray.count+1)+10)];
+}
+-(NSArray*)sortByPercentageArrayOfPeople:(NSMutableArray*)array
+{
+    NSMutableArray *lessArray = [[NSMutableArray alloc] init] ;
+    NSMutableArray *greaterArray =[[NSMutableArray alloc] init] ;
+    if ([array count] <1)
+    {
+        return nil;
+    }
+    int randomPivotPoint = arc4random() % [array count];
+    Person *pIQ;
+    pIQ =[array objectAtIndex:randomPivotPoint];
+    double pivotValue = [pIQ returnPercentage];
+    [array removeObjectAtIndex:randomPivotPoint];
+    for (Person *p in array)
+    {
+        //quickSortCount++; //This is required to see how many iterations does it take to sort the array using quick sort
+        if ([p returnPercentage] < pivotValue)
+        {
+            [lessArray addObject:p];
+        }
+        else
+        {
+            [greaterArray addObject:p];
+        }
+    }
+    NSMutableArray *sortedArray = [[NSMutableArray alloc] init];
+    [sortedArray addObjectsFromArray:[self sortByPercentageArrayOfPeople:lessArray]];
+    [sortedArray addObject:pIQ];
+    [sortedArray addObjectsFromArray:[self sortByPercentageArrayOfPeople:greaterArray]];
+    
+    return sortedArray;
+}
 -(IBAction)showPicker:(id)sender
 {
     [self playSoundNamed:@"ClickSound" andType:@"m4a" andFX:true];
@@ -1259,31 +1403,23 @@
    // NSLog(@"allPeople(top) - %i",allPeople.count);
 
     //NSLog(@"lType = %@",labelType);
-    if ([labelType  isEqual: @"Date"])
+    if ([labelType  isEqual: @"Date"] || [labelType isEqual:@"Birthday"])
     {
-        from.hidden = false;
-        to.hidden = false;
-        fromField.hidden = false;
-        toField.hidden = false;
-        fromButton.hidden = false;
-        toButton.hidden = false;
-        date.hidden=false;
-        fromOrTo.hidden = false;
         iV.hidden = false;
-        dateSwitch.hidden = false;
+        percentView.hidden = true;
+        date.hidden = false;
+    }
+    else if([labelType  isEqual: @"Missed"])
+    {
+        iV.hidden = true;
+        percentView.hidden = false;
+        date.hidden=true;
     }
     else
     {
-        from.hidden = true;
-        to.hidden = true;
-        fromField.hidden = true;
-        toField.hidden = true;
-        fromButton.hidden = true;
-        toButton.hidden = true;
-        date.hidden=true;
-        fromOrTo.hidden = true;
         iV.hidden = true;
-        dateSwitch.hidden = true;
+        percentView.hidden = true;
+        date.hidden=true;
 
         UILabel *newLabel = [[UILabel alloc]init];
         newLabel.text = @"All";
@@ -1854,9 +1990,49 @@
     animating = true;
 
 }
+-(IBAction)hidePercentEditer
+{
+    [percentField resignFirstResponder];
+}
+-(IBAction)percentChanged
+{
+    percentField.text = [NSString stringWithFormat:@"%@%%",percentField.text];
+}
 //go to first view
 -(IBAction)goToFV
 {
+    NSMutableArray *myArray = [peopleStatsScrollView subviews];
+    /*
+    for (int i =0; i< [peopleStatsScrollView subviews].count; ++i)
+    {
+        if([myArray objectAtIndex:i] isKindOfClass:<#(__unsafe_unretained Class)#>)
+        {
+            for (UIImageView *view in [peopleStatsScrollView subviews])
+            {
+                if( view.image != rowSpacer1.image || view.image  !=  columnSpacer1.image  || view.image  !=  columnSpacer2.image  || view.image  !=  columnSpacer2.image  || view.image  !=  columnSpacer3.image  || view.image  !=  columnSpacer4.image  || view.image  != mySeparater1.image  )
+                {
+                    [view removeFromSuperview];
+                }
+            }
+        }
+        if([peopleStatsScrollView subviews])
+        {
+            for (UILabel *label in [peopleStatsScrollView subviews])
+            {
+                if(label.text != name1.text || label.text != myTitle.text)
+                {
+                    [label removeFromSuperview];
+                }
+            }
+        }
+    }
+*/
+
+    
+    
+    [percentField resignFirstResponder];
+    
+    
     [self playSoundNamed:@"ClickSound" andType:@"m4a" andFX:true];
 
     [self updateCurrentFilters];
@@ -2041,6 +2217,7 @@
         UIButton *b = (UIButton *)sender;
         if ([b.titleLabel.text isEqualToString:correctMCPerson.getFullName])
         {
+            [self playSoundNamed:@"DingSound" andType:@"m4a" andFX:true];
             b.backgroundColor = [UIColor greenColor];
             [currentPerson gotRight];
             totalCorrect++;
@@ -2054,6 +2231,7 @@
         {
             b.backgroundColor = [UIColor redColor];
             [currentPerson gotWrong];
+            [self playSoundNamed:@"DongSound" andType:@"m4a" andFX:true];
         }
     }
     else if (practiceModeSwitch.isOn == false && currentPerson.hasBeenGuessed == false)
@@ -2065,6 +2243,7 @@
         if ([b.titleLabel.text isEqualToString:correctMCPerson.getFullName])
         {
             [currentPerson gotRight];
+            [self playSoundNamed:@"DingSound" andType:@"m4a" andFX:true];
             totalCorrect++;
             currentPerson.hasBeenGuessedRight = true;
             currentPerson.hasBeenGuessed = true;
@@ -2073,6 +2252,7 @@
         {
             b.backgroundColor = [UIColor redColor];
             [currentPerson gotWrong];
+            [self playSoundNamed:@"DongSound" andType:@"m4a" andFX:true];
             currentPerson.hasBeenGuessed = true;
         }
         if([mcButton1.titleLabel.text isEqualToString:correctMCPerson.getFullName])
@@ -2153,6 +2333,7 @@
 }
 -(IBAction)nextMCN
 {
+    [self playSoundNamed:@"ClickSound" andType:@"m4a" andFX:true];
     numberOfHintsPressed = 0;
     iBMCN1.hidden = true;
     iBMCN2.hidden = true;
@@ -2453,6 +2634,12 @@
         settingsView.hidden = false;
         firstView.hidden = true;
 
+        statsScrollView.hidden = false;
+        peopleStatsScrollView.hidden = true;
+        for (UIView *object in [peopleStatsScrollView subviews])
+        {
+            [object removeFromSuperview];
+        }
     }
 }
 
@@ -2950,7 +3137,6 @@
 }
 -(IBAction)personGuessedMCF:(id)sender
 {
-    [self playSoundNamed:@"ClickSound" andType:@"m4a" andFX:true];
 
     totalGuessed++;
     
@@ -3063,6 +3249,13 @@
         if(correctPersonMCF == pIQ)
         {
             totalCorrect++;
+            [self playSoundNamed:@"DingSound" andType:@"m4a" andFX:true];
+            [pIQ gotRight];
+        }
+        else
+        {
+            [self playSoundNamed:@"DongSound" andType:@"m4a" andFX:true];
+            [pIQ gotWrong];
         }
         //NSLog(@"percent %f", totalCorrect/totalGuessed);
     }
@@ -3095,6 +3288,7 @@
 }
 -(IBAction)hintMCF
 {
+    [self playSoundNamed:@"ClickSound" andType:@"m4a" andFX:true];
     if(numberOfHintsPressed < 2)
     {
         int x;
@@ -3191,6 +3385,7 @@
 }
 -(IBAction)hintMCN
 {
+    [self playSoundNamed:@"ClickSound" andType:@"m4a" andFX:true];
     if(numberOfHintsPressed < 2)
     {
         int x;
@@ -3280,6 +3475,7 @@
 
 -(IBAction)nextMCF
 {
+    [self playSoundNamed:@"ClickSound" andType:@"m4a" andFX:true];
     numberOfHintsPressed = 0;
     [self generateNewPeopleMCF];
     nextButtonMCF.hidden = true;
@@ -3725,6 +3921,7 @@
 
 -(IBAction)goButtonPressed
 {
+    [self playSoundNamed:@"ClickSound" andType:@"m4a" andFX:true];
     numberOfHintsPressed = 0;
     hintLabel.text = [NSString stringWithFormat:@"H:%i", 3-numberOfHintsPressed];
 
@@ -3768,8 +3965,8 @@
         if([typeOfGame.text  isEqual: @"Multiple Choice Names"])
         {
             NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-
-            mostTimeIntMCN =(int)[defaults integerForKey:@"timeMCN"];
+            mostTimeIntMCN = 0;
+            //mostTimeIntMCN =(int)[defaults integerForKey:@"timeMCN"];
             mostTimeMCN = NULL;
             MCTGameView.hidden = false;
             [self generateNewPeopleMCN];
@@ -3779,8 +3976,8 @@
             mostTimeMCF = NULL;
             NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
             
-            mostTimeIntMCF = (int)[defaults integerForKey:@"timeMCF"];
-            NSLog(@"Saved Value = %i", mostTimeIntMCF);
+            //mostTimeIntMCF = (int)[defaults integerForKey:@"timeMCF"];
+            mostTimeIntMCF = 0;
             mCFacesView.hidden = false;
             nextButtonMCF.hidden = true;
             iBMCF1.hidden = true;
@@ -3834,27 +4031,32 @@
     [defaults setBool:companySwitchSetting.on forKey:kcompanyBool];
     [defaults setBool:musicSwitchSetting.on forKey:kmusicBool];
     [defaults setBool:fxSwitchSetting.on forKey:kfxBool];
+    [defaults setBool:percentMissedSwichSetting.on forKey:kmissedBool];
     [defaults synchronize];
     
     if(dateSwitchSetting.isOn == true)
     {
-        [filters insertSegmentWithTitle:@"Date" atIndex:0 animated:NO];
+        [filters insertSegmentWithTitle:@"Date" atIndex:0 animated:YES];
     }
     if(birthdaySwitchSetting.isOn == true)
     {
-        [filters insertSegmentWithTitle:@"Birthday" atIndex:0 animated:NO];
+        [filters insertSegmentWithTitle:@"Birthday" atIndex:0 animated:YES];
+    }
+    if(percentMissedSwichSetting.isOn == true)
+    {
+        [filters insertSegmentWithTitle:@"Missed" atIndex:0 animated:YES];
     }
     if(jobTitleSwitchSetting.isOn == true)
     {
-        [filters insertSegmentWithTitle:@"Job Title" atIndex:0 animated:NO];
+        [filters insertSegmentWithTitle:@"Job Title" atIndex:0 animated:YES];
     }
     if(departmentSwitchSetting.isOn == true)
     {
-        [filters insertSegmentWithTitle:@"Department" atIndex:0 animated:NO];
+        [filters insertSegmentWithTitle:@"Department" atIndex:0 animated:YES];
     }
     if(companySwitchSetting.isOn == true)
     {
-        [filters insertSegmentWithTitle:@"Company" atIndex:0 animated:NO];
+        [filters insertSegmentWithTitle:@"Company" atIndex:0 animated:YES];
     }
     
     if(filters.numberOfSegments > 4)
@@ -3869,10 +4071,12 @@
 
     if(dateSwitchSetting.isOn == true)
     {
+        /*
         UIAlertView *dateAlertView = [[UIAlertView alloc]initWithTitle:@"Enter a Date Type" message:@"" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Add", nil];
         [dateAlertView setAlertViewStyle:UIAlertViewStylePlainTextInput];
         [[dateAlertView textFieldAtIndex:0] setKeyboardType:UIKeyboardTypeAlphabet];
         [dateAlertView show];
+         */
     }
 }
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
