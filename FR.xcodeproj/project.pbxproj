@@ -16,6 +16,8 @@
 		4CB7481B199ECC4600721DD4 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CB7481A199ECC4600721DD4 /* AudioToolbox.framework */; };
 		4CB74821199EE68B00721DD4 /* Cheers Theme.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 4CB7481E199EE36900721DD4 /* Cheers Theme.m4a */; };
 		4CB74823199EE68B00721DD4 /* ClickSound.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 4CB7481F199EE41700721DD4 /* ClickSound.m4a */; };
+		4E04730119A59B8100A99A20 /* BackgroundNamesView.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E04730019A59B8100A99A20 /* BackgroundNamesView.png */; };
+		4E04730319A5A35800A99A20 /* White Bar.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E04730219A5A35800A99A20 /* White Bar.png */; };
 		4E0F49C919A3BA2F001F4372 /* GetKnowU.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 4E5058C619A39EF500C6B9A9 /* GetKnowU.m4a */; };
 		4E0F49CA19A3BA32001F4372 /* GetToKnowYouBetter.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 4E5058C719A39EF500C6B9A9 /* GetToKnowYouBetter.m4a */; };
 		4E0F49CC19A3BC75001F4372 /* DongSound.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 4E0F49CB19A3BC71001F4372 /* DongSound.m4a */; };
@@ -108,6 +110,8 @@
 		4CB7481A199ECC4600721DD4 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		4CB7481E199EE36900721DD4 /* Cheers Theme.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Cheers Theme.m4a"; path = "../../Music/iTunes/iTunes Media/Music/Various Artists/Garage Band/Cheers Theme.m4a"; sourceTree = "<group>"; };
 		4CB7481F199EE41700721DD4 /* ClickSound.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = ClickSound.m4a; path = "../../Music/iTunes/iTunes Media/Music/Matt Burton/App Sounds/ClickSound.m4a"; sourceTree = "<group>"; };
+		4E04730019A59B8100A99A20 /* BackgroundNamesView.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BackgroundNamesView.png; sourceTree = "<group>"; };
+		4E04730219A5A35800A99A20 /* White Bar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "White Bar.png"; sourceTree = "<group>"; };
 		4E0F49CB19A3BC71001F4372 /* DongSound.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = DongSound.m4a; path = "../../Desktop/App Sounds/FRSounds/DongSound.m4a"; sourceTree = "<group>"; };
 		4E50587A19A02BCD00C6B9A9 /* IMG_0930.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = IMG_0930.png; path = ../IMG_0930.png; sourceTree = "<group>"; };
 		4E50587B19A02BCD00C6B9A9 /* IMG_0931.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = IMG_0931.png; path = ../IMG_0931.png; sourceTree = "<group>"; };
@@ -216,6 +220,7 @@
 		4E5058F719A3A1CF00C6B9A9 /* FRImages */ = {
 			isa = PBXGroup;
 			children = (
+				4E04730019A59B8100A99A20 /* BackgroundNamesView.png */,
 				4E50587A19A02BCD00C6B9A9 /* IMG_0930.png */,
 				4E50587B19A02BCD00C6B9A9 /* IMG_0931.png */,
 				4E50587C19A02BCD00C6B9A9 /* IMG_0932.png */,
@@ -266,6 +271,7 @@
 				4E50591119A3A1CF00C6B9A9 /* Sound Music Icon.png */,
 				4E50591219A3A1CF00C6B9A9 /* TimedFlashcard.png */,
 				4E50591319A3A1CF00C6B9A9 /* TimerHCContacts.png */,
+				4E04730219A5A35800A99A20 /* White Bar.png */,
 			);
 			name = FRImages;
 			path = "../../Desktop/App Images/FRImages";
@@ -489,6 +495,7 @@
 				4E5058AD19A02BCD00C6B9A9 /* IMG_0931.png in Resources */,
 				4EC04F55195297350017AA78 /* Images.xcassets in Resources */,
 				4E5058B019A02BCD00C6B9A9 /* IMG_0935.png in Resources */,
+				4E04730119A59B8100A99A20 /* BackgroundNamesView.png in Resources */,
 				4E0F49CC19A3BC75001F4372 /* DongSound.m4a in Resources */,
 				4E50591F19A3A1CF00C6B9A9 /* HCNamesIcon80X80.png in Resources */,
 				4E5058B419A02BCD00C6B9A9 /* IMG_0939.png in Resources */,
@@ -510,6 +517,7 @@
 				4E50592419A3A1CF00C6B9A9 /* MultipleChoiceNames.png in Resources */,
 				4EC04F50195297350017AA78 /* Main.storyboard in Resources */,
 				4E50591919A3A1CF00C6B9A9 /* GoButton.png in Resources */,
+				4E04730319A5A35800A99A20 /* White Bar.png in Resources */,
 				4E50592A19A3A1CF00C6B9A9 /* SmallTD.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

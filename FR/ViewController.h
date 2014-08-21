@@ -242,6 +242,11 @@
     IBOutlet UIImageView*iTIMCF3;
     IBOutlet UIImageView*iTIMCF4;
     
+    IBOutlet UIImageView*iTIMCN1;
+    IBOutlet UIImageView*iTIMCN2;
+    IBOutlet UIImageView*iTIMCN3;
+    IBOutlet UIImageView*iTIMCN4;
+    
     Person*lastPerson;
     
     SystemSoundID SoundID;
