@@ -151,17 +151,17 @@
 }
 - (void)viewDidLoad
 {
-    frame0 = [UIImage imageNamed:@"IMG_0929.png"];
-    frame1 = [UIImage imageNamed:@"IMG_0930.png"];
-    frame2 = [UIImage imageNamed:@"IMG_0931.png"];
-    frame3 = [UIImage imageNamed:@"IMG_0932.PNG"];
-    frame4 = [UIImage imageNamed:@"IMG_0933.PNG"];
-    frame5 = [UIImage imageNamed:@"IMG_0935.PNG"];
-    frame6 = [UIImage imageNamed:@"IMG_0936.PNG"];
-    frame7 = [UIImage imageNamed:@"IMG_0937.PNG"];
-    frame8 = [UIImage imageNamed:@"IMG_0938.PNG"];
-    frame9 = [UIImage imageNamed:@"IMG_0939.png"];
-    frame10 =[UIImage imageNamed:@"IMG_0940.png"];
+    frame0 = [UIImage imageNamed:@" .png"];
+    frame1 = [UIImage imageNamed:@" .png"];
+    frame2 = [UIImage imageNamed:@" .png"];
+    frame3 = [UIImage imageNamed:@" .PNG"];
+    frame4 = [UIImage imageNamed:@" .PNG"];
+    frame5 = [UIImage imageNamed:@" .PNG"];
+    frame6 = [UIImage imageNamed:@" .PNG"];
+    frame7 = [UIImage imageNamed:@" .PNG"];
+    frame8 = [UIImage imageNamed:@" .PNG"];
+    frame9 = [UIImage imageNamed:@" .png"];
+    frame10 =[UIImage imageNamed:@" .png"];
     
     //moreInfoBio.text = @"No Notes";
     //moreInfoBio = [[UITextView alloc]init];
@@ -183,7 +183,7 @@
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     int j = (int)[defaults integerForKey:kbestTimeF];
     if (j==0) {
-        bestTimeF = 10000000000;
+        bestTimeF = 10000000;
     } else {
         bestTimeF = j;
     }
@@ -270,7 +270,6 @@
     [self playSoundNamed:@"Cheers Theme" andType:@"m4a" andFX:false];
 
     hintLabel.text = [NSString stringWithFormat:@"H:%i", 3-numberOfHintsPressed];
-    
     _gameCenterEnabled = NO;
     _leaderboardIdentifier = @"";
     [self authenticateLocalPlayer];
@@ -307,6 +306,21 @@
     MSContactManipulater *contactGetter = [[MSContactManipulater alloc]init];
     allPeople = [[NSMutableArray alloc]init];
     allPeople = [contactGetter getContactsWithAnImage];
+    NSArray *savedPeople = [[NSArray alloc] init];
+    savedPeople = [self addInfoFromSavedData];
+    NSLog(@"YO YO - %@",[[allPeople objectAtIndex:25] getFullName]);
+    NSLog(@"YO YO - %@",[[savedPeople objectAtIndex:25] getFullName]);
+    for (int i = 0; i<allPeople.count; i++) {
+        for (int j = 0; j<savedPeople.count; j++) {
+            if ([[[allPeople objectAtIndex:i] getFullName] caseInsensitiveCompare: [[savedPeople objectAtIndex:j] getFullName]] == NSOrderedSame) {
+                [[allPeople objectAtIndex:i] setNumTimesCorrect: [[savedPeople objectAtIndex:j] getNumTimesCorrect]];
+                [[allPeople objectAtIndex:i] setNumTimesGuessed: [[savedPeople objectAtIndex:j] getNumTimesGuessed]];
+                NSLog(@"%@ == %@ so %@.%% = %f",[[allPeople objectAtIndex:i] getFullName],[[savedPeople objectAtIndex:j] getFullName],[[allPeople objectAtIndex:i] getFullName], [[allPeople objectAtIndex:i] returnPercentage]);
+
+            }
+        }
+    }
+    [self saveData];
     [self addFieldsFromArray:allPeople];
 
     [self loadLabels:@"Company"];
@@ -333,9 +347,38 @@
 }
 
 
+-(NSArray *)addInfoFromSavedData {
+    NSArray *allThePeople = [[NSMutableArray alloc] init];
+    NSUserDefaults *theDefaults = [NSUserDefaults standardUserDefaults];
 
+    NSData *data = [theDefaults objectForKey:@"dataKey"];
+    allThePeople = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+    NSLog(@"_________________________________");
+    NSLog(@"How Many People Can We Get? - %lu",(unsigned long)allThePeople.count);
+    NSLog(@"_________________________________");
+    
+    for (int i = 0; i<allThePeople.count; i++) {
+        Person *myPerson = [[Person alloc]init];
+        myPerson = [allThePeople objectAtIndex:i];
+        NSLog(@"%@",[[allThePeople objectAtIndex:i] getFullName]);
+    }
+    return allThePeople;
+    
+}
 
+-(void)saveData {
+    NSUserDefaults *theDefaults = [NSUserDefaults standardUserDefaults];
+    NSMutableArray *tallPeople = [[NSMutableArray alloc]init];
+    MSContactManipulater *contactGetter = [[MSContactManipulater alloc]init];
+    tallPeople = [contactGetter getContactsWithAnImage];
+    NSData *theData = [NSKeyedArchiver archivedDataWithRootObject:allPeople];
+    for (int i = 0; i<tallPeople.count; i++) {
+        NSLog(@"%@",[[tallPeople objectAtIndex:i] getFullName]);
 
+    }
+    [theDefaults setObject:theData forKey:@"dataKey"];
+    [theDefaults synchronize];
+}
 
 
 -(IBAction)showInfo:(id)sender
@@ -421,7 +464,7 @@
         }
         
         totalSeconds = minutes*60 + seconds;
-        
+        [self saveData];
 
         
         currentScore = (int)round(((1000*totalGuessed*totalGuessed*totalPercentage)/(totalSeconds)));
@@ -544,13 +587,13 @@
             {
                 percentLabel.text = [NSString stringWithFormat:@"YOU GOT %d%% (%i OUT OF %i) IN %i:%i",(int)round(totalPercentage*100),(int)round(totalCorrect),(int)round(totalGuessed),minutes,seconds];
             }
-            
+            [self saveData];
             totalSeconds = minutes*60 + seconds;
             currentScore = (int)round(((1000*totalGuessed*totalGuessed*totalPercentage)/totalSeconds));
             [self printHighScore];
             
             FilterView.hidden = true;
-            
+            [self saveData];
             totalCorrect = 0;
             totalGuessed = 0;
             timerView.hidden = true;
@@ -823,7 +866,7 @@
             
             percentLabel.text = [NSString stringWithFormat:@"YOU GOT %d%% (%f OUT OF %f) IN %i:%i",(int)round(totalPercentage*100),totalCorrect,totalGuessed,minutes,seconds];
             [self printHighScore];
-
+            [self saveData];
         }
     }
     if(practiceModeSwitch.isOn == false)
@@ -1227,7 +1270,7 @@
     [peopleStatsScrollView addSubview:columnSpacer2];
     [peopleStatsScrollView addSubview:columnSpacer3];
     [peopleStatsScrollView addSubview:columnSpacer4];
-
+    
     
     [columnSpacer1 setBounds:CGRectMake(columnSpacer1.center.x, columnSpacer1.center.y, columnSpacer1.bounds.size.width,  48*peopleArray.count+2)];
     columnSpacer1.center = CGPointMake(columnSpacer1.center.x, (columnSpacer1.bounds.size.height/2 + rowSpacer1.center.y)-rowSpacer1.bounds.size.height/2);
@@ -2311,7 +2354,7 @@
         {
             percentLabel.text = [NSString stringWithFormat:@"YOU GOT %d%% (%i OUT OF %i) IN %i:%i",(int)round(totalPercentage*100),(int)round(totalCorrect),(int)round(totalGuessed),minutes,seconds];
         }
-        
+        [self saveData];
         totalSeconds = minutes*60 + seconds;
         
         currentScoreMCN = (int)round(((1000*totalGuessed*totalGuessed*totalPercentage)/(totalSeconds)));
@@ -3602,7 +3645,7 @@
         }
         
         totalSeconds = minutes*60 + seconds;
-        
+        [self saveData];
         currentScoreMCF = (int)round(((1000*totalGuessed*totalGuessed*totalPercentage)/(totalSeconds)));
         [self printHighScoreMCF];
         

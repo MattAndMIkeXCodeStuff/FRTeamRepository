@@ -39,6 +39,12 @@
     
     return (double)(numTimesCorrect/numTimesGuessed);
 }
+-(double)getNumTimesCorrect {
+    return numTimesCorrect;
+}
+-(double)getNumTimesGuessed {
+    return numTimesGuessed;
+}
 -(void)gotRight {
     numTimesCorrect++;
     numTimesGuessed++;
@@ -59,5 +65,25 @@
     }
     return fullName;
     
+}
+-(void)encodeWithCoder:(NSCoder *)encoder
+{
+    [encoder encodeObject:value forKey:@"Value"];
+    [encoder encodeObject:firstName forKey:@"FirstName"];
+    [encoder encodeObject:lastName forKey:@"LastName"];
+    [encoder encodeDouble:numTimesGuessed forKey:@"NumGuessed"];
+    [encoder encodeDouble:numTimesCorrect forKey:@"NumCorrect"];
+
+}
+
+-(id)initWithCoder:(NSCoder *)decoder
+{
+    self.value = [decoder decodeObjectForKey:@"Value"];
+    self.firstName = [decoder decodeObjectForKey:@"FirstName"];
+    self.lastName = [decoder decodeObjectForKey:@"LastName"];
+    self.numTimesGuessed = [decoder decodeDoubleForKey:@"NumGuessed"];
+    self.numTimesCorrect = [decoder decodeDoubleForKey:@"NumCorrect"];
+    
+    return self;
 }
 @end
