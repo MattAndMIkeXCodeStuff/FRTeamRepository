@@ -151,7 +151,6 @@
         bestTimeMCN = j;
     }
 
-    birthdaySwitchSetting.on = [defaults boolForKey:kbirthdayBool];
     companySwitchSetting.on = [defaults boolForKey:kcompanyBool];
     departmentSwitchSetting.on = [defaults boolForKey:kdepartmentBool];
     dateSwitchSetting.on = [defaults boolForKey:kdateBool];
@@ -1160,6 +1159,7 @@
 }
 -(IBAction)changeStatsView:(id)sender
 {
+    [self playSoundNamed:@"ClickSound" andType:@"m4a" andFX:true];
     UISegmentedControl *s=  sender;
     if([[s titleForSegmentAtIndex:s.selectedSegmentIndex] isEqualToString:@"Game Stats"])
     {
@@ -1247,6 +1247,7 @@
         [button addTarget:self action:@selector(moreInfo) forControlEvents:UIControlEventTouchUpInside];
         button.reversesTitleShadowWhenHighlighted = true;
         
+
         [peopleStatsScrollView addSubview:name];
         [peopleStatsScrollView addSubview:percent];
         [peopleStatsScrollView addSubview:spacer];
@@ -1256,6 +1257,8 @@
         [peopleStatsScrollView addSubview:columnSpacer3];
         [peopleStatsScrollView addSubview:columnSpacer4];
         [peopleStatsScrollView addSubview:image];
+        
+
 
         //[percent set]
         
@@ -1286,6 +1289,7 @@
     int randomPivotPoint = arc4random() % [array count];
     Person *pIQ;
     pIQ =[array objectAtIndex:randomPivotPoint];
+
     double pivotValue = [pIQ returnPercentage];
     [array removeObjectAtIndex:randomPivotPoint];
     for (Person *p in array)
@@ -1300,12 +1304,14 @@
             [greaterArray addObject:p];
         }
     }
+    
     NSMutableArray *sortedArray = [[NSMutableArray alloc] init];
     [sortedArray addObjectsFromArray:[self sortByPercentageArrayOfPeople:lessArray]];
     [sortedArray addObject:pIQ];
     [sortedArray addObjectsFromArray:[self sortByPercentageArrayOfPeople:greaterArray]];
     
     return sortedArray;
+    
 }
 -(IBAction)showPicker:(id)sender
 {
@@ -1368,7 +1374,7 @@
    // NSLog(@"allPeople(top) - %i",allPeople.count);
 
     //NSLog(@"lType = %@",labelType);
-    if ([labelType  isEqual: @"Date"] || [labelType isEqual:@"Birthday"])
+    if ([labelType  isEqual: @"Date"])
     {
         iV.hidden = false;
         percentView.hidden = true;
@@ -2195,34 +2201,12 @@
     filterField.text = @"";
     filterLabel.text = @"Filter By:";
     NSLog(@"%i",arrayOf49PercentAndUnder.count);
-    if(practiceModeSwitch.isOn == true && currentPerson.hasBeenGuessed == false)
+    if(practiceModeSwitch.isOn == true && correctMCPerson.hasBeenGuessedRight == false)
     {
         UIButton *b = (UIButton *)sender;
         if ([b.titleLabel.text isEqualToString:correctMCPerson.getFullName])
         {
             [self playSoundNamed:@"DingSound" andType:@"m4a" andFX:true];
-
-            if(b == mcButton1)
-            {
-                iTIMCN1.hidden = false;
-                iTIMCN1.image = [UIImage imageNamed:@"SmallTU.png"];
-            }
-            if(b == mcButton2)
-            {
-                iTIMCN2.hidden = false;
-                iTIMCN2.image = [UIImage imageNamed:@"SmallTU.png"];
-            }
-            if(b == mcButton3)
-            {
-                iTIMCN3.hidden = false;
-                iTIMCN3.image = [UIImage imageNamed:@"SmallTU.png"];
-            }
-            if(b == mcButton4)
-            {
-                iTIMCN4.hidden = false;
-                iTIMCN4.image = [UIImage imageNamed:@"SmallTU.png"];
-            }
-            
             [currentPerson gotRight];
             totalCorrect++;
             currentPerson.hasBeenGuessedRight = true;
@@ -2230,6 +2214,46 @@
             [arrayOf49PercentAndUnder removeObjectIdenticalTo:correctMCPerson];
             [arrayOf50PercentAndOver addObject:correctMCPerson];
             nextMCN.hidden =false;
+            if([mcButton1.titleLabel.text isEqualToString:correctMCPerson.getFullName])
+            {
+                iTIMCN1.hidden = false;
+                iTIMCN1.image = [UIImage imageNamed:@"SmallTU.png"];
+            }
+            else
+            {
+                iTIMCN1.hidden = false;
+                iTIMCN1.image = [UIImage imageNamed:@"SmallTD.png"];
+            }
+            if([mcButton2.titleLabel.text isEqualToString:correctMCPerson.getFullName])
+            {
+                iTIMCN2.hidden = false;
+                iTIMCN2.image = [UIImage imageNamed:@"SmallTU.png"];
+            }
+            else
+            {
+                iTIMCN2.hidden = false;
+                iTIMCN2.image = [UIImage imageNamed:@"SmallTD.png"];
+            }
+            if([mcButton3.titleLabel.text isEqualToString:correctMCPerson.getFullName])
+            {
+                iTIMCN3.hidden = false;
+                iTIMCN3.image = [UIImage imageNamed:@"SmallTU.png"];
+            }
+            else
+            {
+                iTIMCN3.hidden = false;
+                iTIMCN3.image = [UIImage imageNamed:@"SmallTD.png"];
+            }
+            if([mcButton4.titleLabel.text isEqualToString:correctMCPerson.getFullName])
+            {
+                iTIMCN4.hidden = false;
+                iTIMCN4.image = [UIImage imageNamed:@"SmallTU.png"];
+            }
+            else
+            {
+                iTIMCN4.hidden = false;
+                iTIMCN4.image = [UIImage imageNamed:@"SmallTD.png"];
+            }
         }
         else
         {
@@ -2254,10 +2278,12 @@
                 iTIMCN4.image = [UIImage imageNamed:@"SmallTD.png"];
             }
             [currentPerson gotWrong];
+            currentPerson.hasBeenGuessed = true;
             [self playSoundNamed:@"DongSound" andType:@"m4a" andFX:true];
         }
+        
     }
-    else if (practiceModeSwitch.isOn == false && currentPerson.hasBeenGuessed == false)
+    else if (practiceModeSwitch.isOn == false && correctMCPerson.hasBeenGuessed == false)
     {
         nextMCN.hidden = false;
         UIButton *b = (UIButton *)sender;
@@ -2312,9 +2338,9 @@
             {
                 iTIMCN4.hidden = false;
                 iTIMCN4.image = [UIImage imageNamed:@"SmallTD.png"];
-            }            [currentPerson gotWrong];
+            }
+            [currentPerson gotWrong];
             [self playSoundNamed:@"DongSound" andType:@"m4a" andFX:true];
-            currentPerson.hasBeenGuessed = true;
         }
         if([mcButton1.titleLabel.text isEqualToString:correctMCPerson.getFullName])
         {
@@ -2765,7 +2791,7 @@
 
 -(IBAction)hintButtonPressed
 {
-    [self playSoundNamed:@"ClickSound" andType:@"m4a" andFX:true];
+    [self playSoundNamed:@"HintSound" andType:@"m4a" andFX:true];
 
     ++numberOfHintsPressed;
     hintLabel.text = [NSString stringWithFormat:@"H:%i", 3-numberOfHintsPressed];
@@ -3262,37 +3288,37 @@
     {
         //they guessed the top left person
         n1.text = [NSString stringWithFormat:@"%@ %@",pMCF1.firstName, pMCF1.lastName];
+
+        [self checkIfCorrectMCF:pMCF1];
         iBMCF1.hidden = false;
         iTIMCF1.hidden = false;
-        [self checkIfCorrectMCF:pMCF1];
-
     }
     if(sender == gBMCF2)
     {
         //they guessed the top right person
         n2.text = [NSString stringWithFormat:@"%@ %@",pMCF2.firstName, pMCF2.lastName];
+
+        [self checkIfCorrectMCF:pMCF2];
         iBMCF2.hidden = false;
         iTIMCF2.hidden = false;
-        [self checkIfCorrectMCF:pMCF2];
-
     }
     if(sender == gBMCF3)
     {
         //they guessed the bottom left person
         n3.text = [NSString stringWithFormat:@"%@ %@",pMCF3.firstName, pMCF3.lastName];
+
+        [self checkIfCorrectMCF:pMCF3];
         iBMCF3.hidden = false;
         iTIMCF3.hidden = false;
-        [self checkIfCorrectMCF:pMCF3];
-
     }
     if(sender == gBMCF4)
     {
         //they guessed the bottom right person
         n4.text = [NSString stringWithFormat:@"%@ %@",pMCF4.firstName, pMCF4.lastName];
+
+        [self checkIfCorrectMCF:pMCF4];
         iBMCF4.hidden = false;
         iTIMCF4.hidden = false;
-        [self checkIfCorrectMCF:pMCF4];
-
     }
     
     
@@ -3301,7 +3327,7 @@
 -(void)checkIfCorrectMCF:(Person*)pIQ
 {
     
-    if ((pIQ == correctPersonMCF && practiceModeSwitch.isOn == true) || (practiceModeSwitch.isOn == false))
+    if ((pIQ == correctPersonMCF && practiceModeSwitch.isOn == true && correctPersonMCF.hasBeenGuessedRight == false) || (practiceModeSwitch.isOn == false && correctPersonMCF.hasBeenGuessed == false))
     {
         nextButtonMCF.hidden = false;
         iBMCF1.hidden = false;
@@ -3375,38 +3401,55 @@
             [self playSoundNamed:@"DongSound" andType:@"m4a" andFX:true];
             [pIQ gotWrong];
         }
+        [correctPersonMCF gotRight];
+        correctPersonMCF.hasBeenGuessedRight = true;
+        correctPersonMCF.hasBeenGuessed = true;
         //NSLog(@"percent %f", totalCorrect/totalGuessed);
     }
     else
     {
-        if(pIQ == pMCF1)
+        if((practiceModeSwitch.isOn == false && correctPersonMCF.hasBeenGuessed == false) || (practiceModeSwitch.isOn == true && correctPersonMCF.hasBeenGuessedRight == false) )
         {
-            //got wrong
-            iTIMCF1.image = [UIImage imageNamed:@"SmallTD.png"];
-        }
-        if(pIQ == pMCF2)
-        {
-            //got wrong
-            iTIMCF2.image = [UIImage imageNamed:@"SmallTD.png"];
+            correctPersonMCF.hasBeenGuessed = true;
 
-        }
-        if(pIQ == pMCF3)
-        {
-            //got wrong
-            iTIMCF3.image = [UIImage imageNamed:@"SmallTD.png"];
+            if(pIQ == pMCF1 && iTIMCF1.hidden == true)
+            {
+                //got wrong
+                iTIMCF1.image = [UIImage imageNamed:@"SmallTD.png"];
+                [correctPersonMCF gotWrong];
+                [self playSoundNamed:@"DongSound" andType:@"m4a" andFX:true];
 
-        }
-        if(pIQ == pMCF4)
-        {
-            //got wrong
-            iTIMCF4.image = [UIImage imageNamed:@"SmallTD.png"];
+            }
+            if(pIQ == pMCF2 && iTIMCF2.hidden == true)
+            {
+                //got wrong
+                iTIMCF2.image = [UIImage imageNamed:@"SmallTD.png"];
+                [correctPersonMCF gotWrong];
+                [self playSoundNamed:@"DongSound" andType:@"m4a" andFX:true];
 
+            }
+            if(pIQ == pMCF3 && iTIMCF3.hidden == true)
+            {
+                //got wrong
+                iTIMCF3.image = [UIImage imageNamed:@"SmallTD.png"];
+                [correctPersonMCF gotWrong];
+                [self playSoundNamed:@"DongSound" andType:@"m4a" andFX:true];
+
+            }
+            if(pIQ == pMCF4 && iTIMCF4.hidden == true)
+            {
+                //got wrong
+                iTIMCF4.image = [UIImage imageNamed:@"SmallTD.png"];
+                [correctPersonMCF gotWrong];
+                [self playSoundNamed:@"DongSound" andType:@"m4a" andFX:true];
+
+            }
         }
     }
 }
 -(IBAction)hintMCF
 {
-    [self playSoundNamed:@"ClickSound" andType:@"m4a" andFX:true];
+    [self playSoundNamed:@"HintSound" andType:@"m4a" andFX:true];
     if(iTIMCF1.hidden == true || iTIMCF2.hidden == true || iTIMCF3.hidden == true || iTIMCF4.hidden == true)
     {
         if(numberOfHintsPressed < 2)
@@ -3506,7 +3549,7 @@
 }
 -(IBAction)hintMCN
 {
-    [self playSoundNamed:@"ClickSound" andType:@"m4a" andFX:true];
+    [self playSoundNamed:@"HintSound" andType:@"m4a" andFX:true];
     if(iTIMCN1.hidden == true || iTIMCN2.hidden == true || iTIMCN3.hidden == true || iTIMCN4.hidden == true)
     {
         if(numberOfHintsPressed < 2)
@@ -4157,7 +4200,6 @@
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults setBool:dateSwitchSetting.on forKey:kdateBool];
-    [defaults setBool:birthdaySwitchSetting.on forKey:kbirthdayBool];
     [defaults setBool:jobTitleSwitchSetting.on forKey:kjobTitleBool];
     [defaults setBool:departmentSwitchSetting.on forKey:kdepartmentBool];
     [defaults setBool:companySwitchSetting.on forKey:kcompanyBool];
@@ -4169,10 +4211,6 @@
     if(dateSwitchSetting.isOn == true)
     {
         [filters insertSegmentWithTitle:@"Date" atIndex:0 animated:YES];
-    }
-    if(birthdaySwitchSetting.isOn == true)
-    {
-        [filters insertSegmentWithTitle:@"Birthday" atIndex:0 animated:YES];
     }
     if(percentMissedSwichSetting.isOn == true)
     {
@@ -4219,8 +4257,27 @@
     }
     else
     {
-        dateTypeString = [alertView textFieldAtIndex:0].text;
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        //erase stats
+        bestTimeF = 100000000;
+        [defaults setInteger:bestTimeF forKey:kbestTimeF];
+        bestTimeMCF = 100000000;
+        [defaults setInteger:bestTimeMCF forKey:kbestTimeMCF];
+        bestTimeMCN = 100000000;
+        [defaults setInteger:bestTimeMCN forKey:kbestTimeMCN];
+        highscore = 0;
+        [defaults setInteger:highscore forKey:khighscoreF];
+        highscoreMCF = 0;
+        [defaults setInteger:highscoreMCF forKey:khighscoreMCF];
+        highscoreMCN = 0;
+        [defaults setInteger:highscoreMCN forKey:khighscoreMCN];
+        [defaults synchronize];
     }
-    UITextField *field = (UITextField *)[[alertView subviews] lastObject];
+}
+
+-(IBAction)eraseStats
+{
+    alert = [[UIAlertView alloc] initWithTitle:@"Are you sure?" message:@"Are you sure you want to erase all of your stats?" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Erase", nil];
+    [alert show];
 }
 @end

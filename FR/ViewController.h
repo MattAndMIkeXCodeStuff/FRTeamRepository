@@ -20,7 +20,6 @@
 #define kmusicBool @"musicBool"
 #define kfxBool @"fxBool"
 
-#define kbirthdayBool @"birthdayBool"
 #define kcompanyBool @"companyBool"
 #define kdepartmentBool @"departmentBool"
 #define kdateBool @"dateBool"
@@ -300,7 +299,6 @@
     IBOutlet UISwitch*musicSwitchSetting;
     IBOutlet UISwitch*fxSwitchSetting;
     
-    IBOutlet UISwitch*birthdaySwitchSetting;
     IBOutlet UISwitch*companySwitchSetting;
     IBOutlet UISwitch*dateSwitchSetting;
     IBOutlet UISwitch*departmentSwitchSetting;
@@ -340,6 +338,8 @@
 -(IBAction)hintMCN;
 
 -(IBAction)customDate;
+
+-(IBAction)eraseStats;
 
 -(IBAction)changeStatsView:(id)sender;
 -(NSArray*)sortByPercentageArrayOfPeople:(NSMutableArray*)array;

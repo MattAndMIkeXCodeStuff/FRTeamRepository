@@ -18,6 +18,7 @@
 		4CB74823199EE68B00721DD4 /* ClickSound.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 4CB7481F199EE41700721DD4 /* ClickSound.m4a */; };
 		4E04730119A59B8100A99A20 /* BackgroundNamesView.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E04730019A59B8100A99A20 /* BackgroundNamesView.png */; };
 		4E04730319A5A35800A99A20 /* White Bar.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E04730219A5A35800A99A20 /* White Bar.png */; };
+		4E04730A19A6E8B400A99A20 /* HintSound.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 4E04730819A6E85500A99A20 /* HintSound.m4a */; };
 		4E0F49C919A3BA2F001F4372 /* GetKnowU.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 4E5058C619A39EF500C6B9A9 /* GetKnowU.m4a */; };
 		4E0F49CA19A3BA32001F4372 /* GetToKnowYouBetter.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 4E5058C719A39EF500C6B9A9 /* GetToKnowYouBetter.m4a */; };
 		4E0F49CC19A3BC75001F4372 /* DongSound.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 4E0F49CB19A3BC71001F4372 /* DongSound.m4a */; };
@@ -112,6 +113,7 @@
 		4CB7481F199EE41700721DD4 /* ClickSound.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = ClickSound.m4a; path = "../../Music/iTunes/iTunes Media/Music/Matt Burton/App Sounds/ClickSound.m4a"; sourceTree = "<group>"; };
 		4E04730019A59B8100A99A20 /* BackgroundNamesView.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BackgroundNamesView.png; sourceTree = "<group>"; };
 		4E04730219A5A35800A99A20 /* White Bar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "White Bar.png"; sourceTree = "<group>"; };
+		4E04730819A6E85500A99A20 /* HintSound.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = HintSound.m4a; path = "../../Desktop/App Sounds/FRSounds/HintSound.m4a"; sourceTree = "<group>"; };
 		4E0F49CB19A3BC71001F4372 /* DongSound.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = DongSound.m4a; path = "../../Desktop/App Sounds/FRSounds/DongSound.m4a"; sourceTree = "<group>"; };
 		4E50587A19A02BCD00C6B9A9 /* IMG_0930.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = IMG_0930.png; path = ../IMG_0930.png; sourceTree = "<group>"; };
 		4E50587B19A02BCD00C6B9A9 /* IMG_0931.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = IMG_0931.png; path = ../IMG_0931.png; sourceTree = "<group>"; };
@@ -280,6 +282,7 @@
 		4E50593119A3A25F00C6B9A9 /* FRSounds */ = {
 			isa = PBXGroup;
 			children = (
+				4E04730819A6E85500A99A20 /* HintSound.m4a */,
 				4E0F49CB19A3BC71001F4372 /* DongSound.m4a */,
 				4E5058C619A39EF500C6B9A9 /* GetKnowU.m4a */,
 				4E5058C719A39EF500C6B9A9 /* GetToKnowYouBetter.m4a */,
@@ -466,6 +469,7 @@
 				4E5058AE19A02BCD00C6B9A9 /* IMG_0932.png in Resources */,
 				4E5058B219A02BCD00C6B9A9 /* IMG_0937.png in Resources */,
 				4E50592219A3A1CF00C6B9A9 /* LeaderBoard.png in Resources */,
+				4E04730A19A6E8B400A99A20 /* HintSound.m4a in Resources */,
 				4E0F49C919A3BA2F001F4372 /* GetKnowU.m4a in Resources */,
 				4CB74821199EE68B00721DD4 /* Cheers Theme.m4a in Resources */,
 				4E5058BD19A02BCD00C6B9A9 /* Alex Day.png in Resources */,
