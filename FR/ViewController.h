@@ -242,6 +242,11 @@
     IBOutlet UIImageView*iTIMCF3;
     IBOutlet UIImageView*iTIMCF4;
     
+    IBOutlet UIImageView*iTIMCN1;
+    IBOutlet UIImageView*iTIMCN2;
+    IBOutlet UIImageView*iTIMCN3;
+    IBOutlet UIImageView*iTIMCN4;
+    
     Person*lastPerson;
     
     SystemSoundID SoundID;
@@ -452,7 +457,7 @@
 
 -(void)generateDotsForTime:(int)t;
 
--(void)animateView:(UIView*)v fromDirection:(NSString*)direction;
+-(void)animateView:(UIView*)v fromDirection:(NSString*)direction forThis:(double)secs;
 -(NSMutableArray*)getContactsWithCompany:(NSString*)company fromArray:(NSMutableArray*)array;
 -(NSMutableArray*)getContactsWithJobTitle:(NSString*)jobTitle fromArray:(NSMutableArray*)array;
 

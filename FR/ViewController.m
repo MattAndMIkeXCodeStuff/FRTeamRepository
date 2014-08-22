@@ -9,63 +9,12 @@
 #import "ViewController.h"
 
 @interface ViewController ()
-// This object that will be used to count the 60 seconds of each level.
-@property (nonatomic, strong) NSTimer *gameTimer;
-
-// It will be used to display the Game Center related options and handle the user selection in a block.
-//@property (nonatomic, strong) CustomActionSheet *customActionSheet;
-
-// These two member variables that will store the operand values of the addition.
-@property (nonatomic) int operand1;
-@property (nonatomic) int operand2;
-
-// The timer value.
-@property (nonatomic) int timerValue;
-
-// The current level.
-@property (nonatomic) int level;
-
-// The current round of a level.
-@property (nonatomic) int currentAdditionCounter;
-
 // The player's score. Its type is int64_t so as to match the expected type by the respective method of GameKit.
 @property (nonatomic) int64_t score;
-
-// The number of remaining "lives" in the game.
-@property (nonatomic) int lives;
-
 // A flag indicating whether the Game Center features can be used after a user has been authenticated.
 @property (nonatomic) BOOL gameCenterEnabled;
-
 // This property stores the default leaderboard's identifier.
 @property (nonatomic, strong) NSString *leaderboardIdentifier;
-
-
-
-// This method is used to set the initial values to all member variables.
--(void)initValues;
-
-
-// When it's called, the timerValue member variable gets its initial value, which is 0, and the timer
-// is re-scheduled in order to start counting the time for a new level.
--(void)startTimer;
-
-
-// It updates the time label on the view with the current timer value.
--(void)updateTimerLabel:(NSTimer *)timer;
-
-
-// It creates a new ramdom addition operation and shows is to the lblAddition label, as well as all the three
-// possible answers.
--(void)createAddition;
-
-
-// It updates the level, both internally and visually.
--(void)updateLevelLabel;
-
-
-// It sets the initial value to the lives member variable and makes visible all "life" images.
--(void)initLives;
 
 -(void)reportScore;
 -(void)authenticateLocalPlayer;
@@ -133,11 +82,13 @@
     
     gcViewController.gameCenterDelegate = self;
     
-    if (shouldShowLeaderboard) {
+    if (shouldShowLeaderboard)
+    {
         gcViewController.viewState = GKGameCenterViewControllerStateLeaderboards;
-        gcViewController.leaderboardIdentifier = _leaderboardIdentifier;
+        //gcViewController.leaderboardIdentifier = _leaderboardIdentifier;
     }
-    else{
+    else
+    {
         gcViewController.viewState = GKGameCenterViewControllerStateAchievements;
     }
     
@@ -166,10 +117,10 @@
     //moreInfoBio.text = @"No Notes";
     //moreInfoBio = [[UITextView alloc]init];
     
-    imageArray = [NSMutableArray arrayWithObjects:frame0, frame1, frame2, frame3, frame4, frame5, frame6, frame7,frame8,frame9,frame10, nil];
+    imageArray = [NSMutableArray arrayWithObjects:frame0, frame1, frame2, frame3, frame4, frame5, frame6, frame7,frame8,frame9,frame10, frame10, nil];
     
     igniteChange.animationImages = imageArray;
-    igniteChange.animationDuration = 0.075*(imageArray.count);
+    igniteChange.animationDuration = 0.08*(imageArray.count);
     igniteChange.animationRepeatCount=100;
     [igniteChange startAnimating];
     
@@ -394,6 +345,7 @@
     {
         nameLabel.text = [NSString stringWithFormat:@"%@ %@", currentPerson.firstName,currentPerson.lastName];
     }
+    //this one needs no animation
     nameLabel.hidden = false;
     guessButton.hidden = true;
     nameView.hidden = false;
@@ -439,7 +391,7 @@
     }
     else if([self checkIfAllPeopleHaveBeenGuessed] == true && practiceModeSwitch.isOn == false)
     {
-        FTGameView.hidden = true;
+        [self animateView:FTGameView fromDirection:@"L" forThis:2];
         gameOverView.hidden = false;
 
         guessButton.hidden = true;
@@ -496,7 +448,7 @@
     }
     else if([self checkIfAllPeopleHaveBeenGuessedCorrectly] == true && practiceModeSwitch.isOn == true)
     {
-        FTGameView.hidden = true;
+        [self animateView:FTGameView fromDirection:@"L" forThis:2];
         gameOverView.hidden = false;
 
         guessButton.hidden = true;
@@ -508,8 +460,7 @@
         [arrayOf49PercentAndUnder removeAllObjects];
         [arrayOf50PercentAndOver removeAllObjects];
         
-        percentLabel.text = @"YOU HAVE NOW GUESSED EVERY PERSON RIGHT AT LEAST ONCE";
-        pointsLabel.text = @"TURN OFF PRACTICE MODE TO PLAY FOR POINTS";
+  
         timerView.hidden = true;
 
         totalCorrect = 0;
@@ -565,6 +516,7 @@
         }
         else
         {
+            [self animateView:FTGameView fromDirection:@"L" forThis:2];
             gameOverView.hidden = false;
             timerView.hidden=false;
 
@@ -655,6 +607,11 @@
             [defaults synchronize];
         }
     }
+    else
+    {
+        percentLabel.text = @"YOU HAVE NOW GUESSED EVERY PERSON RIGHT AT LEAST ONCE";
+        pointsLabel.text = @"TURN OFF PRACTICE MODE TO PLAY FOR POINTS";
+    }
 }
 -(void)printHighScoreMCN
 {
@@ -687,7 +644,11 @@
             [defaults setInteger:bestTimeMCN forKey:kbestTimeMCN];
             [defaults synchronize];
         }
-
+    }
+    else
+    {
+        percentLabel.text = @"YOU HAVE NOW GUESSED EVERY PERSON RIGHT AT LEAST ONCE";
+        pointsLabel.text = @"TURN OFF PRACTICE MODE TO PLAY FOR POINTS";
     }
 }
 
@@ -720,6 +681,11 @@
             [defaults synchronize];
         }
 
+    }
+    else
+    {
+        percentLabel.text = @"YOU HAVE NOW GUESSED EVERY PERSON RIGHT AT LEAST ONCE";
+        pointsLabel.text = @"TURN OFF PRACTICE MODE TO PLAY FOR POINTS";
     }
 }
 -(NSMutableArray*)chooseArray
@@ -835,7 +801,6 @@
             //game ends
             //go to view that shows stats
             MCGameView.hidden=true;
-            firstView.hidden=true;
             MCTGameView.hidden=true;
             FCView.hidden=true;
             MCCView.hidden = true;
@@ -1814,49 +1779,65 @@
         minutes =0;
         timerLable.text = [NSString stringWithFormat:@"%i:0%i", minutes,seconds];
     }
-    if(animating == true && wait%10 == 0)
+    
+    if(animating == true)
     {
+        /*
         if([nextView isEqualToString:@"FCV"])
         {
             //move the view to the right side of the screen
             [self animateView:FCView fromDirection:@"R"];
+            animating = false;
         }
         if([nextView isEqualToString:@"MCCV"])
         {
             //move the view to the right side of the screen
             [self animateView:MCCView fromDirection:@"R"];
+            animating = false;
         }
         if([nextView isEqualToString:@"MCGV"])
         {
             //move the view to the right side of the screen
             [self animateView:MCGameView fromDirection:@"R"];
+            animating = false;
+
         }
         if([nextView isEqualToString:@"FV"])
         {
             //move the view to the right side of the screen
             [self animateView:firstView fromDirection:@"R"];
+            animating = false;
+
         }
         if([nextView isEqualToString:@"MCTV"])
         {
             //move the view to the right side of the screen
             [self animateView:MCTGameView fromDirection:@"R"];
+            animating = false;
+
         }
         if([nextView isEqualToString:@"FTGV"])
         {
             //move the view to the right side of the screen
             [self animateView:FTGameView fromDirection:@"R"];
+            animating = false;
+
         }
         if([nextView isEqualToString:@"FTGV"])
         {
             //move the view to the right side of the screen
             [self animateView:FTGameView fromDirection:@"R"];
+            animating = false;
+
         }
         if([nextView isEqualToString:@"FGV"])
         {
             //move the view to the right side of the screen
             [self animateView:FGameView fromDirection:@"R"];
-        }
+            animating = false;
 
+        }
+*/
     }
     else
     {
@@ -1867,39 +1848,44 @@
         if([nextView isEqualToString:@"FCV"])
         {
             //move the view to the right side of the screen
-            [self animateView:FCView fromDirection:@"L"];
+            //[self animateView:FCView fromDirection:@"L"];
         }
     }
     else
     {
         xValL = firstView.center.x + firstView.bounds.size.width;
     }
+         
 }
+     
 
--(void)animateView:(UIView*)v fromDirection:(NSString*)direction
+-(void)animateView:(UIView*)v fromDirection:(NSString*)direction forThis:(double)secs
 {
     if([direction isEqualToString:@"R"])
     {
-        //xValR++;
-        v.center = CGPointMake(v.center.x+40, v.center.y);
-        //NSLog(@"%f", v.center.x);
-        if(160 <= v.center.x)
-        {
-            animating = false;
-            nextView = @"";
-        }
+        [UIView beginAnimations:nil context:NULL];
+        [UIView setAnimationDuration:secs];
+        [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromLeft forView:v cache:YES];
     }
-    else
+    else if([direction isEqualToString:@"L"])
     {
-        xValL--;
-        v.center = CGPointMake(v.center.x-40, v.center.y);
-        //NSLog(@"%f", v.center.x);
-        if(160 <= v.center.x)
-        {
-            animatingBack = false;
-            nextView = @"";
-        }
+        [UIView beginAnimations:nil context:NULL];
+        [UIView setAnimationDuration:secs];
+        [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromRight forView:v cache:YES];
     }
+    else if([direction isEqualToString:@"T"])
+    {
+        [UIView beginAnimations:nil context:NULL];
+        [UIView setAnimationDuration:secs];
+        [UIView setAnimationTransition:UIViewAnimationTransitionCurlDown forView:v cache:YES];
+    }
+    else if([direction isEqualToString:@"B"])
+    {
+        [UIView beginAnimations:nil context:NULL];
+        [UIView setAnimationDuration:secs];
+        [UIView setAnimationTransition:UIViewAnimationTransitionCurlUp forView:v cache:YES];
+    }
+    [UIView commitAnimations];
 }
 
 
@@ -1914,7 +1900,6 @@
 
     MCCView.hidden = false;
     MCGameView.hidden=true;
-    firstView.hidden=true;
     MCTGameView.hidden=true;
     FCView.hidden=true;
     FGameView.hidden = true;
@@ -1955,10 +1940,10 @@
     int currentContactIndex = rand()%currentContacts.count;
     correctMCPerson = [currentContacts objectAtIndex:currentContactIndex];
     
-    mcButton1.backgroundColor = [UIColor lightGrayColor];
-    mcButton2.backgroundColor = [UIColor lightGrayColor];
-    mcButton3.backgroundColor = [UIColor lightGrayColor];
-    mcButton4.backgroundColor = [UIColor lightGrayColor];
+    //mcButton1.backgroundColor = [UIColor lightGrayColor];
+    //mcButton2.backgroundColor = [UIColor lightGrayColor];
+    //mcButton3.backgroundColor = [UIColor lightGrayColor];
+    //mcButton4.backgroundColor = [UIColor lightGrayColor];
     
     mcPersonPicture.image = correctMCPerson.selfImage;
     int h = 0;
@@ -2071,8 +2056,7 @@
     }
 */
 
-    
-    
+    [self animateView:FilterView fromDirection:@"L" forThis:2];
     [percentField resignFirstResponder];
     
     
@@ -2083,7 +2067,6 @@
     {
         gameOverView.hidden = true;
         nextView = @"FV";
-        firstView.center = CGPointMake(firstView.center.x - firstView.bounds.size.width, firstView.center.y);
         
         animating = true;
         
@@ -2153,10 +2136,10 @@
     //[self chooseArray];
     correctMCPerson = [currentContacts objectAtIndex:currentContactIndex];
      
-    mcButton1.backgroundColor = [UIColor lightGrayColor];
-    mcButton2.backgroundColor = [UIColor lightGrayColor];
-    mcButton3.backgroundColor = [UIColor lightGrayColor];
-    mcButton4.backgroundColor = [UIColor lightGrayColor];
+    //mcButton1.backgroundColor = [UIColor lightGrayColor];
+    //mcButton2.backgroundColor = [UIColor lightGrayColor];
+    //mcButton3.backgroundColor = [UIColor lightGrayColor];
+    //mcButton4.backgroundColor = [UIColor lightGrayColor];
 //
     mcPersonPicture.image = correctMCPerson.selfImage;
     
@@ -2261,7 +2244,28 @@
         if ([b.titleLabel.text isEqualToString:correctMCPerson.getFullName])
         {
             [self playSoundNamed:@"DingSound" andType:@"m4a" andFX:true];
-            b.backgroundColor = [UIColor greenColor];
+
+            if(b == mcButton1)
+            {
+                iTIMCN1.hidden = false;
+                iTIMCN1.image = [UIImage imageNamed:@"SmallTU.png"];
+            }
+            if(b == mcButton2)
+            {
+                iTIMCN2.hidden = false;
+                iTIMCN2.image = [UIImage imageNamed:@"SmallTU.png"];
+            }
+            if(b == mcButton3)
+            {
+                iTIMCN3.hidden = false;
+                iTIMCN3.image = [UIImage imageNamed:@"SmallTU.png"];
+            }
+            if(b == mcButton4)
+            {
+                iTIMCN4.hidden = false;
+                iTIMCN4.image = [UIImage imageNamed:@"SmallTU.png"];
+            }
+            
             [currentPerson gotRight];
             totalCorrect++;
             currentPerson.hasBeenGuessedRight = true;
@@ -2272,7 +2276,26 @@
         }
         else
         {
-            b.backgroundColor = [UIColor redColor];
+            if(b == mcButton1)
+            {
+                iTIMCN1.hidden = false;
+                iTIMCN1.image = [UIImage imageNamed:@"SmallTD.png"];
+            }
+            if(b == mcButton2)
+            {
+                iTIMCN2.hidden = false;
+                iTIMCN2.image = [UIImage imageNamed:@"SmallTD.png"];
+            }
+            if(b == mcButton3)
+            {
+                iTIMCN3.hidden = false;
+                iTIMCN3.image = [UIImage imageNamed:@"SmallTD.png"];
+            }
+            if(b == mcButton4)
+            {
+                iTIMCN4.hidden = false;
+                iTIMCN4.image = [UIImage imageNamed:@"SmallTD.png"];
+            }
             [currentPerson gotWrong];
             [self playSoundNamed:@"DongSound" andType:@"m4a" andFX:true];
         }
@@ -2285,6 +2308,26 @@
         [arrayOf50PercentAndOver addObject:correctMCPerson];
         if ([b.titleLabel.text isEqualToString:correctMCPerson.getFullName])
         {
+            if(b == mcButton1)
+            {
+                iTIMCN1.hidden = false;
+                iTIMCN1.image = [UIImage imageNamed:@"SmallTU.png"];
+            }
+            if(b == mcButton2)
+            {
+                iTIMCN2.hidden = false;
+                iTIMCN2.image = [UIImage imageNamed:@"SmallTU.png"];
+            }
+            if(b == mcButton3)
+            {
+                iTIMCN3.hidden = false;
+                iTIMCN3.image = [UIImage imageNamed:@"SmallTU.png"];
+            }
+            if(b == mcButton4)
+            {
+                iTIMCN4.hidden = false;
+                iTIMCN4.image = [UIImage imageNamed:@"SmallTU.png"];
+            }
             [currentPerson gotRight];
             [self playSoundNamed:@"DingSound" andType:@"m4a" andFX:true];
             totalCorrect++;
@@ -2293,46 +2336,84 @@
         }
         else
         {
-            b.backgroundColor = [UIColor redColor];
-            [currentPerson gotWrong];
+            if(b == mcButton1)
+            {
+                iTIMCN1.hidden = false;
+                iTIMCN1.image = [UIImage imageNamed:@"SmallTD.png"];
+            }
+            if(b == mcButton2)
+            {
+                iTIMCN2.hidden = false;
+                iTIMCN2.image = [UIImage imageNamed:@"SmallTD.png"];
+            }
+            if(b == mcButton3)
+            {
+                iTIMCN3.hidden = false;
+                iTIMCN3.image = [UIImage imageNamed:@"SmallTD.png"];
+            }
+            if(b == mcButton4)
+            {
+                iTIMCN4.hidden = false;
+                iTIMCN4.image = [UIImage imageNamed:@"SmallTD.png"];
+            }            [currentPerson gotWrong];
             [self playSoundNamed:@"DongSound" andType:@"m4a" andFX:true];
             currentPerson.hasBeenGuessed = true;
         }
         if([mcButton1.titleLabel.text isEqualToString:correctMCPerson.getFullName])
         {
-            mcButton1.backgroundColor = [UIColor greenColor];
+            //mcButton1.backgroundColor = [UIColor greenColor];
+            iTIMCN1.hidden = false;
+            iTIMCN1.image = [UIImage imageNamed:@"SmallTU.png"];
         }
         else
         {
-            mcButton1.backgroundColor = [UIColor redColor];
+            iTIMCN1.hidden = false;
+            iTIMCN1.image = [UIImage imageNamed:@"SmallTD.png"];
         }
         if([mcButton2.titleLabel.text isEqualToString:correctMCPerson.getFullName])
         {
-            mcButton2.backgroundColor = [UIColor greenColor];
+            iTIMCN2.hidden = false;
+            iTIMCN2.image = [UIImage imageNamed:@"SmallTU.png"];
         }
         else
         {
-            mcButton2.backgroundColor = [UIColor redColor];
+            iTIMCN2.hidden = false;
+            iTIMCN2.image = [UIImage imageNamed:@"SmallTD.png"];
         }
         if([mcButton3.titleLabel.text isEqualToString:correctMCPerson.getFullName])
         {
-            mcButton3.backgroundColor = [UIColor greenColor];
+            iTIMCN3.hidden = false;
+            iTIMCN3.image = [UIImage imageNamed:@"SmallTU.png"];
         }
         else
         {
-            mcButton3.backgroundColor = [UIColor redColor];
+            iTIMCN3.hidden = false;
+            iTIMCN3.image = [UIImage imageNamed:@"SmallTD.png"];
         }
         if([mcButton4.titleLabel.text isEqualToString:correctMCPerson.getFullName])
         {
-            mcButton4.backgroundColor = [UIColor greenColor];
+            iTIMCN4.hidden = false;
+            iTIMCN4.image = [UIImage imageNamed:@"SmallTU.png"];
         }
         else
         {
-            mcButton4.backgroundColor = [UIColor redColor];
+            iTIMCN4.hidden = false;
+            iTIMCN4.image = [UIImage imageNamed:@"SmallTD.png"];
         }
     }
     if(arrayOf49PercentAndUnder.count < 4)
     {
+        iBMCN1.hidden = true;
+        iBMCN2.hidden = true;
+        iBMCN3.hidden = true;
+        iBMCN4.hidden = true;
+        
+        iTIMCN1.hidden = true;
+        iTIMCN2.hidden = true;
+        iTIMCN3.hidden = true;
+        iTIMCN4.hidden = true;
+        nextMCN.hidden = true;
+        
         gameOverView.hidden = false;
         guessButton.hidden = true;
         nameView.hidden = true;
@@ -2378,12 +2459,20 @@
 {
     [self playSoundNamed:@"ClickSound" andType:@"m4a" andFX:true];
     numberOfHintsPressed = 0;
+    hintLabel.text = [NSString stringWithFormat:@"H:%i", 2-numberOfHintsPressed];
+
     iBMCN1.hidden = true;
     iBMCN2.hidden = true;
     iBMCN3.hidden = true;
     iBMCN4.hidden = true;
-    [self generateNewPeopleMCN];
+    
+    iTIMCN1.hidden = true;
+    iTIMCN2.hidden = true;
+    iTIMCN3.hidden = true;
+    iTIMCN4.hidden = true;
     nextMCN.hidden = true;
+
+    [self generateNewPeopleMCN];
     currentPerson.hasBeenGuessed = false;
     numOfContactsLeftLabel.text = [NSString stringWithFormat:@"%i",arrayOf49PercentAndUnder.count];
 
@@ -2485,16 +2574,39 @@
 {
     [self playSoundNamed:@"ClickSound" andType:@"m4a" andFX:true];
 
+    iBMCN1.hidden = true;
+    iBMCN2.hidden = true;
+    iBMCN3.hidden = true;
+    iBMCN4.hidden = true;
+
+    iTIMCN1.hidden = true;
+    iTIMCN2.hidden = true;
+    iTIMCN3.hidden = true;
+    iTIMCN4.hidden = true;
+    nextMCN.hidden = true;
+    
+    for(int i =0; i < allPeople.count; i++)
+    {
+        Person *p;
+        p =[allPeople objectAtIndex:i];
+        p.hasBeenGuessed = false;
+        p.hasBeenGuessedRight = false;
+        //NSLog(@"%id", p.hasBeenGuessed);
+    }
+    
     if(sender ==tFButton)
     {
+        //[self animateView:firstView fromDirection:@"L" forThis:2];
         typeOfGame.text = @"Flashcard Game";
     }
     else if(sender == mCNamesButton)
     {
+        //[self animateView:firstView fromDirection:@"L" forThis:2];
         typeOfGame.text = @"Multiple Choice Names";
     }
     else if(sender == mCFacesButton)
     {
+        //[self animateView:firstView fromDirection:@"L" forThis:2];
         typeOfGame.text = @"Multiple Choice Faces";
     }
 
@@ -2580,7 +2692,6 @@
     filterField.text = @"";
     filterLabel.text = @"Filter By:";
     nextView = @"FTGV";
-    FTGameView.center = CGPointMake(FTGameView.center.x - FTGameView.bounds.size.width, FTGameView.center.y);
     
     nameView.hidden = true;
 
@@ -2596,13 +2707,20 @@
 
     if(sender == leaderBoardButton)
     {
-        [self showLeaderboardAndAchievements:NO];
+        [self showLeaderboardAndAchievements:YES];
         //leaderBoardView.hidden = false;
         //firstView.hidden = true;
 
     }
     else if(sender == statsButton)
     {
+        statsScrollView.hidden = false;
+        peopleStatsScrollView.hidden = true;
+        for (UIView *object in [peopleStatsScrollView subviews])
+        {
+            [object removeFromSuperview];
+        }
+        
         bestScoreLabelF.text = [NSString stringWithFormat:@"Highest Score: %i",highscore];
         bestScoreLabelMCF.text = [NSString stringWithFormat:@"Highest Score: %i",highscoreMCF];
         bestScoreLabelMCN.text = [NSString stringWithFormat:@"Highest Score: %i",highscoreMCN];
@@ -3332,186 +3450,196 @@
 -(IBAction)hintMCF
 {
     [self playSoundNamed:@"ClickSound" andType:@"m4a" andFX:true];
-    if(numberOfHintsPressed < 2)
+    if(iTIMCF1.hidden == true || iTIMCF2.hidden == true || iTIMCF3.hidden == true || iTIMCF4.hidden == true)
     {
-        int x;
-        Person* randomPerson;
-        bool canGoOn;
-        canGoOn = false;
-        do
+        if(numberOfHintsPressed < 2)
         {
-            x = rand()%4;
-            if(x == 0 && iBMCF1.hidden == true)
+            int x;
+            Person* randomPerson;
+            bool canGoOn;
+            canGoOn = false;
+            do
             {
-                randomPerson = pMCF1;
-                canGoOn = true;
+                x = rand()%4;
+                if(x == 0 && iBMCF1.hidden == true)
+                {
+                    randomPerson = pMCF1;
+                    canGoOn = true;
+                }
+                if(x == 1 && iBMCF2.hidden == true)
+                {
+                    randomPerson = pMCF2;
+                    canGoOn = true;
+                }
+                if(x == 2 && iBMCF3.hidden == true)
+                {
+                    randomPerson = pMCF3;
+                    canGoOn = true;
+                }
+                if(x == 3 && iBMCF4.hidden == true)
+                {
+                    randomPerson = pMCF4;
+                    canGoOn = true;
+                }
+                
+            }while(randomPerson == correctPersonMCF || canGoOn == false);
+            
+            if(randomPerson == pMCF1)
+            {
+                iBMCF1.hidden = false;
+                iTIMCF1.hidden = false;
+                n1.text = [NSString stringWithFormat:@"%@ %@",pMCF1.firstName,pMCF1.lastName];
+                iTIMCF1.image = [UIImage imageNamed:@"SmallTD.png"];
             }
-            if(x == 1 && iBMCF2.hidden == true)
+            if(randomPerson == pMCF2)
             {
-                randomPerson = pMCF2;
-                canGoOn = true;
+                iBMCF2.hidden = false;
+                iTIMCF2.hidden = false;
+                n2.text = [NSString stringWithFormat:@"%@ %@",pMCF2.firstName,pMCF2.lastName];
+                iTIMCF2.image = [UIImage imageNamed:@"SmallTD.png"];
             }
-            if(x == 2 && iBMCF3.hidden == true)
+            if(randomPerson == pMCF3)
             {
-                randomPerson = pMCF3;
-                canGoOn = true;
+                iBMCF3.hidden = false;
+                iTIMCF3.hidden = false;
+                n3.text = [NSString stringWithFormat:@"%@ %@",pMCF3.firstName,pMCF3.lastName];
+                iTIMCF3.image = [UIImage imageNamed:@"SmallTD.png"];
             }
-            if(x == 3 && iBMCF4.hidden == true)
+            if(randomPerson == pMCF4)
             {
-                randomPerson = pMCF4;
-                canGoOn = true;
+                iBMCF4.hidden = false;
+                iTIMCF4.hidden = false;
+                n4.text = [NSString stringWithFormat:@"%@ %@",pMCF4.firstName,pMCF4.lastName];
+                iTIMCF4.image = [UIImage imageNamed:@"SmallTD.png"];
             }
             
-        }while(randomPerson == correctPersonMCF || canGoOn == false);
-        
-        if(randomPerson == pMCF1)
-        {
-            iBMCF1.hidden = false;
-            iTIMCF1.hidden = false;
-            n1.text = [NSString stringWithFormat:@"%@ %@",pMCF1.firstName,pMCF1.lastName];
-            iTIMCF1.image = [UIImage imageNamed:@"SmallTD.png"];
-        }
-        if(randomPerson == pMCF2)
-        {
-            iBMCF2.hidden = false;
-            iTIMCF2.hidden = false;
-            n2.text = [NSString stringWithFormat:@"%@ %@",pMCF2.firstName,pMCF2.lastName];
-            iTIMCF2.image = [UIImage imageNamed:@"SmallTD.png"];
-        }
-        if(randomPerson == pMCF3)
-        {
-            iBMCF3.hidden = false;
-            iTIMCF3.hidden = false;
-            n3.text = [NSString stringWithFormat:@"%@ %@",pMCF3.firstName,pMCF3.lastName];
-            iTIMCF3.image = [UIImage imageNamed:@"SmallTD.png"];
-        }
-        if(randomPerson == pMCF4)
-        {
-            iBMCF4.hidden = false;
-            iTIMCF4.hidden = false;
-            n4.text = [NSString stringWithFormat:@"%@ %@",pMCF4.firstName,pMCF4.lastName];
-            iTIMCF4.image = [UIImage imageNamed:@"SmallTD.png"];
-        }
-        
-        ++numberOfHintsPressed;
-        hintLabel.text = [NSString stringWithFormat:@"H:%i", 2-numberOfHintsPressed];
-        seconds+=5;
-        if( numberOfHintsPressed > 2)
-        {
-            hintLabel.text = @"H:0";
-        }
-        if(seconds <= 9)
-        {
-            timerLable.text = [NSString stringWithFormat:@"%i:0%i", minutes,seconds];
-        }
-        else
-        {
-            timerLable.text = [NSString stringWithFormat:@"%i:%i", minutes,seconds];
-        }
-        if(seconds == 59)
-        {
-            seconds = 0;
-            //timerLableSeconds.text = [NSString stringWithFormat:@"0%i", countUpValue];
-            
-            minutes +=1;
-            timerLable.text = [NSString stringWithFormat:@"%i:0%i", minutes,seconds];
-        }
-        else if(seconds > 59)
-        {
-            seconds = seconds - 60;
-            //timerLableSeconds.text = [NSString stringWithFormat:@"0%i", countUpValue];
-            
-            minutes +=1;
-            timerLable.text = [NSString stringWithFormat:@"%i:0%i", minutes,seconds];
+            ++numberOfHintsPressed;
+            hintLabel.text = [NSString stringWithFormat:@"H:%i", 2-numberOfHintsPressed];
+            seconds+=5;
+            if( numberOfHintsPressed > 2)
+            {
+                hintLabel.text = @"H:0";
+            }
+            if(seconds <= 9)
+            {
+                timerLable.text = [NSString stringWithFormat:@"%i:0%i", minutes,seconds];
+            }
+            else
+            {
+                timerLable.text = [NSString stringWithFormat:@"%i:%i", minutes,seconds];
+            }
+            if(seconds == 59)
+            {
+                seconds = 0;
+                //timerLableSeconds.text = [NSString stringWithFormat:@"0%i", countUpValue];
+                
+                minutes +=1;
+                timerLable.text = [NSString stringWithFormat:@"%i:0%i", minutes,seconds];
+            }
+            else if(seconds > 59)
+            {
+                seconds = seconds - 60;
+                //timerLableSeconds.text = [NSString stringWithFormat:@"0%i", countUpValue];
+                
+                minutes +=1;
+                timerLable.text = [NSString stringWithFormat:@"%i:0%i", minutes,seconds];
+            }
         }
     }
 }
 -(IBAction)hintMCN
 {
     [self playSoundNamed:@"ClickSound" andType:@"m4a" andFX:true];
-    if(numberOfHintsPressed < 2)
+    if(iTIMCN1.hidden == true || iTIMCN2.hidden == true || iTIMCN3.hidden == true || iTIMCN4.hidden == true)
     {
-        int x;
-        Person* randomPerson;
-        bool canGoOn;
-        canGoOn = false;
-        do
+        if(numberOfHintsPressed < 2)
         {
-            x = rand()%4;
-            if(x == 0 && iBMCN1.hidden == true)
+            int x;
+            Person* randomPerson;
+            bool canGoOn;
+            canGoOn = false;
+            do
             {
-                randomPerson = pMCN1;
-                canGoOn = true;
+                x = rand()%4;
+                if(x == 0 && iTIMCN1.hidden == true)
+                {
+                    randomPerson = pMCN1;
+                    canGoOn = true;
+                }
+                if(x == 1 && iTIMCN2.hidden == true)
+                {
+                    randomPerson = pMCN2;
+                    canGoOn = true;
+                }
+                if(x == 2 && iTIMCN3.hidden == true)
+                {
+                    randomPerson = pMCN3;
+                    canGoOn = true;
+                }
+                if(x == 3 && iTIMCN4.hidden == true)
+                {
+                    randomPerson = pMCN4;
+                    canGoOn = true;
+                }
+                
+            }while(randomPerson == correctMCPerson || canGoOn == false);
+            
+            if(randomPerson == pMCN1)
+            {
+                iBMCN1.hidden = false;
+                iTIMCN1.hidden = false;
+                iTIMCN1.image = [UIImage imageNamed:@"SmallTD.png"];
             }
-            if(x == 1 && iBMCN1.hidden == true)
+            if(randomPerson == pMCN2)
             {
-                randomPerson = pMCN2;
-                canGoOn = true;
+                iBMCN2.hidden = false;
+                iTIMCN2.hidden = false;
+                iTIMCN2.image = [UIImage imageNamed:@"SmallTD.png"];
             }
-            if(x == 2 && iBMCN1.hidden == true)
+            if(randomPerson == pMCN3)
             {
-                randomPerson = pMCN3;
-                canGoOn = true;
+                iBMCN3.hidden = false;
+                iTIMCN3.hidden = false;
+                iTIMCN3.image = [UIImage imageNamed:@"SmallTD.png"];
             }
-            if(x == 3 && iBMCN1.hidden == true)
+            if(randomPerson == pMCN4)
             {
-                randomPerson = pMCN4;
-                canGoOn = true;
+                iBMCN4.hidden = false;
+                iTIMCN4.hidden = false;
+                iTIMCN4.image = [UIImage imageNamed:@"SmallTD.png"];
             }
             
-        }while(randomPerson == correctMCPerson || canGoOn == false);
-        
-        if(randomPerson == pMCN1)
-        {
-            iBMCN1.hidden = false;
-            mcButton1.backgroundColor = [UIColor redColor];
-        }
-        if(randomPerson == pMCN2)
-        {
-            iBMCN2.hidden = false;
-            mcButton2.backgroundColor = [UIColor redColor];
-        }
-        if(randomPerson == pMCN3)
-        {
-            iBMCN3.hidden = false;
-            mcButton3.backgroundColor = [UIColor redColor];
-        }
-        if(randomPerson == pMCN4)
-        {
-            iBMCN4.hidden = false;
-            mcButton4.backgroundColor = [UIColor redColor];
-        }
-        
-        ++numberOfHintsPressed;
-        hintLabel.text = [NSString stringWithFormat:@"H:%i", 2-numberOfHintsPressed];
-        seconds+=5;
-        if( numberOfHintsPressed > 2)
-        {
-            hintLabel.text = @"H:0";
-        }
-        if(seconds <= 9)
-        {
-            timerLable.text = [NSString stringWithFormat:@"%i:0%i", minutes,seconds];
-        }
-        else
-        {
-            timerLable.text = [NSString stringWithFormat:@"%i:%i", minutes,seconds];
-        }
-        if(seconds == 59)
-        {
-            seconds = 0;
-            //timerLableSeconds.text = [NSString stringWithFormat:@"0%i", countUpValue];
-            
-            minutes +=1;
-            timerLable.text = [NSString stringWithFormat:@"%i:0%i", minutes,seconds];
-        }
-        else if(seconds > 59)
-        {
-            seconds = seconds - 60;
-            //timerLableSeconds.text = [NSString stringWithFormat:@"0%i", countUpValue];
-            
-            minutes +=1;
-            timerLable.text = [NSString stringWithFormat:@"%i:0%i", minutes,seconds];
+            ++numberOfHintsPressed;
+            hintLabel.text = [NSString stringWithFormat:@"H:%i", 2-numberOfHintsPressed];
+            seconds+=5;
+            if( numberOfHintsPressed > 2)
+            {
+                hintLabel.text = @"H:0";
+            }
+            if(seconds <= 9)
+            {
+                timerLable.text = [NSString stringWithFormat:@"%i:0%i", minutes,seconds];
+            }
+            else
+            {
+                timerLable.text = [NSString stringWithFormat:@"%i:%i", minutes,seconds];
+            }
+            if(seconds == 59)
+            {
+                seconds = 0;
+                //timerLableSeconds.text = [NSString stringWithFormat:@"0%i", countUpValue];
+                
+                minutes +=1;
+                timerLable.text = [NSString stringWithFormat:@"%i:0%i", minutes,seconds];
+            }
+            else if(seconds > 59)
+            {
+                seconds = seconds - 60;
+                //timerLableSeconds.text = [NSString stringWithFormat:@"0%i", countUpValue];
+                
+                minutes +=1;
+                timerLable.text = [NSString stringWithFormat:@"%i:0%i", minutes,seconds];
+            }
         }
     }
 }
@@ -3849,10 +3977,10 @@
     
 
 
-    mcButton1.backgroundColor = [UIColor lightGrayColor];
-    mcButton2.backgroundColor = [UIColor lightGrayColor];
-    mcButton3.backgroundColor = [UIColor lightGrayColor];
-    mcButton4.backgroundColor = [UIColor lightGrayColor];
+    //mcButton1.backgroundColor = [UIColor lightGrayColor];
+    //mcButton2.backgroundColor = [UIColor lightGrayColor];
+    //mcButton3.backgroundColor = [UIColor lightGrayColor];
+    //mcButton4.backgroundColor = [UIColor lightGrayColor];
     //
     if(arrayOf49PercentAndUnder.count >3) {
     mcPersonPicture.image = correctMCPerson.selfImage;
@@ -4000,7 +4128,6 @@
             filterField.text = @"";
             filterLabel.text = @"Filter By:";
             nextView = @"FTGV";
-            FTGameView.center = CGPointMake(FTGameView.center.x - FTGameView.bounds.size.width, FTGameView.center.y);
             nameView.hidden = true;
             animating = true;
             
@@ -4013,6 +4140,11 @@
             mostTimeMCN = NULL;
             MCTGameView.hidden = false;
             [self generateNewPeopleMCN];
+            iTIMCN1.hidden = true;
+            iTIMCN2.hidden = true;
+            iTIMCN3.hidden = true;
+            iTIMCN4.hidden = true;
+            nextMCN.hidden = true;
         }
         if([typeOfGame.text  isEqual: @"Multiple Choice Faces"])
         {
