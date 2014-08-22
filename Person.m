@@ -31,12 +31,8 @@
     selfImage = img;
     isMale = iM;
 }
--(double)returnPercentage {
-    NSLog(@"ntc=%f",numTimesCorrect);
-    NSLog(@"ntg=%f",numTimesGuessed);
-    NSLog(@"p=%f",(numTimesCorrect/numTimesGuessed));
-
-    
+-(double)returnPercentage
+{
     return (double)(numTimesCorrect/numTimesGuessed);
 }
 -(void)gotRight {
