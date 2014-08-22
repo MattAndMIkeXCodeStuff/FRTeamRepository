@@ -457,7 +457,7 @@
 
 -(void)generateDotsForTime:(int)t;
 
--(void)animateView:(UIView*)v fromDirection:(NSString*)direction;
+-(void)animateView:(UIView*)v fromDirection:(NSString*)direction forThis:(double)secs;
 -(NSMutableArray*)getContactsWithCompany:(NSString*)company fromArray:(NSMutableArray*)array;
 -(NSMutableArray*)getContactsWithJobTitle:(NSString*)jobTitle fromArray:(NSMutableArray*)array;
 

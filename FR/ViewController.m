@@ -9,63 +9,12 @@
 #import "ViewController.h"
 
 @interface ViewController ()
-// This object that will be used to count the 60 seconds of each level.
-@property (nonatomic, strong) NSTimer *gameTimer;
-
-// It will be used to display the Game Center related options and handle the user selection in a block.
-//@property (nonatomic, strong) CustomActionSheet *customActionSheet;
-
-// These two member variables that will store the operand values of the addition.
-@property (nonatomic) int operand1;
-@property (nonatomic) int operand2;
-
-// The timer value.
-@property (nonatomic) int timerValue;
-
-// The current level.
-@property (nonatomic) int level;
-
-// The current round of a level.
-@property (nonatomic) int currentAdditionCounter;
-
 // The player's score. Its type is int64_t so as to match the expected type by the respective method of GameKit.
 @property (nonatomic) int64_t score;
-
-// The number of remaining "lives" in the game.
-@property (nonatomic) int lives;
-
 // A flag indicating whether the Game Center features can be used after a user has been authenticated.
 @property (nonatomic) BOOL gameCenterEnabled;
-
 // This property stores the default leaderboard's identifier.
 @property (nonatomic, strong) NSString *leaderboardIdentifier;
-
-
-
-// This method is used to set the initial values to all member variables.
--(void)initValues;
-
-
-// When it's called, the timerValue member variable gets its initial value, which is 0, and the timer
-// is re-scheduled in order to start counting the time for a new level.
--(void)startTimer;
-
-
-// It updates the time label on the view with the current timer value.
--(void)updateTimerLabel:(NSTimer *)timer;
-
-
-// It creates a new ramdom addition operation and shows is to the lblAddition label, as well as all the three
-// possible answers.
--(void)createAddition;
-
-
-// It updates the level, both internally and visually.
--(void)updateLevelLabel;
-
-
-// It sets the initial value to the lives member variable and makes visible all "life" images.
--(void)initLives;
 
 -(void)reportScore;
 -(void)authenticateLocalPlayer;
@@ -133,11 +82,13 @@
     
     gcViewController.gameCenterDelegate = self;
     
-    if (shouldShowLeaderboard) {
+    if (shouldShowLeaderboard)
+    {
         gcViewController.viewState = GKGameCenterViewControllerStateLeaderboards;
-        gcViewController.leaderboardIdentifier = _leaderboardIdentifier;
+        //gcViewController.leaderboardIdentifier = _leaderboardIdentifier;
     }
-    else{
+    else
+    {
         gcViewController.viewState = GKGameCenterViewControllerStateAchievements;
     }
     
@@ -166,10 +117,10 @@
     //moreInfoBio.text = @"No Notes";
     //moreInfoBio = [[UITextView alloc]init];
     
-    imageArray = [NSMutableArray arrayWithObjects:frame0, frame1, frame2, frame3, frame4, frame5, frame6, frame7,frame8,frame9,frame10, nil];
+    imageArray = [NSMutableArray arrayWithObjects:frame0, frame1, frame2, frame3, frame4, frame5, frame6, frame7,frame8,frame9,frame10, frame10, nil];
     
     igniteChange.animationImages = imageArray;
-    igniteChange.animationDuration = 0.075*(imageArray.count);
+    igniteChange.animationDuration = 0.08*(imageArray.count);
     igniteChange.animationRepeatCount=100;
     [igniteChange startAnimating];
     
@@ -351,6 +302,7 @@
     {
         nameLabel.text = [NSString stringWithFormat:@"%@ %@", currentPerson.firstName,currentPerson.lastName];
     }
+    //this one needs no animation
     nameLabel.hidden = false;
     guessButton.hidden = true;
     nameView.hidden = false;
@@ -396,7 +348,7 @@
     }
     else if([self checkIfAllPeopleHaveBeenGuessed] == true && practiceModeSwitch.isOn == false)
     {
-        FTGameView.hidden = true;
+        [self animateView:FTGameView fromDirection:@"L" forThis:2];
         gameOverView.hidden = false;
 
         guessButton.hidden = true;
@@ -420,7 +372,7 @@
             percentLabel.text = [NSString stringWithFormat:@"YOU GOT %d%% (%i OUT OF %i) IN %i:%i",(int)round(totalPercentage*100),(int)round(totalCorrect),(int)round(totalGuessed),minutes,seconds];
         }
         
-        totalSeconds = minutes*60 + seconds;
+        totalSeconds = minutes*60 + seconds +1;
         
 
         
@@ -453,7 +405,7 @@
     }
     else if([self checkIfAllPeopleHaveBeenGuessedCorrectly] == true && practiceModeSwitch.isOn == true)
     {
-        FTGameView.hidden = true;
+        [self animateView:FTGameView fromDirection:@"L" forThis:2];
         gameOverView.hidden = false;
 
         guessButton.hidden = true;
@@ -521,6 +473,7 @@
         }
         else
         {
+            [self animateView:FTGameView fromDirection:@"L" forThis:2];
             gameOverView.hidden = false;
             timerView.hidden=false;
 
@@ -544,7 +497,7 @@
                 percentLabel.text = [NSString stringWithFormat:@"YOU GOT %d%% (%i OUT OF %i) IN %i:%i",(int)round(totalPercentage*100),(int)round(totalCorrect),(int)round(totalGuessed),minutes,seconds];
             }
             
-            totalSeconds = minutes*60 + seconds;
+            totalSeconds = minutes*60 + seconds +1;
             currentScore = (int)round(((1000*totalGuessed*totalGuessed*totalPercentage)/totalSeconds));
             [self printHighScore];
             
@@ -805,7 +758,6 @@
             //game ends
             //go to view that shows stats
             MCGameView.hidden=true;
-            firstView.hidden=true;
             MCTGameView.hidden=true;
             FCView.hidden=true;
             MCCView.hidden = true;
@@ -1784,49 +1736,65 @@
         minutes =0;
         timerLable.text = [NSString stringWithFormat:@"%i:0%i", minutes,seconds];
     }
-    if(animating == true && wait%10 == 0)
+    
+    if(animating == true)
     {
+        /*
         if([nextView isEqualToString:@"FCV"])
         {
             //move the view to the right side of the screen
             [self animateView:FCView fromDirection:@"R"];
+            animating = false;
         }
         if([nextView isEqualToString:@"MCCV"])
         {
             //move the view to the right side of the screen
             [self animateView:MCCView fromDirection:@"R"];
+            animating = false;
         }
         if([nextView isEqualToString:@"MCGV"])
         {
             //move the view to the right side of the screen
             [self animateView:MCGameView fromDirection:@"R"];
+            animating = false;
+
         }
         if([nextView isEqualToString:@"FV"])
         {
             //move the view to the right side of the screen
             [self animateView:firstView fromDirection:@"R"];
+            animating = false;
+
         }
         if([nextView isEqualToString:@"MCTV"])
         {
             //move the view to the right side of the screen
             [self animateView:MCTGameView fromDirection:@"R"];
+            animating = false;
+
         }
         if([nextView isEqualToString:@"FTGV"])
         {
             //move the view to the right side of the screen
             [self animateView:FTGameView fromDirection:@"R"];
+            animating = false;
+
         }
         if([nextView isEqualToString:@"FTGV"])
         {
             //move the view to the right side of the screen
             [self animateView:FTGameView fromDirection:@"R"];
+            animating = false;
+
         }
         if([nextView isEqualToString:@"FGV"])
         {
             //move the view to the right side of the screen
             [self animateView:FGameView fromDirection:@"R"];
-        }
+            animating = false;
 
+        }
+*/
     }
     else
     {
@@ -1837,39 +1805,44 @@
         if([nextView isEqualToString:@"FCV"])
         {
             //move the view to the right side of the screen
-            [self animateView:FCView fromDirection:@"L"];
+            //[self animateView:FCView fromDirection:@"L"];
         }
     }
     else
     {
         xValL = firstView.center.x + firstView.bounds.size.width;
     }
+         
 }
+     
 
--(void)animateView:(UIView*)v fromDirection:(NSString*)direction
+-(void)animateView:(UIView*)v fromDirection:(NSString*)direction forThis:(double)secs
 {
     if([direction isEqualToString:@"R"])
     {
-        //xValR++;
-        v.center = CGPointMake(v.center.x+40, v.center.y);
-        //NSLog(@"%f", v.center.x);
-        if(160 <= v.center.x)
-        {
-            animating = false;
-            nextView = @"";
-        }
+        [UIView beginAnimations:nil context:NULL];
+        [UIView setAnimationDuration:secs];
+        [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromLeft forView:v cache:YES];
     }
-    else
+    else if([direction isEqualToString:@"L"])
     {
-        xValL--;
-        v.center = CGPointMake(v.center.x-40, v.center.y);
-        //NSLog(@"%f", v.center.x);
-        if(160 <= v.center.x)
-        {
-            animatingBack = false;
-            nextView = @"";
-        }
+        [UIView beginAnimations:nil context:NULL];
+        [UIView setAnimationDuration:secs];
+        [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromRight forView:v cache:YES];
     }
+    else if([direction isEqualToString:@"T"])
+    {
+        [UIView beginAnimations:nil context:NULL];
+        [UIView setAnimationDuration:secs];
+        [UIView setAnimationTransition:UIViewAnimationTransitionCurlDown forView:v cache:YES];
+    }
+    else if([direction isEqualToString:@"B"])
+    {
+        [UIView beginAnimations:nil context:NULL];
+        [UIView setAnimationDuration:secs];
+        [UIView setAnimationTransition:UIViewAnimationTransitionCurlUp forView:v cache:YES];
+    }
+    [UIView commitAnimations];
 }
 
 
@@ -1884,7 +1857,6 @@
 
     MCCView.hidden = false;
     MCGameView.hidden=true;
-    firstView.hidden=true;
     MCTGameView.hidden=true;
     FCView.hidden=true;
     FGameView.hidden = true;
@@ -2041,8 +2013,7 @@
     }
 */
 
-    
-    
+    [self animateView:FilterView fromDirection:@"L" forThis:2];
     [percentField resignFirstResponder];
     
     
@@ -2053,7 +2024,6 @@
     {
         gameOverView.hidden = true;
         nextView = @"FV";
-        firstView.center = CGPointMake(firstView.center.x - firstView.bounds.size.width, firstView.center.y);
         
         animating = true;
         
@@ -2423,7 +2393,7 @@
             percentLabel.text = [NSString stringWithFormat:@"YOU GOT %d%% (%i OUT OF %i) IN %i:%i",(int)round(totalPercentage*100),(int)round(totalCorrect),(int)round(totalGuessed),minutes,seconds];
         }
         
-        totalSeconds = minutes*60 + seconds;
+        totalSeconds = minutes*60 + seconds +1;
         
         currentScoreMCN = (int)round(((1000*totalGuessed*totalGuessed*totalPercentage)/(totalSeconds)));
         [self printHighScoreMCN];
@@ -2560,7 +2530,7 @@
 -(IBAction)showFilterView:(id)sender
 {
     [self playSoundNamed:@"ClickSound" andType:@"m4a" andFX:true];
-    
+
     iBMCN1.hidden = true;
     iBMCN2.hidden = true;
     iBMCN3.hidden = true;
@@ -2583,14 +2553,17 @@
     
     if(sender ==tFButton)
     {
+        //[self animateView:firstView fromDirection:@"L" forThis:2];
         typeOfGame.text = @"Flashcard Game";
     }
     else if(sender == mCNamesButton)
     {
+        //[self animateView:firstView fromDirection:@"L" forThis:2];
         typeOfGame.text = @"Multiple Choice Names";
     }
     else if(sender == mCFacesButton)
     {
+        //[self animateView:firstView fromDirection:@"L" forThis:2];
         typeOfGame.text = @"Multiple Choice Faces";
     }
 
@@ -2676,7 +2649,6 @@
     filterField.text = @"";
     filterLabel.text = @"Filter By:";
     nextView = @"FTGV";
-    FTGameView.center = CGPointMake(FTGameView.center.x - FTGameView.bounds.size.width, FTGameView.center.y);
     
     nameView.hidden = true;
 
@@ -2692,13 +2664,20 @@
 
     if(sender == leaderBoardButton)
     {
-        [self showLeaderboardAndAchievements:NO];
+        [self showLeaderboardAndAchievements:YES];
         //leaderBoardView.hidden = false;
         //firstView.hidden = true;
 
     }
     else if(sender == statsButton)
     {
+        statsScrollView.hidden = false;
+        peopleStatsScrollView.hidden = true;
+        for (UIView *object in [peopleStatsScrollView subviews])
+        {
+            [object removeFromSuperview];
+        }
+        
         bestScoreLabelF.text = [NSString stringWithFormat:@"Highest Score: %i",highscore];
         bestScoreLabelMCF.text = [NSString stringWithFormat:@"Highest Score: %i",highscoreMCF];
         bestScoreLabelMCN.text = [NSString stringWithFormat:@"Highest Score: %i",highscoreMCN];
@@ -3750,7 +3729,7 @@
             percentLabel.text = [NSString stringWithFormat:@"YOU GOT %d%% (%i OUT OF %i) IN %i:%i",(int)round(totalPercentage*100),(int)round(totalCorrect),(int)round(totalGuessed),minutes,seconds];
         }
         
-        totalSeconds = minutes*60 + seconds;
+        totalSeconds = minutes*60 + seconds +1;
         
         currentScoreMCF = (int)round(((1000*totalGuessed*totalGuessed*totalPercentage)/(totalSeconds)));
         [self printHighScoreMCF];
@@ -4106,7 +4085,6 @@
             filterField.text = @"";
             filterLabel.text = @"Filter By:";
             nextView = @"FTGV";
-            FTGameView.center = CGPointMake(FTGameView.center.x - FTGameView.bounds.size.width, FTGameView.center.y);
             nameView.hidden = true;
             animating = true;
             
