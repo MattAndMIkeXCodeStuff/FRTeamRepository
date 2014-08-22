@@ -10,7 +10,7 @@
 
 @interface Person : NSObject
 {
-    
+    NSString *value;
 }
 @property (nonatomic) UIImage* selfImage;
 @property (nonatomic) NSString* firstName;
@@ -28,7 +28,7 @@
 @property(nonatomic)NSDate* date;
 @property(nonatomic)int secondsTaken;
 @property(nonatomic)int minutesTaken;
-
+@property(nonatomic)NSString *value;
 @property(nonatomic)double totalNumTimesCorrectF;
 @property(nonatomic)double totalNumTimesGuessedF;
 @property(nonatomic)double totalNumTimesCorrectMCF;
@@ -44,4 +44,6 @@
 -(double)returnPercentage;
 - (void)setWithFirstName:(NSString*) fName andLastName:(NSString*) lName andImage:(UIImage*)img andGender:(bool)iM;
 -(NSString *)getFullName;
+-(double)getNumTimesCorrect;
+-(double)getNumTimesGuessed;
 @end
