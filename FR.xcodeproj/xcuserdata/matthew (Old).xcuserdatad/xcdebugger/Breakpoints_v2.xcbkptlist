@@ -26,12 +26,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FR/ViewController.m"
-            timestampString = "430371835.842855"
+            timestampString = "430504875.625742"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "832"
-            endingLineNumber = "832"
-            landmarkName = "-addJob:"
+            startingLineNumber = "913"
+            endingLineNumber = "913"
+            landmarkName = "-loadNewPerson"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -42,12 +42,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FR/ViewController.m"
-            timestampString = "430371835.842855"
+            timestampString = "430504875.625742"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "661"
-            endingLineNumber = "661"
-            landmarkName = "-chooseArray"
+            startingLineNumber = "742"
+            endingLineNumber = "742"
+            landmarkName = "-printHighScore"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

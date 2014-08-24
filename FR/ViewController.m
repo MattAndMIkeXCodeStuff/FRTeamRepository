@@ -19,6 +19,7 @@
 -(void)reportScore;
 -(void)authenticateLocalPlayer;
 -(void)showLeaderboardAndAchievements:(BOOL)shouldShowLeaderboard;
+-(void)updateAchievements;
 @end
 
 @implementation ViewController
@@ -94,6 +95,91 @@
     
     [self presentViewController:gcViewController animated:YES completion:nil];
 }
+-(void)updateAchievements
+{
+    NSString *achievementIdentifier;
+    GKAchievementDescription*description;
+    GKAchievement *achievement1 = nil;
+    GKAchievement *achievement2 = nil;
+    GKAchievement *achievement3 = nil;
+    GKAchievement *achievement4 = nil;
+    GKAchievement *achievement5 = nil;
+
+    //game over
+    
+    achievementIdentifier = @"10_cards";
+    achievement1 = [[GKAchievement alloc] initWithIdentifier:achievementIdentifier];
+    achievementIdentifier = @"50_cards";
+    achievement2 = [[GKAchievement alloc] initWithIdentifier:achievementIdentifier];
+    achievementIdentifier = @"100_cards";
+    achievement3 = [[GKAchievement alloc] initWithIdentifier:achievementIdentifier];
+    achievementIdentifier = @"150_cards";
+    achievement4 = [[GKAchievement alloc] initWithIdentifier:achievementIdentifier];
+    achievementIdentifier = @"200_cards";
+    achievement5 = [[GKAchievement alloc] initWithIdentifier:achievementIdentifier];
+    
+    if (totalPercentage == 1 && totalGuessed > 10)
+    {
+        achievement1.percentComplete = 100.0;
+    }
+    if (totalPercentage == 1 && totalGuessed > 50)
+    {
+        //[self showAchievementNotification: [GKAchievementDescription*description objectForKey:achievement2.identifier]];
+        achievement1.percentComplete = 100.0;
+        achievement2.percentComplete = 100.0;
+
+    }
+    if (totalPercentage == 1 && totalGuessed > 100)
+    {
+        achievement1.percentComplete = 100.0;
+        achievement2.percentComplete = 100.0;
+        achievement3.percentComplete = 100.0;
+
+    }
+    if (totalPercentage == 1 && totalGuessed > 150)
+    {
+        achievement1.percentComplete = 100.0;
+        achievement2.percentComplete = 100.0;
+        achievement3.percentComplete = 100.0;
+        achievement4.percentComplete = 100.0;
+    }
+    if (totalPercentage == 1 && totalGuessed > 200)
+    {
+        achievement1.percentComplete = 100.0;
+        achievement2.percentComplete = 100.0;
+        achievement3.percentComplete = 100.0;
+        achievement4.percentComplete = 100.0;
+        achievement5.percentComplete = 100.0;
+    }
+    
+    NSArray *achievements =  @[achievement1,achievement2,achievement3,achievement4,achievement5] ;
+    
+//    [GKAchievementDescription loadAchievementDescriptionsWithCompletionHandler:^(NSArray *descriptions, NSError *error) {
+//         if (error != nil) {
+//             NSLog(@"Error %@", error);
+//             
+//         } else {
+//             if (descriptions != nil)
+//             {
+//                 for (GKAchievementDescription* a in descriptions)
+//                 {
+//                     [achievementsDescDictionary setObject: a forKey: a.identifier];
+//                 }
+//             } else
+//             {
+//                 
+//             }
+//         }
+//     }];
+    
+    [GKAchievement reportAchievements:achievements withCompletionHandler:^(NSError *error) {
+        if (error != nil)
+        {
+           // NSLog(@&quot;%@&quot;, [error localizedDescription]);
+        }
+    }];
+}
+
 -(void)reportScore:(int)score toLeaderboard:(NSString *)identifier {
     _score = score;
     _leaderboardIdentifier = identifier;
@@ -316,16 +402,10 @@
     
 }
 
--(void)saveData {
+-(void)saveData
+{
     NSUserDefaults *theDefaults = [NSUserDefaults standardUserDefaults];
-    NSMutableArray *tallPeople = [[NSMutableArray alloc]init];
-    MSContactManipulater *contactGetter = [[MSContactManipulater alloc]init];
-    tallPeople = [contactGetter getContactsWithAnImage];
     NSData *theData = [NSKeyedArchiver archivedDataWithRootObject:allPeople];
-    for (int i = 0; i<tallPeople.count; i++) {
-        NSLog(@"%@",[[tallPeople objectAtIndex:i] getFullName]);
-
-    }
     [theDefaults setObject:theData forKey:@"dataKey"];
     [theDefaults synchronize];
 }
@@ -420,7 +500,7 @@
         
         currentScore = (int)round(((1000*totalGuessed*totalGuessed*totalPercentage)/(totalSeconds)));
         [self printHighScore];
-        
+        [self updateAchievements];
         FilterView.hidden = true;
         
         totalCorrect = 0;
@@ -542,7 +622,8 @@
             totalSeconds = minutes*60 + seconds;
             currentScore = (int)round(((1000*totalGuessed*totalGuessed*totalPercentage)/totalSeconds));
             [self printHighScore];
-            
+            [self updateAchievements];
+
             FilterView.hidden = true;
             [self saveData];
             totalCorrect = 0;
@@ -830,6 +911,8 @@
             
             percentLabel.text = [NSString stringWithFormat:@"YOU GOT %d%% (%f OUT OF %f) IN %i:%i",(int)round(totalPercentage*100),totalCorrect,totalGuessed,minutes,seconds];
             [self printHighScore];
+            [self updateAchievements];
+
             [self saveData];
         }
     }
@@ -2466,7 +2549,8 @@
         
         currentScoreMCN = (int)round(((1000*totalGuessed*totalGuessed*totalPercentage)/(totalSeconds)));
         [self printHighScoreMCN];
-        
+        [self updateAchievements];
+
         FilterView.hidden = true;
         
         totalCorrect = 0;
@@ -3819,7 +3903,8 @@
         [self saveData];
         currentScoreMCF = (int)round(((1000*totalGuessed*totalGuessed*totalPercentage)/(totalSeconds)));
         [self printHighScoreMCF];
-        
+        [self updateAchievements];
+
         FilterView.hidden = true;
         
         totalCorrect = 0;
@@ -4314,6 +4399,17 @@
         [defaults setInteger:highscoreMCF forKey:khighscoreMCF];
         highscoreMCN = 0;
         [defaults setInteger:highscoreMCN forKey:khighscoreMCN];
+        
+        for(int i =0; i<allPeople.count;++i)
+        {
+            Person *pIQ;
+            pIQ = [allPeople objectAtIndex:i];
+            pIQ.numTimesCorrect=0;
+            pIQ.numTimesGuessed=0;
+        }
+        NSData *theData = [NSKeyedArchiver archivedDataWithRootObject:allPeople];
+        [defaults setObject:theData forKey:@"dataKey"];
+        
         [defaults synchronize];
     }
 }
