@@ -118,32 +118,32 @@
     achievementIdentifier = @"200_cards";
     achievement5 = [[GKAchievement alloc] initWithIdentifier:achievementIdentifier];
     
-    if (totalPercentage == 1 && totalGuessed > 10)
+    if (totalPercentage == 1 && totalGuessed >= 10)
     {
         achievement1.percentComplete = 100.0;
     }
-    if (totalPercentage == 1 && totalGuessed > 50)
+    if (totalPercentage == 1 && totalGuessed >= 50)
     {
         //[self showAchievementNotification: [GKAchievementDescription*description objectForKey:achievement2.identifier]];
         achievement1.percentComplete = 100.0;
         achievement2.percentComplete = 100.0;
 
     }
-    if (totalPercentage == 1 && totalGuessed > 100)
+    if (totalPercentage == 1 && totalGuessed >= 100)
     {
         achievement1.percentComplete = 100.0;
         achievement2.percentComplete = 100.0;
         achievement3.percentComplete = 100.0;
 
     }
-    if (totalPercentage == 1 && totalGuessed > 150)
+    if (totalPercentage == 1 && totalGuessed >= 150)
     {
         achievement1.percentComplete = 100.0;
         achievement2.percentComplete = 100.0;
         achievement3.percentComplete = 100.0;
         achievement4.percentComplete = 100.0;
     }
-    if (totalPercentage == 1 && totalGuessed > 200)
+    if (totalPercentage == 1 && totalGuessed >= 200)
     {
         achievement1.percentComplete = 100.0;
         achievement2.percentComplete = 100.0;
