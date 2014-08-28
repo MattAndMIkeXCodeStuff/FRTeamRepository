@@ -25,6 +25,7 @@
 #define kdateBool @"dateBool"
 #define kjobTitleBool @"jobTitleBool"
 #define kmissedBool @"missedBool"
+#define ktimesOpened @"timesOpened"
 
 #import <UIKit/UIKit.h>
 #import "Person.h"
@@ -79,6 +80,8 @@
     NSMutableArray* arrayOf49PercentAndUnder;
 
     IBOutlet UIView *FilterView;
+    
+    int timesOpened;
     
     //MC stands for multiple choice
     IBOutlet UIView* MCGameView;

@@ -58,6 +58,9 @@
 		4E04733A19A8EE1600A99A20 /* HCNamesIcon120X120.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E04733919A8EE1600A99A20 /* HCNamesIcon120X120.png */; };
 		4E04733C19A8EE2400A99A20 /* HCNamesIcon58X58.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E04733B19A8EE2400A99A20 /* HCNamesIcon58X58.png */; };
 		4E04733E19A8EE2F00A99A20 /* HCNamesIcon80X80.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E04733D19A8EE2F00A99A20 /* HCNamesIcon80X80.png */; };
+		4E60AD2519ABD88800A06818 /* HintButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E60AD2219ABD88800A06818 /* HintButton.png */; };
+		4E60AD2619ABD88800A06818 /* HintButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E60AD2319ABD88800A06818 /* HintButton.png */; };
+		4E60AD2719ABD88800A06818 /* HintButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E60AD2419ABD88800A06818 /* HintButton.png */; };
 		4EC04F3D195297350017AA78 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EC04F3C195297350017AA78 /* Foundation.framework */; };
 		4EC04F3F195297350017AA78 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EC04F3E195297350017AA78 /* CoreGraphics.framework */; };
 		4EC04F41195297350017AA78 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EC04F40195297350017AA78 /* UIKit.framework */; };
@@ -141,6 +144,9 @@
 		4E04733919A8EE1600A99A20 /* HCNamesIcon120X120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = HCNamesIcon120X120.png; path = "../../../Desktop/App Images/FRImages/HCNamesIcon120X120.png"; sourceTree = "<group>"; };
 		4E04733B19A8EE2400A99A20 /* HCNamesIcon58X58.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = HCNamesIcon58X58.png; path = "../../../Desktop/App Images/FRImages/HCNamesIcon58X58.png"; sourceTree = "<group>"; };
 		4E04733D19A8EE2F00A99A20 /* HCNamesIcon80X80.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = HCNamesIcon80X80.png; path = "../../../Desktop/App Images/FRImages/HCNamesIcon80X80.png"; sourceTree = "<group>"; };
+		4E60AD2219ABD88800A06818 /* HintButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = HintButton.png; path = "../../../Desktop/App Images/FRImages/HintButton.png"; sourceTree = "<group>"; };
+		4E60AD2319ABD88800A06818 /* HintButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HintButton.png; sourceTree = "<group>"; };
+		4E60AD2419ABD88800A06818 /* HintButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = HintButton.png; path = FR/HintButton.png; sourceTree = SOURCE_ROOT; };
 		4EC04F39195297350017AA78 /* FR.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FR.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4EC04F3C195297350017AA78 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		4EC04F3E195297350017AA78 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -229,6 +235,9 @@
 				4C6AF05A19A591B400378517 /* Sound Music Icon.png */,
 				4C6AF05B19A591B400378517 /* TimedFlashcard.png */,
 				4E04731119A7EF4F00A99A20 /* CheckButton.png */,
+				4E60AD2219ABD88800A06818 /* HintButton.png */,
+				4E60AD2319ABD88800A06818 /* HintButton.png */,
+				4E60AD2419ABD88800A06818 /* HintButton.png */,
 				4C6AF05C19A591B400378517 /* TimerHCContacts.png */,
 			);
 			path = FRImages;
@@ -424,6 +433,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4E60AD2519ABD88800A06818 /* HintButton.png in Resources */,
 				4E04730F19A7EF1000A99A20 /* White Bar.png in Resources */,
 				4E04733219A7F1AA00A99A20 /* HintSound.m4a in Resources */,
 				4EC04F55195297350017AA78 /* Images.xcassets in Resources */,
@@ -435,6 +445,7 @@
 				4E04732B19A7F1AA00A99A20 /* Cheers Theme.m4a in Resources */,
 				4E04732719A7F1AA00A99A20 /* 06 Can I Get To Know You Better.m4a in Resources */,
 				4EC04F47195297350017AA78 /* InfoPlist.strings in Resources */,
+				4E60AD2619ABD88800A06818 /* HintButton.png in Resources */,
 				4E04733C19A8EE2400A99A20 /* HCNamesIcon58X58.png in Resources */,
 				4C6AF06119A591B400378517 /* BackgroundImageMC.png in Resources */,
 				4C6AF05E19A591B400378517 /* BackgroundImageHCContacts.png in Resources */,
@@ -448,6 +459,7 @@
 				4E04733619A8ED7E00A99A20 /* BackgroundImageHCContactsFilterPage.png in Resources */,
 				4E04732919A7F1AA00A99A20 /* 1-28 Cheers.m4a in Resources */,
 				4C6AF06E19A591B400378517 /* My Stats.png in Resources */,
+				4E60AD2719ABD88800A06818 /* HintButton.png in Resources */,
 				4C6AF07319A591B400378517 /* SmallTD.png in Resources */,
 				4E04731219A7EF4F00A99A20 /* CheckButton.png in Resources */,
 				4C6AF06B19A591B400378517 /* LeaderBoard.png in Resources */,
