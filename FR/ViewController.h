@@ -182,7 +182,11 @@
     UIImage *frame9;
     UIImage *frame10;
     
+    NSString*viewDidLoadString;
+    
     IBOutlet UIImageView *igniteChange;
+    
+    IBOutlet UIProgressView*progressInLoading;
     
     NSMutableArray *imageArray;
 
@@ -198,6 +202,10 @@
     int numberOfHintsPressed;
     
     IBOutlet UILabel*hintLabel;
+    
+    IBOutlet UIView*stillLoadingView;
+    
+    IBOutlet UILabel*loadingLabel;
     
     IBOutlet UILabel*from;
     IBOutlet UILabel*to;
@@ -314,6 +322,11 @@
     
     IBOutlet UIScrollView*peopleStatsScrollView;
     
+    IBOutlet UIScrollView*settingsScrollView;
+    
+    IBOutlet UISlider*typeOfGameSlider;
+    NSString *typeOfGameString;
+    
     IBOutlet UIImageView*columnSpacer1;
     IBOutlet UIImageView*columnSpacer2;
     IBOutlet UIImageView*columnSpacer3;
@@ -324,6 +337,9 @@
     IBOutlet UILabel*percent1;
     IBOutlet UILabel*myTitle;
     IBOutlet UIImageView*mySeparater1;
+    
+    NSMutableArray*buttonsOnStatsView;
+    NSMutableArray*peopleOnStatsView;
 }
 //more info multiple choice faces
 -(IBAction)moreInfoMC:(id)sender;
@@ -335,6 +351,8 @@
 -(void)checkIfCorrectMCF:(Person*)pIQ;
 -(IBAction)nextMCF;
 -(IBAction)hintMCF;
+
+-(IBAction)sliderValueChanged;
 
 -(void)generateNewPeopleMCN;
 -(IBAction)nextMCN;
@@ -406,6 +424,8 @@
 -(void)printHighScore;
 -(void)printHighScoreMCF;
 -(void)printHighScoreMCN;
+
+-(void)showLoadingUI:(int)percentDone :(int)i :(int)total;
 
 -(void)countUpDuration;
 

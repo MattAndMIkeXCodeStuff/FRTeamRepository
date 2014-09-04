@@ -9,8 +9,18 @@
 #import "MSContactManipulater.h"
 
 @implementation MSContactManipulater
-
-
+{
+    
+}
+-(int)numberOfContacts
+{
+    _addressBook = ABAddressBookCreateWithOptions(NULL, NULL);
+    
+    NSMutableArray *people = (__bridge NSMutableArray *)ABAddressBookCopyArrayOfAllPeople(_addressBook);
+    int l;
+//    l = (__bridge int)abaddressbook
+    return people.count;
+}
 -(NSMutableArray *)getContactsWithAnImage {
     ABAddressBookRef addressBook2  = ABAddressBookCreateWithOptions(NULL, NULL);
     //NSLog(@"image");

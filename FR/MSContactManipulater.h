@@ -10,9 +10,12 @@
 #import <AddressBook/AddressBook.h>
 #import <AddressBookUI/AddressBookUI.h>
 #import "Person.h"
-@interface MSContactManipulater : NSObject {
-ABAddressBookRef addressBook;
+extern int numberGoneThrough;
+@interface MSContactManipulater : NSObject
+{
+//    ABAddressBookRef addressBook;
 }
+@property(nonatomic)ABAddressBookRef addressBook;
 
 -(NSMutableArray *)getContactsWithAnImage;
 -(NSMutableArray *)getContactsWithJobTitle:(NSString*)jobTitle;
@@ -25,4 +28,5 @@ ABAddressBookRef addressBook;
 
 -(bool)checkForString:(NSString*)str inArray:(NSMutableArray*)arr;
 
+-(int)numberOfContacts;
 @end
