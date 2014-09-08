@@ -2415,6 +2415,9 @@
             iTIMCN4.image = [UIImage imageNamed:@"SmallTD.png"];
         }
     }
+}
+-(IBAction)nextMCN
+{
     if(arrayOf49PercentAndUnder.count ==0)
     {
         iBMCN1.hidden = true;
@@ -2455,7 +2458,7 @@
         currentScoreMCN = (int)round(((1000*totalGuessed*totalGuessed*totalPercentage)/(totalSeconds)));
         [self printHighScoreMCN];
         [self updateAchievements];
-
+        
         FilterView.hidden = true;
         
         totalCorrect = 0;
@@ -2468,28 +2471,27 @@
             p.hasBeenGuessedRight = false;
         }
     }
-}
--(IBAction)nextMCN
-{
-    [self playSoundNamed:@"ClickSound" andType:@"m4a" andFX:true];
-    numberOfHintsPressed = 0;
-    hintLabel.text = [NSString stringWithFormat:@"H:%i", 2-numberOfHintsPressed];
-
-    iBMCN1.hidden = true;
-    iBMCN2.hidden = true;
-    iBMCN3.hidden = true;
-    iBMCN4.hidden = true;
-    
-    iTIMCN1.hidden = true;
-    iTIMCN2.hidden = true;
-    iTIMCN3.hidden = true;
-    iTIMCN4.hidden = true;
-    nextMCN.hidden = true;
-
-    [self generateNewPeopleMCN];
-    currentPerson.hasBeenGuessed = false;
-    numOfContactsLeftLabel.text = [NSString stringWithFormat:@"%i",arrayOf49PercentAndUnder.count];
-
+    else
+    {
+        [self playSoundNamed:@"ClickSound" andType:@"m4a" andFX:true];
+        numberOfHintsPressed = 0;
+        hintLabel.text = [NSString stringWithFormat:@"H:%i", 2-numberOfHintsPressed];
+        
+        iBMCN1.hidden = true;
+        iBMCN2.hidden = true;
+        iBMCN3.hidden = true;
+        iBMCN4.hidden = true;
+        
+        iTIMCN1.hidden = true;
+        iTIMCN2.hidden = true;
+        iTIMCN3.hidden = true;
+        iTIMCN4.hidden = true;
+        nextMCN.hidden = true;
+        
+        [self generateNewPeopleMCN];
+        currentPerson.hasBeenGuessed = false;
+        numOfContactsLeftLabel.text = [NSString stringWithFormat:@"%i",arrayOf49PercentAndUnder.count];
+    }
 }
 -(IBAction)showFilterView:(id)sender
 {
@@ -3522,65 +3524,105 @@
             pMCF1 = [arrayOf50PercentAndOver objectAtIndex:x];
             
             do {
-                x = (rand()%arrayOf50PercentAndOver.count);
-                
-                pMCF2 = [arrayOf50PercentAndOver objectAtIndex:x];
-                
+                if(arrayOf50PercentAndOver.count > 1)
+                {
+                    x = (rand()%arrayOf50PercentAndOver.count);
+                    pMCF2 = [arrayOf50PercentAndOver objectAtIndex:x];
+                }
+                else
+                {
+                    x = (rand()%arrayOf49PercentAndUnder.count);
+                    pMCF2 = [arrayOf49PercentAndUnder objectAtIndex:x];
+                }
             }while (pMCF2 == pMCF1);
             
             
             do
             {
-                x = (rand()%arrayOf50PercentAndOver.count);
-                
-                pMCF3 = [arrayOf50PercentAndOver objectAtIndex:x];
-                
+                if(arrayOf50PercentAndOver.count > 2)
+                {
+                    x = (rand()%arrayOf50PercentAndOver.count);
+                    pMCF3 = [arrayOf50PercentAndOver objectAtIndex:x];
+                }
+                else
+                {
+                    x = (rand()%arrayOf49PercentAndUnder.count);
+                    pMCF3 = [arrayOf49PercentAndUnder objectAtIndex:x];
+                }
             }while (pMCF3 == pMCF1 || pMCF2 == pMCF3);
             
             do
             {
-                x = (rand()%arrayOf50PercentAndOver.count);
-                
-                pMCF4 = [arrayOf50PercentAndOver objectAtIndex:x];
-                
+                if(arrayOf50PercentAndOver.count > 3)
+                {
+                    x = (rand()%arrayOf50PercentAndOver.count);
+                    pMCF4 = [arrayOf50PercentAndOver objectAtIndex:x];
+                }
+                else
+                {
+                    x = (rand()%arrayOf49PercentAndUnder.count);
+                    pMCF4 = [arrayOf49PercentAndUnder objectAtIndex:x];
+                }
             }while (pMCF4 == pMCF1 || pMCF4 == pMCF2 || pMCF4 == pMCF3);
             
-            iMCF1.image = pMCF1.selfImage;
-            iMCF2.image = pMCF2.selfImage;
-            iMCF3.image = pMCF3.selfImage;
-            iMCF4.image = pMCF4.selfImage;
-            
-            n1.text = @"";
-            n2.text = @"";
-            n3.text = @"";
-            n4.text = @"";
-            
-            
+            if(pMCF4.selfImage == pMCF1.selfImage || pMCF4.selfImage == pMCF2.selfImage || pMCF4.selfImage == pMCF3.selfImage ||  pMCF3.selfImage == pMCF1.selfImage || pMCF2.selfImage == pMCF3.selfImage || pMCF2.selfImage == pMCF1.selfImage)
+            {
+                NSLog(@"the method did not work");
+            }
             //If you only have 3 people left
-            
-            x = (rand()%4);
-            int rn3;
-            rn3 = rand()%arrayOf49PercentAndUnder.count;
-            if(x == 3)
+            do
             {
-                pMCF4 = [arrayOf49PercentAndUnder objectAtIndex:rn3];
-                correctPersonMCF = pMCF4;
-            }
-            if(x == 2)
-            {
-                pMCF3 = [arrayOf49PercentAndUnder objectAtIndex:rn3];
-                correctPersonMCF = pMCF3;
-            }
-            if(x == 1)
-            {
-                pMCF2 = [arrayOf49PercentAndUnder objectAtIndex:rn3];
-                correctPersonMCF = pMCF2;
-            }
-            if(x == 0)
-            {
-                pMCF1 = [arrayOf49PercentAndUnder objectAtIndex:rn3];
-                correctPersonMCF = pMCF1;
-            }
+                int rn3;
+                rn3 = rand()%4;
+                if(arrayOf49PercentAndUnder.count + arrayOf50PercentAndOver.count < 5)
+                {
+                    // THEY ONLY have four people
+                    if (rn3==0)
+                    {
+                        correctPersonMCF = pMCF1;
+                    }
+                    else if (rn3==1)
+                    {
+                        correctPersonMCF = pMCF2;
+                    }
+                    else if (rn3==2)
+                    {
+                        correctPersonMCF = pMCF3;
+                        
+                    }
+                    else if (rn3==3)
+                    {
+                        correctPersonMCF = pMCF4;
+                    }
+                }
+                else
+                {
+                    if (rn3==0)
+                    {
+                        rn3 = rand()%arrayOf49PercentAndUnder.count;
+                        pMCF1 = [arrayOf49PercentAndUnder objectAtIndex:rn3];
+                        correctPersonMCF = pMCF1;
+                    }
+                    else if (rn3==1)
+                    {
+                        rn3 = rand()%arrayOf49PercentAndUnder.count;
+                        pMCF2 = [arrayOf49PercentAndUnder objectAtIndex:rn3];
+                        correctPersonMCF = pMCF2;
+                    }
+                    else if (rn3==2)
+                    {
+                        rn3 = rand()%arrayOf49PercentAndUnder.count;
+                        pMCF3 = [arrayOf49PercentAndUnder objectAtIndex:rn3];
+                        correctPersonMCF = pMCF3;
+                    }
+                    else if (rn3==3)
+                    {
+                        rn3 = rand()%arrayOf49PercentAndUnder.count;
+                        pMCF4 = [arrayOf49PercentAndUnder objectAtIndex:rn3];
+                        correctPersonMCF = pMCF4;
+                    }
+                }
+            }while ([self object:correctPersonMCF isInArray:arrayOf49PercentAndUnder]==false);
             iMCF1.image = pMCF1.selfImage;
             iMCF2.image = pMCF2.selfImage;
             iMCF3.image = pMCF3.selfImage;
@@ -3596,6 +3638,25 @@
 
         
     }
+}
+-(bool)object: (id)object isInArray: (NSMutableArray*)array
+{
+//    @try
+//    {
+        Person*pIQ = object;
+        for (int i = 0; i<arrayOf49PercentAndUnder.count; ++i)
+        {
+            if (pIQ == [arrayOf49PercentAndUnder objectAtIndex:i]) {
+                return true;
+            }
+        }
+//    }
+//    @catch(int x = 9)
+//    {
+//        return false;
+//    }
+    return false;
+    
 }
 -(IBAction)moreInfoMC:(id)sender
 {
@@ -3779,8 +3840,6 @@
 
 -(void)generateNewPeopleMCN
 {
-    
-    
     if(timeOnThisCard > mostTimeIntMCN)
     {
         mostTimeIntMCN = timeOnThisCard;
@@ -3792,49 +3851,43 @@
     timeOnThisCard = 0;
     int rn;
     
-
-
-    //mcButton1.backgroundColor = [UIColor lightGrayColor];
-    //mcButton2.backgroundColor = [UIColor lightGrayColor];
-    //mcButton3.backgroundColor = [UIColor lightGrayColor];
-    //mcButton4.backgroundColor = [UIColor lightGrayColor];
-    //
-    if(arrayOf49PercentAndUnder.count >3) {
-    mcPersonPicture.image = correctMCPerson.selfImage;
-    
-    rn = rand()%arrayOf49PercentAndUnder.count;
-    pMCN1 = [arrayOf49PercentAndUnder objectAtIndex:rn];
-    do
+    if(arrayOf49PercentAndUnder.count >3)
     {
-        rn = rand()%arrayOf49PercentAndUnder.count;
-        pMCN2 = [arrayOf49PercentAndUnder objectAtIndex:rn];
-    }while (pMCN1 == pMCN2);
-    do
-    {
-        rn = rand()%arrayOf49PercentAndUnder.count;
-        pMCN3 = [arrayOf49PercentAndUnder objectAtIndex:rn];
-    }while (pMCN1 == pMCN3 || pMCN3 == pMCN2);
-    do
-    {
-        rn = rand()%arrayOf49PercentAndUnder.count;
-        pMCN4 = [arrayOf49PercentAndUnder objectAtIndex:rn];
-    }while (pMCN4 == pMCN3 || pMCN4 == pMCN2|| pMCN4 == pMCN1);
-    
+        mcPersonPicture.image = correctMCPerson.selfImage;
         
-    NSString *nameString = [[NSString alloc]init];
-    if([typeOfGameString isEqual:@"Full Name"])
-    {
-        nameString =[pMCN1 getFullName];
-    }
-    if([typeOfGameString isEqual:@"Last Name"])
-    {
-        nameString = [pMCN1 lastName];
-    }
-    if([typeOfGameString isEqual:@"First Name"])
-    {
-        nameString = [pMCN1 firstName];
-    }
-    [mcButton1 setTitle:nameString forState:UIControlStateNormal];
+        rn = rand()%arrayOf49PercentAndUnder.count;
+        pMCN1 = [arrayOf49PercentAndUnder objectAtIndex:rn];
+        do
+        {
+            rn = rand()%arrayOf49PercentAndUnder.count;
+            pMCN2 = [arrayOf49PercentAndUnder objectAtIndex:rn];
+        }while (pMCN1 == pMCN2);
+        do
+        {
+            rn = rand()%arrayOf49PercentAndUnder.count;
+            pMCN3 = [arrayOf49PercentAndUnder objectAtIndex:rn];
+        }while (pMCN1 == pMCN3 || pMCN3 == pMCN2);
+        do
+        {
+            rn = rand()%arrayOf49PercentAndUnder.count;
+            pMCN4 = [arrayOf49PercentAndUnder objectAtIndex:rn];
+        }while (pMCN4 == pMCN3 || pMCN4 == pMCN2|| pMCN4 == pMCN1);
+        
+        
+        NSString *nameString = [[NSString alloc]init];
+        if([typeOfGameString isEqual:@"Full Name"])
+        {
+            nameString =[pMCN1 getFullName];
+        }
+        if([typeOfGameString isEqual:@"Last Name"])
+        {
+            nameString = [pMCN1 lastName];
+        }
+        if([typeOfGameString isEqual:@"First Name"])
+        {
+            nameString = [pMCN1 firstName];
+        }
+        [mcButton1 setTitle:nameString forState:UIControlStateNormal];
         if([typeOfGameString isEqual:@"Full Name"])
         {
             nameString =[pMCN2 getFullName];
@@ -3847,7 +3900,7 @@
         {
             nameString = [pMCN2 firstName];
         }
-    [mcButton2 setTitle:nameString forState:UIControlStateNormal];
+        [mcButton2 setTitle:nameString forState:UIControlStateNormal];
         if([typeOfGameString isEqual:@"Full Name"])
         {
             nameString =[pMCN3 getFullName];
@@ -3860,7 +3913,7 @@
         {
             nameString = [pMCN3 firstName];
         }
-    [mcButton3 setTitle:nameString forState:UIControlStateNormal];
+        [mcButton3 setTitle:nameString forState:UIControlStateNormal];
         if([typeOfGameString isEqual:@"Full Name"])
         {
             nameString = [pMCN4 getFullName];
@@ -3873,94 +3926,140 @@
         {
             nameString = [pMCN4 firstName];
         }
-    [mcButton4 setTitle:nameString forState:UIControlStateNormal];
-
-    
-    rn = rand()%4;
-    if (rn==0)
-    {
-        correctMCPerson = pMCN1;
+        [mcButton4 setTitle:nameString forState:UIControlStateNormal];
         
-    }
-    else if (rn==1)
-    {
-        correctMCPerson = pMCN2;
         
-    }
-    else if (rn==2)
+        rn = rand()%4;
+        if (rn==0)
+        {
+            correctMCPerson = pMCN1;
+            
+        }
+        else if (rn==1)
+        {
+            correctMCPerson = pMCN2;
+            
+        }
+        else if (rn==2)
+        {
+            correctMCPerson = pMCN3;
+        }
+        else if (rn==3)
+        {
+            correctMCPerson = pMCN4;
+        }
+        
+        mcPersonPicture.image = correctMCPerson.selfImage;
+        currentPerson = correctMCPerson;
+    } else
     {
-        correctMCPerson = pMCN3;
-    }
-    else if (rn==3)
-    {
-        correctMCPerson = pMCN4;
-    }
-
-    mcPersonPicture.image = correctMCPerson.selfImage;
-    currentPerson = correctMCPerson;
-    } else {
         //If their is less than 4 people you havent guessed
         rn = rand()%arrayOf50PercentAndOver.count;
         pMCN1 = [arrayOf50PercentAndOver objectAtIndex:rn];
+        
         do
         {
-            rn = rand()%arrayOf50PercentAndOver.count;
-            pMCN2 = [arrayOf50PercentAndOver objectAtIndex:rn];
+            if(arrayOf50PercentAndOver.count > 1)
+            {
+                rn = (rand()%arrayOf50PercentAndOver.count);
+                pMCN2 = [arrayOf50PercentAndOver objectAtIndex:rn];
+            }
+            else
+            {
+                rn = (rand()%arrayOf49PercentAndUnder.count);
+                pMCN2 = [arrayOf49PercentAndUnder objectAtIndex:rn];
+            }
         }while (pMCN1 == pMCN2);
         do
         {
-            rn = rand()%arrayOf50PercentAndOver.count;
-            pMCN3 = [arrayOf50PercentAndOver objectAtIndex:rn];
+            if(arrayOf50PercentAndOver.count > 2)
+            {
+                rn = (rand()%arrayOf50PercentAndOver.count);
+                pMCN3 = [arrayOf50PercentAndOver objectAtIndex:rn];
+            }
+            else
+            {
+                rn = (rand()%arrayOf49PercentAndUnder.count);
+                pMCN3 = [arrayOf49PercentAndUnder objectAtIndex:rn];
+            }
         }while (pMCN1 == pMCN3 || pMCN3 == pMCN2);
         do
         {
-            rn = rand()%arrayOf50PercentAndOver.count;
-            pMCN4 = [arrayOf50PercentAndOver objectAtIndex:rn];
+            if(arrayOf50PercentAndOver.count > 3)
+            {
+                rn = (rand()%arrayOf50PercentAndOver.count);
+                pMCN4 = [arrayOf50PercentAndOver objectAtIndex:rn];
+            }
+            else
+            {
+                rn = (rand()%arrayOf49PercentAndUnder.count);
+                pMCN4 = [arrayOf49PercentAndUnder objectAtIndex:rn];
+            }
         }while (pMCN4 == pMCN3 || pMCN4 == pMCN2|| pMCN4 == pMCN1);
+
+        
+        
+        do
+        {
+            rn = rand()%4;
+            if(arrayOf49PercentAndUnder.count + arrayOf50PercentAndOver.count < 5)
+            {
+                // THEY ONLY have four people
+                if (rn==0)
+                {
+                    correctMCPerson = pMCN1;
+                }
+                else if (rn==1)
+                {
+                    correctMCPerson = pMCN2;
+                }
+                else if (rn==2)
+                {
+                    correctMCPerson = pMCN3;
+                    
+                }
+                else if (rn==3)
+                {
+                    correctMCPerson = pMCN4;
+                }
+            }
+            else
+            {
+                if (rn==0)
+                {
+                    rn = rand()%arrayOf49PercentAndUnder.count;
+                    pMCN1 = [arrayOf49PercentAndUnder objectAtIndex:rn];
+                    correctMCPerson = pMCN1;
+                }
+                else if (rn==1)
+                {
+                    rn = rand()%arrayOf49PercentAndUnder.count;
+                    pMCN2 = [arrayOf49PercentAndUnder objectAtIndex:rn];
+                    correctMCPerson = pMCN2;
+                }
+                else if (rn==2)
+                {
+                    rn = rand()%arrayOf49PercentAndUnder.count;
+                    pMCN3 = [arrayOf49PercentAndUnder objectAtIndex:rn];
+                    correctMCPerson = pMCN3;
+                }
+                else if (rn==3)
+                {
+                    rn = rand()%arrayOf49PercentAndUnder.count;
+                    pMCN4 = [arrayOf49PercentAndUnder objectAtIndex:rn];
+                    correctMCPerson = pMCN4;
+                }
+            }
+            
+        }while ([self object:correctMCPerson isInArray:arrayOf49PercentAndUnder]==false);
         
         [mcButton1 setTitle:[NSString stringWithFormat:@"%@",[pMCN1 getFullName]] forState:UIControlStateNormal];
         [mcButton2 setTitle:[NSString stringWithFormat:@"%@",[pMCN2 getFullName]] forState:UIControlStateNormal];
         [mcButton3 setTitle:[NSString stringWithFormat:@"%@",[pMCN3 getFullName]] forState:UIControlStateNormal];
         [mcButton4 setTitle:[NSString stringWithFormat:@"%@",[pMCN4 getFullName]] forState:UIControlStateNormal];
         
-        rn = rand()%4;
-        int rn2;
-        rn2 = rand()%arrayOf49PercentAndUnder.count;
         
-        if (rn==0)
-        {
-            pMCN1 = [arrayOf49PercentAndUnder objectAtIndex:rn2];
-            correctMCPerson = pMCN1;
-            [mcButton1 setTitle:[NSString stringWithFormat:@"%@",[pMCN1 getFullName]] forState:UIControlStateNormal];
-            
-            
-        }
-        else if (rn==1)
-        {
-            pMCN2 = [arrayOf49PercentAndUnder objectAtIndex:rn2];
-            
-            correctMCPerson = pMCN2;
-            [mcButton2 setTitle:[NSString stringWithFormat:@"%@",[pMCN2 getFullName]] forState:UIControlStateNormal];
-            
-            
-        }
-        else if (rn==2)
-        {
-            pMCN3 = [arrayOf49PercentAndUnder objectAtIndex:rn2];
-            
-            correctMCPerson = pMCN3;
-            [mcButton3 setTitle:[NSString stringWithFormat:@"%@",[pMCN3 getFullName]] forState:UIControlStateNormal];
-            
-        }
-        else if (rn==3)
-        {
-            pMCN4 = [arrayOf49PercentAndUnder objectAtIndex:rn2];
-            
-            correctMCPerson = pMCN4;
-            [mcButton4 setTitle:[NSString stringWithFormat:@"%@",[pMCN4 getFullName]] forState:UIControlStateNormal];
-            
-        }
-        mcPersonPicture.image = correctMCPerson.selfImage;
+                mcPersonPicture.image = correctMCPerson.selfImage;
         currentPerson = correctMCPerson;
         
         

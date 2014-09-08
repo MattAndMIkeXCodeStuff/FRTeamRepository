@@ -355,6 +355,9 @@
 -(IBAction)sliderValueChanged;
 
 -(void)generateNewPeopleMCN;
+
+-(bool)object: (id)object isInArray: (NSMutableArray*)array;
+
 -(IBAction)nextMCN;
 -(IBAction)hintMCN;
 
