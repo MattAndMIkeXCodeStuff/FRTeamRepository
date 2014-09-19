@@ -58,7 +58,8 @@
 		4E04733C19A8EE2400A99A20 /* HCNamesIcon58X58.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E04733B19A8EE2400A99A20 /* HCNamesIcon58X58.png */; };
 		4E04733E19A8EE2F00A99A20 /* HCNamesIcon80X80.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E04733D19A8EE2F00A99A20 /* HCNamesIcon80X80.png */; };
 		4E14F70E19B6931400559B1B /* healthCatalystIgniteChange.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E14F70D19B6931400559B1B /* healthCatalystIgniteChange.png */; };
-		4E14F71219B9047D00559B1B /* Settings.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E14F71119B9047D00559B1B /* Settings.png */; };
+		4E14F75819BE413D00559B1B /* Settings.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E14F75719BE413D00559B1B /* Settings.png */; };
+		4E14F75A19BE429500559B1B /* Settings.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E14F75919BE429500559B1B /* Settings.png */; };
 		4E60AD2519ABD88800A06818 /* HintButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E60AD2219ABD88800A06818 /* HintButton.png */; };
 		4E60AD2619ABD88800A06818 /* HintButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E60AD2319ABD88800A06818 /* HintButton.png */; };
 		4E60AD2719ABD88800A06818 /* HintButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E60AD2419ABD88800A06818 /* HintButton.png */; };
@@ -145,7 +146,8 @@
 		4E04733B19A8EE2400A99A20 /* HCNamesIcon58X58.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = HCNamesIcon58X58.png; path = "../../../Desktop/App Images/FRImages/HCNamesIcon58X58.png"; sourceTree = "<group>"; };
 		4E04733D19A8EE2F00A99A20 /* HCNamesIcon80X80.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = HCNamesIcon80X80.png; path = "../../../Desktop/App Images/FRImages/HCNamesIcon80X80.png"; sourceTree = "<group>"; };
 		4E14F70D19B6931400559B1B /* healthCatalystIgniteChange.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = healthCatalystIgniteChange.png; path = "../../../Desktop/App Images/healthCatalystIgniteChange.png"; sourceTree = "<group>"; };
-		4E14F71119B9047D00559B1B /* Settings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Settings.png; path = "../../../Desktop/App Images/FRImages/Settings.png"; sourceTree = "<group>"; };
+		4E14F75719BE413D00559B1B /* Settings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Settings.png; path = "../../../Desktop/App Images/FRImages/Settings.png"; sourceTree = "<group>"; };
+		4E14F75919BE429500559B1B /* Settings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Settings.png; path = "../../../Desktop/App Images/FRImages/Settings.png"; sourceTree = "<group>"; };
 		4E60AD2219ABD88800A06818 /* HintButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = HintButton.png; path = "../../../Desktop/App Images/FRImages/HintButton.png"; sourceTree = "<group>"; };
 		4E60AD2319ABD88800A06818 /* HintButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HintButton.png; sourceTree = "<group>"; };
 		4E60AD2419ABD88800A06818 /* HintButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = HintButton.png; path = FR/HintButton.png; sourceTree = SOURCE_ROOT; };
@@ -229,8 +231,9 @@
 				4C6AF05219A591B400378517 /* My Stats.png */,
 				4C6AF05319A591B400378517 /* NextButton.png */,
 				4C6AF05419A591B400378517 /* PersonHCContacts.png */,
+				4E14F75719BE413D00559B1B /* Settings.png */,
 				4C6AF05519A591B400378517 /* separater.png */,
-				4E14F71119B9047D00559B1B /* Settings.png */,
+				4E14F75919BE429500559B1B /* Settings.png */,
 				4C6AF05719A591B400378517 /* SmallTD.png */,
 				4C6AF05819A591B400378517 /* SmallTU.png */,
 				4C6AF05919A591B400378517 /* Sound FX Icon.png */,
@@ -441,7 +444,7 @@
 				4E14F70E19B6931400559B1B /* healthCatalystIgniteChange.png in Resources */,
 				4E04733219A7F1AA00A99A20 /* HintSound.m4a in Resources */,
 				4EC04F55195297350017AA78 /* Images.xcassets in Resources */,
-				4E14F71219B9047D00559B1B /* Settings.png in Resources */,
+				4E14F75819BE413D00559B1B /* Settings.png in Resources */,
 				4E04732819A7F1AA00A99A20 /* 06 Like To Get To Know You Well.m4a in Resources */,
 				4C6AF06319A591B400378517 /* GotRightTU.png in Resources */,
 				4C6AF06F19A591B400378517 /* NextButton.png in Resources */,
@@ -472,6 +475,7 @@
 				4E04732D19A7F1AA00A99A20 /* DingSound.m4a in Resources */,
 				4E04733719A8ED7E00A99A20 /* BackgroundImageHCContactsFilterPage.png in Resources */,
 				4E04732F19A7F1AA00A99A20 /* DingSound.m4a in Resources */,
+				4E14F75A19BE429500559B1B /* Settings.png in Resources */,
 				4C6AF06019A591B400378517 /* BackgroundImageHCCountactsMoreInfoPage.png in Resources */,
 				4E04733819A8ED7E00A99A20 /* BackgroundImageHCContactsFilterPage.png in Resources */,
 				4C6AF06519A591B400378517 /* GuessButton.png in Resources */,
@@ -660,7 +664,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "FR/FR-Prefix.pch";
 				INFOPLIST_FILE = "FR/FR-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos7.1;
@@ -690,7 +694,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "FR/FR-Prefix.pch";
 				INFOPLIST_FILE = "FR/FR-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos7.1;

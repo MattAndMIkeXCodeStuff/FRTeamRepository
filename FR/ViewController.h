@@ -83,6 +83,8 @@
     
     int timesOpened;
     
+    int numInARow;
+    
     //MC stands for multiple choice
     IBOutlet UIView* MCGameView;
     //MCT stands for multiple choice timed
@@ -343,6 +345,8 @@
 }
 //more info multiple choice faces
 -(IBAction)moreInfoMC:(id)sender;
+
+-(void)respondToNumInARow;
 
 -(void)showMoreInfo:(Person*)pIQ;
 -(IBAction)personGuessedMCF:(id)sender;

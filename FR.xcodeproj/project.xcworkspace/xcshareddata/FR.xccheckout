@@ -12,22 +12,34 @@
 	<dict>
 		<key>36015337-1F49-48D2-B3BD-CA91E14E1801</key>
 		<string>https://github.com/MattAndMIkeXCodeStuff/FRTeamRepository.git</string>
+		<key>AACE3BA47ED50D8A6B6A3C59EB112126A51198BB</key>
+		<string>https://github.com/MattAndMIkeXCodeStuff/FRTeamRepository</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>FR.xcodeproj/project.xcworkspace</string>
+	<string>FR.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>36015337-1F49-48D2-B3BD-CA91E14E1801</key>
+		<string>../../../NewTeamRepo</string>
+		<key>AACE3BA47ED50D8A6B6A3C59EB112126A51198BB</key>
 		<string>../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>https://github.com/MattAndMIkeXCodeStuff/FRTeamRepository.git</string>
+	<string>https://github.com/MattAndMIkeXCodeStuff/FRTeamRepository</string>
 	<key>IDESourceControlProjectVersion</key>
-	<integer>110</integer>
+	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>36015337-1F49-48D2-B3BD-CA91E14E1801</string>
+	<string>AACE3BA47ED50D8A6B6A3C59EB112126A51198BB</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>AACE3BA47ED50D8A6B6A3C59EB112126A51198BB</string>
+			<key>IDESourceControlWCCName</key>
+			<string>Matt'sBranch</string>
+		</dict>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>

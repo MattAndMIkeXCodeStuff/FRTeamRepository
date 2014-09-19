@@ -51,7 +51,7 @@
 }
 -(void)authenticateLocalPlayer{
     GKLocalPlayer *localPlayer = [GKLocalPlayer localPlayer];
-    
+
     localPlayer.authenticateHandler = ^(UIViewController *viewController, NSError *error){
         if (viewController != nil) {
             [self presentViewController:viewController animated:YES completion:nil];
@@ -74,6 +74,7 @@
             
             else{
                 _gameCenterEnabled = NO;
+                NSLog(@"%@", [error localizedDescription]);
             }
         }
     };
@@ -452,7 +453,38 @@
     hintButton.hidden = true;
 
 }
+-(void)respondToNumInARow
+{
+    if(numInARow == 25)
+    {
+        //play some cool animation
+        seconds-=5;
+    }
+    if(seconds < 0)
+    {
+        seconds = 60 + seconds;
+        minutes--;
+    }
+    else if(seconds <= 9)
+    {
+        timerLable.text = [NSString stringWithFormat:@"%i:0%i", minutes,seconds];
+    }
+    else
+    {
+        timerLable.text = [NSString stringWithFormat:@"%i:%i", minutes,seconds];
+    }
+    if(seconds == 60)
+    {
+        seconds = 0;
+        //timerLableSeconds.text = [NSString stringWithFormat:@"0%i", countUpValue];
+        
+        minutes +=1;
+        timerLable.text = [NSString stringWithFormat:@"%i:0%i", minutes,seconds];
+    }
+
+}
 -(IBAction)gotRight:(id)sender {
+    numInARow++;
     [self playSoundNamed:@"DingSound" andType:@"m4a" andFX:true];
     if(timeOnThisCard > mostTimeIntF)
     {
@@ -491,7 +523,7 @@
     {
         //[self animateView:FTGameView fromDirection:@"L" forThis:2];
         gameOverView.hidden = false;
-
+        numInARow =0;
         guessButton.hidden = true;
         nameView.hidden = true;
         infoButton.hidden = true;
@@ -517,7 +549,7 @@
         [self saveData];
 
         
-        currentScore = (int)round(((1000*totalGuessed*totalGuessed*totalPercentage)/(totalSeconds)));
+        currentScore = (int)round(((1000*totalGuessed*totalGuessed*totalPercentage)/(totalSeconds*totalSeconds)));
         [self printHighScore];
         [self updateAchievements];
         FilterView.hidden = true;
@@ -547,6 +579,7 @@
     {
         //[self animateView:FTGameView fromDirection:@"L" forThis:2];
         gameOverView.hidden = false;
+        numInARow =0;
 
         guessButton.hidden = true;
         nameView.hidden = true;
@@ -572,10 +605,11 @@
         }
     }
     numOfContactsLeftLabel.text = [NSString stringWithFormat:@"%i",arrayOf49PercentAndUnder.count];
-
+    [self respondToNumInARow];
 }
--(IBAction)gotWrong:(id)sender {
 
+-(IBAction)gotWrong:(id)sender {
+    numInARow = 0;
     if(timeOnThisCard > mostTimeIntF)
     {
         mostTimeIntF = timeOnThisCard;
@@ -614,6 +648,7 @@
            // [self animateView:FTGameView fromDirection:@"L" forThis:2];
             gameOverView.hidden = false;
             timerView.hidden=false;
+            numInARow =0;
 
             guessButton.hidden = true;
             nameView.hidden = true;
@@ -636,7 +671,7 @@
             }
             [self saveData];
             totalSeconds = minutes*60 + seconds;
-            currentScore = (int)round(((1000*totalGuessed*totalGuessed*totalPercentage)/totalSeconds));
+            currentScore = (int)round(((1000*totalGuessed*totalGuessed*totalPercentage)/(totalSeconds*totalSeconds)));
             [self printHighScore];
             [self updateAchievements];
 
@@ -669,7 +704,8 @@
         {
             gameOverView.hidden = false;
             timerView.hidden=false;
-            
+            numInARow =0;
+
             guessButton.hidden = true;
             nameView.hidden = true;
             infoButton.hidden = true;
@@ -937,6 +973,7 @@
             
             gameOverView.hidden = false;
             timerView.hidden=false;
+            numInARow =0;
 
             totalPercentage = (totalCorrect/totalGuessed);
 
@@ -1936,7 +1973,7 @@
             {
                 timerLable.text = [NSString stringWithFormat:@"%i:%i", minutes,seconds];
             }
-            if(seconds == 59)
+            if(seconds == 60)
             {
                 seconds = 0;
                 //timerLableSeconds.text = [NSString stringWithFormat:@"0%i", countUpValue];
@@ -2137,7 +2174,8 @@
     nameView.hidden = true;
 
     FilterView.hidden = false;
-    
+    numInARow =0;
+
     deptTitleField.hidden = true;
     jobTitleField.hidden = true;
     mcButton1.titleLabel.text = @"";
@@ -2238,6 +2276,7 @@
         {
             [self playSoundNamed:@"DingSound" andType:@"m4a" andFX:true];
             [currentPerson gotRight];
+            numInARow++;
             totalCorrect++;
             correctMCPerson.hasBeenGuessedRight = true;
             correctMCPerson.hasBeenGuessed = true;
@@ -2308,6 +2347,7 @@
                 iTIMCN4.image = [UIImage imageNamed:@"SmallTD.png"];
             }
             [correctMCPerson gotWrong];
+            numInARow = 0;
             correctMCPerson.hasBeenGuessed = true;
             [self playSoundNamed:@"DongSound" andType:@"m4a" andFX:true];
         }
@@ -2342,6 +2382,7 @@
                 iTIMCN4.image = [UIImage imageNamed:@"SmallTU.png"];
             }
             [correctMCPerson gotRight];
+            numInARow++;
             [self playSoundNamed:@"DingSound" andType:@"m4a" andFX:true];
             totalCorrect++;
             correctMCPerson.hasBeenGuessedRight = true;
@@ -2370,6 +2411,7 @@
                 iTIMCN4.image = [UIImage imageNamed:@"SmallTD.png"];
             }
             [correctMCPerson gotWrong];
+            numInARow = 0;
             correctMCPerson.hasBeenGuessed=true;
             [self playSoundNamed:@"DongSound" andType:@"m4a" andFX:true];
         }
@@ -2415,6 +2457,7 @@
             iTIMCN4.image = [UIImage imageNamed:@"SmallTD.png"];
         }
     }
+    [self respondToNumInARow];
 }
 -(IBAction)nextMCN
 {
@@ -2430,7 +2473,8 @@
         iTIMCN3.hidden = true;
         iTIMCN4.hidden = true;
         nextMCN.hidden = true;
-        
+        numInARow =0;
+
         gameOverView.hidden = false;
         guessButton.hidden = true;
         nameView.hidden = true;
@@ -2455,7 +2499,7 @@
         [self saveData];
         totalSeconds = minutes*60 + seconds;
         
-        currentScoreMCN = (int)round(((1000*totalGuessed*totalGuessed*totalPercentage)/(totalSeconds)));
+        currentScoreMCN = (int)round(((1000*totalGuessed*totalGuessed*totalPercentage)/(totalSeconds*totalSeconds)));
         [self printHighScoreMCN];
         [self updateAchievements];
         
@@ -2566,6 +2610,7 @@
         //animating = true;
         
         
+        numInARow =0;
 
         FilterView.hidden=false;
     }
@@ -2821,7 +2866,7 @@
     {
         timerLable.text = [NSString stringWithFormat:@"%i:%i", minutes,seconds];
     }
-    if(seconds == 59)
+    if(seconds == 60)
     {
         seconds = 0;
         //timerLableSeconds.text = [NSString stringWithFormat:@"0%i", countUpValue];
@@ -3110,13 +3155,16 @@
             totalCorrect++;
             [self playSoundNamed:@"DingSound" andType:@"m4a" andFX:true];
             [pIQ gotRight];
+            numInARow++;
         }
         else
         {
             [self playSoundNamed:@"DongSound" andType:@"m4a" andFX:true];
             [pIQ gotWrong];
+            numInARow = 0;
         }
         [correctPersonMCF gotRight];
+        numInARow++;
         correctPersonMCF.hasBeenGuessedRight = true;
         correctPersonMCF.hasBeenGuessed = true;
     }
@@ -3131,6 +3179,7 @@
                 //got wrong
                 iTIMCF1.image = [UIImage imageNamed:@"SmallTD.png"];
                 [correctPersonMCF gotWrong];
+                numInARow = 0;
                 [self playSoundNamed:@"DongSound" andType:@"m4a" andFX:true];
 
             }
@@ -3139,6 +3188,7 @@
                 //got wrong
                 iTIMCF2.image = [UIImage imageNamed:@"SmallTD.png"];
                 [correctPersonMCF gotWrong];
+                numInARow = 0;
                 [self playSoundNamed:@"DongSound" andType:@"m4a" andFX:true];
 
             }
@@ -3147,6 +3197,7 @@
                 //got wrong
                 iTIMCF3.image = [UIImage imageNamed:@"SmallTD.png"];
                 [correctPersonMCF gotWrong];
+                numInARow = 0;
                 [self playSoundNamed:@"DongSound" andType:@"m4a" andFX:true];
 
             }
@@ -3155,11 +3206,13 @@
                 //got wrong
                 iTIMCF4.image = [UIImage imageNamed:@"SmallTD.png"];
                 [correctPersonMCF gotWrong];
+                numInARow = 0;
                 [self playSoundNamed:@"DongSound" andType:@"m4a" andFX:true];
 
             }
         }
     }
+    [self respondToNumInARow];
 }
 -(IBAction)hintMCF
 {
@@ -3242,7 +3295,7 @@
             {
                 timerLable.text = [NSString stringWithFormat:@"%i:%i", minutes,seconds];
             }
-            if(seconds == 59)
+            if(seconds == 60)
             {
                 seconds = 0;
                 //timerLableSeconds.text = [NSString stringWithFormat:@"0%i", countUpValue];
@@ -3338,7 +3391,7 @@
             {
                 timerLable.text = [NSString stringWithFormat:@"%i:%i", minutes,seconds];
             }
-            if(seconds == 59)
+            if(seconds == 60)
             {
                 seconds = 0;
                 //timerLableSeconds.text = [NSString stringWithFormat:@"0%i", countUpValue];
@@ -3477,7 +3530,8 @@
             
             mCFacesView.hidden = true;
             gameOverView.hidden = false;
-            
+            numInARow =0;
+
             guessButton.hidden = true;
             nameView.hidden = true;
             infoButton.hidden = true;
@@ -3501,7 +3555,7 @@
             
             totalSeconds = minutes*60 + seconds;
             [self saveData];
-            currentScoreMCF = (int)round(((1000*totalGuessed*totalGuessed*totalPercentage)/(totalSeconds)));
+            currentScoreMCF = (int)round(((1000*totalGuessed*totalGuessed*totalPercentage)/(totalSeconds*totalSeconds)));
             [self printHighScoreMCF];
             [self updateAchievements];
             
@@ -4113,7 +4167,6 @@
         }
         if([typeOfGame.text  isEqual: @"Multiple Choice Names"])
         {
-            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
             mostTimeIntMCN = 0;
             //mostTimeIntMCN =(int)[defaults integerForKey:@"timeMCN"];
             mostTimeMCN = NULL;
@@ -4128,8 +4181,6 @@
         if([typeOfGame.text  isEqual: @"Multiple Choice Faces"])
         {
             mostTimeMCF = NULL;
-            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-            
             //mostTimeIntMCF = (int)[defaults integerForKey:@"timeMCF"];
             mostTimeIntMCF = 0;
             mCFacesView.hidden = false;
@@ -4144,7 +4195,6 @@
             iTIMCF3.hidden = true;
             iTIMCF4.hidden = true;
             [self generateNewPeopleMCF];
-
         }
         if(practiceModeSwitch.isOn == true)
         {
