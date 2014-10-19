@@ -309,7 +309,8 @@
     iBMCN2.hidden = true;
     iBMCN3.hidden = true;
     iBMCN4.hidden = true;
-    
+    hardFlashcardGuessView.hidden = true;
+
     mostTimeIntMCN =0;
     mostTimeIntMCF =0;
     mostTimeIntF =0;
@@ -321,7 +322,7 @@
     [statsScrollView setContentSize:CGSizeMake(320, 798)];
     
     [settingsScrollView setScrollEnabled:YES];
-    [settingsScrollView setContentSize:CGSizeMake(320, 578)];
+    [settingsScrollView setContentSize:CGSizeMake(320, 618)];
     [self updateCurrentFilters];
     
     [super viewDidLoad];
@@ -369,24 +370,28 @@
         // it is in closer to the middle but on the right side
         typeOfGameSlider.value = 0.5;
         typeOfGameString = @"First Name";
+        hardTextField.placeholder = @"John";
     }
     else if(typeOfGameSlider.value < 0.5 && typeOfGameSlider.value > 0.25)
     {
         // it is in closer to the middle but on the left side
         typeOfGameSlider.value = 0.5;
         typeOfGameString = @"First Name";
+        hardTextField.placeholder = @"John";
     }
     else if(typeOfGameSlider.value > 0.5 && typeOfGameSlider.value >= 0.75)
     {
         // it is in closer to the right side
         typeOfGameSlider.value = 1.0;
         typeOfGameString = @"Full Name";
+        hardTextField.placeholder = @"John Doe";
     }
     else if(typeOfGameSlider.value < 0.5 && typeOfGameSlider.value <= 0.25)
     {
         // it is in closer to the left side
         typeOfGameSlider.value = 0.0;
         typeOfGameString = @"Last Name";
+        hardTextField.placeholder = @"Doe";
     }
     else
     {
@@ -394,6 +399,100 @@
     }
 }
 
+-(IBAction)sliderValueChangedVersion2:(id)sender
+{
+    UISlider* slidingSlider  = sender;
+    
+    if(slidingSlider.value > 0.5 && slidingSlider.value < 0.75)
+    {
+        // it is in closer to the middle but on the right side
+        slidingSlider.value = 0.5;
+        difficultyString = @"Normal";
+        hintButton.enabled = true;
+        hintButtonMCF.enabled = true;
+        hintButtonMCN.enabled = true;
+        hardFlashcardGuessView.hidden = true;
+    }
+    else if(slidingSlider.value < 0.5 && slidingSlider.value > 0.25)
+    {
+        // it is in closer to the middle but on the left side
+        slidingSlider.value = 0.5;
+        difficultyString = @"Normal";
+        hintButton.enabled = true;
+        hintButtonMCF.enabled = true;
+        hintButtonMCN.enabled = true;
+        hardFlashcardGuessView.hidden = true;
+    }
+    else if(slidingSlider.value > 0.5 && slidingSlider.value >= 0.75)
+    {
+        // it is in closer to the right side
+        slidingSlider.value = 1.0;
+        difficultyString = @"Hard";
+        hintButton.enabled = false;
+        hintButtonMCF.enabled = false;
+        hintButtonMCN.enabled = false;
+        hardFlashcardGuessView.hidden = false;
+    }
+    else if(slidingSlider.value < 0.5 && slidingSlider.value <= 0.25)
+    {
+        // it is in closer to the left side
+        slidingSlider.value = 0.0;
+        difficultyString = @"Easy";
+        hintButton.enabled = true;
+        hintButtonMCF.enabled = true;
+        hintButtonMCN.enabled = true;
+        hardFlashcardGuessView.hidden = true;
+    }
+    else
+    {
+        slidingSlider.value = 0.0;
+    }
+}
+-(IBAction)checkAnswer:(id)sender
+{
+    UITextField*field;
+    field = sender;
+    [field resignFirstResponder];
+    if([typeOfGameString isEqual:@"Full Name"])
+    {
+        if([[hardTextField.text uppercaseString] isEqual: [[currentPerson getFullName] uppercaseString]])
+        {
+            [self gotRight:infoButton];
+        }
+        else
+        {
+            [self gotWrong:infoButton];
+        }
+    }
+    if([typeOfGameString isEqual:@"First Name"])
+    {
+        if([[hardTextField.text uppercaseString] isEqual: [currentPerson.firstName uppercaseString]])
+        {
+            [self gotRight:infoButton];
+        }
+        else
+        {
+            [self gotWrong:infoButton];
+        }
+    }
+    if([typeOfGameString isEqual:@"Last Name"])
+    {
+        if([[hardTextField.text uppercaseString] isEqual: [currentPerson.lastName uppercaseString]])
+        {
+            [self gotRight:infoButton];
+        }
+        else
+        {
+            [self gotWrong:infoButton];
+        }
+    }
+    field.text = @"";
+    hardFlashcardGuessView.center = nameAndButtonsView.center;
+}
+-(IBAction)moveHardTextFieldIntoView
+{
+    hardFlashcardGuessView.center = FTGameView.center;
+}
 -(NSArray *)addInfoFromSavedData {
     NSArray *allThePeople = [[NSMutableArray alloc] init];
     NSUserDefaults *theDefaults = [NSUserDefaults standardUserDefaults];
@@ -1562,6 +1661,7 @@
         [labelsScrollView addSubview:switchThing];
         switchThing.center = CGPointMake(220, 36);
         switchThing.on = true;
+        switchThing.onTintColor = fxSwitchSetting.onTintColor;
         
         UILabel *noneSpecified = [[UILabel alloc]init];
         noneSpecified.text = @"None Specified";
@@ -1574,6 +1674,7 @@
         [labelsScrollView addSubview:noneSpecifiedSwitch];
         noneSpecifiedSwitch.center = CGPointMake(220, 76);
         noneSpecifiedSwitch.on = true;
+        noneSpecifiedSwitch.onTintColor = fxSwitchSetting.onTintColor;
 
         if([labelType isEqual:@"Company"]) {
             if (filterCompanyText.count == 0 || filterCompanyText.count == 1)
@@ -1607,6 +1708,7 @@
                     [labelsScrollView addSubview:switchThing];
                     switchThing.center = CGPointMake(220, 116+(40*i));
                     switchThing.on=true;
+                    switchThing.onTintColor = fxSwitchSetting.onTintColor;
                     [switchThing addTarget:self action:@selector(companySwitchValueChanged:) forControlEvents:UIControlEventValueChanged];
                     [filterCompanyText addObject:newLabel.text];
                     [filterCompanySwitches addObject:switchThing];
@@ -1631,6 +1733,8 @@
                 [switchThing addTarget:self action:@selector(companySwitchValueChanged:)  forControlEvents:UIControlEventValueChanged];
                 noneSpecifiedSwitch.on = [[filterCompanySwitches objectAtIndex:1] isOn];
                 switchThing.on = [[filterCompanySwitches objectAtIndex:0] isOn];
+                switchThing.onTintColor = fxSwitchSetting.onTintColor;
+
                 [filterCompanySwitches removeAllObjects];
                 [filterCompanyText removeAllObjects];
                 [filterCompanyText addObject:newLabel.text];
@@ -1653,7 +1757,8 @@
                     [labelsScrollView addSubview:switchThing];
                     switchThing.center = CGPointMake(220, 116+(40*i));
                     [switchThing addTarget:self action:@selector(companySwitchValueChanged:) forControlEvents:UIControlEventValueChanged];
-                    
+                    switchThing.onTintColor = fxSwitchSetting.onTintColor;
+
                     [switchThing setOn:[[newArray objectAtIndex:i+2] boolValue] animated:NO];
                     [filterCompanyText addObject:newLabel.text];
                     [filterCompanySwitches addObject:switchThing];
@@ -1698,6 +1803,7 @@
                         switchThing.center = CGPointMake(220, 116+(40*i));
                         [switchThing addTarget:self action:@selector(departmentSwitchValueChanged:) forControlEvents:UIControlEventValueChanged];
                         switchThing.on=true;
+                        switchThing.onTintColor = fxSwitchSetting.onTintColor;
 
                         [filterDepartmentText addObject:newLabel.text];
                         [filterDepartmentSwitches addObject:switchThing];
@@ -1721,6 +1827,7 @@
                     [switchThing addTarget:self action:@selector(departmentSwitchValueChanged:)  forControlEvents:UIControlEventValueChanged];
                     noneSpecifiedSwitch.on = [[filterDepartmentSwitches objectAtIndex:1] isOn];
                     switchThing.on = [[filterDepartmentSwitches objectAtIndex:0] isOn];
+                    switchThing.onTintColor = fxSwitchSetting.onTintColor;
 
                     [filterDepartmentSwitches removeAllObjects];
                     [filterDepartmentText removeAllObjects];
@@ -1743,7 +1850,8 @@
                         [labelsScrollView addSubview:switchThing];
                         switchThing.center = CGPointMake(220, 116+(40*i));
                         [switchThing addTarget:self action:@selector(departmentSwitchValueChanged:) forControlEvents:UIControlEventValueChanged];
-                        
+                        switchThing.onTintColor = fxSwitchSetting.onTintColor;
+
                         [switchThing setOn:[[newArray objectAtIndex:i+2] boolValue] animated:NO];
                         [filterDepartmentText addObject:newLabel.text];
                         [filterDepartmentSwitches addObject:switchThing];
@@ -1783,6 +1891,7 @@
                     [labelsScrollView addSubview:switchThing];
                     switchThing.center = CGPointMake(220, 116+(40*i));
                     switchThing.on=true;
+                    switchThing.onTintColor = fxSwitchSetting.onTintColor;
 
                     [switchThing addTarget:self action:@selector(jobTitleSwitchValueChanged:) forControlEvents:UIControlEventValueChanged];
                     [filterJobTitlesText addObject:newLabel.text];
@@ -1820,7 +1929,8 @@
                     [labelsScrollView addSubview:switchThing];
                     switchThing.center = CGPointMake(220, 116+(40*i));
                     [switchThing addTarget:self action:@selector(jobTitleSwitchValueChanged:) forControlEvents:UIControlEventValueChanged];
-                    
+                    switchThing.onTintColor = fxSwitchSetting.onTintColor;
+
                     [switchThing setOn:[[newArray objectAtIndex:i+2] boolValue] animated:NO];
                     [filterJobTitlesText addObject:newLabel.text];
                     [filterJobTitlesSwitches addObject:switchThing];
@@ -2145,104 +2255,104 @@
     }
 }
 //go to multiple choice timed view
--(IBAction)goToMCTV
-{
-    [self playSoundNamed:@"ClickSound" andType:@"m4a" andFX:true];
-
-    nextView = @"MCTV";
-    MCTGameView.center = CGPointMake(MCTGameView.center.x - MCTGameView.bounds.size.width, MCTGameView.center.y);
-
-    animating = true;
-
-    MCGameView.hidden=true;
-    firstView.hidden=true;
-    MCTGameView.hidden=false;
-    FCView.hidden=true;
-    MCCView.hidden = true;
-    FGameView.hidden = true;
-    FCView.hidden = true;
-    FTGameView.hidden = true;
-    deptTitleField.hidden = true;
-    jobTitleField.hidden = true;
-    filterField.text = @"";
-    filterLabel.text = @"Filter By:";
-    companyTitleField.hidden = true;
-    FilterView.hidden = true;
-    gameOverView.hidden = true;
-    //nameAndButtonsView.hidden = true;
-    
-    nameView.hidden = true;
-
-    FilterView.hidden = false;
-    numInARow =0;
-
-    deptTitleField.hidden = true;
-    jobTitleField.hidden = true;
-    mcButton1.titleLabel.text = @"";
-    mcButton2.titleLabel.text = @"";
-    mcButton3.titleLabel.text = @"";
-    mcButton4.titleLabel.text = @"";
-    
-    MSContactManipulater *tcontactGetter = [[MSContactManipulater alloc]init];
-    currentContacts = [tcontactGetter getContactsWithAnImage];
-     
-    int currentContactIndex = rand()%currentContacts.count;
-    //[self chooseArray];
-    correctMCPerson = [currentContacts objectAtIndex:currentContactIndex];
-     
-    //mcButton1.backgroundColor = [UIColor lightGrayColor];
-    //mcButton2.backgroundColor = [UIColor lightGrayColor];
-    //mcButton3.backgroundColor = [UIColor lightGrayColor];
-    //mcButton4.backgroundColor = [UIColor lightGrayColor];
+//-(IBAction)goToMCTV
+//{
+//    [self playSoundNamed:@"ClickSound" andType:@"m4a" andFX:true];
 //
-    mcPersonPicture.image = correctMCPerson.selfImage;
-    
-    int h = 0;
-    do {
-        h = rand()%currentContacts.count;
-    } while(h==currentContactIndex);
-    [mcButton1 setTitle:[NSString stringWithFormat:@"%@",[[currentContacts objectAtIndex:h] getFullName]] forState:UIControlStateNormal];
-    int i = 0;
-    do {
-        i = rand()%currentContacts.count;
-    } while(h==currentContactIndex || i==h);
-    [mcButton2 setTitle:[NSString stringWithFormat:@"%@",[[currentContacts objectAtIndex:i] getFullName]] forState:UIControlStateNormal];
-    int k = 0;
-    do {
-        k = rand()%currentContacts.count;
-    } while(k==currentContactIndex || k==h || k==i);
-    [mcButton3 setTitle:[NSString stringWithFormat:@"%@",[[currentContacts objectAtIndex:k] getFullName]] forState:UIControlStateNormal];
-    int l= 0;
-    do {
-        l = rand()%currentContacts.count;
-    } while(l==currentContactIndex || l==h || l==i || l==k);
-    [mcButton4 setTitle:[NSString stringWithFormat:@"%@",[[currentContacts objectAtIndex:l] getFullName]] forState:UIControlStateNormal];
-       int ra = rand()%4;
-    if (ra==0)
-    {
-        [mcButton1 setTitle:[NSString stringWithFormat:@"%@",[correctMCPerson getFullName]] forState:UIControlStateNormal];
-        mcPersonPicture.image = correctMCPerson.selfImage;
-
-    }
-    else if (ra==1)
-    {
-        [mcButton2 setTitle:[NSString stringWithFormat:@"%@",[correctMCPerson getFullName]] forState:UIControlStateNormal];
-        mcPersonPicture.image = correctMCPerson.selfImage;
-
-    }
-    else if (ra==2)
-    {
-        [mcButton3 setTitle:[NSString stringWithFormat:@"%@",[correctMCPerson getFullName]] forState:UIControlStateNormal];
-        mcPersonPicture.image = correctMCPerson.selfImage;
-        
-    }
-    else if (ra==3)
-    {
-        [mcButton4 setTitle:[NSString stringWithFormat:@"%@",[correctMCPerson getFullName]] forState:UIControlStateNormal];
-        mcPersonPicture.image = correctMCPerson.selfImage;
-
-    }
- }
+//    nextView = @"MCTV";
+//    MCTGameView.center = CGPointMake(MCTGameView.center.x - MCTGameView.bounds.size.width, MCTGameView.center.y);
+//
+//    animating = true;
+//
+//    MCGameView.hidden=true;
+//    firstView.hidden=true;
+//    MCTGameView.hidden=false;
+//    FCView.hidden=true;
+//    MCCView.hidden = true;
+//    FGameView.hidden = true;
+//    FCView.hidden = true;
+//    FTGameView.hidden = true;
+//    deptTitleField.hidden = true;
+//    jobTitleField.hidden = true;
+//    filterField.text = @"";
+//    filterLabel.text = @"Filter By:";
+//    companyTitleField.hidden = true;
+//    FilterView.hidden = true;
+//    gameOverView.hidden = true;
+//    //nameAndButtonsView.hidden = true;
+//    
+//    nameView.hidden = true;
+//
+//    FilterView.hidden = false;
+//    numInARow =0;
+//
+//    deptTitleField.hidden = true;
+//    jobTitleField.hidden = true;
+//    mcButton1.titleLabel.text = @"";
+//    mcButton2.titleLabel.text = @"";
+//    mcButton3.titleLabel.text = @"";
+//    mcButton4.titleLabel.text = @"";
+//    
+//    MSContactManipulater *tcontactGetter = [[MSContactManipulater alloc]init];
+//    currentContacts = [tcontactGetter getContactsWithAnImage];
+//     
+//    int currentContactIndex = rand()%currentContacts.count;
+//    //[self chooseArray];
+//    correctMCPerson = [currentContacts objectAtIndex:currentContactIndex];
+//     
+//    //mcButton1.backgroundColor = [UIColor lightGrayColor];
+//    //mcButton2.backgroundColor = [UIColor lightGrayColor];
+//    //mcButton3.backgroundColor = [UIColor lightGrayColor];
+//    //mcButton4.backgroundColor = [UIColor lightGrayColor];
+////
+//    mcPersonPicture.image = correctMCPerson.selfImage;
+//    
+//    int h = 0;
+//    do {
+//        h = rand()%currentContacts.count;
+//    } while(h==currentContactIndex);
+//    [mcButton1 setTitle:[NSString stringWithFormat:@"%@",[[currentContacts objectAtIndex:h] getFullName]] forState:UIControlStateNormal];
+//    int i = 0;
+//    do {
+//        i = rand()%currentContacts.count;
+//    } while(h==currentContactIndex || i==h);
+//    [mcButton2 setTitle:[NSString stringWithFormat:@"%@",[[currentContacts objectAtIndex:i] getFullName]] forState:UIControlStateNormal];
+//    int k = 0;
+//    do {
+//        k = rand()%currentContacts.count;
+//    } while(k==currentContactIndex || k==h || k==i);
+//    [mcButton3 setTitle:[NSString stringWithFormat:@"%@",[[currentContacts objectAtIndex:k] getFullName]] forState:UIControlStateNormal];
+//    int l= 0;
+//    do {
+//        l = rand()%currentContacts.count;
+//    } while(l==currentContactIndex || l==h || l==i || l==k);
+//    [mcButton4 setTitle:[NSString stringWithFormat:@"%@",[[currentContacts objectAtIndex:l] getFullName]] forState:UIControlStateNormal];
+//       int ra = rand()%4;
+//    if (ra==0)
+//    {
+//        [mcButton1 setTitle:[NSString stringWithFormat:@"%@",[correctMCPerson getFullName]] forState:UIControlStateNormal];
+//        mcPersonPicture.image = correctMCPerson.selfImage;
+//
+//    }
+//    else if (ra==1)
+//    {
+//        [mcButton2 setTitle:[NSString stringWithFormat:@"%@",[correctMCPerson getFullName]] forState:UIControlStateNormal];
+//        mcPersonPicture.image = correctMCPerson.selfImage;
+//
+//    }
+//    else if (ra==2)
+//    {
+//        [mcButton3 setTitle:[NSString stringWithFormat:@"%@",[correctMCPerson getFullName]] forState:UIControlStateNormal];
+//        mcPersonPicture.image = correctMCPerson.selfImage;
+//        
+//    }
+//    else if (ra==3)
+//    {
+//        [mcButton4 setTitle:[NSString stringWithFormat:@"%@",[correctMCPerson getFullName]] forState:UIControlStateNormal];
+//        mcPersonPicture.image = correctMCPerson.selfImage;
+//
+//    }
+// }
 -(IBAction)mcAnswerPressed:(id)sender
 {
     iBMCN1.hidden = false;
@@ -2540,7 +2650,13 @@
 -(IBAction)showFilterView:(id)sender
 {
     [self playSoundNamed:@"ClickSound" andType:@"m4a" andFX:true];
-
+    [filters setSelectedSegmentIndex:0];
+    for (UIView *object in [labelsScrollView subviews])
+    {
+        [object removeFromSuperview];
+    }
+    [self loadLabels:[filters titleForSegmentAtIndex:0]];
+    
     iBMCN1.hidden = true;
     iBMCN2.hidden = true;
     iBMCN3.hidden = true;
@@ -2613,6 +2729,8 @@
         numInARow =0;
 
         FilterView.hidden=false;
+        [hardTextField resignFirstResponder];
+        hardFlashcardGuessView.center = nameAndButtonsView.center;
     }
     else
     {

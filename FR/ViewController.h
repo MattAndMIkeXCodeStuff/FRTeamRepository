@@ -329,6 +329,8 @@
     IBOutlet UISlider*typeOfGameSlider;
     NSString *typeOfGameString;
     
+    NSString *difficultyString;
+    
     IBOutlet UIImageView*columnSpacer1;
     IBOutlet UIImageView*columnSpacer2;
     IBOutlet UIImageView*columnSpacer3;
@@ -340,10 +342,20 @@
     IBOutlet UILabel*myTitle;
     IBOutlet UIImageView*mySeparater1;
     
+    IBOutlet UIButton*hintButtonMCF;
+    IBOutlet UIButton*hintButtonMCN;
+    
     NSMutableArray*buttonsOnStatsView;
     NSMutableArray*peopleOnStatsView;
+    
+    IBOutlet UIView*hardFlashcardGuessView;
+    IBOutlet UITextField*hardTextField;
 }
 //more info multiple choice faces
+-(IBAction)checkAnswer:(id)sender;
+
+-(IBAction)moveHardTextFieldIntoView;
+
 -(IBAction)moreInfoMC:(id)sender;
 
 -(void)respondToNumInARow;
@@ -357,6 +369,7 @@
 -(IBAction)hintMCF;
 
 -(IBAction)sliderValueChanged;
+-(IBAction)sliderValueChangedVersion2:(id)sender;
 
 -(void)generateNewPeopleMCN;
 

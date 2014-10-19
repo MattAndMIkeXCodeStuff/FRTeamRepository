@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FR/ViewController.m"
-            timestampString = "432767900.430355"
+            timestampString = "433720004.523004"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "968"
-            endingLineNumber = "968"
+            startingLineNumber = "1067"
+            endingLineNumber = "1067"
             landmarkName = "-loadNewPerson"
             landmarkType = "5">
          </BreakpointContent>
@@ -42,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FR/ViewController.m"
-            timestampString = "432767900.430355"
+            timestampString = "433720004.523004"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "804"
-            endingLineNumber = "804"
+            startingLineNumber = "903"
+            endingLineNumber = "903"
             landmarkName = "-printHighScoreMCN"
             landmarkType = "5">
          </BreakpointContent>

@@ -31,7 +31,6 @@
 		4C6AF07719A591B400378517 /* TimedFlashcard.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C6AF05B19A591B400378517 /* TimedFlashcard.png */; };
 		4C6AF07819A591B400378517 /* TimerHCContacts.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C6AF05C19A591B400378517 /* TimerHCContacts.png */; };
 		4CA584D819995395003ED355 /* GameController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CA584D719995395003ED355 /* GameController.framework */; };
-		4CA584DA19995815003ED355 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CA584D919995815003ED355 /* GameKit.framework */; };
 		4CACF951195F9F1500056B92 /* MSContactManipulater.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CACF950195F9F1500056B92 /* MSContactManipulater.m */; };
 		4CACF953195FA19400056B92 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CACF952195FA19400056B92 /* AddressBook.framework */; };
 		4CACF955195FA19B00056B92 /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CACF954195FA19B00056B92 /* AddressBookUI.framework */; };
@@ -63,6 +62,7 @@
 		4E60AD2519ABD88800A06818 /* HintButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E60AD2219ABD88800A06818 /* HintButton.png */; };
 		4E60AD2619ABD88800A06818 /* HintButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E60AD2319ABD88800A06818 /* HintButton.png */; };
 		4E60AD2719ABD88800A06818 /* HintButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E60AD2419ABD88800A06818 /* HintButton.png */; };
+		4E62949619CCDB8500386727 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E62949519CCDB8500386727 /* GameKit.framework */; };
 		4EC04F3D195297350017AA78 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EC04F3C195297350017AA78 /* Foundation.framework */; };
 		4EC04F3F195297350017AA78 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EC04F3E195297350017AA78 /* CoreGraphics.framework */; };
 		4EC04F41195297350017AA78 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EC04F40195297350017AA78 /* UIKit.framework */; };
@@ -118,7 +118,6 @@
 		4C6AF05B19A591B400378517 /* TimedFlashcard.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TimedFlashcard.png; sourceTree = "<group>"; };
 		4C6AF05C19A591B400378517 /* TimerHCContacts.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TimerHCContacts.png; sourceTree = "<group>"; };
 		4CA584D719995395003ED355 /* GameController.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameController.framework; path = System/Library/Frameworks/GameController.framework; sourceTree = SDKROOT; };
-		4CA584D919995815003ED355 /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
 		4CACF94F195F9F1500056B92 /* MSContactManipulater.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSContactManipulater.h; sourceTree = "<group>"; };
 		4CACF950195F9F1500056B92 /* MSContactManipulater.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSContactManipulater.m; sourceTree = "<group>"; };
 		4CACF952195FA19400056B92 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
@@ -151,6 +150,7 @@
 		4E60AD2219ABD88800A06818 /* HintButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = HintButton.png; path = "../../../Desktop/App Images/FRImages/HintButton.png"; sourceTree = "<group>"; };
 		4E60AD2319ABD88800A06818 /* HintButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HintButton.png; sourceTree = "<group>"; };
 		4E60AD2419ABD88800A06818 /* HintButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = HintButton.png; path = FR/HintButton.png; sourceTree = SOURCE_ROOT; };
+		4E62949519CCDB8500386727 /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
 		4EC04F39195297350017AA78 /* FR.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FR.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4EC04F3C195297350017AA78 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		4EC04F3E195297350017AA78 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -182,11 +182,11 @@
 				4CB7481B199ECC4600721DD4 /* AudioToolbox.framework in Frameworks */,
 				4CA584D819995395003ED355 /* GameController.framework in Frameworks */,
 				4CACF955195FA19B00056B92 /* AddressBookUI.framework in Frameworks */,
-				4CA584DA19995815003ED355 /* GameKit.framework in Frameworks */,
 				4CACF953195FA19400056B92 /* AddressBook.framework in Frameworks */,
 				4EC04F3F195297350017AA78 /* CoreGraphics.framework in Frameworks */,
 				4EC04F41195297350017AA78 /* UIKit.framework in Frameworks */,
 				4EC04F3D195297350017AA78 /* Foundation.framework in Frameworks */,
+				4E62949619CCDB8500386727 /* GameKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -293,8 +293,8 @@
 		4EC04F3B195297350017AA78 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4E62949519CCDB8500386727 /* GameKit.framework */,
 				4CB7481A199ECC4600721DD4 /* AudioToolbox.framework */,
-				4CA584D919995815003ED355 /* GameKit.framework */,
 				4CA584D719995395003ED355 /* GameController.framework */,
 				4EC04F40195297350017AA78 /* UIKit.framework */,
 				4CACF954195FA19B00056B92 /* AddressBookUI.framework */,
@@ -403,7 +403,7 @@
 				ORGANIZATIONNAME = "Mattehw Burton";
 				TargetAttributes = {
 					4EC04F38195297350017AA78 = {
-						DevelopmentTeam = STUDKFT6R9;
+						DevelopmentTeam = 8395G832W7;
 						SystemCapabilities = {
 							com.apple.GameCenter = {
 								enabled = 1;
@@ -664,7 +664,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "FR/FR-Prefix.pch";
 				INFOPLIST_FILE = "FR/FR-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos7.1;
@@ -694,7 +694,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "FR/FR-Prefix.pch";
 				INFOPLIST_FILE = "FR/FR-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos7.1;
