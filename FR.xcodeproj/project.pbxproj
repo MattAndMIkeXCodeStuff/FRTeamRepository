@@ -35,9 +35,6 @@
 		4CACF953195FA19400056B92 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CACF952195FA19400056B92 /* AddressBook.framework */; };
 		4CACF955195FA19B00056B92 /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CACF954195FA19B00056B92 /* AddressBookUI.framework */; };
 		4CB7481B199ECC4600721DD4 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CB7481A199ECC4600721DD4 /* AudioToolbox.framework */; };
-		4E04730F19A7EF1000A99A20 /* White Bar.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E04730D19A7EF1000A99A20 /* White Bar.png */; };
-		4E04731019A7EF1000A99A20 /* BackgroundNamesView.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E04730E19A7EF1000A99A20 /* BackgroundNamesView.png */; };
-		4E04731219A7EF4F00A99A20 /* CheckButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E04731119A7EF4F00A99A20 /* CheckButton.png */; };
 		4E04732719A7F1AA00A99A20 /* 06 Can I Get To Know You Better.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 4E04731A19A7F1A900A99A20 /* 06 Can I Get To Know You Better.m4a */; };
 		4E04732819A7F1AA00A99A20 /* 06 Like To Get To Know You Well.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 4E04731B19A7F1A900A99A20 /* 06 Like To Get To Know You Well.m4a */; };
 		4E04732919A7F1AA00A99A20 /* 1-28 Cheers.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 4E04731C19A7F1A900A99A20 /* 1-28 Cheers.m4a */; };
@@ -50,16 +47,8 @@
 		4E04733019A7F1AA00A99A20 /* GetKnowU.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 4E04732419A7F1A900A99A20 /* GetKnowU.m4a */; };
 		4E04733119A7F1AA00A99A20 /* GetToKnowYouBetter.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 4E04732519A7F1A900A99A20 /* GetToKnowYouBetter.m4a */; };
 		4E04733219A7F1AA00A99A20 /* HintSound.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 4E04732619A7F1A900A99A20 /* HintSound.m4a */; };
-		4E04733619A8ED7E00A99A20 /* BackgroundImageHCContactsFilterPage.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E04733319A8ED7E00A99A20 /* BackgroundImageHCContactsFilterPage.png */; };
 		4E04733719A8ED7E00A99A20 /* BackgroundImageHCContactsFilterPage.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E04733419A8ED7E00A99A20 /* BackgroundImageHCContactsFilterPage.png */; };
 		4E04733819A8ED7E00A99A20 /* BackgroundImageHCContactsFilterPage.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E04733519A8ED7E00A99A20 /* BackgroundImageHCContactsFilterPage.png */; };
-		4E04733A19A8EE1600A99A20 /* HCNamesIcon120X120.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E04733919A8EE1600A99A20 /* HCNamesIcon120X120.png */; };
-		4E04733C19A8EE2400A99A20 /* HCNamesIcon58X58.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E04733B19A8EE2400A99A20 /* HCNamesIcon58X58.png */; };
-		4E04733E19A8EE2F00A99A20 /* HCNamesIcon80X80.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E04733D19A8EE2F00A99A20 /* HCNamesIcon80X80.png */; };
-		4E14F70E19B6931400559B1B /* healthCatalystIgniteChange.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E14F70D19B6931400559B1B /* healthCatalystIgniteChange.png */; };
-		4E14F75819BE413D00559B1B /* Settings.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E14F75719BE413D00559B1B /* Settings.png */; };
-		4E14F75A19BE429500559B1B /* Settings.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E14F75919BE429500559B1B /* Settings.png */; };
-		4E60AD2519ABD88800A06818 /* HintButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E60AD2219ABD88800A06818 /* HintButton.png */; };
 		4E60AD2619ABD88800A06818 /* HintButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E60AD2319ABD88800A06818 /* HintButton.png */; };
 		4E60AD2719ABD88800A06818 /* HintButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E60AD2419ABD88800A06818 /* HintButton.png */; };
 		4E62949619CCDB8500386727 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E62949519CCDB8500386727 /* GameKit.framework */; };
@@ -78,6 +67,15 @@
 		4EC04F66195297350017AA78 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4EC04F64195297350017AA78 /* InfoPlist.strings */; };
 		4EC04F68195297350017AA78 /* FRTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EC04F67195297350017AA78 /* FRTests.m */; };
 		4EC04F73195297E90017AA78 /* Person.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EC04F72195297E90017AA78 /* Person.m */; };
+		516E29741A00792100B5579B /* BackgroundImageHCContactsFilterPage.png in Resources */ = {isa = PBXBuildFile; fileRef = 516E29731A00792100B5579B /* BackgroundImageHCContactsFilterPage.png */; };
+		516E29761A00793700B5579B /* White Bar.png in Resources */ = {isa = PBXBuildFile; fileRef = 516E29751A00793700B5579B /* White Bar.png */; };
+		516E29781A00794900B5579B /* BackgroundNamesView.png in Resources */ = {isa = PBXBuildFile; fileRef = 516E29771A00794900B5579B /* BackgroundNamesView.png */; };
+		516E297D1A00798000B5579B /* HCNamesIcon80X80.png in Resources */ = {isa = PBXBuildFile; fileRef = 516E297A1A00798000B5579B /* HCNamesIcon80X80.png */; };
+		516E29801A0079A300B5579B /* Settings.png in Resources */ = {isa = PBXBuildFile; fileRef = 516E297F1A0079A300B5579B /* Settings.png */; };
+		516E29821A0079BF00B5579B /* CheckButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 516E29811A0079BF00B5579B /* CheckButton.png */; };
+		516E29841A0079DB00B5579B /* healthCatalystIgniteChange.png in Resources */ = {isa = PBXBuildFile; fileRef = 516E29831A0079DB00B5579B /* healthCatalystIgniteChange.png */; };
+		51B1AA511A0599DB0052DB92 /* HCNamesIcon58X58.png in Resources */ = {isa = PBXBuildFile; fileRef = 51B1AA501A0599DB0052DB92 /* HCNamesIcon58X58.png */; };
+		51B1AA531A0599EA0052DB92 /* HCNamesIcon120X120.png in Resources */ = {isa = PBXBuildFile; fileRef = 51B1AA521A0599EA0052DB92 /* HCNamesIcon120X120.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -123,9 +121,6 @@
 		4CACF952195FA19400056B92 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		4CACF954195FA19B00056B92 /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
 		4CB7481A199ECC4600721DD4 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
-		4E04730D19A7EF1000A99A20 /* White Bar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "White Bar.png"; path = "../../../Desktop/App Images/FRImages/White Bar.png"; sourceTree = "<group>"; };
-		4E04730E19A7EF1000A99A20 /* BackgroundNamesView.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BackgroundNamesView.png; path = "../../../Desktop/App Images/FRImages/BackgroundNamesView.png"; sourceTree = "<group>"; };
-		4E04731119A7EF4F00A99A20 /* CheckButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = CheckButton.png; path = "../../../Desktop/App Images/CheckButton.png"; sourceTree = "<group>"; };
 		4E04731A19A7F1A900A99A20 /* 06 Can I Get To Know You Better.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "06 Can I Get To Know You Better.m4a"; sourceTree = "<group>"; };
 		4E04731B19A7F1A900A99A20 /* 06 Like To Get To Know You Well.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "06 Like To Get To Know You Well.m4a"; sourceTree = "<group>"; };
 		4E04731C19A7F1A900A99A20 /* 1-28 Cheers.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "1-28 Cheers.m4a"; sourceTree = "<group>"; };
@@ -138,16 +133,8 @@
 		4E04732419A7F1A900A99A20 /* GetKnowU.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = GetKnowU.m4a; sourceTree = "<group>"; };
 		4E04732519A7F1A900A99A20 /* GetToKnowYouBetter.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = GetToKnowYouBetter.m4a; sourceTree = "<group>"; };
 		4E04732619A7F1A900A99A20 /* HintSound.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = HintSound.m4a; sourceTree = "<group>"; };
-		4E04733319A8ED7E00A99A20 /* BackgroundImageHCContactsFilterPage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BackgroundImageHCContactsFilterPage.png; path = "../../../Desktop/App Images/FRImages/BackgroundImageHCContactsFilterPage.png"; sourceTree = "<group>"; };
 		4E04733419A8ED7E00A99A20 /* BackgroundImageHCContactsFilterPage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BackgroundImageHCContactsFilterPage.png; sourceTree = "<group>"; };
 		4E04733519A8ED7E00A99A20 /* BackgroundImageHCContactsFilterPage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BackgroundImageHCContactsFilterPage.png; path = FR/BackgroundImageHCContactsFilterPage.png; sourceTree = SOURCE_ROOT; };
-		4E04733919A8EE1600A99A20 /* HCNamesIcon120X120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = HCNamesIcon120X120.png; path = "../../../Desktop/App Images/FRImages/HCNamesIcon120X120.png"; sourceTree = "<group>"; };
-		4E04733B19A8EE2400A99A20 /* HCNamesIcon58X58.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = HCNamesIcon58X58.png; path = "../../../Desktop/App Images/FRImages/HCNamesIcon58X58.png"; sourceTree = "<group>"; };
-		4E04733D19A8EE2F00A99A20 /* HCNamesIcon80X80.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = HCNamesIcon80X80.png; path = "../../../Desktop/App Images/FRImages/HCNamesIcon80X80.png"; sourceTree = "<group>"; };
-		4E14F70D19B6931400559B1B /* healthCatalystIgniteChange.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = healthCatalystIgniteChange.png; path = "../../../Desktop/App Images/healthCatalystIgniteChange.png"; sourceTree = "<group>"; };
-		4E14F75719BE413D00559B1B /* Settings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Settings.png; path = "../../../Desktop/App Images/FRImages/Settings.png"; sourceTree = "<group>"; };
-		4E14F75919BE429500559B1B /* Settings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Settings.png; path = "../../../Desktop/App Images/FRImages/Settings.png"; sourceTree = "<group>"; };
-		4E60AD2219ABD88800A06818 /* HintButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = HintButton.png; path = "../../../Desktop/App Images/FRImages/HintButton.png"; sourceTree = "<group>"; };
 		4E60AD2319ABD88800A06818 /* HintButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HintButton.png; sourceTree = "<group>"; };
 		4E60AD2419ABD88800A06818 /* HintButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = HintButton.png; path = FR/HintButton.png; sourceTree = SOURCE_ROOT; };
 		4E62949519CCDB8500386727 /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
@@ -172,6 +159,15 @@
 		4EC04F67195297350017AA78 /* FRTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FRTests.m; sourceTree = "<group>"; };
 		4EC04F71195297E90017AA78 /* Person.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Person.h; path = ../Person.h; sourceTree = "<group>"; };
 		4EC04F72195297E90017AA78 /* Person.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Person.m; path = ../Person.m; sourceTree = "<group>"; };
+		516E29731A00792100B5579B /* BackgroundImageHCContactsFilterPage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BackgroundImageHCContactsFilterPage.png; path = FR/BackgroundImageHCContactsFilterPage.png; sourceTree = SOURCE_ROOT; };
+		516E29751A00793700B5579B /* White Bar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "White Bar.png"; path = "../../App Images/FRImages/White Bar.png"; sourceTree = "<group>"; };
+		516E29771A00794900B5579B /* BackgroundNamesView.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BackgroundNamesView.png; path = "../../App Images/FRImages/BackgroundNamesView.png"; sourceTree = "<group>"; };
+		516E297A1A00798000B5579B /* HCNamesIcon80X80.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = HCNamesIcon80X80.png; path = "../../App Images/FRImages/HCNamesIcon80X80.png"; sourceTree = "<group>"; };
+		516E297F1A0079A300B5579B /* Settings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Settings.png; path = "../../App Images/FRImages/Settings.png"; sourceTree = "<group>"; };
+		516E29811A0079BF00B5579B /* CheckButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = CheckButton.png; path = "../../App Images/CheckButton.png"; sourceTree = "<group>"; };
+		516E29831A0079DB00B5579B /* healthCatalystIgniteChange.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = healthCatalystIgniteChange.png; path = "FR/Images.xcassets/LaunchImage-2.launchimage/healthCatalystIgniteChange.png"; sourceTree = SOURCE_ROOT; };
+		51B1AA501A0599DB0052DB92 /* HCNamesIcon58X58.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = HCNamesIcon58X58.png; path = "../../App Images/FRImages/HCNamesIcon58X58.png"; sourceTree = "<group>"; };
+		51B1AA521A0599EA0052DB92 /* HCNamesIcon120X120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = HCNamesIcon120X120.png; path = "../../App Images/FRImages/HCNamesIcon120X120.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -206,18 +202,18 @@
 		4C6AF04019A591B400378517 /* FRImages */ = {
 			isa = PBXGroup;
 			children = (
-				4E04733319A8ED7E00A99A20 /* BackgroundImageHCContactsFilterPage.png */,
+				516E29731A00792100B5579B /* BackgroundImageHCContactsFilterPage.png */,
 				4E04733419A8ED7E00A99A20 /* BackgroundImageHCContactsFilterPage.png */,
 				4E04733519A8ED7E00A99A20 /* BackgroundImageHCContactsFilterPage.png */,
-				4E04730D19A7EF1000A99A20 /* White Bar.png */,
-				4E04730E19A7EF1000A99A20 /* BackgroundNamesView.png */,
+				516E29751A00793700B5579B /* White Bar.png */,
+				516E29771A00794900B5579B /* BackgroundNamesView.png */,
 				4C6AF04119A591B400378517 /* BackButton.png */,
 				4C6AF04219A591B400378517 /* BackgroundImageHCContacts.png */,
 				4C6AF04319A591B400378517 /* BackgroundImageHCContactsFilterPage.png */,
 				4C6AF04419A591B400378517 /* BackgroundImageHCCountactsMoreInfoPage.png */,
-				4E04733B19A8EE2400A99A20 /* HCNamesIcon58X58.png */,
-				4E04733D19A8EE2F00A99A20 /* HCNamesIcon80X80.png */,
-				4E04733919A8EE1600A99A20 /* HCNamesIcon120X120.png */,
+				51B1AA501A0599DB0052DB92 /* HCNamesIcon58X58.png */,
+				516E297A1A00798000B5579B /* HCNamesIcon80X80.png */,
+				51B1AA521A0599EA0052DB92 /* HCNamesIcon120X120.png */,
 				4C6AF04519A591B400378517 /* BackgroundImageMC.png */,
 				4C6AF04619A591B400378517 /* GoButton.png */,
 				4C6AF04719A591B400378517 /* GotRightTU.png */,
@@ -231,20 +227,18 @@
 				4C6AF05219A591B400378517 /* My Stats.png */,
 				4C6AF05319A591B400378517 /* NextButton.png */,
 				4C6AF05419A591B400378517 /* PersonHCContacts.png */,
-				4E14F75719BE413D00559B1B /* Settings.png */,
+				516E297F1A0079A300B5579B /* Settings.png */,
 				4C6AF05519A591B400378517 /* separater.png */,
-				4E14F75919BE429500559B1B /* Settings.png */,
 				4C6AF05719A591B400378517 /* SmallTD.png */,
 				4C6AF05819A591B400378517 /* SmallTU.png */,
 				4C6AF05919A591B400378517 /* Sound FX Icon.png */,
 				4C6AF05A19A591B400378517 /* Sound Music Icon.png */,
 				4C6AF05B19A591B400378517 /* TimedFlashcard.png */,
-				4E04731119A7EF4F00A99A20 /* CheckButton.png */,
-				4E60AD2219ABD88800A06818 /* HintButton.png */,
+				516E29811A0079BF00B5579B /* CheckButton.png */,
 				4E60AD2319ABD88800A06818 /* HintButton.png */,
 				4E60AD2419ABD88800A06818 /* HintButton.png */,
 				4C6AF05C19A591B400378517 /* TimerHCContacts.png */,
-				4E14F70D19B6931400559B1B /* healthCatalystIgniteChange.png */,
+				516E29831A0079DB00B5579B /* healthCatalystIgniteChange.png */,
 			);
 			path = FRImages;
 			sourceTree = "<group>";
@@ -403,7 +397,7 @@
 				ORGANIZATIONNAME = "Mattehw Burton";
 				TargetAttributes = {
 					4EC04F38195297350017AA78 = {
-						DevelopmentTeam = 8395G832W7;
+						DevelopmentTeam = STUDKFT6R9;
 						SystemCapabilities = {
 							com.apple.GameCenter = {
 								enabled = 1;
@@ -439,56 +433,54 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4E60AD2519ABD88800A06818 /* HintButton.png in Resources */,
-				4E04730F19A7EF1000A99A20 /* White Bar.png in Resources */,
-				4E14F70E19B6931400559B1B /* healthCatalystIgniteChange.png in Resources */,
 				4E04733219A7F1AA00A99A20 /* HintSound.m4a in Resources */,
+				516E29841A0079DB00B5579B /* healthCatalystIgniteChange.png in Resources */,
 				4EC04F55195297350017AA78 /* Images.xcassets in Resources */,
-				4E14F75819BE413D00559B1B /* Settings.png in Resources */,
 				4E04732819A7F1AA00A99A20 /* 06 Like To Get To Know You Well.m4a in Resources */,
 				4C6AF06319A591B400378517 /* GotRightTU.png in Resources */,
 				4C6AF06F19A591B400378517 /* NextButton.png in Resources */,
 				4C6AF07619A591B400378517 /* Sound Music Icon.png in Resources */,
 				4E04732B19A7F1AA00A99A20 /* Cheers Theme.m4a in Resources */,
 				4E04732719A7F1AA00A99A20 /* 06 Can I Get To Know You Better.m4a in Resources */,
+				51B1AA511A0599DB0052DB92 /* HCNamesIcon58X58.png in Resources */,
+				516E29781A00794900B5579B /* BackgroundNamesView.png in Resources */,
 				4EC04F47195297350017AA78 /* InfoPlist.strings in Resources */,
 				4E60AD2619ABD88800A06818 /* HintButton.png in Resources */,
-				4E04733C19A8EE2400A99A20 /* HCNamesIcon58X58.png in Resources */,
 				4C6AF06119A591B400378517 /* BackgroundImageMC.png in Resources */,
 				4C6AF05E19A591B400378517 /* BackgroundImageHCContacts.png in Resources */,
-				4E04733A19A8EE1600A99A20 /* HCNamesIcon120X120.png in Resources */,
+				516E297D1A00798000B5579B /* HCNamesIcon80X80.png in Resources */,
 				4E04732E19A7F1AA00A99A20 /* DongSound.m4a in Resources */,
 				4C6AF06C19A591B400378517 /* MultipleChoiceFaces.png in Resources */,
+				51B1AA531A0599EA0052DB92 /* HCNamesIcon120X120.png in Resources */,
 				4E04733019A7F1AA00A99A20 /* GetKnowU.m4a in Resources */,
+				516E29801A0079A300B5579B /* Settings.png in Resources */,
 				4C6AF07519A591B400378517 /* Sound FX Icon.png in Resources */,
 				4C6AF05D19A591B400378517 /* BackButton.png in Resources */,
 				4C6AF06419A591B400378517 /* GotWrongTD.png in Resources */,
-				4E04733619A8ED7E00A99A20 /* BackgroundImageHCContactsFilterPage.png in Resources */,
 				4E04732919A7F1AA00A99A20 /* 1-28 Cheers.m4a in Resources */,
 				4C6AF06E19A591B400378517 /* My Stats.png in Resources */,
 				4E60AD2719ABD88800A06818 /* HintButton.png in Resources */,
 				4C6AF07319A591B400378517 /* SmallTD.png in Resources */,
-				4E04731219A7EF4F00A99A20 /* CheckButton.png in Resources */,
+				516E29741A00792100B5579B /* BackgroundImageHCContactsFilterPage.png in Resources */,
 				4C6AF06B19A591B400378517 /* LeaderBoard.png in Resources */,
 				4C6AF07119A591B400378517 /* separater.png in Resources */,
 				4E04733119A7F1AA00A99A20 /* GetToKnowYouBetter.m4a in Resources */,
 				4E04732D19A7F1AA00A99A20 /* DingSound.m4a in Resources */,
 				4E04733719A8ED7E00A99A20 /* BackgroundImageHCContactsFilterPage.png in Resources */,
 				4E04732F19A7F1AA00A99A20 /* DingSound.m4a in Resources */,
-				4E14F75A19BE429500559B1B /* Settings.png in Resources */,
 				4C6AF06019A591B400378517 /* BackgroundImageHCCountactsMoreInfoPage.png in Resources */,
 				4E04733819A8ED7E00A99A20 /* BackgroundImageHCContactsFilterPage.png in Resources */,
 				4C6AF06519A591B400378517 /* GuessButton.png in Resources */,
+				516E29821A0079BF00B5579B /* CheckButton.png in Resources */,
 				4EC04F50195297350017AA78 /* Main.storyboard in Resources */,
 				4E04732A19A7F1AA00A99A20 /* 2-36 Jeopardy! (Main Theme).m4a in Resources */,
 				4C6AF06D19A591B400378517 /* MultipleChoiceNames.png in Resources */,
-				4E04733E19A8EE2F00A99A20 /* HCNamesIcon80X80.png in Resources */,
 				4C6AF07419A591B400378517 /* SmallTU.png in Resources */,
 				4C6AF07719A591B400378517 /* TimedFlashcard.png in Resources */,
-				4E04731019A7EF1000A99A20 /* BackgroundNamesView.png in Resources */,
 				4C6AF06A19A591B400378517 /* InfoButton.png in Resources */,
 				4C6AF07819A591B400378517 /* TimerHCContacts.png in Resources */,
 				4C6AF07019A591B400378517 /* PersonHCContacts.png in Resources */,
+				516E29761A00793700B5579B /* White Bar.png in Resources */,
 				4C6AF06219A591B400378517 /* GoButton.png in Resources */,
 				4E04732C19A7F1AA00A99A20 /* ClickSound.m4a in Resources */,
 			);
