@@ -326,6 +326,7 @@
     [self updateCurrentFilters];
     
     [super viewDidLoad];
+    
     [self playSoundNamed:@"Cheers Theme" andType:@"m4a" andFX:false];
 
     hintLabel.text = [NSString stringWithFormat:@"H:%i", 3-numberOfHintsPressed];
@@ -358,6 +359,7 @@
             }
             //5
             NSLog(@"Just authorized");
+            
         });
     }
     
@@ -458,6 +460,10 @@
         if([[hardTextField.text uppercaseString] isEqual: [[currentPerson getFullName] uppercaseString]])
         {
             [self gotRight:infoButton];
+            if(timeOnThisCard>0)
+            {
+                currentScoreMCN+=100-(10*(10-timeOnThisCard));
+            }
         }
         else
         {
@@ -469,7 +475,10 @@
         if([[hardTextField.text uppercaseString] isEqual: [currentPerson.firstName uppercaseString]])
         {
             [self gotRight:infoButton];
-        }
+            if(timeOnThisCard>0)
+            {
+                currentScoreMCN+=100-(10*(10-timeOnThisCard));
+            }        }
         else
         {
             [self gotWrong:infoButton];
@@ -480,7 +489,10 @@
         if([[hardTextField.text uppercaseString] isEqual: [currentPerson.lastName uppercaseString]])
         {
             [self gotRight:infoButton];
-        }
+            if(timeOnThisCard>0)
+            {
+                currentScoreMCN+=100-(10*(10-timeOnThisCard));
+            }        }
         else
         {
             [self gotWrong:infoButton];
@@ -591,11 +603,15 @@
         mostTimeF = currentPerson;
     }
     
+    if(timeOnThisCard>0)
+    {
+        currentScore += 100 - (10*(10 -timeOnThisCard));
+    }
     
     numberOfHintsPressed = 0;
     hintLabel.text = [NSString stringWithFormat:@"H:%i", 3-numberOfHintsPressed];
-    timeOnThisCard = 0;
-    timeOnThisCardLabel.text =@"0";
+    timeOnThisCard = 10;
+    timeOnThisCardLabel.text =@"10";
     currentPerson.hasBeenGuessed = true;
     currentPerson.hasBeenGuessedRight = true;
     [currentPerson gotRight];
@@ -648,9 +664,12 @@
         [self saveData];
 
         
-        currentScore = (int)round(((1000*totalGuessed*totalGuessed*totalPercentage)/(totalSeconds*totalSeconds)));
+        //currentScore = (int)round(((1000*totalGuessed*totalGuessed*totalPercentage)/(totalSeconds)));
         [self printHighScore];
         [self updateAchievements];
+        
+        currentScore = 0;
+        
         FilterView.hidden = true;
         
         totalCorrect = 0;
@@ -714,8 +733,8 @@
         mostTimeIntF = timeOnThisCard;
         mostTimeF = currentPerson;
     }
-    timeOnThisCard = 0;
-    timeOnThisCardLabel.text =@"0";
+    timeOnThisCard = 10;
+    timeOnThisCardLabel.text =@"10";
     
     numberOfHintsPressed = 0;
     hintLabel.text = [NSString stringWithFormat:@"H:%i", 3-numberOfHintsPressed];
@@ -770,9 +789,10 @@
             }
             [self saveData];
             totalSeconds = minutes*60 + seconds;
-            currentScore = (int)round(((1000*totalGuessed*totalGuessed*totalPercentage)/(totalSeconds*totalSeconds)));
+            //currentScore = (int)round(((1000*totalGuessed*totalGuessed*totalPercentage)/(totalSeconds*totalSeconds)));
             [self printHighScore];
             [self updateAchievements];
+            currentScore = 0;
 
             FilterView.hidden = true;
             [self saveData];
@@ -817,7 +837,8 @@
             
             [self printHighScore];
             [self updateAchievements];
-            
+            currentScore = 0;
+
             FilterView.hidden = true;
             totalCorrect = 0;
             totalGuessed = 0;
@@ -920,7 +941,7 @@
             [self playSoundNamed:@"Cheers Theme" andType:@"m4a" andFX:true];
             
             [defaults setInteger:i forKey:khighscoreF];
-            [self reportScore:highscore toLeaderboard:@"Flashcard_Leader_Board"];
+            [self reportScore:highscore toLeaderboard:@"Flashcard_Leaderboard"];
             pointsLabel.text = [NSString stringWithFormat:@"NEW HIGH SCORE! %i", currentScore];
             
         }
@@ -1079,6 +1100,7 @@
             percentLabel.text = [NSString stringWithFormat:@"YOU GOT %d%% (%f OUT OF %f) IN %i:%i",(int)round(totalPercentage*100),totalCorrect,totalGuessed,minutes,seconds];
             [self printHighScore];
             [self updateAchievements];
+            currentScore = 0;
 
             [self saveData];
         }
@@ -2073,8 +2095,30 @@
         if(wait%100 ==0 && moreInfoView.hidden == true)
         {
             wait = 0;
-            seconds += 1;
-            timeOnThisCard+=1;
+            
+
+            if([typeOfGame.text  isEqual: @"Multiple Choice Names"])
+            {
+                if(iBMCN1.hidden == true||iBMCN4.hidden == true||iBMCN2.hidden==true||iBMCN3.hidden==true)//in other words they have not guessed all of the answers and so the timer should go
+                {
+                    
+                }
+            }
+            else if([typeOfGame.text  isEqual: @"Multiple Choice Faces"])
+            {
+                if(iBMCF1.hidden == true||iBMCF2.hidden==true||iBMCF3.hidden==true||iBMCF4.hidden==true)//in other words they have not guessed all of the answers and so the timer should go
+                {
+                    seconds += 1;
+                    timeOnThisCard-=1;
+                }
+            }
+            else if([typeOfGame.text  isEqual: @"Flashcard Game"])
+            {
+                seconds += 1;
+                timeOnThisCard-=1;
+            }
+            
+            
             if(seconds <= 9)
             {
                 timerLable.text = [NSString stringWithFormat:@"%i:0%i", minutes,seconds];
@@ -2093,6 +2137,10 @@
             }
 
             timeOnThisCardLabel.text = [NSString stringWithFormat:@"%i", timeOnThisCard];
+            if(timeOnThisCard<0)
+            {
+                timeOnThisCardLabel.text = @"0";
+            }
         }
     }
     else
@@ -2584,6 +2632,7 @@
         iTIMCN4.hidden = true;
         nextMCN.hidden = true;
         numInARow =0;
+        
 
         gameOverView.hidden = false;
         guessButton.hidden = true;
@@ -2609,10 +2658,10 @@
         [self saveData];
         totalSeconds = minutes*60 + seconds;
         
-        currentScoreMCN = (int)round(((1000*totalGuessed*totalGuessed*totalPercentage)/(totalSeconds*totalSeconds)));
+        //currentScoreMCN = (int)round(((1000*totalGuessed*totalGuessed*totalPercentage)/(totalSeconds*totalSeconds)));
         [self printHighScoreMCN];
         [self updateAchievements];
-        
+        currentScoreMCN = 0;
         FilterView.hidden = true;
         
         totalCorrect = 0;
@@ -2912,7 +2961,8 @@
     if( t == 1)
     {
         seconds+=3;
-        
+        timeOnThisCard-=3;
+        timeOnThisCardLabel.text = [NSString stringWithFormat:@"%i", timeOnThisCard];
         for(int l = 0; l<currentPerson.firstName.length; ++l)
         {
             fNDots = [NSString stringWithFormat:@"-%@",fNDots];
@@ -2927,6 +2977,8 @@
     if( t == 2)
     {
         seconds+=3;
+        timeOnThisCard-=3;
+        timeOnThisCardLabel.text = [NSString stringWithFormat:@"%i", timeOnThisCard];
 
         for(int l = 0; l<currentPerson.firstName.length-1; ++l)
         {
@@ -2944,6 +2996,8 @@
     if( t == 3)
     {
         seconds+=3;
+        timeOnThisCard-=3;
+        timeOnThisCardLabel.text = [NSString stringWithFormat:@"%i", timeOnThisCard];
 
         for(int l = currentPerson.firstName.length-1; l>0; --l)
         {
@@ -3273,6 +3327,10 @@
             totalCorrect++;
             [self playSoundNamed:@"DingSound" andType:@"m4a" andFX:true];
             [pIQ gotRight];
+            if(timeOnThisCard>0)
+            {
+                currentScoreMCF+=100-(10*(10-timeOnThisCard));
+            }
             numInARow++;
         }
         else
@@ -3281,7 +3339,7 @@
             [pIQ gotWrong];
             numInARow = 0;
         }
-        [correctPersonMCF gotRight];
+        //[correctPersonMCF gotRight];
         numInARow++;
         correctPersonMCF.hasBeenGuessedRight = true;
         correctPersonMCF.hasBeenGuessed = true;
@@ -3401,6 +3459,9 @@
             ++numberOfHintsPressed;
             hintLabel.text = [NSString stringWithFormat:@"H:%i", 2-numberOfHintsPressed];
             seconds+=5;
+            timeOnThisCard-=5;
+            timeOnThisCardLabel.text = [NSString stringWithFormat:@"%i", timeOnThisCard];
+
             if( numberOfHintsPressed > 2)
             {
                 hintLabel.text = @"H:0";
@@ -3497,6 +3558,9 @@
             ++numberOfHintsPressed;
             hintLabel.text = [NSString stringWithFormat:@"H:%i", 2-numberOfHintsPressed];
             seconds+=5;
+            timeOnThisCard-=5;
+            timeOnThisCardLabel.text = [NSString stringWithFormat:@"%i", timeOnThisCard];
+
             if( numberOfHintsPressed > 2)
             {
                 hintLabel.text = @"H:0";
@@ -3595,7 +3659,7 @@
         [defaults setInteger:i forKey:kmostTimeMCF];
         mostTimeMCF = currentPerson;
     }
-    timeOnThisCard = 0;
+    timeOnThisCard = 10;
 
     if (arrayOf49PercentAndUnder.count > 3)
     {
@@ -3643,12 +3707,13 @@
     }
     else
     {
-        //you are down to 3 people so there are only 3 possibilities
+        //you are down to 3 or less people so there are only 3 possibilities
         if (arrayOf49PercentAndUnder.count == 0) {
             
             mCFacesView.hidden = true;
             gameOverView.hidden = false;
             numInARow =0;
+            
 
             guessButton.hidden = true;
             nameView.hidden = true;
@@ -3673,10 +3738,10 @@
             
             totalSeconds = minutes*60 + seconds;
             [self saveData];
-            currentScoreMCF = (int)round(((1000*totalGuessed*totalGuessed*totalPercentage)/(totalSeconds*totalSeconds)));
+            //currentScoreMCF = (int)round(((1000*totalGuessed*totalGuessed*totalPercentage)/(totalSeconds*totalSeconds)));
             [self printHighScoreMCF];
             [self updateAchievements];
-            
+            currentScoreMCF = 0;
             FilterView.hidden = true;
             
             totalCorrect = 0;
@@ -3688,7 +3753,9 @@
                 p.hasBeenGuessed = false;
                 p.hasBeenGuessedRight = false;
             }
-        } else {
+        }
+        else
+        {
             
             int x;
             x = (rand()%arrayOf50PercentAndOver.count);
@@ -3883,7 +3950,7 @@
 {
     moreInfoView.hidden=false;
     moreInfoViewImage.image = pIQ.selfImage;
-    timerLable.text = @"Pause";
+   // timerLable.text = @"Pause";
     if(pIQ.firstName.length > 0 && pIQ.lastName.length > 0)
     {
         moreInfoName.text = [NSString stringWithFormat:@"%@ %@", pIQ.firstName, pIQ.lastName];
@@ -3938,7 +4005,7 @@
 
     moreInfoView.hidden=false;
     moreInfoViewImage.image = personPic.image;
-    timerLable.text = @"Pause";
+    //timerLable.text = @"Pause";
     if(currentPerson.firstName.length > 0 && currentPerson.lastName.length > 0)
     {
             moreInfoName.text = [NSString stringWithFormat:@"%@ %@", currentPerson.firstName, currentPerson.lastName];
@@ -4020,7 +4087,8 @@
         [defaults setInteger:i forKey:kmostTimeMCN];
         mostTimeMCN = currentPerson;
     }
-    timeOnThisCard = 0;
+    timeOnThisCard = 10;
+    timeOnThisCardLabel.text = [NSString stringWithFormat:@"%i", timeOnThisCard];
     int rn;
     
     if(arrayOf49PercentAndUnder.count >3)
@@ -4253,11 +4321,13 @@
         FilterView.hidden= true;
         timerView.hidden=false;
         timerLable.text = [NSString stringWithFormat:@"%i:0%i", minutes,seconds];
-        timeOnThisCardLabel.text = @"0";
+        timeOnThisCardLabel.text = @"10";
+        
+        currentScore=0;
         
         seconds=0;
         minutes=0;
-        timeOnThisCard = 0;
+        timeOnThisCard = 10;
         
         if([typeOfGame.text  isEqual: @"Flashcard Game"])
         {
@@ -4326,6 +4396,7 @@
 }
 -(void)playSoundNamed:(NSString*)soundName andType:(NSString*)type andFX:(BOOL)isFX;
 {
+    /*
     soundURL = [NSURL fileURLWithPath:[[NSBundle mainBundle]pathForResource:soundName ofType:type]];
     AudioServicesCreateSystemSoundID((__bridge CFURLRef)soundURL, &SoundID);
     
@@ -4337,6 +4408,7 @@
     {
         AudioServicesPlaySystemSound(SoundID);
     }
+     */
 }
 -(void)updateCurrentFilters
 {

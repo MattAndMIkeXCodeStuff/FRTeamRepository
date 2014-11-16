@@ -61,6 +61,8 @@
     int currentScoreMCF;
     int highscoreMCF;
     
+    int theScoreTheyGet;
+    
     int currentScoreMCN;
     int highscoreMCN;
     
