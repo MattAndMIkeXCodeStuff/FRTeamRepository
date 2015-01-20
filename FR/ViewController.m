@@ -2248,6 +2248,13 @@
         filters.selectedSegmentIndex = 0;
         viewDidLoadString = @"Done";
         stillLoadingView.hidden = true;
+        
+        if (timesOpened == 1)
+        {
+            alert =[[UIAlertView alloc] initWithTitle:@"Close Down" message:@"Apple requires complete shutdown for KnowNames to recive your contacts" delegate:self cancelButtonTitle:@"Okay" otherButtonTitles:NULL, nil];
+        }
+        [alert show];
+         
     }
     
     ++wait;
