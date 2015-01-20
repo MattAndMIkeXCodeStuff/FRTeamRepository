@@ -105,55 +105,146 @@
     GKAchievement *achievement3 = nil;
     GKAchievement *achievement4 = nil;
     GKAchievement *achievement5 = nil;
-
+    
+    GKAchievement *achievement6 = nil;
+    GKAchievement *achievement7 = nil;
+    GKAchievement *achievement8 = nil;
+    GKAchievement *achievement9 = nil;
+    GKAchievement *achievement10 = nil;
     //game over
     
-    achievementIdentifier = @"10_cards";
+    achievementIdentifier = @"10_Novice_MCN";
     achievement1 = [[GKAchievement alloc] initWithIdentifier:achievementIdentifier];
-    achievementIdentifier = @"50_cards";
+    achievementIdentifier = @"10_Novice_MCF";
     achievement2 = [[GKAchievement alloc] initWithIdentifier:achievementIdentifier];
-    achievementIdentifier = @"100_cards";
+    achievementIdentifier = @"50_Beginner_MCN";
     achievement3 = [[GKAchievement alloc] initWithIdentifier:achievementIdentifier];
-    achievementIdentifier = @"150_cards";
+    achievementIdentifier = @"50_Beginner_MCF";
     achievement4 = [[GKAchievement alloc] initWithIdentifier:achievementIdentifier];
-    achievementIdentifier = @"200_cards";
+    achievementIdentifier = @"100_Intermediate_MCN";
     achievement5 = [[GKAchievement alloc] initWithIdentifier:achievementIdentifier];
-    
-    if (totalPercentage == 1 && totalGuessed >= 10)
+    achievementIdentifier = @"100_Intermediate_MCF";
+    achievement6 = [[GKAchievement alloc] initWithIdentifier:achievementIdentifier];
+    achievementIdentifier = @"200_Advanced_MCN";
+    achievement7 = [[GKAchievement alloc] initWithIdentifier:achievementIdentifier];
+    achievementIdentifier = @"200_Advanced_MCF";
+    achievement8 = [[GKAchievement alloc] initWithIdentifier:achievementIdentifier];
+    achievementIdentifier = @"300_Rain_Man_MCN";
+    achievement9 = [[GKAchievement alloc] initWithIdentifier:achievementIdentifier];
+    achievementIdentifier = @"300_Rain_Man_MCF";
+    achievement10 = [[GKAchievement alloc] initWithIdentifier:achievementIdentifier];
+
+
+    if([typeOfGame.text isEqual:@"Multiple Choice Names"])
     {
-        achievement1.percentComplete = 100.0;
+        if (totalPercentage == 1 && totalGuessed >= 10)
+        {
+            achievement1.percentComplete = 100.0;
+            if(achievement1Done==false)
+            {
+                achievement1Done = true;
+                [defaults setBool:achievement1Done forKey:kacheivement1Done];
+                [GKNotificationBanner showBannerWithTitle:@"Novice (MCN)" message:@"You got 100% on 10 names!" completionHandler:nil];
+            }
+        }
+        if (totalPercentage == 1 && totalGuessed >= 50)
+        {
+            //[self showAchievementNotification: [GKAchievementDescription*description objectForKey:achievement2.identifier]];
+            achievement3.percentComplete = 100.0;
+            if(achievement3Done==false)
+            {
+                achievement3Done=true;
+                [defaults setBool:achievement3Done forKey:kacheivement3Done];
+                [GKNotificationBanner showBannerWithTitle:@"Beginner (MCN)" message:@"You got 100% on 50 names!" completionHandler:nil];
+            }
+        }
+        if (totalPercentage == 1 && totalGuessed >= 100)
+        {
+            achievement5.percentComplete = 100.0;
+            if(achievement5Done==false)
+            {
+                achievement5Done = true;
+                [defaults setBool:achievement5Done forKey:kacheivement5Done];
+                [GKNotificationBanner showBannerWithTitle:@"Intermediate (MCN)" message:@"You got 100% on 100 names!" completionHandler:nil];
+            }
+        }
+        if (totalPercentage == 1 && totalGuessed >= 200)
+        {
+            achievement7.percentComplete = 100.0;
+            if(achievement7Done==false)
+            {
+                achievement7Done=true;
+                [defaults setBool:achievement7Done forKey:kacheivement7Done];
+                [GKNotificationBanner showBannerWithTitle:@"Advanced (MCN)" message:@"You got 100% on 200 names!" completionHandler:nil];
+            }
+        }
+        if (totalPercentage == 1 && totalGuessed >= 300)
+        {
+            achievement9.percentComplete = 100.0;
+            if(achievement9Done==false)
+            {
+                achievement9Done=true;
+                [defaults setBool:achievement9Done forKey:kacheivement9Done];
+                [GKNotificationBanner showBannerWithTitle:@"Rain Man (MCN)" message:@"You got 100% on 300 names!" completionHandler:nil];
+            }
+        }
     }
-    if (totalPercentage == 1 && totalGuessed >= 50)
+    else if([typeOfGame.text isEqual:@"Multiple Choice Faces"])
     {
-        //[self showAchievementNotification: [GKAchievementDescription*description objectForKey:achievement2.identifier]];
-        achievement1.percentComplete = 100.0;
-        achievement2.percentComplete = 100.0;
+        if (totalPercentage == 1 && totalGuessed >= 10)
+        {
+            achievement2.percentComplete = 100.0;
+            if(achievement2Done==false)
+            {
+                achievement2Done=true;
+                [defaults setBool:achievement2Done forKey:kacheivement2Done];
+                [GKNotificationBanner showBannerWithTitle:@"Novice (MCF)" message:@"You got 100% on 10 faces!" completionHandler:nil];
+            }
+        }
+        if (totalPercentage == 1 && totalGuessed >= 50)
+        {
+            achievement4.percentComplete = 100.0;
+            if(achievement4Done==false)
+            {
+                achievement4Done=true;
+                [defaults setBool:achievement4Done forKey:kacheivement4Done];
+                [GKNotificationBanner showBannerWithTitle:@"Beginner (MCF)" message:@"You got 100% on 50 faces!" completionHandler:nil];
+            }
+        }
+        if (totalPercentage == 1 && totalGuessed >= 100)
+        {
+            achievement6.percentComplete = 100.0;
+            if(achievement6Done==false)
+            {
+                achievement6Done=true;
+                [defaults setBool:achievement6Done forKey:kacheivement6Done];
+                [GKNotificationBanner showBannerWithTitle:@"Intermediate (MCF)" message:@"You got 100% on 100 faces!" completionHandler:nil];
+            }
+        }
+        if (totalPercentage == 1 && totalGuessed >= 200)
+        {
+            achievement8.percentComplete = 100.0;
+            if(achievement8Done==false)
+            {
+                achievement8Done=true;
+                [defaults setBool:achievement8Done forKey:kacheivement8Done];
+                [GKNotificationBanner showBannerWithTitle:@"Advanced (MCF)" message:@"You got 100% on 200 faces!" completionHandler:nil];
+            }
+        }
+        if (totalPercentage == 1 && totalGuessed >= 300)
+        {
+            achievement10.percentComplete = 100.0;
+            if(achievement10Done==false)
+            {
+                achievement10Done=true;
+                [defaults setBool:achievement10Done forKey:kacheivement10Done];
+                [GKNotificationBanner showBannerWithTitle:@"Rain Man (MCF)" message:@"You got 100% on 300 faces!" completionHandler:nil];
+            }
+        }
 
     }
-    if (totalPercentage == 1 && totalGuessed >= 100)
-    {
-        achievement1.percentComplete = 100.0;
-        achievement2.percentComplete = 100.0;
-        achievement3.percentComplete = 100.0;
 
-    }
-    if (totalPercentage == 1 && totalGuessed >= 150)
-    {
-        achievement1.percentComplete = 100.0;
-        achievement2.percentComplete = 100.0;
-        achievement3.percentComplete = 100.0;
-        achievement4.percentComplete = 100.0;
-    }
-    if (totalPercentage == 1 && totalGuessed >= 200)
-    {
-        achievement1.percentComplete = 100.0;
-        achievement2.percentComplete = 100.0;
-        achievement3.percentComplete = 100.0;
-        achievement4.percentComplete = 100.0;
-        achievement5.percentComplete = 100.0;
-    }
-    
-    NSArray *achievements =  @[achievement1,achievement2,achievement3,achievement4,achievement5] ;
+    NSArray *achievements =  @[achievement1,achievement2,achievement3,achievement4,achievement5, achievement6,achievement7,achievement8,achievement9,achievement10];
     
 //    [GKAchievementDescription loadAchievementDescriptionsWithCompletionHandler:^(NSArray *descriptions, NSError *error) {
 //         if (error != nil) {
@@ -250,7 +341,19 @@
         [defaults setBool:true forKey:kmissedBool];
 
     }
+    
+    achievement1Done = [defaults boolForKey:kacheivement1Done];
+    achievement2Done = [defaults boolForKey:kacheivement2Done];
+    achievement3Done = [defaults boolForKey:kacheivement3Done];
+    achievement4Done = [defaults boolForKey:kacheivement4Done];
+    achievement5Done = [defaults boolForKey:kacheivement5Done];
+    achievement6Done = [defaults boolForKey:kacheivement6Done];
+    achievement7Done = [defaults boolForKey:kacheivement7Done];
+    achievement8Done = [defaults boolForKey:kacheivement8Done];
+    achievement9Done = [defaults boolForKey:kacheivement9Done];
+    achievement10Done = [defaults boolForKey:kacheivement10Done];
 
+    
     timesOpened++;
     NSInteger i = (NSInteger) timesOpened;
     [defaults setInteger:i forKey:ktimesOpened];
@@ -263,6 +366,7 @@
     percentMissedSwichSetting.on = [defaults boolForKey:kmissedBool];
     
     highscore = (int)[defaults integerForKey:khighscoreF];
+    highscoreHardMode = (int)[defaults integerForKey:khighscoreFHard];
     highscoreMCN = (int)[defaults integerForKey:khighscoreMCN];
     highscoreMCF = (int)[defaults integerForKey:khighscoreMCF];
     
@@ -322,7 +426,7 @@
     [statsScrollView setContentSize:CGSizeMake(320, 798)];
     
     [settingsScrollView setScrollEnabled:YES];
-    [settingsScrollView setContentSize:CGSizeMake(320, 618)];
+    [settingsScrollView setContentSize:CGSizeMake(320, 640)];
     [self updateCurrentFilters];
     
     [super viewDidLoad];
@@ -336,6 +440,10 @@
     uniqueDepartmentsArray = [[NSMutableArray alloc]init];
     uniqueCompaniesArray = [[NSMutableArray alloc]init];
     uniqueJobTitlesArray = [[NSMutableArray alloc]init];
+    numInJobTitles = [[NSMutableArray alloc]init];
+    numInCompanies = [[NSMutableArray alloc]init];
+    numInDepartments = [[NSMutableArray alloc]init];
+
     filteringIndicator = [[UIActivityIndicatorView alloc]init];
     arrayOf50PercentAndOver = [[NSMutableArray alloc]init];
     [moreInfoScrollView setScrollEnabled:YES];
@@ -462,7 +570,7 @@
             [self gotRight:infoButton];
             if(timeOnThisCard>0)
             {
-                currentScoreMCN+=100-(10*(10-timeOnThisCard));
+                currentScore+=100-(10*(10-timeOnThisCard));
             }
         }
         else
@@ -477,7 +585,7 @@
             [self gotRight:infoButton];
             if(timeOnThisCard>0)
             {
-                currentScoreMCN+=100-(10*(10-timeOnThisCard));
+                currentScore+=100-(10*(10-timeOnThisCard));
             }        }
         else
         {
@@ -491,8 +599,9 @@
             [self gotRight:infoButton];
             if(timeOnThisCard>0)
             {
-                currentScoreMCN+=100-(10*(10-timeOnThisCard));
-            }        }
+                currentScore+=100-(10*(10-timeOnThisCard));
+            }
+        }
         else
         {
             [self gotWrong:infoButton];
@@ -933,22 +1042,50 @@
 {
     if(practiceModeSwitch.isOn == false)
     {
-        if(currentScore > highscore)
+        
+        if([difficultyString isEqual:@"Hard"])
         {
-            highscore = currentScore;
-            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-            NSInteger i = (NSInteger) highscore;
-            [self playSoundNamed:@"Cheers Theme" andType:@"m4a" andFX:true];
-            
-            [defaults setInteger:i forKey:khighscoreF];
-            [self reportScore:highscore toLeaderboard:@"Flashcard_Leaderboard"];
-            pointsLabel.text = [NSString stringWithFormat:@"NEW HIGH SCORE! %i", currentScore];
-            
+            if(currentScore > highscoreHardMode)
+            {
+                highscoreHardMode = currentScore;
+                NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+                NSInteger i = (NSInteger) highscoreHardMode;
+                [self playSoundNamed:@"Cheers Theme" andType:@"m4a" andFX:true];
+                
+                [defaults setInteger:i forKey:khighscoreFHard];
+                
+                [self reportScore:highscoreHardMode toLeaderboard:@"Flashcard_Leaderboard_Hard_Mode"];
+                pointsLabel.text = [NSString stringWithFormat:@"NEW HIGH SCORE! %i", currentScore];
+                
+            }
+            else
+            {
+                pointsLabel.text = [NSString stringWithFormat:@"You scored %i", currentScore];
+            }
+
         }
         else
         {
-            pointsLabel.text = [NSString stringWithFormat:@"You scored %i", currentScore];
+            if(currentScore > highscore)
+            {
+                highscore = currentScore;
+                NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+                NSInteger i = (NSInteger) highscore;
+                [self playSoundNamed:@"Cheers Theme" andType:@"m4a" andFX:true];
+                
+                [defaults setInteger:i forKey:khighscoreF];
+                
+                [self reportScore:highscore toLeaderboard:@"Flashcard_Leader_Board"];
+                pointsLabel.text = [NSString stringWithFormat:@"NEW HIGH SCORE! %i", currentScore];
+                
+            }
+            else
+            {
+                pointsLabel.text = [NSString stringWithFormat:@"You scored %i", currentScore];
+            }
+
         }
+        
         if(totalSeconds < bestTimeF)
         {
             bestTimeF = totalSeconds;
@@ -1137,8 +1274,28 @@
     if([self checkForString:str inArray:uniqueJobTitlesArray]==false && str.length > 0)
     {
         [uniqueJobTitlesArray addObject:str];
-        
+        NSString* x = @"1";
+        //[numInJobTitles addObject:x];
     }
+//    
+//    else if(str.length >0)
+//    {
+//        for(int i =0; i < uniqueJobTitlesArray.count; i++)
+//        {
+//            NSString *sIQ;
+//            sIQ = [uniqueJobTitlesArray objectAtIndex:i];
+//            if([sIQ isEqualToString: str])
+//            {
+//                NSString*iIQ;
+//                iIQ = [numInJobTitles objectAtIndex:i];
+//                int x;
+//                x = [iIQ integerValue];
+//                ++x;
+//                iIQ = [NSString stringWithFormat:@"%i",x];
+//                [numInJobTitles replaceObjectAtIndex:i withObject:iIQ];
+//            }
+//        }
+//    }
 }
 -(void)addCompany:(NSString*)str
 {
@@ -1328,7 +1485,7 @@
     
     if([typeOfGame.text isEqualToString:@"Multiple Choice Faces"] || [typeOfGame.text isEqualToString:@"Multiple Choice Names"])
     {
-        alert = [[UIAlertView alloc] initWithTitle:@"Errorr" message:@"In a Multiple Choice Game you must have at least four people." delegate:self cancelButtonTitle:@"Okay" otherButtonTitles:NULL, nil];
+        alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"In a Multiple Choice Game you must have at least four people." delegate:self cancelButtonTitle:@"Okay" otherButtonTitles:NULL, nil];
         if(arrayOf49PercentAndUnder.count < 4)
         {
             [alert show];
@@ -1713,7 +1870,7 @@
                 [filterCompanyText addObject:noneSpecified.text];
                 [filterCompanySwitches addObject:noneSpecifiedSwitch];
                 
-                 uniqueCompaniesArray = [uniqueCompaniesArray sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
+                 //uniqueCompaniesArray = [uniqueCompaniesArray sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
                 
                 for (int i =0 ; i<uniqueCompaniesArray.count; i++)
                 {
@@ -1807,7 +1964,7 @@
                     [filterDepartmentText addObject:noneSpecified.text];
                     [filterDepartmentSwitches addObject:noneSpecifiedSwitch];
                     
-                    uniqueDepartmentsArray = [uniqueDepartmentsArray sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
+                    //uniqueDepartmentsArray = [uniqueDepartmentsArray sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
                     
                     for (int i =0 ; i<uniqueDepartmentsArray.count; i++) {
                         
@@ -1896,13 +2053,15 @@
                 [filterJobTitlesText addObject:noneSpecified.text];
                 [filterJobTitlesSwitches addObject:noneSpecifiedSwitch];
                 
-                uniqueJobTitlesArray = [uniqueJobTitlesArray sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
+               // uniqueJobTitlesArray = [uniqueJobTitlesArray sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
                 
                 for (int i =0 ; i<uniqueJobTitlesArray.count; i++) {
                     
                     
                     UILabel *newLabel = [[UILabel alloc]init];
+                   // newLabel.text = [NSString stringWithFormat:@"%@ (%@)", [uniqueJobTitlesArray objectAtIndex:i],[numInJobTitles objectAtIndex:i]];
                     newLabel.text = [uniqueJobTitlesArray objectAtIndex:i];
+
                     [labelsScrollView addSubview:newLabel];
                     newLabel.bounds  = CGRectMake(100, 10, 170, 30);
                     newLabel.center = CGPointMake(100, 115+(40*i));
@@ -1940,7 +2099,9 @@
                 for (int i =0 ; i<uniqueJobTitlesArray.count; i++) {
                     
                     UILabel *newLabel = [[UILabel alloc]init];
+                    //newLabel.text = [NSString stringWithFormat:@"%@ (%@)", [uniqueJobTitlesArray objectAtIndex:i],[numInJobTitles objectAtIndex:i]];
                     newLabel.text = [uniqueJobTitlesArray objectAtIndex:i];
+
                     [labelsScrollView addSubview:newLabel];
                     newLabel.bounds  = CGRectMake(100, 10, 170, 30);
                     newLabel.center = CGPointMake(100, 115+(40*i));
@@ -2101,7 +2262,8 @@
             {
                 if(iBMCN1.hidden == true||iBMCN4.hidden == true||iBMCN2.hidden==true||iBMCN3.hidden==true)//in other words they have not guessed all of the answers and so the timer should go
                 {
-                    
+                    seconds += 1;
+                    timeOnThisCard-=1;
                 }
             }
             else if([typeOfGame.text  isEqual: @"Multiple Choice Faces"])
@@ -2578,6 +2740,10 @@
             //mcButton1.backgroundColor = [UIColor greenColor];
             iTIMCN1.hidden = false;
             iTIMCN1.image = [UIImage imageNamed:@"SmallTU.png"];
+            if(timeOnThisCard>0)
+            {
+                currentScoreMCN+=100-(10*(10-timeOnThisCard));
+            }
         }
         else
         {
@@ -2588,6 +2754,10 @@
         {
             iTIMCN2.hidden = false;
             iTIMCN2.image = [UIImage imageNamed:@"SmallTU.png"];
+            if(timeOnThisCard>0)
+            {
+                currentScoreMCN+=100-(10*(10-timeOnThisCard));
+            }
         }
         else
         {
@@ -2598,6 +2768,10 @@
         {
             iTIMCN3.hidden = false;
             iTIMCN3.image = [UIImage imageNamed:@"SmallTU.png"];
+            if(timeOnThisCard>0)
+            {
+                currentScoreMCN+=100-(10*(10-timeOnThisCard));
+            }
         }
         else
         {
@@ -2608,6 +2782,10 @@
         {
             iTIMCN4.hidden = false;
             iTIMCN4.image = [UIImage imageNamed:@"SmallTU.png"];
+            if(timeOnThisCard>0)
+            {
+                currentScoreMCN+=100-(10*(10-timeOnThisCard));
+            }
         }
         else
         {
@@ -2941,7 +3119,11 @@
 
 -(IBAction)hintButtonPressed
 {
-    [self playSoundNamed:@"HintSound" andType:@"m4a" andFX:true];
+    if(numberOfHintsPressed < 3)
+    {
+        [self playSoundNamed:@"HintSound" andType:@"m4a" andFX:true];
+
+    }
 
     ++numberOfHintsPressed;
     hintLabel.text = [NSString stringWithFormat:@"H:%i", 3-numberOfHintsPressed];
@@ -2963,11 +3145,13 @@
         seconds+=3;
         timeOnThisCard-=3;
         timeOnThisCardLabel.text = [NSString stringWithFormat:@"%i", timeOnThisCard];
-        for(int l = 0; l<currentPerson.firstName.length; ++l)
+        
+        for(int l = 0; l<currentPerson.firstName.length && currentPerson.firstName != nil; ++l)
         {
             fNDots = [NSString stringWithFormat:@"-%@",fNDots];
         }
-        for(int l = 0; l<currentPerson.lastName.length; ++l)
+        
+        for(int l = 0; l<currentPerson.lastName.length && currentPerson.lastName != nil; ++l)
         {
             lNDots = [NSString stringWithFormat:@"-%@",lNDots];
         }
@@ -2980,11 +3164,11 @@
         timeOnThisCard-=3;
         timeOnThisCardLabel.text = [NSString stringWithFormat:@"%i", timeOnThisCard];
 
-        for(int l = 0; l<currentPerson.firstName.length-1; ++l)
+        for(int l = 0; l<currentPerson.firstName.length-1 && currentPerson.firstName != nil; ++l)
         {
             fNDots = [NSString stringWithFormat:@"-%@",fNDots];
         }
-        for(int l = 0; l<currentPerson.lastName.length-1; ++l)
+        for(int l = 0; l<currentPerson.lastName.length-1 && currentPerson.lastName != nil; ++l)
         {
             lNDots = [NSString stringWithFormat:@"-%@",lNDots];
         }
@@ -2999,7 +3183,7 @@
         timeOnThisCard-=3;
         timeOnThisCardLabel.text = [NSString stringWithFormat:@"%i", timeOnThisCard];
 
-        for(int l = currentPerson.firstName.length-1; l>0; --l)
+        for(int l = currentPerson.firstName.length-1 ; l>0 && currentPerson.firstName != nil; --l)
         {
             if(l%2 == 0)
             {
@@ -3010,7 +3194,7 @@
                 fNDots = [NSString stringWithFormat:@"-%@",fNDots];
             }
         }
-        for(int l = currentPerson.lastName.length-1; l>0; --l)
+        for(int l = currentPerson.lastName.length-1 ; l>0 && currentPerson.lastName != nil; --l)
         {
             if(l%2 == 0)
             {
@@ -4396,7 +4580,7 @@
 }
 -(void)playSoundNamed:(NSString*)soundName andType:(NSString*)type andFX:(BOOL)isFX;
 {
-    /*
+    
     soundURL = [NSURL fileURLWithPath:[[NSBundle mainBundle]pathForResource:soundName ofType:type]];
     AudioServicesCreateSystemSoundID((__bridge CFURLRef)soundURL, &SoundID);
     
@@ -4408,7 +4592,7 @@
     {
         AudioServicesPlaySystemSound(SoundID);
     }
-     */
+     
 }
 -(void)updateCurrentFilters
 {

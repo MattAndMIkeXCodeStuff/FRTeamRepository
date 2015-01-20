@@ -63,6 +63,17 @@
 		516E29841A0079DB00B5579B /* healthCatalystIgniteChange.png in Resources */ = {isa = PBXBuildFile; fileRef = 516E29831A0079DB00B5579B /* healthCatalystIgniteChange.png */; };
 		51B1AA511A0599DB0052DB92 /* HCNamesIcon58X58.png in Resources */ = {isa = PBXBuildFile; fileRef = 51B1AA501A0599DB0052DB92 /* HCNamesIcon58X58.png */; };
 		51B1AA531A0599EA0052DB92 /* HCNamesIcon120X120.png in Resources */ = {isa = PBXBuildFile; fileRef = 51B1AA521A0599EA0052DB92 /* HCNamesIcon120X120.png */; };
+		51EEAFC01A608D0300DA77FB /* Cheers Theme.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 51B1AA5B1A059F6B0052DB92 /* Cheers Theme.m4a */; };
+		51EEAFC11A608D4D00DA77FB /* 1-28 Cheers.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 51B1AA571A059F6B0052DB92 /* 1-28 Cheers.m4a */; };
+		51EEAFC21A608D4D00DA77FB /* 2-36 Jeopardy! (Main Theme).m4a in Resources */ = {isa = PBXBuildFile; fileRef = 51B1AA581A059F6B0052DB92 /* 2-36 Jeopardy! (Main Theme).m4a */; };
+		51EEAFC31A608D4D00DA77FB /* 06 Can I Get To Know You Better.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 51B1AA591A059F6B0052DB92 /* 06 Can I Get To Know You Better.m4a */; };
+		51EEAFC41A608D4D00DA77FB /* 06 Like To Get To Know You Well.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 51B1AA5A1A059F6B0052DB92 /* 06 Like To Get To Know You Well.m4a */; };
+		51EEAFC51A608D4D00DA77FB /* ClickSound.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 51B1AA5C1A059F6B0052DB92 /* ClickSound.m4a */; };
+		51EEAFC61A608D4D00DA77FB /* DongSound.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 51B1AA5D1A059F6B0052DB92 /* DongSound.m4a */; };
+		51EEAFC71A608D4D00DA77FB /* GetKnowU.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 51B1AA5E1A059F6B0052DB92 /* GetKnowU.m4a */; };
+		51EEAFC81A608D4D00DA77FB /* GetToKnowYouBetter.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 51B1AA5F1A059F6B0052DB92 /* GetToKnowYouBetter.m4a */; };
+		51EEAFC91A608D4D00DA77FB /* HintSound.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 51B1AA601A059F6B0052DB92 /* HintSound.m4a */; };
+		51EEAFCB1A608DA700DA77FB /* DingSound.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 51EEAFCA1A608D9D00DA77FB /* DingSound.m4a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -152,6 +163,7 @@
 		51B1AA5E1A059F6B0052DB92 /* GetKnowU.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = GetKnowU.m4a; sourceTree = SOURCE_ROOT; };
 		51B1AA5F1A059F6B0052DB92 /* GetToKnowYouBetter.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = GetToKnowYouBetter.m4a; sourceTree = SOURCE_ROOT; };
 		51B1AA601A059F6B0052DB92 /* HintSound.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = HintSound.m4a; sourceTree = SOURCE_ROOT; };
+		51EEAFCA1A608D9D00DA77FB /* DingSound.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = DingSound.m4a; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -239,6 +251,7 @@
 				51B1AA5E1A059F6B0052DB92 /* GetKnowU.m4a */,
 				51B1AA5F1A059F6B0052DB92 /* GetToKnowYouBetter.m4a */,
 				51B1AA601A059F6B0052DB92 /* HintSound.m4a */,
+				51EEAFCA1A608D9D00DA77FB /* DingSound.m4a */,
 			);
 			name = FRSounds;
 			path = "../../Desktop/App Sounds/FRSounds";
@@ -378,7 +391,7 @@
 				ORGANIZATIONNAME = "Mattehw Burton";
 				TargetAttributes = {
 					4EC04F38195297350017AA78 = {
-						DevelopmentTeam = YDK59Y5KW2;
+						DevelopmentTeam = STUDKFT6R9;
 						SystemCapabilities = {
 							com.apple.GameCenter = {
 								enabled = 1;
@@ -414,6 +427,17 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				51EEAFCB1A608DA700DA77FB /* DingSound.m4a in Resources */,
+				51EEAFC11A608D4D00DA77FB /* 1-28 Cheers.m4a in Resources */,
+				51EEAFC21A608D4D00DA77FB /* 2-36 Jeopardy! (Main Theme).m4a in Resources */,
+				51EEAFC31A608D4D00DA77FB /* 06 Can I Get To Know You Better.m4a in Resources */,
+				51EEAFC41A608D4D00DA77FB /* 06 Like To Get To Know You Well.m4a in Resources */,
+				51EEAFC51A608D4D00DA77FB /* ClickSound.m4a in Resources */,
+				51EEAFC61A608D4D00DA77FB /* DongSound.m4a in Resources */,
+				51EEAFC71A608D4D00DA77FB /* GetKnowU.m4a in Resources */,
+				51EEAFC81A608D4D00DA77FB /* GetToKnowYouBetter.m4a in Resources */,
+				51EEAFC91A608D4D00DA77FB /* HintSound.m4a in Resources */,
+				51EEAFC01A608D0300DA77FB /* Cheers Theme.m4a in Resources */,
 				516E29841A0079DB00B5579B /* healthCatalystIgniteChange.png in Resources */,
 				4EC04F55195297350017AA78 /* Images.xcassets in Resources */,
 				4C6AF06319A591B400378517 /* GotRightTU.png in Resources */,
@@ -616,7 +640,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "FR/FR-Prefix.pch";
 				INFOPLIST_FILE = "FR/FR-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos7.1;
@@ -646,7 +670,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "FR/FR-Prefix.pch";
 				INFOPLIST_FILE = "FR/FR-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos7.1;

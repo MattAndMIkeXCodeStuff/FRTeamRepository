@@ -16,9 +16,21 @@
 #define khighscoreMCF @"highscoreMCF"
 #define khighscoreMCN @"highscoreMCN"
 #define khighscoreF @"highscoreF"
+#define khighscoreFHard @"highscoreFHard"
 
 #define kmusicBool @"musicBool"
 #define kfxBool @"fxBool"
+
+#define kacheivement1Done @"achievement1Done"
+#define kacheivement2Done @"achievement2Done"
+#define kacheivement3Done @"achievement3Done"
+#define kacheivement4Done @"achievement4Done"
+#define kacheivement5Done @"achievement5Done"
+#define kacheivement6Done @"achievement6Done"
+#define kacheivement7Done @"achievement7Done"
+#define kacheivement8Done @"achievement8Done"
+#define kacheivement9Done @"achievement9Done"
+#define kacheivement10Done @"achievement10Done"
 
 #define kcompanyBool @"companyBool"
 #define kdepartmentBool @"departmentBool"
@@ -37,6 +49,19 @@
 
 @interface ViewController : UIViewController <UIAlertViewDelegate, GKGameCenterControllerDelegate>
 {
+    BOOL achievement1Done;
+    BOOL achievement2Done;
+    BOOL achievement3Done;
+    BOOL achievement4Done;
+    BOOL achievement5Done;
+    BOOL achievement6Done;
+    BOOL achievement7Done;
+    BOOL achievement8Done;
+    BOOL achievement9Done;
+    BOOL achievement10Done;
+
+    NSUserDefaults *defaults;
+    
     IBOutlet UILabel* timerLable;
     NSTimer *timer;
     int seconds;
@@ -57,6 +82,7 @@
     
     int currentScore;
     int highscore;
+    int highscoreHardMode;
     
     int currentScoreMCF;
     int highscoreMCF;
@@ -155,6 +181,11 @@
     NSMutableArray* uniqueCompaniesArray;
     NSMutableArray* uniqueDepartmentsArray;
     NSMutableArray* uniqueJobTitlesArray;
+    
+    NSMutableArray*numInCompanies;
+    NSMutableArray*numInJobTitles;
+    NSMutableArray*numInDepartments;
+
     
     NSMutableArray* filterCompanySwitches;
     NSMutableArray* filterCompanyText;
