@@ -36,7 +36,6 @@
 		4CACF955195FA19B00056B92 /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CACF954195FA19B00056B92 /* AddressBookUI.framework */; };
 		4CB7481B199ECC4600721DD4 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CB7481A199ECC4600721DD4 /* AudioToolbox.framework */; };
 		4E04733719A8ED7E00A99A20 /* BackgroundImageHCContactsFilterPage.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E04733419A8ED7E00A99A20 /* BackgroundImageHCContactsFilterPage.png */; };
-		4E04733819A8ED7E00A99A20 /* BackgroundImageHCContactsFilterPage.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E04733519A8ED7E00A99A20 /* BackgroundImageHCContactsFilterPage.png */; };
 		4E60AD2619ABD88800A06818 /* HintButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E60AD2319ABD88800A06818 /* HintButton.png */; };
 		4EC04F3D195297350017AA78 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EC04F3C195297350017AA78 /* Foundation.framework */; };
 		4EC04F3F195297350017AA78 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EC04F3E195297350017AA78 /* CoreGraphics.framework */; };
@@ -387,11 +386,11 @@
 		4EC04F31195297350017AA78 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0510;
+				LastUpgradeCheck = 0610;
 				ORGANIZATIONNAME = "Mattehw Burton";
 				TargetAttributes = {
 					4EC04F38195297350017AA78 = {
-						DevelopmentTeam = STUDKFT6R9;
+						DevelopmentTeam = 8395G832W7;
 						SystemCapabilities = {
 							com.apple.GameCenter = {
 								enabled = 1;
@@ -463,7 +462,6 @@
 				4C6AF07119A591B400378517 /* separater.png in Resources */,
 				4E04733719A8ED7E00A99A20 /* BackgroundImageHCContactsFilterPage.png in Resources */,
 				4C6AF06019A591B400378517 /* BackgroundImageHCCountactsMoreInfoPage.png in Resources */,
-				4E04733819A8ED7E00A99A20 /* BackgroundImageHCContactsFilterPage.png in Resources */,
 				4C6AF06519A591B400378517 /* GuessButton.png in Resources */,
 				516E29821A0079BF00B5579B /* CheckButton.png in Resources */,
 				4EC04F50195297350017AA78 /* Main.storyboard in Resources */,
@@ -641,9 +639,9 @@
 				GCC_PREFIX_HEADER = "FR/FR-Prefix.pch";
 				INFOPLIST_FILE = "FR/FR-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = FR;
 				PROVISIONING_PROFILE = "";
-				SDKROOT = iphoneos7.1;
+				SDKROOT = iphoneos;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -671,9 +669,9 @@
 				GCC_PREFIX_HEADER = "FR/FR-Prefix.pch";
 				INFOPLIST_FILE = "FR/FR-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = FR;
 				PROVISIONING_PROFILE = "";
-				SDKROOT = iphoneos7.1;
+				SDKROOT = iphoneos;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
