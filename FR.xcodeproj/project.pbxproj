@@ -60,8 +60,8 @@
 		516E29841A0079DB00B5579B /* healthCatalystIgniteChange.png in Resources */ = {isa = PBXBuildFile; fileRef = 516E29831A0079DB00B5579B /* healthCatalystIgniteChange.png */; };
 		51B1AA511A0599DB0052DB92 /* HCNamesIcon58X58.png in Resources */ = {isa = PBXBuildFile; fileRef = 51B1AA501A0599DB0052DB92 /* HCNamesIcon58X58.png */; };
 		51B1AA531A0599EA0052DB92 /* HCNamesIcon120X120.png in Resources */ = {isa = PBXBuildFile; fileRef = 51B1AA521A0599EA0052DB92 /* HCNamesIcon120X120.png */; };
-		51C0F9461A72EE040001A9AD /* Settings.png in Resources */ = {isa = PBXBuildFile; fileRef = 51C0F9451A72EE040001A9AD /* Settings.png */; };
-		51C0F9481A72EE930001A9AD /* BackgroundNamesView.png in Resources */ = {isa = PBXBuildFile; fileRef = 51C0F9471A72EE930001A9AD /* BackgroundNamesView.png */; };
+		51C0F9531A7449E90001A9AD /* BackgroundNamesView.png in Resources */ = {isa = PBXBuildFile; fileRef = 51C0F9521A7449E90001A9AD /* BackgroundNamesView.png */; };
+		51C0F9551A744A150001A9AD /* Settings.png in Resources */ = {isa = PBXBuildFile; fileRef = 51C0F9541A744A150001A9AD /* Settings.png */; };
 		51EEAFC01A608D0300DA77FB /* Cheers Theme.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 51B1AA5B1A059F6B0052DB92 /* Cheers Theme.m4a */; };
 		51EEAFC11A608D4D00DA77FB /* 1-28 Cheers.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 51B1AA571A059F6B0052DB92 /* 1-28 Cheers.m4a */; };
 		51EEAFC21A608D4D00DA77FB /* 2-36 Jeopardy! (Main Theme).m4a in Resources */ = {isa = PBXBuildFile; fileRef = 51B1AA581A059F6B0052DB92 /* 2-36 Jeopardy! (Main Theme).m4a */; };
@@ -160,8 +160,8 @@
 		51B1AA5E1A059F6B0052DB92 /* GetKnowU.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = GetKnowU.m4a; sourceTree = SOURCE_ROOT; };
 		51B1AA5F1A059F6B0052DB92 /* GetToKnowYouBetter.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = GetToKnowYouBetter.m4a; sourceTree = SOURCE_ROOT; };
 		51B1AA601A059F6B0052DB92 /* HintSound.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = HintSound.m4a; sourceTree = SOURCE_ROOT; };
-		51C0F9451A72EE040001A9AD /* Settings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Settings.png; path = ../../../../Desktop/Settings.png; sourceTree = "<group>"; };
-		51C0F9471A72EE930001A9AD /* BackgroundNamesView.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BackgroundNamesView.png; path = ../../../../Desktop/BackgroundNamesView.png; sourceTree = "<group>"; };
+		51C0F9521A7449E90001A9AD /* BackgroundNamesView.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BackgroundNamesView.png; sourceTree = "<group>"; };
+		51C0F9541A744A150001A9AD /* Settings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Settings.png; sourceTree = "<group>"; };
 		51EEAFCA1A608D9D00DA77FB /* DingSound.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = DingSound.m4a; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
@@ -201,7 +201,8 @@
 				4E04733419A8ED7E00A99A20 /* BackgroundImageHCContactsFilterPage.png */,
 				4E04733519A8ED7E00A99A20 /* BackgroundImageHCContactsFilterPage.png */,
 				516E29751A00793700B5579B /* White Bar.png */,
-				51C0F9471A72EE930001A9AD /* BackgroundNamesView.png */,
+				51C0F9521A7449E90001A9AD /* BackgroundNamesView.png */,
+				51C0F9541A744A150001A9AD /* Settings.png */,
 				4C6AF04119A591B400378517 /* BackButton.png */,
 				4C6AF04219A591B400378517 /* BackgroundImageHCContacts.png */,
 				4C6AF04319A591B400378517 /* BackgroundImageHCContactsFilterPage.png */,
@@ -217,7 +218,6 @@
 				4C6AF04D19A591B400378517 /* HintButton.png */,
 				4C6AF04E19A591B400378517 /* InfoButton.png */,
 				4C6AF04F19A591B400378517 /* LeaderBoard.png */,
-				51C0F9451A72EE040001A9AD /* Settings.png */,
 				4C6AF05019A591B400378517 /* MultipleChoiceFaces.png */,
 				4C6AF05119A591B400378517 /* MultipleChoiceNames.png */,
 				4C6AF05219A591B400378517 /* My Stats.png */,
@@ -440,10 +440,11 @@
 				516E29841A0079DB00B5579B /* healthCatalystIgniteChange.png in Resources */,
 				4EC04F55195297350017AA78 /* Images.xcassets in Resources */,
 				4C6AF06319A591B400378517 /* GotRightTU.png in Resources */,
-				51C0F9461A72EE040001A9AD /* Settings.png in Resources */,
+				51C0F9551A744A150001A9AD /* Settings.png in Resources */,
 				4C6AF06F19A591B400378517 /* NextButton.png in Resources */,
 				4C6AF07619A591B400378517 /* Sound Music Icon.png in Resources */,
 				51B1AA511A0599DB0052DB92 /* HCNamesIcon58X58.png in Resources */,
+				51C0F9531A7449E90001A9AD /* BackgroundNamesView.png in Resources */,
 				4EC04F47195297350017AA78 /* InfoPlist.strings in Resources */,
 				4E60AD2619ABD88800A06818 /* HintButton.png in Resources */,
 				4C6AF06119A591B400378517 /* BackgroundImageMC.png in Resources */,
@@ -470,7 +471,6 @@
 				4C6AF06A19A591B400378517 /* InfoButton.png in Resources */,
 				4C6AF07819A591B400378517 /* TimerHCContacts.png in Resources */,
 				4C6AF07019A591B400378517 /* PersonHCContacts.png in Resources */,
-				51C0F9481A72EE930001A9AD /* BackgroundNamesView.png in Resources */,
 				516E29761A00793700B5579B /* White Bar.png in Resources */,
 				4C6AF06219A591B400378517 /* GoButton.png in Resources */,
 			);
