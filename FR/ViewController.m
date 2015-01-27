@@ -3025,10 +3025,12 @@
 
     if(sender == leaderBoardButton)
     {
-        [self showLeaderboardAndAchievements:YES];
+        //[self showLeaderboardAndAchievements:YES];
         //leaderBoardView.hidden = false;
         //firstView.hidden = true;
-
+        alert =[[UIAlertView alloc] initWithTitle:@"Coming Soon!" message:@"Leader Board feature coming soon!" delegate:self cancelButtonTitle:@"Okay" otherButtonTitles:NULL, nil];
+        [alert show];
+        
     }
     else if(sender == statsButton)
     {
