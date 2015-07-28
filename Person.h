@@ -15,6 +15,7 @@
 @property (nonatomic) UIImage* selfImage;
 @property (nonatomic) NSString* firstName;
 @property (nonatomic) NSString* lastName;
+@property (nonatomic) NSString* fullName;
 @property (nonatomic) bool isMale;
 @property(nonatomic) NSString *company;
 @property(nonatomic) NSString *department;

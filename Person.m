@@ -11,6 +11,7 @@
 @implementation Person
 @synthesize firstName;
 @synthesize lastName;
+@synthesize fullName;
 @synthesize selfImage;
 @synthesize isMale;
 @synthesize numTimesCorrect;
@@ -29,6 +30,7 @@
     firstName = fName;
     lastName = lName;
     selfImage = img;
+    fullName = [NSString stringWithFormat:@"%@ %@",firstName,lastName];
     isMale = iM;
 }
 -(double)returnPercentage

@@ -10,8 +10,6 @@
 	<string>FR</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>36015337-1F49-48D2-B3BD-CA91E14E1801</key>
-		<string>https://github.com/MattAndMIkeXCodeStuff/FRTeamRepository.git</string>
 		<key>AACE3BA47ED50D8A6B6A3C59EB112126A51198BB</key>
 		<string>https://github.com/MattAndMIkeXCodeStuff/FRTeamRepository</string>
 	</dict>
@@ -19,8 +17,6 @@
 	<string>FR.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>36015337-1F49-48D2-B3BD-CA91E14E1801</key>
-		<string>../../../NewTeamRepo</string>
 		<key>AACE3BA47ED50D8A6B6A3C59EB112126A51198BB</key>
 		<string>../..</string>
 	</dict>
@@ -38,15 +34,7 @@
 			<key>IDESourceControlWCCIdentifierKey</key>
 			<string>AACE3BA47ED50D8A6B6A3C59EB112126A51198BB</string>
 			<key>IDESourceControlWCCName</key>
-			<string>Matt'sBranch</string>
-		</dict>
-		<dict>
-			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
-			<string>public.vcs.git</string>
-			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>36015337-1F49-48D2-B3BD-CA91E14E1801</string>
-			<key>IDESourceControlWCCName</key>
-			<string>NewTeamRepo</string>
+			<string>FR-Beta_Matt's_Branch</string>
 		</dict>
 	</array>
 </dict>
